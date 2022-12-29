@@ -1,19 +1,12 @@
-
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline bg-gray-600">
-      Hello world!
-    </h1>
-      <h1 className="text-3xl font-bold underline bg-gray-600">
-      Hello world 111!
-    </h1>
-      <h1 className="text-3xl font-bold underline bg-gray-600">
-       Hi Developer
-    </h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
   );
 }
 
