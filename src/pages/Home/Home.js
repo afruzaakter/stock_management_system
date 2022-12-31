@@ -1,9 +1,10 @@
 import React from 'react';
+import Login from '../Auth/Login';
 
 const Home = () => {
     return (
-        <div>
-            <h1>This is Home page</h1>
+        <div className='h-screen m-auto mt-10 '>
+            <Login/>
         </div>
     );
 };
