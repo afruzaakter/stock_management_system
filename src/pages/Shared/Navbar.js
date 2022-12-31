@@ -1,6 +1,23 @@
+import { signOut } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const Navbar = ({ children }) => {
+    const [ user ] = useAuthState(auth)
+    const handleSignOut = () =>{
+        signOut(auth);
+
+    }
+    const menuItem = <>
+        <li> <NavLink to="/home" className="rounded-lg">Home</NavLink> </li>
+        <li><NavLink to="/dashboard" className="rounded-lg">Dashboard </NavLink></li>
+
+        {
+        user? <button className="btn" onClick={handleSignOut} >Sign Out</button> :
+        <li> <NavLink to="/login" className="rounded-lg"> Login </NavLink> </li> 
+        }
+    </>
     return (
         <div className="drawer drawer-end">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -15,11 +32,9 @@ const Navbar = ({ children }) => {
                         </label>
                     </div>
                     <div className="flex-none hidden lg:block">
-                        <ul className="menu menu-horizontal">
-                            {/* <!-- Navbar menu content here --> */}
-                            <li> <NavLink to="/home" className="rounded-lg">Home</NavLink> </li>
-                            <li> <NavLink to="/login" className="rounded-lg"> Login </NavLink> </li>
-                            <li><NavLink to="/dashboard" className="rounded-lg">Dashboard </NavLink></li>
+                        <ul className="menu menu-horizontal gap-8">
+                      
+                         {menuItem}
                         </ul>
                     </div>
                 </div>
@@ -29,10 +44,7 @@ const Navbar = ({ children }) => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
                 <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
-                    {/* <!-- Sidebar content here --> */}
-                    <li><NavLink to="/home" className="rounded-lg">Home</NavLink></li>
-                    <li><NavLink to="/login" className="rounded-lg">Login </NavLink></li>
-                    <li> <NavLink to="/dashboard" className="rounded-lg">Dashboard </NavLink> </li>
+                   {menuItem}
                 </ul>
             </div>
         </div>
