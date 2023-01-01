@@ -2,9 +2,13 @@ import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
+import Loading from "./Loading";
 
 const Navbar = ({ children }) => {
-    const [ user ] = useAuthState(auth)
+    const [ user, loading ] = useAuthState(auth)
+    if(loading){
+        return <Loading/>
+    }
     const handleSignOut = () =>{
         signOut(auth);
 
