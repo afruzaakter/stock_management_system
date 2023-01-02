@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init'
 import { useSignInWithEmailAndPassword  } from 'react-firebase-hooks/auth';
-import Social from './Social';
+// import Social from './Social';
 import { BsArrowRight } from 'react-icons/bs';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
@@ -39,12 +39,12 @@ const Login = () => {
     }
     return (
         <div className='h-screen m-auto mt-16 '>
-            <div className="card   bg-gray-200 border border-blue-800 bg-gradient-to-r bg-opacity-30 shadow-md ">
+            <div className="card bg-gray-200 border-blue-800 bg-gradient-to-r bg-opacity-30 border-2 shadow-2xl ">
            
                 <div className="card-body items-center">
-                <h2 className="text-4xl  text-center uppercase  text-blue-800 font-bold ">Create An Account</h2>
+                {/* <h2 className="text-4xl  text-center uppercase  text-blue-800 font-bold ">Create An Account</h2> */}
             
-                 <Social/>
+                 {/* <Social/> */}
                     
 
                     {/* ------------- Login Form start ----------------------- */}
@@ -52,11 +52,11 @@ const Login = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {/* ----------------------Email input field ------------------------- */}
                         <div className="form-control   max-w-xs">
-                            <label className='mb-2  text-xl flex items-center gap-2 font-bold'> <MdOutlineMailOutline className='font-bold text-2xl text-blue-800' /> Your Email</label>
+                            {/* <label className='mb-2  text-xl flex items-center gap-2 font-semibold'> <MdOutlineMailOutline className='font-semibold text-xl text-blue-800' />Id</label> */}
                             <input
                                 type="email"
-                                // placeholder="Your Email"
-                                className="input  border border-blue-900   focus:border-pink-900   w-96  opacity-60 max-w-xs login-container-input"
+                                placeholder="Your id"
+                                className="input  border border-blue-900 focus:border-pink-900 w-96 opacity-80 max-w-xs login-container-input"
                                 {...register("email", {
                                     required: {
                                         value: true,
