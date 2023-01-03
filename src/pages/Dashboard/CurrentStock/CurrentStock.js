@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
+import { IoMdArrowDropdown } from 'react-icons/io';
 import { TbMessageReport } from 'react-icons/tb';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { MdRefresh } from 'react-icons/md';
@@ -26,7 +27,8 @@ const CurrentStock = () => {
                 <div>
                     <div className="dropdown dropdown-hover">
                         <label tabIndex={0} className="btn m-1 btn-sm bg-primary
-                         text-white "> <BsSearch /> All Item</label>
+                         text-white "> <BsSearch /> All Item <IoMdArrowDropdown />
+                        </label>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow
                              bg-primary text-white rounded-box w-52">
                             <li><a>Item 1</a></li>
