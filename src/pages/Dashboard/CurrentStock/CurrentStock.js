@@ -37,9 +37,9 @@ const CurrentStock = () => {
                         <TbMessageReport /> Reports</button>
                 </div>
                 <div>
-                    <button className="btn btn-sm mx-1 bg-success text-white">
+                    <button className="btn btn-sm mx-1 bg-info text-white">
                         < FiRefreshCcw />  Reset</button>
-                    <button className="btn btn-sm mx-1 bg-error text-white">
+                    <button className="btn btn-sm mx-1 bg-primary text-white">
                         < MdRefresh /> Refresh</button>
                 </div>
             </div>
