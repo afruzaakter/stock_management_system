@@ -7,7 +7,7 @@ const RequisitionAuthorize = () => {
 
             <div className="navbar bg-base-100">
                 <div className="flex-1">
-                    <h1 className='text-3xl'> Requisition Request List</h1>
+                    <h1 className='text-3xl'> Requisition Authorization List</h1>
                 </div>
                 <div className="form-control">
                     <div className="input-group">
