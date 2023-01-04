@@ -18,6 +18,9 @@ import Reports from "./pages/Dashboard/Reports/Reports";
 import Employee from "./pages/Dashboard/Employee/Employee";
 import UserManagement from "./pages/Dashboard/UserManagement/UserManagement";
 import KeyType from "./pages/Dashboard/Settings/Library/KeyType";
+import Department from "./pages/Dashboard/Settings/Department";
+import Designation from "./pages/Dashboard/Settings/Designation";
+import ProductKey from "./pages/Dashboard/Settings/ProductKey";
 
 function App() {
   return (
@@ -43,6 +46,9 @@ function App() {
           <Route path="employee" element={<Employee/>}/>
           <Route path="userManagement" element={<UserManagement/>}/>
           <Route path="keyType" element={<KeyType/>}/>
+          <Route path="department" element={<Department/>}/>
+          <Route path="designation" element={<Designation/>}/>
+          <Route path="productKey" element={<ProductKey/>}/>
 
         </Route>
        

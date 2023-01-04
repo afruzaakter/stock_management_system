@@ -25,7 +25,7 @@ const Dashboard = () => {
   const [open, setOpen] = useState(true);
   const [subMenuOpen, setSubMenuOpen] = useState(false);
   const [librarySubMenuOpen, setLibrarySubMenuOpen] = useState(false);
- 
+
 
   if (loading) {
     return <Loading />
@@ -137,12 +137,26 @@ const Dashboard = () => {
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Settings </span></Link></li>
                   {
                     subMenuOpen && <ul>
+                            {/* ------------------------------ Setting Department ----------------------- */}
+                      <li className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/department" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                        <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Department </span></Link></li>
+                            {/* ------------------------------ Setting Designation ----------------------- */}
+                      <li  className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/designation" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                        <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Designation </span></Link></li>
+                            {/* ------------------------------ Setting Product Key ----------------------- */}
+                      <li  className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/productKey" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                        <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Product Key </span></Link></li>
+
+                      {/* ------------------------ Setting Library ------------------- */}
                       <li onClick={() => setLibrarySubMenuOpen(!librarySubMenuOpen)} className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
                         <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Library </span></Link></li>
                       {
                         librarySubMenuOpen && <ul>
-                          <li  className={`text-gray-300 text-md  flex items-start ml-8  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='/dashboard/keyType' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                          <li className={`text-gray-300 text-md  flex items-start ml-8  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='/dashboard/keyType' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
                             <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <AiOutlineRightSquare className='' /></span>
                             <span className={` text-gray-800 ${!open && 'hidden'}`}>Key Type </span></Link></li>
 
