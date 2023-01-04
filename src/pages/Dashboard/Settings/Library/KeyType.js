@@ -65,7 +65,7 @@ const KeyType = () => {
 
     return (
         <div className='lg:flex lg:justify-start lg:ml-28 lg:items-start mt-16 lg:gap-20'>
-            <div className="card w-96 bg-gray-200 ">
+            <div className="card w-96 bg-gray-300 ">
                 <div className='card-body'>
                     <h2 className="text-center text-xl font-bold">Key Type</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -97,14 +97,14 @@ const KeyType = () => {
             </div>
 
             
-            <div className="overflow-x-auto lg:w-96">
-                <table className="table w-full">
+            <div className="overflow-x-auto lg:w-96  ">
+                <table className="table w-full ">
                     {/* <!-- head --> */}
-                    <thead>
+                    <thead >
                         <tr>
-                            <th>SL No.</th>
-                            <th>Key Type</th>
-                            <th>Action</th>
+                            <th className='bg-green-300 '>SL No.</th>
+                            <th className='bg-green-300 '>Key Type</th>
+                            <th className='bg-green-300 '>Action</th>
 
                         </tr>
                     </thead>
