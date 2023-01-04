@@ -12,6 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 6. React Icons ( npm install react-icons --save ) .
 7. Firebase ( npm install firebase ) .
 8. Spinner ( npm i react-spinners )
+9. React Toastify (npm i react-toastify)
 
 ### `Package Install Website`
 1. Tailwind CSS (https://tailwindcss.com/docs/guides/create-react-app).
@@ -21,7 +22,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 5. React Hook Form (https://react-hook-form.com/) .
 6. React Icons (https://react-icons.github.io/react-icons/) .
 7. Firebase (https://console.firebase.google.com/) .
-8. Spinner (https://www.npmjs.com/package/react-spinners)
+8. Spinner (https://www.npmjs.com/package/react-spinners).
+9. React Toastify (https://www.npmjs.com/package/react-toastify).
 
 
 
