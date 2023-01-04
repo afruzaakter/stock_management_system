@@ -17,7 +17,10 @@ import Product from "./pages/Dashboard/Products/Product";
 import Reports from "./pages/Dashboard/Reports/Reports";
 import Employee from "./pages/Dashboard/Employee/Employee";
 import UserManagement from "./pages/Dashboard/UserManagement/UserManagement";
-import Settings from "./pages/Dashboard/Settings/Settings";
+import KeyType from "./pages/Dashboard/Settings/Library/KeyType";
+import Department from "./pages/Dashboard/Settings/Department";
+import Designation from "./pages/Dashboard/Settings/Designation";
+import ProductKey from "./pages/Dashboard/Settings/ProductKey";
 
 function App() {
   return (
@@ -42,7 +45,10 @@ function App() {
           <Route path="reports" element={<Reports/>}/>
           <Route path="employee" element={<Employee/>}/>
           <Route path="userManagement" element={<UserManagement/>}/>
-          <Route path="settings" element={<Settings/>}/>
+          <Route path="keyType" element={<KeyType/>}/>
+          <Route path="department" element={<Department/>}/>
+          <Route path="designation" element={<Designation/>}/>
+          <Route path="productKey" element={<ProductKey/>}/>
 
         </Route>
        

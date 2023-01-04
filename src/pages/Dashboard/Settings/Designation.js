@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Settings = () => {
+const Designation = () => {
     return (
         <div>
-            Settings pages 
+            Designation
         </div>
     );
 };
 
-export default Settings;
+export default Designation;
