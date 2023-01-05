@@ -21,6 +21,11 @@ import KeyType from "./pages/Dashboard/Settings/Library/KeyType";
 import Department from "./pages/Dashboard/Settings/Department";
 import Designation from "./pages/Dashboard/Settings/Designation";
 import ProductKey from "./pages/Dashboard/Settings/ProductKey";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import EditKeyType from "./pages/Dashboard/Settings/Library/EditKeyType";
+import DesignationAdd from "./pages/Dashboard/Settings/DesignationAdd";
+import DesignationEdit from "./pages/Dashboard/Settings/DesignationEdit";
 
 function App() {
   return (
@@ -46,9 +51,12 @@ function App() {
           <Route path="employee" element={<Employee/>}/>
           <Route path="userManagement" element={<UserManagement/>}/>
           <Route path="keyType" element={<KeyType/>}/>
+          <Route path="keyEdit/:id" element={<EditKeyType/>}/>
           <Route path="department" element={<Department/>}/>
           <Route path="designation" element={<Designation/>}/>
           <Route path="productKey" element={<ProductKey/>}/>
+          <Route path="designationAdd" element={<DesignationAdd/>}/>
+          <Route path="designationEdit/:id" element={<DesignationEdit/>}/>
 
         </Route>
        
@@ -56,6 +64,7 @@ function App() {
           
         
       </Routes>
+      <ToastContainer />
     </Navbar>
   );
 }
