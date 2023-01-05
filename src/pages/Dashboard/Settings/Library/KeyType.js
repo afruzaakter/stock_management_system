@@ -2,66 +2,65 @@ import { async } from '@firebase/util';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
 
 const KeyType = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const  [updated, setUpdated] = useState(false);
+    const [updated, setUpdated] = useState(false);
 
     // -------------get method ----------------
     const [keys, setKeys] = useState([]);
 
-    useEffect (()=>{
-      fetch('http://localhost:5000/key')
-      .then(res => res.json())
-      .then(data => setKeys(data))
-      }, [updated]);
+    useEffect(() => {
+        fetch('http://localhost:5000/key')
+            .then(res => res.json())
+            .then(data => setKeys(data))
+    }, [updated]);
 
 
     // ------------ data post method  start --------------
-    const onSubmit = async(data) => {
-       const url = 'http://localhost:5000/key'
-       console.log(url)
-       fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-       })
-       .then( (res) => res.json())
-       .then((data) => {
-        console.log("data", data)
-             if(data.insertedId){
-
-                toast.success("Successfull Data add !!!");
-                setUpdated(!updated)
-                reset()
-             }
-             else{
-                toast.error("Failed to add product !!!");
-             }
-       });
-    }
-    // ------------ data post method  start --------------
-  const handleDelete = (id) =>{
-    const proceed = window.confirm('Are you sure?')
-    if(proceed){
-        const url = `http://localhost:5000/key/${id}`
+    const onSubmit = async (data) => {
+        const url = 'http://localhost:5000/key'
+        console.log(url)
         fetch(url, {
-            method: 'DELETE'
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
         })
-        .then(res => res.json())
-        .then(data =>{
-            const remaining = keys.filter(key => key._id  !== id)
-            setKeys(remaining)
-        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("data", data)
+                if (data.insertedId) {
+
+                    toast.success("Successfull Data add !!!");
+                    setUpdated(!updated)
+                    reset()
+                }
+                else {
+                    toast.error("Failed to add product !!!");
+                }
+            });
     }
-     
-  }
+    // ------------ data post method  start --------------
+    const handleDelete = (id) => {
+        const proceed = window.confirm('Are you sure?')
+        if (proceed) {
+            const url = `http://localhost:5000/key/${id}`
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const remaining = keys.filter(key => key._id !== id)
+                    setKeys(remaining)
+                })
+        }
+
+    }
 
     return (
         <div className='lg:flex lg:justify-start lg:ml-28 lg:items-start mt-16 lg:gap-20'>
@@ -90,13 +89,13 @@ const KeyType = () => {
                         </div>
                         <input className='input focus:outline-0 input-bordered input-primary w-full max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='Submit' />
                     </form>
-                   
+
                 </div>
 
-                <ToastContainer />
+              
             </div>
 
-            
+
             <div className="overflow-x-auto lg:w-96  ">
                 <table className="table w-full ">
                     {/* <!-- head --> */}
@@ -117,7 +116,7 @@ const KeyType = () => {
                                     <th>{index + 1}</th>
                                     <td>{key.key}</td>
                                     <td className='flex gap-4'>
-                                        <Link to={`/dashboard/departmentEdit/${key._id}`}><FaEdit /></Link>
+                                        <Link to={`/dashboard/keyEdit/${key._id}`}><FaEdit /></Link>
                                         <button onClick={() => handleDelete(key._id)}><MdDeleteForever /></button>
                                     </td>
 
