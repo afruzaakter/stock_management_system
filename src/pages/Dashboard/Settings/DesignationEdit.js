@@ -20,7 +20,9 @@ const DesignationEdit = () => {
          }, [])
     const onSubmit = (data) =>{
         const designation = {
-            designation: data.designation
+            designation: data.designation,
+            name: data.name,
+            order: data.order,
          };
          const url = `http://localhost:5000/designation/${id}`
          fetch(url, {
@@ -62,16 +64,18 @@ const DesignationEdit = () => {
                             {errors.name?.type === 'required' && <span className="label-text-alt text-red-700">{errors.name.message}</span>}
 
                         </label>
-                    </div>   
+                    </div>  
+
+                       
                     {/* -----------------------Department Name Field ------------------------------ */}
 
                     <div className="form-control">
                         <label className='text-start '>Description</label>
                         <textarea
                             type="text"
-                            Value={designations.description}
+                            Value={designations.name}
                            
-                            className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm border-gray-400 mt-1  w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                            className={`input font-bold max-w-xs text-red-900  border-green-700  focus:outline-0 rounded-sm border-gray-400 mt-1  w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
                             {...register("description", {
                                 required: {
                                     value: true,
