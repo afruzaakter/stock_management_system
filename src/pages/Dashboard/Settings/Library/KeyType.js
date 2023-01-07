@@ -2,8 +2,7 @@ import { async } from '@firebase/util';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
 
@@ -93,7 +92,7 @@ const KeyType = () => {
 
                 </div>
 
-                <ToastContainer />
+              
             </div>
 
 
@@ -117,7 +116,7 @@ const KeyType = () => {
                                     <th>{index + 1}</th>
                                     <td>{key.key}</td>
                                     <td className='flex gap-4'>
-                                        <Link to={`/dashboard/departmentEdit/${key._id}`}><FaEdit /></Link>
+                                        <Link to={`/dashboard/keyEdit/${key._id}`}><FaEdit /></Link>
                                         <button onClick={() => handleDelete(key._id)}><MdDeleteForever /></button>
                                     </td>
 
