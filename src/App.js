@@ -29,6 +29,8 @@ import { ToastContainer } from "react-toastify";
 import EditKeyType from "./pages/Dashboard/Settings/Library/EditKeyType";
 import DesignationAdd from "./pages/Dashboard/Settings/DesignationAdd";
 import DesignationEdit from "./pages/Dashboard/Settings/DesignationEdit";
+import ProductAddKey from "./pages/Dashboard/Settings/ProductAddKey";
+import ProductKeyEdit from "./pages/Dashboard/Settings/ProductKeyEdit";
 
 function App() {
   return (
@@ -61,9 +63,11 @@ function App() {
           <Route path="keyEdit/:id" element={<EditKeyType/>}/>
           <Route path="department" element={<Department/>}/>
           <Route path="designation" element={<Designation/>}/>
-          <Route path="productKey" element={<ProductKey/>}/>
           <Route path="designationAdd" element={<DesignationAdd/>}/>
           <Route path="designationEdit/:id" element={<DesignationEdit/>}/>
+          <Route path="productKey" element={<ProductKey/>}/>
+          <Route path="productKeyAdd" element={<ProductAddKey/>}/>
+          <Route path="productKeyEdit/:id" element={<ProductKeyEdit/>}/>
 
         </Route>
        
