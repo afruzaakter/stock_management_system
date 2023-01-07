@@ -60,7 +60,7 @@ const CurrentStock = () => {
                     </thead>
 
                     <tbody>
-                        <tr >
+                        <tr>
                             <th>1001 </th>
                             <td>Laptop</td>
                             <td>Qnty </td>

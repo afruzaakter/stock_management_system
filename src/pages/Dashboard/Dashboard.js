@@ -19,10 +19,15 @@ import { TbFileDatabase } from 'react-icons/tb';
 import { AiOutlineFieldTime } from 'react-icons/ai';
 import { MdLocalLibrary } from 'react-icons/md';
 import { AiOutlineRightSquare } from 'react-icons/ai';
+import { FaChevronDown } from 'react-icons/fa';
+import { GoIssueReopened } from 'react-icons/go';
+import { MdOutlineInventory } from 'react-icons/md';
+import { FaUserFriends } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
   const [open, setOpen] = useState(true);
+  const [subReportOpen, setSubReportOpen] = useState(false);
   const [subMenuOpen, setSubMenuOpen] = useState(false);
   const [librarySubMenuOpen, setLibrarySubMenuOpen] = useState(false);
 
@@ -31,16 +36,11 @@ const Dashboard = () => {
     return <Loading />
   }
   return (
-    <div className='' >
       <div className="drawer drawer-mobile ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
-
           <Outlet></Outlet>
-
-
         </div>
-
 
         <div className="drawer-side ">
           <label for="my-drawer-2" className="drawer-overlay"></label>
@@ -54,7 +54,7 @@ const Dashboard = () => {
 
                   {/* ***************************** Dashboard menu   *********************************** */}
 
-                  <li className={`text-gray-300 text-md  flex items-start   hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='/dashboard/dashboardhome' className='w-full font-medium border-b border-gray-400 rounded-md  hover:bg-rose-400  '>
+                  <li className={`text-gray-300 text-md  flex items-start   hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='/dashboard' className='w-full font-medium border-b border-gray-400 rounded-md  hover:bg-rose-400  '>
 
                     <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <MdOutlineDashboardCustomize className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Dashboard</span></Link></li>
@@ -114,9 +114,34 @@ const Dashboard = () => {
 
 
                   {/* ----------------------------Reports dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start   hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='/dashboard/reports' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                  <li onClick={() => setSubReportOpen(!subReportOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
                     <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <HiDocumentReport className='' /></span>
-                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Reports </span></Link></li>
+                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Reports </span> 
+                    <span className={` text-gray-800 pl-20 ${!open && 'hidden'}`}> <FaChevronDown/></span>
+                     </Link></li>
+                    {
+                      subReportOpen && <>
+                       {/* ------------------------------ Product issue ----------------------- */}
+                       <li className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/reports/productIssue" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                        <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <GoIssueReopened className='' /></span>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Product issue </span></Link></li>
+                      {/* ------------------------------ Inventory  ----------------------- */}
+                      <li className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/reports/inventory" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                        <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <MdOutlineInventory className='' /></span>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Inventory </span></Link></li>
+                      {/* ------------------------------ Employee User -------------------- */}
+                      <li className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/reports/employeeUser" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                        <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <FaUserFriends className='' /></span>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Employee User </span></Link></li>
+                      </>
+                    }
+
+
+
+
+
+
+
                   {/* -----------------------------Reports dashboard menu End ---------------------------- */}
 
                   {/* ----------------------------Employee dashboard menu Start ---------------------------- */}
@@ -134,19 +159,21 @@ const Dashboard = () => {
                   {/* ----------------------------Settings dashboard Sub menu Start ---------------------------- */}
                   <li onClick={() => setSubMenuOpen(!subMenuOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
                     <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiFillSetting className='' /></span>
-                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Settings </span></Link></li>
+                    <span className={` text-gray-800 pr-2 ${!open && 'hidden'}`}>Settings </span> 
+                    <span className={` text-gray-800 pl-16 ${!open && 'hidden'}`}> <FaChevronDown/></span>
+                    </Link></li>
                   {
                     subMenuOpen && <ul>
-                            {/* ------------------------------ Setting Department ----------------------- */}
+                      {/* ------------------------------ Setting Department ----------------------- */}
                       <li className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/department" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
                         <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Department </span></Link></li>
-                            {/* ------------------------------ Setting Designation ----------------------- */}
-                      <li  className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/designation" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                      {/* ------------------------------ Setting Designation ----------------------- */}
+                      <li className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/designation" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
                         <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Designation </span></Link></li>
-                            {/* ------------------------------ Setting Product Key ----------------------- */}
-                      <li  className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/productKey" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
+                     {/* ------------------------------ Setting Product Key ----------------------- */}
+                      <li className={`text-gray-300 text-md  flex items-start ml-4  hover:bg-rose-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to="/dashboard/productKey" className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-rose-400  '>
                         <span className={`text-xl text-gray-800 hover:text-gray-700 block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Product Key </span></Link></li>
 
@@ -181,10 +208,7 @@ const Dashboard = () => {
 
         </div>
 
-
       </div>
-
-    </div>
   );
 };
 
