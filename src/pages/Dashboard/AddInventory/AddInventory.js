@@ -1,10 +1,44 @@
-import React from 'react';
-import { FaPlus } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { TbMessageReport } from 'react-icons/tb';
+import AddInventoryModal from './AddInventoryModal';
+import { toast } from 'react-toastify';
 
 const AddInventory = () => {
+    const[addInventorys, setAddInventorys] = useState([]);
+    const [updated, setUpdated] = useState(false);
+    const [rowId, setRowId] = useState('');
+    const [checkboxClicked, setCheckboxClicked] = useState(false);
+
+    // console.log( "Row Id", rowId);
+    // console.log("Clicked", checkboxClicked);
+
+    useEffect(() =>{
+        fetch('http://localhost:5000/addInventory')
+        .then(res => res.json())
+        .then(data => setAddInventorys(data))
+        
+    },[updated])
+
+    const handleDelete = (id) =>{
+        if (checkboxClicked === true) {
+            const url = `http://localhost:5000/addInventory/${id}`
+            fetch(url, {
+                method: 'DELETE'
+              })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    const remaining = addInventorys.filter(department => department._id !== id)
+                    setAddInventorys(remaining);
+                })
+
+        }else{
+            toast("Please, Select Any Row")
+        }
+    }
+
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -23,21 +57,21 @@ const AddInventory = () => {
             </div>
 
             <div className='mb-2 '>
-                <button className="btn btn-sm mx-1 bg-primary text-white">
-                    <FaPlus /> Add Inventory</button>
+                <button> <AddInventoryModal setUpdated={setUpdated} />  </button>
+
                 <button className="btn btn-sm mx-1 bg-success text-white">
                     <FiEdit /> Edit</button>
-                <button className="btn btn-sm mx-1 bg-error text-white">
-                    <AiOutlineDelete /> Delete</button>
+                <button onClick={()=> handleDelete(rowId)} className="btn btn-sm mx-1 bg-error
+                 text-white"> <AiOutlineDelete /> Delete</button>
                 <button className="btn btn-sm mx-1 bg-warning   text-white">
                     <TbMessageReport /> Reports</button>
             </div>
-
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>
+                            <th>    </th>
                             <th>Date</th>
                             <th>#Purchase</th>
                             <th>Supplier</th>
@@ -49,15 +83,23 @@ const AddInventory = () => {
                     </thead>
 
                     <tbody>
-                        <tr >
-                            <th>02-01-2023</th>
-                            <td>PO-0001</td>
-                            <td>Razu Molla</td>
-                            <td>  01754247854 </td>
-                            <td>A4 Paper</td>
-                            <td>01754358895</td>
-                            <td> 01-01-2023 </td>
-                        </tr>
+                        {
+                            addInventorys.map((addInventory,index)=>
+                            <tr key={addInventory._id}  onClick={() => setRowId(addInventory._id)}  >
+                                <th onClick={()=> setCheckboxClicked(!checkboxClicked)}> 
+                                    <label> <input type="checkbox" className="checkbox" /> </label>
+                                </th>
+                                <th> {index+1 } </th>
+                                <th> { addInventory.purchase } </th>
+                                <th> { addInventory.supplierName } </th>
+                                <th> { addInventory.mobile } </th>
+                                <th> { addInventory.acceptedNote } </th>
+                                <th> { addInventory.createdNumber } </th>
+                                <th> { addInventory.lastUpdateDate } </th>                                
+                            </tr>
+
+                            )
+                        }
                     </tbody>
                 </table>
             </div>
