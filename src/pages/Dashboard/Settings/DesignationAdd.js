@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { BiRefresh } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 const DesignationAdd = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
@@ -24,7 +24,7 @@ const DesignationAdd = () => {
          setUpdated(!updated)
          reset();
         })
-        navigate('/dashboard/designation')
+        navigate('/dashboard/designation');
     }
     return (
         <div className='m-10'>
@@ -92,10 +92,10 @@ const DesignationAdd = () => {
                       </div>  
 
                       <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
-                       <button className="btn btn-sm mx-1 bg-gray-600  text-white">
-                     <BiRefresh className='text-xl ' /> Reset</button>
-                       <button className="btn btn-sm mx-1 bg-warning text-white"><RxCross2/>
-                     cancle</button>
+                       {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
+                     <BiRefresh className='text-xl ' /> Reset</button> */}
+                       <Link to='/dashboard/designation' className="btn btn-sm mx-1 bg-warning text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white"><RxCross2/>
+                     cancle</Link>
                        
                        
                     </form>

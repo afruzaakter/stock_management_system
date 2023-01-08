@@ -16,8 +16,19 @@ const Designation = () => {
         
     },[updated])
 
-    const handleDelete = () =>{
-
+    const handleDelete = (id) =>{
+      const proceed = window.confirm('Are you sure !!!')
+      if(proceed){
+        const url = `http://localhost:5000/designation/${id}`
+        fetch(url,{
+         method: "DELETE"
+        })
+        .then(res => res.json())
+        .then(data=>{
+            const remaining = designations.filter(designation => designation._id !== id)
+            setDesignations(remaining);
+        })
+      }
     }
     return (
         <div className='border m-1 p-1 rounded-lg m-6'>
