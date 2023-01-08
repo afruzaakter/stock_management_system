@@ -85,7 +85,7 @@ const AddInventory = () => {
                     <tbody>
                         {
                             addInventorys.map((addInventory,index)=>
-                            <tr key={addInventory._id}  onClick={() => setRowId(addInventory._id)}  >
+                            <tr className='bg-blue-900' key={addInventory._id}  onClick={() => setRowId(addInventory._id)}  >
                                 <th onClick={()=> setCheckboxClicked(!checkboxClicked)}> 
                                     <label> <input type="checkbox" className="checkbox" /> </label>
                                 </th>
