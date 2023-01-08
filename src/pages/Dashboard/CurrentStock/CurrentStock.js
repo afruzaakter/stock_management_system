@@ -46,19 +46,13 @@ const CurrentStock = () => {
                 </div>
             </div>
 
-            <div className="overflow-x-auto">
+            {/* <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>
                             <th>Code </th>
-                            <th>Product Name </th>
-                            <th>Unit </th>
-                            <th>Stock </th>
-                            <th>Sale Price </th>
-                            <th>Alert Qty </th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <tr>
                             <th>1001 </th>
@@ -70,7 +64,43 @@ const CurrentStock = () => {
                         </tr>
                     </tbody>
                 </table>
+            </div> */}
+            <div className="overflow-x-auto w-full">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            
+                            <th>Code </th>
+                            <th>Product Name </th>
+                            <th>Unit </th>
+                            <th>Stock </th>
+                            <th>Sale Price </th>
+                            <th>Alert Qty </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr>
+                            <th>
+                                <label> <input type="checkbox" className="checkbox" /> </label>
+                            </th>
+
+                            <th>1001 </th>
+                            <td>Laptop</td>
+                            <td>Qnty </td>
+                            <td> 46</td>
+                            <td>84999.00</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+
+
+
+
+
+
 
         </div>
     );
