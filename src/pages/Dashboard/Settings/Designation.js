@@ -8,13 +8,13 @@ import { Link } from 'react-router-dom';
 
 const Designation = () => {
     const[designations, setDesignations] = useState([]);
-    const [updated, setUpdated] = useState(false);
+    // const [updated, setUpdated] = useState(false);
     useEffect(() =>{
         fetch('http://localhost:5000/designation')
         .then(res => res.json())
         .then(data => setDesignations(data))
         
-    },[updated])
+    },[])
 
     const handleDelete = (id) =>{
       const proceed = window.confirm('Are you sure !!!')

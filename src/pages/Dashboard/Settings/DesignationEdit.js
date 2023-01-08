@@ -18,26 +18,23 @@ const DesignationEdit = () => {
           .then(data=>setDesignations(data))
       
          }, [])
+         console.log(designations)
     const onSubmit = (data) =>{
-        const designation = {
-            designation: data.designation,
-            name: data.name,
-            order: data.order,
-         };
-         const url = `http://localhost:5000/designation/${id}`
+         const url = `http://localhost:5000/designation/${id}`;
          fetch(url, {
             method: 'PUT',
             headers:{
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(designation)
+            body: JSON.stringify(data)
          })
          .then(res =>res.json())
          .then(data =>{
+            console.log('success', data)
             toast.success(' Data Update Successfully !!!')
             reset();
          })
-         navigate('/dashboard/designation')
+         navigate('/dashboard/designation');
     }
     return (
         <div className='m-10'>
@@ -73,7 +70,7 @@ const DesignationEdit = () => {
                         <label className='text-start '>Description</label>
                         <textarea
                             type="text"
-                            Value={designations.name}
+                            Value={designations.description}
                            
                             className={`input font-bold max-w-xs text-red-900  border-green-700  focus:outline-0 rounded-sm border-gray-400 mt-1  w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
                             {...register("description", {
@@ -110,7 +107,7 @@ const DesignationEdit = () => {
                     </div> 
                   </div>  
 
-                  <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
+                  <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
                    <button className="btn btn-sm mx-1 bg-gray-600  text-white">
                  <BiRefresh className='text-xl ' /> Reset</button>
                    <Link to='/dashboard/designation' className="btn btn-sm mx-1 bg-warning text-white"><RxCross2/>
