@@ -14,13 +14,16 @@ import CurrentStock from "./pages/Dashboard/CurrentStock/CurrentStock";
 import StockAdjust from "./pages/Dashboard/StockAdjust/StockAdjust";
 import Supplier from "./pages/Dashboard/Supplier/Supplier";
 import Product from "./pages/Dashboard/Products/Product";
-import Reports from "./pages/Dashboard/Reports/Reports";
+
 import Employee from "./pages/Dashboard/Employee/Employee";
 import UserManagement from "./pages/Dashboard/UserManagement/UserManagement";
 import KeyType from "./pages/Dashboard/Settings/Library/KeyType";
 import Department from "./pages/Dashboard/Settings/Department";
 import Designation from "./pages/Dashboard/Settings/Designation";
 import ProductKey from "./pages/Dashboard/Settings/ProductKey";
+import ProductIssue from "./pages/Dashboard/Reports/ProductIssue";
+import Inventory from "./pages/Dashboard/Reports/Inventory";
+import EmployeeUser from "./pages/Dashboard/Reports/EmployeeUser";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import EditKeyType from "./pages/Dashboard/Settings/Library/EditKeyType";
@@ -39,7 +42,7 @@ function App() {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/dashboard" element={<Dashboard />}>
 
-          <Route path="dashboardhome" element={<DashboardHome/>}/>
+          <Route index element={<DashboardHome/>}/>
           <Route path="requisition" element={<Requisition />}/>
           <Route path="requisitionAuthorize" element={<RequisitionAuthorize/>}/>
           <Route path="requisitionApproval" element={<RequisitionApproval/>}/>
@@ -49,7 +52,11 @@ function App() {
           <Route path="stockAdjust" element={<StockAdjust/>}/>
           <Route path="supplier" element={<Supplier/>}/>
           <Route path="product" element={<Product/>}/>
-          <Route path="reports" element={<Reports/>}/>
+          {/* <Route path="reports" element={<Reports/>}/> */}
+          <Route path="reports/productIssue" element={<ProductIssue/>}/>
+          <Route path="reports/inventory" element={ <Inventory />}/>
+          <Route path="reports/employeeUser" element={ <EmployeeUser />} />
+
           <Route path="employee" element={<Employee/>}/>
           <Route path="userManagement" element={<UserManagement/>}/>
           <Route path="keyType" element={<KeyType/>}/>
