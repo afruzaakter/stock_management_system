@@ -43,25 +43,11 @@ const Designation = () => {
         <div className='mb-2 flex justify-between '>
            <div>
         
-              <Link to="/dashboard/designationAdd" className='btn btn-sm mx-1 bg-green-700 text-white'><FaPlus />  Add</Link>
+              <Link to="/dashboard/designationAdd" className='btn btn-sm mx-1 bg-green-700 text-white'><FaPlus /> Add Designation</Link>
 
-                {/* <label 
-               
-                for="my-modal-6" className="btn btn-sm mx-1 bg-green-700 text-white"><FaPlus />  Add</label> */}
-
-            <Link to='/dashboard/designationEdit' className="btn btn-sm mx-1 bg-success text-white">
-                <FiEdit /> Edit</Link>
-            <button 
-            // onClick={()=> handleDelete(department._id)} 
-            className="btn btn-sm mx-1 bg-blue-700 text-white">
-                <AiOutlineDelete /> Delete</button>
+             
            </div>
-            <div >
-            <button className="btn btn-sm mx-1 bg-gray-600   text-white">
-                <BiRefresh className='text-xl ' /> Reset</button>
-            <button className="btn btn-sm mx-1 bg-blue-700   text-white">
-                <IoMdRefresh /> Refresh</button>
-            </div>
+          
         </div>
 
 
@@ -69,7 +55,7 @@ const Designation = () => {
             <table className="table w-full">
                 <thead>
                     <tr>
-                        <th>S No.</th> 
+                        <th>SL.</th> 
                         <th>Name</th> 
                         <th>Description </th>
                         <th>Show Order  </th>
@@ -90,7 +76,7 @@ const Designation = () => {
                             <td>{designation.order}</td> 
                             <td>No</td> 
                             <td>
-                              <button onClick={() => handleDelete(designation._id)}><AiOutlineDelete /> </button> 
+                              <button className="btn btn-sm mx-1 bg-red-500 text-white" onClick={() => handleDelete(designation._id)}><AiOutlineDelete /> </button> 
                               <Link to={`/dashboard/designationEdit/${designation._id}`} className="btn btn-sm mx-1 bg-success text-white">
                 <FiEdit /> </Link> 
                             </td> 

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
 
 const ProductKeyEdit = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const {id} = useParams()
+    const {id} = useParams();
+    const navigate = useNavigate()
     // -------- key type get method------------
     const [keys, setKeys] = useState([]);
     useEffect(() =>{
@@ -39,6 +40,7 @@ const ProductKeyEdit = () => {
         toast.success('Data Update Successfully!!!');
         reset();
      })
+    navigate('/dashboard/productKey');
     }
     return (
         <div className='m-10'>
@@ -90,14 +92,10 @@ const ProductKeyEdit = () => {
 
                     <div className="form-control">
                         <label className='text-start'>Key Type</label>
-                        <select  Value={productkeys.keytype}  {...register("keytype",  {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
+                        <select  {...register("keytype")}
+                         Value={productkeys.keytype} 
                             className={`input font-bold w-64  focus:outline-0 rounded-sm  border-gray-400 mt-1  w-full focus:border-blue-500  login-container-input ${errors.opportunity  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value='' >--Select key type--</option>
+                                {/* <option value='' >--Select key type--</option> */}
                             {
                                 keys.map((key)=><option>{key.key}</option>)
                             }
@@ -110,7 +108,7 @@ const ProductKeyEdit = () => {
                     </div> 
                   </div>  
 
-                  <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
+                  <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
                    {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
                  <BiRefresh className='text-xl ' /> Reset</button> */}
                    <Link to='/dashboard/productKey' className="btn btn-sm mx-1 bg-warning text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white"><RxCross2/>
