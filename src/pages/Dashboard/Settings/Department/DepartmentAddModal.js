@@ -31,7 +31,7 @@ const DepartmentAddModal = () => {
     return (
         <div>
 
-            <label for="my-modal-6" className="btn btn-sm mx-1 bg-green-700 text-white"><FaPlus /> Add</label>
+            <label for="my-modal-6" className="btn btn-sm mx-1 bg-green-700 text-white"><FaPlus /> Add Department</label>
 
 
             <input type="checkbox" id="my-modal-6" className="modal-toggle" />

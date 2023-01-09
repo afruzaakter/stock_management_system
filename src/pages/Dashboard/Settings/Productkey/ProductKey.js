@@ -41,25 +41,10 @@ const ProductKey = () => {
         <div className='mb-2 flex justify-between '>
            <div>
         
-              <Link to="/dashboard/productKeyAdd" className='btn btn-sm mx-1 bg-green-700 text-white'><FaPlus />  Add</Link>
-
-                {/* <label 
-               
-                for="my-modal-6" className="btn btn-sm mx-1 bg-green-700 text-white"><FaPlus />  Add</label> */}
-
-            <Link to='/dashboard/designationEdit' className="btn btn-sm mx-1 bg-success text-white">
-                <FiEdit /> Edit</Link>
-            <button 
-            // onClick={()=> handleDelete(department._id)} 
-            className="btn btn-sm mx-1 bg-blue-700 text-white">
-                <AiOutlineDelete /> Delete</button>
+              <Link to="/dashboard/productKeyAdd" className='btn btn-sm mx-1 bg-green-700 text-white'><FaPlus />  Add Product Key</Link>
+          
            </div>
-            <div >
-            <button className="btn btn-sm mx-1 bg-gray-600   text-white">
-                <BiRefresh className='text-xl ' /> Reset</button>
-            <button className="btn btn-sm mx-1 bg-blue-700   text-white">
-                <IoMdRefresh /> Refresh</button>
-            </div>
+           
         </div>
 
 
@@ -67,18 +52,16 @@ const ProductKey = () => {
             <table className="table w-full">
                 <thead>
                     <tr>
-                        <th>S No.</th> 
+                        <th>SL.</th> 
                         <th>Product Key Code</th> 
                         <th>Description </th>
                         <th>Key Type</th>
                         <th>Is System </th>
-                        <th>Action </th>
-                                                
+                        <th>Action </th>                                               
                     </tr>
                 </thead>
 
                 <tbody>
-                   
                         {
                             productkeys.map((productkey,index) =>
                             <tr key={productkey._id}>
@@ -88,9 +71,9 @@ const ProductKey = () => {
                             <td>{productkey.keytype}</td> 
                             <td>No</td> 
                             <td>
-                              <button onClick={() => handleDelete(productkey._id)}><AiOutlineDelete /> </button> 
+                              <button className='btn btn-sm mx-1 bg-red-500 text-white' onClick={() => handleDelete(productkey._id)}><AiOutlineDelete /> </button> 
                               <Link to={`/dashboard/productKeyEdit/${productkey._id}`} className="btn btn-sm mx-1 bg-success text-white">
-                <FiEdit /> </Link> 
+                              <FiEdit /> </Link> 
                             </td> 
                             </tr>
                             )

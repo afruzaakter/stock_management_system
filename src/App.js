@@ -18,19 +18,21 @@ import Product from "./pages/Dashboard/Products/Product";
 import Employee from "./pages/Dashboard/Employee/Employee";
 import UserManagement from "./pages/Dashboard/UserManagement/UserManagement";
 import KeyType from "./pages/Dashboard/Settings/Library/KeyType";
-import Department from "./pages/Dashboard/Settings/Department";
-import Designation from "./pages/Dashboard/Settings/Designation";
-import ProductKey from "./pages/Dashboard/Settings/ProductKey";
+import Department from "./pages/Dashboard/Settings/Department/Department";
+import Designation from "./pages/Dashboard/Settings/Designation/Designation";
+import ProductKey from "./pages/Dashboard/Settings/Productkey/ProductKey";
 import ProductIssue from "./pages/Dashboard/Reports/ProductIssue";
 import Inventory from "./pages/Dashboard/Reports/Inventory";
 import EmployeeUser from "./pages/Dashboard/Reports/EmployeeUser";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import EditKeyType from "./pages/Dashboard/Settings/Library/EditKeyType";
-import DesignationAdd from "./pages/Dashboard/Settings/DesignationAdd";
-import DesignationEdit from "./pages/Dashboard/Settings/DesignationEdit";
-import ProductAddKey from "./pages/Dashboard/Settings/ProductAddKey";
-import ProductKeyEdit from "./pages/Dashboard/Settings/ProductKeyEdit";
+import DesignationAdd from "./pages/Dashboard/Settings/Designation/DesignationAdd";
+import DesignationEdit from "./pages/Dashboard/Settings/Designation/DesignationEdit";
+import ProductAddKey from "./pages/Dashboard/Settings/Productkey/ProductAddKey";
+import ProductKeyEdit from "./pages/Dashboard/Settings/Productkey/ProductKeyEdit";
+import Setting from "./pages/Dashboard/Settings/Setting";
+import DepartmentEdit from "./pages/Dashboard/Settings/Department/DepartmentEdit";
 
 function App() {
   return (
@@ -68,6 +70,8 @@ function App() {
           <Route path="productKey" element={<ProductKey/>}/>
           <Route path="productKeyAdd" element={<ProductAddKey/>}/>
           <Route path="productKeyEdit/:id" element={<ProductKeyEdit/>}/>
+          <Route path="setting" element={<Setting/>}/>
+          <Route path="departmentEdit/:id" element={<DepartmentEdit/>}/>
 
         </Route>
        
