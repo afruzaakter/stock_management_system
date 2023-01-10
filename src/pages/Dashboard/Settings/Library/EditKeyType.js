@@ -39,7 +39,7 @@ const EditKeyType = () => {
      navigate('/dashboard/keyType')
     }
     return (
-        <div className="card w-96 bg-gray-300 mt-10 ml-16">
+        <div className="card w-96 bg-gray-300 mt-28 ml-16">
                 <div className='card-body'>
                     <h2 className="text-center text-xl font-bold">Key Type</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>

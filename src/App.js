@@ -34,6 +34,9 @@ import ProductAddKey from "./pages/Dashboard/Settings/Productkey/ProductAddKey";
 import ProductKeyEdit from "./pages/Dashboard/Settings/Productkey/ProductKeyEdit";
 import Setting from "./pages/Dashboard/Settings/Setting";
 import DepartmentEdit from "./pages/Dashboard/Settings/Department/DepartmentEdit";
+import BudgetCode from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCode";
+import BudgetCodeEdit from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCodeEdit";
+import ProductAdd from "./pages/Dashboard/Products/ProductAdd";
 
 function App() {
   return (
@@ -67,13 +70,17 @@ function App() {
           <Route path="keyEdit/:id" element={<EditKeyType/>}/>
           <Route path="department" element={<Department/>}/>
           <Route path="designation" element={<Designation/>}/>
+          <Route path="departmentEdit/:id" element={<DepartmentEdit/>}/>
           <Route path="designationAdd" element={<DesignationAdd/>}/>
           <Route path="designationEdit/:id" element={<DesignationEdit/>}/>
           <Route path="productKey" element={<ProductKey/>}/>
           <Route path="productKeyAdd" element={<ProductAddKey/>}/>
           <Route path="productKeyEdit/:id" element={<ProductKeyEdit/>}/>
+          <Route path="budgetCode" element={<BudgetCode/>}/>
+          <Route path="budgetCodeEdit/:id" element={<BudgetCodeEdit/>}/>
           <Route path="setting" element={<Setting/>}/>
-          <Route path="departmentEdit/:id" element={<DepartmentEdit/>}/>
+          <Route path="productAdd" element={<ProductAdd/>}/>
+         
 
         </Route>
        

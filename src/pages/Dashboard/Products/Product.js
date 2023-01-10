@@ -2,6 +2,7 @@ import React from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const Product = () => {
     return (
@@ -22,8 +23,8 @@ const Product = () => {
             </div>
 
             <div className='mb-2'>
-                <button className="btn btn-sm mx-1 bg-primary text-white"> 
-                <FaPlus/> Add Product</button>
+                <Link to='/dashboard/productAdd' className="btn btn-sm mx-1 bg-primary text-white"> 
+                <FaPlus/> Add Product</Link>
                 <button className="btn btn-sm mx-1 bg-success text-white">
                     <FiEdit /> Edit</button>
                 <button className="btn btn-sm mx-1 bg-error text-white">

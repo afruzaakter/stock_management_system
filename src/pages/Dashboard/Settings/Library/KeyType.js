@@ -63,8 +63,8 @@ const KeyType = () => {
     }
 
     return (
-        <div className='lg:flex lg:justify-start lg:ml-28 lg:items-start mt-16 lg:gap-20'>
-            <div className="card w-96 bg-gray-300 ">
+        <div className='lg:flex lg:justify-start lg:ml-28 lg:items-start mt-28 lg:gap-20'>
+            <div className="card w-96 bg-gray-200 ">
                 <div className='card-body'>
                     <h2 className="text-center text-xl font-bold">Key Type</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -101,9 +101,9 @@ const KeyType = () => {
                     {/* <!-- head --> */}
                     <thead >
                         <tr>
-                            <th className='bg-green-300 '>SL No.</th>
-                            <th className='bg-green-300 '>Key Type</th>
-                            <th className='bg-green-300 '>Action</th>
+                            <th className='bg-green-200 '>SL No.</th>
+                            <th className='bg-green-200 '>Key Type</th>
+                            <th className='bg-green-200 '>Action</th>
 
                         </tr>
                     </thead>
@@ -115,9 +115,9 @@ const KeyType = () => {
                                 <tr>
                                     <th>{index + 1}</th>
                                     <td>{key.key}</td>
-                                    <td className='flex gap-4'>
-                                        <Link to={`/dashboard/keyEdit/${key._id}`}><FaEdit /></Link>
-                                        <button onClick={() => handleDelete(key._id)}><MdDeleteForever /></button>
+                                    <td className='flex gap-1'>
+                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/keyEdit/${key._id}`}><FaEdit /></Link>
+                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(key._id)}><MdDeleteForever /></button>
                                     </td>
 
 
