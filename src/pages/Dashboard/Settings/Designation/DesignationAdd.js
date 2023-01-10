@@ -4,6 +4,7 @@ import { BiRefresh } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+
 const DesignationAdd = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
@@ -95,7 +96,7 @@ const DesignationAdd = () => {
                        {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
                      <BiRefresh className='text-xl ' /> Reset</button> */}
                        <Link to='/dashboard/designation' className="btn btn-sm mx-1 bg-warning text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white"><RxCross2/>
-                     cancle</Link>
+                     Cancel </Link>
                        
                        
                     </form>
