@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import FadeLoader from "react-spinners/FadeLoader";
+// import RingLoader from "react-spinners/RingLoader";
 import HashLoader from "react-spinners/HashLoader";
 const Loading = () => {
     const [loading, setLoading] = useState(false)
@@ -18,8 +18,7 @@ const Loading = () => {
             aria-label="Loading Spinner"
             data-testid="loader"
         />
-        {/* <FadeLoader
-
+        {/* <RingLoader
              color={'#0f766e'}
             loading={loading}
             size={400}
