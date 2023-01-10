@@ -31,6 +31,7 @@ import DesignationAdd from "./pages/Dashboard/Settings/DesignationAdd";
 import DesignationEdit from "./pages/Dashboard/Settings/DesignationEdit";
 import ProductAddKey from "./pages/Dashboard/Settings/ProductAddKey";
 import ProductKeyEdit from "./pages/Dashboard/Settings/ProductKeyEdit";
+import AddNewEmployee from "./pages/Dashboard/Employee/AddNewEmployee";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
           <Route path="reports/employeeUser" element={ <EmployeeUser />} />
 
           <Route path="employee" element={<Employee/>}/>
+          <Route path="addNewEmployee" element={< AddNewEmployee />}/>
           <Route path="userManagement" element={<UserManagement/>}/>
           <Route path="keyType" element={<KeyType/>}/>
           <Route path="keyEdit/:id" element={<EditKeyType/>}/>
