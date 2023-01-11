@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ProductEdit = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -24,8 +25,25 @@ const ProductEdit = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
-     const onSubmit = () =>{
+     const onSubmit = (data) =>{
+        const url = `http://localhost:5000/product/${id}`;
 
+        console.log(url)
+
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('success', data);
+                toast.success('Data Update Successfully !!!');
+                reset();
+            })
+        navigate('/dashboard/product')
      }
     return (
         <div className='mt-10 ml-8 '>
