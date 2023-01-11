@@ -114,13 +114,13 @@ const Dashboard = () => {
 
 
                   {/* ----------------------------Reports dashboard menu Start ---------------------------- */}
-                  <li onClick={() => setSubReportOpen(!subReportOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl  rounded-md mt-2  w-full font-medium border-b border-gray-400  rounded-md  hover:bg-gray-400 `}>
-                   <div className='flex justify-between'>
-                   <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <HiDocumentReport className='' /></span>
-                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Reports </span> 
-                    <span className={` text-gray-800 pl-20 ${!open && 'hidden'}`}> <FaChevronDown/></span>
-                   </div>
-                     </li>
+                    <li onClick={() => setSubReportOpen(!subReportOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl mt-2  w-full font-medium border-b border-gray-400  rounded-md `}>
+                      <div className='flex justify-between'>
+                        <span className={`text-xl text-gray-800 hover:text-gray-800 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <HiDocumentReport className='' /></span>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Reports </span> 
+                        <span className={` text-gray-800 pl-20 ${!open && 'hidden'}`}> <FaChevronDown/></span>
+                        </div>
+                    </li>
                     {
                       subReportOpen && <>
                        {/* ------------------------------ Product issue ----------------------- */}
@@ -159,7 +159,7 @@ const Dashboard = () => {
                   {/* -----------------------------User Management  dashboard menu End ---------------------- */}
 
                   {/* ----------------------------Settings dashboard Sub menu Start ---------------------------- */}
-                  <li onClick={() => setSubMenuOpen(!subMenuOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl  rounded-md mt-2   w-full font-medium border-b border-gray-400  rounded-md  hover:bg-gray-400 `}>
+                  <li onClick={() => setSubMenuOpen(!subMenuOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl  rounded-md mt-2  w-full font-medium border-b border-gray-400 `}>
                     
                     <div className='flex justify-between'>
                     <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiFillSetting className='' /></span>

@@ -39,11 +39,11 @@ const DesignationAdd = () => {
                             <label className='text-start '>Designation Name</label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm border-gray-400 mt-1  w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
+                                className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
                                 {...register("name", {
                                     required: {
                                         value: true,
-                                        message: "❌  Please Fillup  Input Field"
+                                        message: "❌  Please Fill-Up  Input Field"
                                     }
                                 })}
                             />
@@ -58,11 +58,11 @@ const DesignationAdd = () => {
                             <label className='text-start '>Description</label>
                             <textarea
                                 type="text"
-                                className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm border-gray-400 mt-1  w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                                className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
                                 {...register("description", {
                                     required: {
                                         value: true,
-                                        message: "❌  Please Fillup  Input Field"
+                                        message: "❌  Please Fill-Up  Input Field"
                                     }
                                 })}
                             />
@@ -77,11 +77,11 @@ const DesignationAdd = () => {
                             <label className='text-start'>Show Order</label>
                             <input
                                 type="number"
-                                className={`input font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm border-gray-400 mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
+                                className={`input font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
                                 {...register("order", {
                                     required: {
                                         value: true,
-                                        message: "❌  Please Fillup  Input Field"
+                                        message: "❌  Please Fill-Up  Input Field"
                                     }
                                 })}
                             />
