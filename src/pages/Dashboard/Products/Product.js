@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import { FiEdit } from 'react-icons/fi';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { FaEdit } from 'react-icons/fa';
+import { MdDeleteForever } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
+
 const Product = () => {
+    // ---------- Drop down budgetCodes get method ----------
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/product')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, [])
+    // ---------- Delete method-----
+    const handleDelete = (id) =>{
+        const proceed = window.confirm('Are you sure?')
+        if (proceed) {
+            const url = `http://localhost:5000/product/${id}`
+            console.log(url)
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    const remaining = products.filter(product => product._id !== id)
+                    setProducts(remaining);
+                })
+
+        }
+    }
     return (
         <div className='border m-2 p-1 rounded-lg'>
 
@@ -23,36 +49,50 @@ const Product = () => {
             </div>
 
             <div className='mb-2'>
-                <Link to='/dashboard/productAdd' className="btn btn-sm mx-1 bg-primary text-white"> 
-                <FaPlus/> Add Product</Link>
-                <button className="btn btn-sm mx-1 bg-success text-white">
-                    <FiEdit /> Edit</button>
-                <button className="btn btn-sm mx-1 bg-error text-white">
-                    <AiOutlineDelete /> Delete</button>
+                <Link to='/dashboard/productAdd' className="btn btn-sm mx-1 bg-primary text-white">
+                    <FaPlus /> Add Product</Link>
+               
             </div>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>
+                            <th>SL.</th>
                             <th>Budget Code </th>
                             <th>Product Name</th>
                             <th>Unit</th>
                             <th>Stock </th>
                             <th>Alert Qty </th>
                             <th>Order </th>
+                            <th>Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr >
+                        {
+                            products.slice(0).reverse().map((product, index) => <tr>
+                                <th>{index+1}</th>
+                                <td>{product.budgetCode} </td>
+                                <td>{product.brandName} </td>
+                                <td>{product.size}</td>
+                                <td>{product.measureUnit} </td>
+                                <td>{product.alertQty}</td>
+                                <td>{product.sortOrder}</td>
+                                <td className='flex gap-1'>
+                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
+                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
+                                    </td>
+                            </tr>)
+                        }
+                        {/* <tr >
                             <th>02015</th>
                             <td>Book </td>
                             <td>Pice</td>
                             <td>  5000 </td>
                             <td>50</td>
                             <td>100</td>
-                        </tr>
+                        </tr> */}
                     </tbody>
                 </table>
             </div>

@@ -52,7 +52,7 @@ const BudgetCode = () => {
       }
     }
     return (
-        <div className='lg:flex lg:justify-start lg:ml-28 lg:items-start mt-28 lg:gap-20'>
+        <div className='lg:flex   lg:ml-10 lg:items-start justify-around mt-28 lg:gap-10'>
         <div className="card w-96 bg-gray-200 ">
             <div className='card-body'>
                 <h2 className="text-center text-xl font-bold">Budget Code</h2>

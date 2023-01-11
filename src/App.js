@@ -36,6 +36,7 @@ import DepartmentEdit from "./pages/Dashboard/Settings/Department/DepartmentEdit
 import BudgetCode from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCode";
 import BudgetCodeEdit from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCodeEdit";
 import ProductAdd from "./pages/Dashboard/Products/ProductAdd";
+import ProductEdit from "./pages/Dashboard/Products/ProductEdit";
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
           <Route path="budgetCodeEdit/:id" element={<BudgetCodeEdit/>}/>
           <Route path="setting" element={<Setting/>}/>
           <Route path="productAdd" element={<ProductAdd/>}/>
+          <Route path="productEdit/:id" element={<ProductEdit/>}/>
          
 
         </Route>

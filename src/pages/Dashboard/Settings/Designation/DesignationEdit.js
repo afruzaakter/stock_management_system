@@ -49,7 +49,7 @@ const DesignationEdit = () => {
                         <input
                             type="text"
                             Value={designations.name}
-                            className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm border-gray-400 mt-1  w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
+                            className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
                             {...register("name", {
                                 required: {
                                     value: true,
@@ -92,7 +92,7 @@ const DesignationEdit = () => {
                         <input
                             type="number"
                             Value={designations.order}
-                            className={`input font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm border-gray-400 mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
+                            className={`input font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
                             {...register("order", {
                                 required: {
                                     value: true,
@@ -111,7 +111,7 @@ const DesignationEdit = () => {
                    <button className="btn btn-sm mx-1 bg-gray-600  text-white">
                  <BiRefresh className='text-xl ' /> Reset</button>
                    <Link to='/dashboard/designation' className="btn btn-sm mx-1 bg-warning text-white"><RxCross2/>
-                 cancle</Link>
+                 cancel</Link>
                    
                    
                 </form>
