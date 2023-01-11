@@ -27,6 +27,7 @@ import EmployeeUser from "./pages/Dashboard/Reports/EmployeeUser";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import EditKeyType from "./pages/Dashboard/Settings/Library/EditKeyType";
+import AddNewEmployee from "./pages/Dashboard/Employee/AddNewEmployee";
 import DesignationAdd from "./pages/Dashboard/Settings/Designation/DesignationAdd";
 import DesignationEdit from "./pages/Dashboard/Settings/Designation/DesignationEdit";
 import ProductAddKey from "./pages/Dashboard/Settings/Productkey/ProductAddKey";
@@ -63,6 +64,7 @@ function App() {
           <Route path="reports/employeeUser" element={ <EmployeeUser />} />
 
           <Route path="employee" element={<Employee/>}/>
+          <Route path="addNewEmployee" element={< AddNewEmployee />}/>
           <Route path="userManagement" element={<UserManagement/>}/>
           <Route path="keyType" element={<KeyType/>}/>
           <Route path="keyEdit/:id" element={<EditKeyType/>}/>
