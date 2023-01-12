@@ -32,7 +32,7 @@ const AddNewEmployee = () => {
       })
       .then(res => res.json())
       .then(data =>{
-        console.log(data)
+        // console.log(data)
         toast.success("Data Added Successfully!!!");
         reset();
       })
