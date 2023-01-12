@@ -46,18 +46,18 @@ const AddInventoryModal = ({setUpdated}) => {
 
                     
                     <form onSubmit={handleSubmit(onSubmit)} >
-                        <div>
+                        <div className='grid place-content-center'>
 
                             {/* ----------Purchase Field ------------- */}
                             <div className="form-control">
-                                <label className='text-start ml-16'>Purchase </label>
+                                <label className='text-start'>Purchase </label>
                                 <input
                                     type="text"
-                                    className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-full ml-16 focus:border-blue-500  login-container-input ${errors.purchase && 'border-red-600 focus:border-red-600'}`}
+                                    className={`input input-md max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-full  focus:border-blue-500  login-container-input ${errors.purchase && 'border-red-600 focus:border-red-600'}`}
                                     {...register("purchase", {
                                         required: {
                                             value: true,
-                                            message: "❌  Please Fillup  Input Field"
+                                            message: "❌  Please fill out  this field"
                                         }
                                     })}
                                 />
@@ -69,14 +69,14 @@ const AddInventoryModal = ({setUpdated}) => {
 
                             {/* ----------------Supplier Name Field ------------------ */}
                             <div className="form-control">
-                                <label className='text-start ml-16'>Supplier Name </label>
+                                <label className='text-start'>Supplier Name </label>
                                 <input
                                     type="text"
-                                    className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1 w-full ml-16 focus:border-blue-500  login-container-input ${errors.supplierName && 'border-red-600 focus:border-red-600'}`}
+                                    className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.supplierName && 'border-red-600 focus:border-red-600'}`}
                                     {...register("supplierName", {
                                         required: {
                                             value: true,
-                                            message: "❌  Please Fillup  Input Field"
+                                            message: "❌  Please fill out  this field"
                                         }
                                     })}
                                 />
@@ -88,14 +88,14 @@ const AddInventoryModal = ({setUpdated}) => {
 
                             {/* --------------------Mobile ----------------------- */}
                             <div className="form-control">
-                                <label className='text-start ml-16'>Mobile </label>
+                                <label className='text-start'>Mobile </label>
                                 <input
                                     type="text"
-                                    className={`input font-bold max-w-xs  border-green-700 ml-16 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.mobile && 'border-red-600 focus:border-red-600'}`}
+                                    className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.mobile && 'border-red-600 focus:border-red-600'}`}
                                     {...register("mobile", {
                                         required: {
                                             value: true,
-                                            message: "❌  Please Fillup  Input Field"
+                                            message: "❌  Please fill out  this field"
                                         }
                                     })}
                                 />
@@ -107,14 +107,14 @@ const AddInventoryModal = ({setUpdated}) => {
                             {/* -----------------------Accepted Note Field ------------------------------ */}
 
                             <div className="form-control">
-                                <label className='text-start ml-16'>Accepted Note </label>
+                                <label className='text-start'>Accepted Note </label>
                                 <textarea
                                     type="text"
-                                    className={`input font-bold max-w-xs  border-green-700 ml-16 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.acceptedNote && 'border-red-600 focus:border-red-600'}`}
+                                    className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.acceptedNote && 'border-red-600 focus:border-red-600'}`}
                                     {...register("acceptedNote", {
                                         required: {
                                             value: true,
-                                            message: "❌  Please Fillup  Input Field"
+                                            message: "❌  Please fill out  this field"
                                         }
                                     })}
                                 />
@@ -126,16 +126,16 @@ const AddInventoryModal = ({setUpdated}) => {
                             {/* ----------------------- Creator Number ------------------------------ */}
 
                             <div className="form-control">
-                                <label className='text-start ml-16'>Created Number </label>
+                                <label className='text-start'>Created Number </label>
                                 <input
                                     type="text"
-                                    className={`input font-bold max-w-xs  border-green-700 ml-16 focus:outline-0 rounded-sm mt-1
+                                    className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1
                                     w-full focus:border-blue-500  login-container-input ${errors.createdNumber && 
                                     'border-red-600 focus:border-red-600'}`}
                                     {...register("createdNumber", {
                                         required: {
                                             value: true,
-                                            message: "❌  Please Fillup  Input Field"
+                                            message: "❌  Please fill out  this field"
                                         }
                                     })}
                                 />
@@ -146,16 +146,16 @@ const AddInventoryModal = ({setUpdated}) => {
                             </div> 
                             {/* ----------------------- last Update date  ------------------------------ */}
                             <div className="form-control">
-                                <label className='text-start ml-16'>Last Update Date  </label>
+                                <label className='text-start'>Last Update Date  </label>
                                 <input
                                     type="date"
-                                    className={`input font-bold max-w-xs  border-green-700 ml-16 focus:outline-0 rounded-sm mt-1
+                                    className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1
                                     w-full focus:border-blue-500  login-container-input ${errors.lastUpdateDate && 
                                     'border-red-600 focus:border-red-600'}`}
                                     {...register("lastUpdateDate", {
                                         required: {
                                             value: true,
-                                            message: "❌  Please Fillup  Input Field"
+                                            message: "❌  Please fill out  this field"
                                         }
                                     })}
                                 />

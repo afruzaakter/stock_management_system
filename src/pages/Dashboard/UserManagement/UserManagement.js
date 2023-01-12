@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
 import { IoMdArrowDropdown } from 'react-icons/io';
@@ -7,11 +7,21 @@ import { FiEdit } from 'react-icons/fi';
 import { MdDone } from 'react-icons/md';
 import { MdBlock } from 'react-icons/md';
 import { FiRefreshCcw } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const UserManagement = () => {
+    const [users, setUsers]= useState([])
+
+    useEffect(()=>{
+        fetch("http://localhost:5000/user")
+        .then(res=>res.json())
+        .then(data=> setUsers(data))
+    },[])
+
     return (
         <div className='border m-1 p-1 rounded-lg'>
-
+            
+            {/*------------ navbar-------- */}
             <div className="navbar bg-base-100">
                 <div className="flex-1">
                     <h1 className='text-3xl'> User Account</h1>
@@ -30,6 +40,7 @@ const UserManagement = () => {
                 </div>
             </div>
 
+            {/*------------ Button------ */}
             <div className='mb-2 '>
                 <div className="dropdown dropdown-hover">
                     <label tabIndex={0} className="btn m-1 btn-sm bg-primary
@@ -41,8 +52,9 @@ const UserManagement = () => {
                         <li><a>Item 2</a></li>
                     </ul>
                 </div>
-                <button className="btn btn-sm mx-1 bg-primary text-white">
-                    <FaPlus /> Add</button>
+                <Link to='/dashboard/addNewUser' className="btn btn-sm mx-1 bg-primary
+                    text-white hover:bg-success hover:text-white">
+                    <FaPlus/> Add</Link>
                 <button className="btn btn-sm mx-1 bg-success text-white">
                     <FiEdit /> Edit</button>
                 <button className="btn btn-sm mx-1 bg-primary text-white">
@@ -54,6 +66,7 @@ const UserManagement = () => {
             </div>
 
 
+            {/*------------ Table-------- */}
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -66,21 +79,31 @@ const UserManagement = () => {
                             <th> Active </th>
                             <th> Locked </th>
                             <th> Topic Sub </th>
+                            <th> Action </th>
                            
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr >
-                            <th>Razu Molla</th>
-                            <td>01758641158</td>
-                            <td>User</td>
-                            <td> GoInnovior  </td>
-                            <td> razumolla@gmail.com </td>
-                            <td>Yes </td>
-                            <td> No </td>
-                            <td> No </td>
-                        </tr>
+                        {
+                            users.map((user)=>
+                            <tr key={user._id}>
+                                <th>{user.fullName }</th>
+                                <th>{user.userName }</th>
+                                <th>{user.userRole }</th>
+                                <th>{user.organization }</th>
+                                <th>{user.email }</th>
+                                <td>Yes </td>
+                                <td> No </td>
+                                <td> No </td>
+                                <td>
+                                    <Link>edit </Link>
+                                </td>
+                             </tr>
+                            )
+                        }
+                   
+                        
                     </tbody>
                 </table>
             </div>

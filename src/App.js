@@ -37,6 +37,7 @@ import DepartmentEdit from "./pages/Dashboard/Settings/Department/DepartmentEdit
 import BudgetCode from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCode";
 import BudgetCodeEdit from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCodeEdit";
 import ProductAdd from "./pages/Dashboard/Products/ProductAdd";
+import AddNewUser from "./pages/Dashboard/UserManagement/AddNewUser";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
           <Route path="employee" element={<Employee/>}/>
           <Route path="addNewEmployee" element={< AddNewEmployee />}/>
           <Route path="userManagement" element={<UserManagement/>}/>
+          <Route path="addNewUser" element={<AddNewUser/>}/>
           <Route path="keyType" element={<KeyType/>}/>
           <Route path="keyEdit/:id" element={<EditKeyType/>}/>
           <Route path="department" element={<Department/>}/>

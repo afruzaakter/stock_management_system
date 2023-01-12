@@ -62,7 +62,7 @@ const Dashboard = () => {
                   {/* ***************************** Dashboard menu  Start *********************************** */}
 
                   {/* -----------------------------Requisition dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='/dashboard/requisition' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-gray-400  '>
+                  <li className={`text-gray-300 text-xl  flex items-start   hover:bg-gray-400 hover:text-rose-300 rounded-md mt-2  `}><Link to='/dashboard/requisition' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-gray-400  '>
                     <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiFillDiff className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition</span></Link></li>
                   {/* -----------------------------Requisition dashboard menu End ---------------------------- */}
