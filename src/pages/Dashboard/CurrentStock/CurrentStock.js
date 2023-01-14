@@ -69,7 +69,7 @@ const CurrentStock = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            
+                            <th> </th>
                             <th>Code </th>
                             <th>Product Name </th>
                             <th>Unit </th>
@@ -84,7 +84,6 @@ const CurrentStock = () => {
                             <th>
                                 <label> <input type="checkbox" className="checkbox" /> </label>
                             </th>
-
                             <th>1001 </th>
                             <td>Laptop</td>
                             <td>Qnty </td>
@@ -95,11 +94,6 @@ const CurrentStock = () => {
                     </tbody>
                 </table>
             </div>
-
-
-
-
-
 
 
         </div>

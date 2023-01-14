@@ -4,6 +4,7 @@ import { BiRefresh } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+
 const DesignationAdd = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
@@ -42,7 +43,7 @@ const DesignationAdd = () => {
                                 {...register("name", {
                                     required: {
                                         value: true,
-                                        message: "❌  Please Fillup  Input Field"
+                                        message: "❌  Please Fill-Up  Input Field"
                                     }
                                 })}
                             />
@@ -61,7 +62,7 @@ const DesignationAdd = () => {
                                 {...register("description", {
                                     required: {
                                         value: true,
-                                        message: "❌  Please Fillup  Input Field"
+                                        message: "❌  Please Fill-Up  Input Field"
                                     }
                                 })}
                             />
@@ -80,7 +81,7 @@ const DesignationAdd = () => {
                                 {...register("order", {
                                     required: {
                                         value: true,
-                                        message: "❌  Please Fillup  Input Field"
+                                        message: "❌  Please Fill-Up  Input Field"
                                     }
                                 })}
                             />

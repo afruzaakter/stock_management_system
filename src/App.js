@@ -27,6 +27,7 @@ import EmployeeUser from "./pages/Dashboard/Reports/EmployeeUser";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import EditKeyType from "./pages/Dashboard/Settings/Library/EditKeyType";
+import AddNewEmployee from "./pages/Dashboard/Employee/AddNewEmployee";
 import DesignationAdd from "./pages/Dashboard/Settings/Designation/DesignationAdd";
 import DesignationEdit from "./pages/Dashboard/Settings/Designation/DesignationEdit";
 import ProductAddKey from "./pages/Dashboard/Settings/Productkey/ProductAddKey";
@@ -37,6 +38,8 @@ import BudgetCode from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCode
 import BudgetCodeEdit from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCodeEdit";
 import ProductAdd from "./pages/Dashboard/Products/ProductAdd";
 import ProductEdit from "./pages/Dashboard/Products/ProductEdit";
+import CreateSupplier from "./pages/Dashboard/Supplier/CreateSupplier";
+import SupplierEdit from "./pages/Dashboard/Supplier/SupplierEdit";
 
 function App() {
   return (
@@ -57,6 +60,8 @@ function App() {
           <Route path="currentStock" element={<CurrentStock/>}/>
           <Route path="stockAdjust" element={<StockAdjust/>}/>
           <Route path="supplier" element={<Supplier/>}/>
+          <Route path="supplierEdit/:id" element={<SupplierEdit/>}/>
+          <Route path="createSupplier" element={<CreateSupplier/>}/>
           <Route path="product" element={<Product/>}/>
           {/* <Route path="reports" element={<Reports/>}/> */}
           <Route path="reports/productIssue" element={<ProductIssue/>}/>
@@ -64,6 +69,7 @@ function App() {
           <Route path="reports/employeeUser" element={ <EmployeeUser />} />
 
           <Route path="employee" element={<Employee/>}/>
+          <Route path="addNewEmployee" element={< AddNewEmployee />}/>
           <Route path="userManagement" element={<UserManagement/>}/>
           <Route path="keyType" element={<KeyType/>}/>
           <Route path="keyEdit/:id" element={<EditKeyType/>}/>

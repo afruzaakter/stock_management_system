@@ -18,7 +18,6 @@ const Product = () => {
         const proceed = window.confirm('Are you sure?')
         if (proceed) {
             const url = `http://localhost:5000/product/${id}`
-            console.log(url)
             fetch(url, {
                 method: 'DELETE'
             })

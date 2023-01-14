@@ -4,37 +4,38 @@ import { BiRefresh } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 const DesignationEdit = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
     const {id} = useParams();
-         // -------------------- Update show data method ----------------
-         const [designations, setDesignations] = useState([])
+        // -------------------- Update show data method ----------------
+        const [designations, setDesignations] = useState([])
          
-         useEffect(()=>{
-          const url = `http://localhost:5000/designation/${id}`
-          fetch(url)
-          .then(res=>res.json())
-          .then(data=>setDesignations(data))
-      
-         }, [])
-         console.log(designations)
-    const onSubmit = (data) =>{
-         const url = `http://localhost:5000/designation/${id}`;
-         fetch(url, {
-            method: 'PUT',
-            headers:{
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
-         })
-         .then(res =>res.json())
-         .then(data =>{
-            console.log('success', data)
-            toast.success(' Data Update Successfully !!!')
-            reset();
-         })
-         navigate('/dashboard/designation');
+        useEffect(()=>{
+            const url = `http://localhost:5000/designation/${id}`
+            fetch(url)
+            .then(res=>res.json())
+            .then(data=>setDesignations(data))
+        }, [])
+        console.log(designations)
+         
+        const onSubmit = (data) =>{
+            const url = `http://localhost:5000/designation/${id}`;
+            fetch(url, {
+                method: 'PUT',
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res =>res.json())
+            .then(data =>{
+                console.log('success', data)
+                toast.success(' Data Update Successfully !!!')
+                reset();
+            })
+        navigate('/dashboard/designation');
     }
     return (
         <div className='m-10'>
