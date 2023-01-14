@@ -71,9 +71,10 @@ const ProductKey = () => {
                             <td>{productkey.keytype}</td> 
                             <td>No</td> 
                             <td>
-                              <button className='btn btn-sm mx-1 bg-red-500 text-white' onClick={() => handleDelete(productkey._id)}><AiOutlineDelete /> </button> 
+                              
                               <Link to={`/dashboard/productKeyEdit/${productkey._id}`} className="btn btn-sm mx-1 bg-success text-white">
                               <FiEdit /> </Link> 
+                              <button className='btn btn-sm mx-1 bg-red-500 text-white' onClick={() => handleDelete(productkey._id)}><AiOutlineDelete /> </button> 
                             </td> 
                             </tr>
                             )

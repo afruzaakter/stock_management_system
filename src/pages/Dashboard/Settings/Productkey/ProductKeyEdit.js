@@ -55,7 +55,7 @@ const ProductKeyEdit = () => {
                         <input
                             type="text"
                             Value={productkeys.productkey}
-                            className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm border-gray-400 mt-1  w-96  focus:border-blue-500  login-container-input ${errors.productkey && 'border-red-600 focus:border-red-600'}`}
+                            className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  w-96  focus:border-blue-500  login-container-input ${errors.productkey && 'border-red-600 focus:border-red-600'}`}
                             {...register("productkey", {
                                 required: {
                                     value: true,
@@ -94,7 +94,7 @@ const ProductKeyEdit = () => {
                         <label className='text-start'>Key Type</label>
                         <select  {...register("keytype")}
                          Value={productkeys.keytype} 
-                            className={`input font-bold w-64  focus:outline-0 rounded-sm  border-gray-400 mt-1  w-full focus:border-blue-500  login-container-input ${errors.opportunity  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                            className={`input font-bold w-64  focus:outline-0 rounded-sm  border-gray-400 mt-1  w-full focus:border-blue-500  login-container-input ${errors.keytype  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 {/* <option value='' >--Select key type--</option> */}
                             {
                                 keys.map((key)=><option>{key.key}</option>)
@@ -102,7 +102,7 @@ const ProductKeyEdit = () => {
                         </select>
                      
                         <label className="label">
-                            {errors.order?.type === 'required' && <span className="label-text-alt text-red-700">{errors.order.message}</span>}
+                            {errors.keytype?.type === 'required' && <span className="label-text-alt text-red-700">{errors.keytype.message}</span>}
 
                         </label>
                     </div> 
@@ -112,7 +112,7 @@ const ProductKeyEdit = () => {
                    {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
                  <BiRefresh className='text-xl ' /> Reset</button> */}
                    <Link to='/dashboard/productKey' className="btn btn-sm mx-1 bg-warning text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white"><RxCross2/>
-                 cancle</Link>
+                 cancel</Link>
                    
                    
                 </form>

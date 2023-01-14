@@ -1,9 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import { FiEdit } from 'react-icons/fi';
+import { FaEdit } from 'react-icons/fa';
+import { MdDeleteForever } from 'react-icons/md';
+// import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const Supplier = () => {
+      // ---------- Drop down budgetCodes get method ----------
+      const [suppliers, setSuppliers] = useState([]);
+      useEffect(() => {
+          fetch('http://localhost:5000/supplier')
+              .then(res => res.json())
+              .then(data => setSuppliers(data))
+      }, []);
+      //-------- supplier delete method -----------
+      const handleDelete = (id) =>{
+        const proceed = window.confirm('Are you sure?')
+        if (proceed) {
+            const url = `http://localhost:5000/supplier/${id}`
+            console.log(url)
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    const remaining = suppliers.filter(supplier => supplier._id !== id)
+                    setSuppliers(remaining);
+                })
+
+        }
+      }
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -22,34 +50,44 @@ const Supplier = () => {
             </div>
 
             <div className='mb-2'>
-                <button className="btn btn-sm mx-1 bg-primary text-white">
-                    <FaPlus /> Add New Supplier</button>
-                <button className="btn btn-sm mx-1 bg-success text-white">
+                <Link to='/dashboard/createSupplier' className="btn btn-sm mx-1 bg-primary text-white">
+                    <FaPlus /> Add New Supplier</Link>
+                {/* <button className="btn btn-sm mx-1 bg-success text-white">
                     <FiEdit /> Edit Supplier</button>
                 <button className="btn btn-sm mx-1 bg-error text-white">
-                    <AiOutlineDelete /> Delete Supplier</button>
+                    <AiOutlineDelete /> Delete Supplier</button> */}
             </div>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>
+                            <th> SL. </th>
                             <th> Name </th>
                             <th> Contact Person </th>
                             <th> Contact No. </th>
                             <th> Code </th>
                             <th> Address-1 </th>
+                            <th> Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr >
-                            <th> Goinnovior Technology </th>
-                            <th>Rifat Haque </th>
-                            <th>01772548897 </th>
-                            <th> 10112</th>
-                            <th>Mirpur </th>
-                        </tr>
+                        {
+                            suppliers.slice(0).reverse().map((supplier,index) =><tr key={supplier._id}>
+                                <th>{index+1}</th>
+                                <td> {supplier.suppliercompany} </td>
+                                <td>{supplier.contactPerson}</td>
+                                <td>{supplier.contactNumber} </td>
+                                <td> {supplier.code}</td>
+                                <td>{supplier.address} </td>
+                                <td>
+                                <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/supplierEdit/${supplier._id}`}><FaEdit /></Link>
+                                        <button className='btn btn-xs bg-red-500 text-white' onClick={() => handleDelete(supplier._id)}><AiOutlineDelete /></button>
+                                </td>
+                            </tr>)
+                        }
+                       
                     </tbody>
                 </table>
             </div>

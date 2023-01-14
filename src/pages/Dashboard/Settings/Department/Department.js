@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { IoMdRefresh } from 'react-icons/io';
-import { BiRefresh } from 'react-icons/bi';
 import DepartmentAddModal from './DepartmentAddModal';
 import { Link } from 'react-router-dom';
 
@@ -99,9 +97,10 @@ const Department = ({ department }) => {
                                     <td>{department.order}</td>
                                     <td>Yes</td>
                                     <td>
-                                        <button className="btn btn-sm mx-1 bg-red-500 text-white" onClick={() => handleDelete(department._id)}><AiOutlineDelete /> </button>
                                         <Link to={`/dashboard/departmentEdit/${department._id}`} className="btn btn-sm mx-1 bg-success text-white">
                                             <FiEdit /> </Link>
+                                        <button className="btn btn-sm mx-1 bg-red-500 text-white" onClick={() => handleDelete(department._id)}><AiOutlineDelete /> </button>
+
                                     </td>
 
                                 </tr>
