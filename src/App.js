@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 import Login from "./pages/Auth/Login";
 import Navbar from "./pages/Shared/Navbar";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -14,9 +16,9 @@ import CurrentStock from "./pages/Dashboard/CurrentStock/CurrentStock";
 import StockAdjust from "./pages/Dashboard/StockAdjust/StockAdjust";
 import Supplier from "./pages/Dashboard/Supplier/Supplier";
 import Product from "./pages/Dashboard/Products/Product";
-
 import Employee from "./pages/Dashboard/Employee/Employee";
 import UserManagement from "./pages/Dashboard/UserManagement/UserManagement";
+import AddNewUser from "./pages/Dashboard/UserManagement/AddNewUser";
 import KeyType from "./pages/Dashboard/Settings/Library/KeyType";
 import Department from "./pages/Dashboard/Settings/Department/Department";
 import Designation from "./pages/Dashboard/Settings/Designation/Designation";
@@ -24,8 +26,6 @@ import ProductKey from "./pages/Dashboard/Settings/Productkey/ProductKey";
 import ProductIssue from "./pages/Dashboard/Reports/ProductIssue";
 import Inventory from "./pages/Dashboard/Reports/Inventory";
 import EmployeeUser from "./pages/Dashboard/Reports/EmployeeUser";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from "react-toastify";
 import EditKeyType from "./pages/Dashboard/Settings/Library/EditKeyType";
 import AddNewEmployee from "./pages/Dashboard/Employee/AddNewEmployee";
 import DesignationAdd from "./pages/Dashboard/Settings/Designation/DesignationAdd";
@@ -37,7 +37,9 @@ import DepartmentEdit from "./pages/Dashboard/Settings/Department/DepartmentEdit
 import BudgetCode from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCode";
 import BudgetCodeEdit from "./pages/Dashboard/Settings/Library/BudgetCode/BudgetCodeEdit";
 import ProductAdd from "./pages/Dashboard/Products/ProductAdd";
-import AddNewUser from "./pages/Dashboard/UserManagement/AddNewUser";
+import ProductEdit from "./pages/Dashboard/Products/ProductEdit";
+import CreateSupplier from "./pages/Dashboard/Supplier/CreateSupplier";
+import SupplierEdit from "./pages/Dashboard/Supplier/SupplierEdit";
 
 function App() {
   return (
@@ -58,6 +60,8 @@ function App() {
           <Route path="currentStock" element={<CurrentStock/>}/>
           <Route path="stockAdjust" element={<StockAdjust/>}/>
           <Route path="supplier" element={<Supplier/>}/>
+          <Route path="supplierEdit/:id" element={<SupplierEdit/>}/>
+          <Route path="createSupplier" element={<CreateSupplier/>}/>
           <Route path="product" element={<Product/>}/>
           {/* <Route path="reports" element={<Reports/>}/> */}
           <Route path="reports/productIssue" element={<ProductIssue/>}/>
@@ -82,6 +86,7 @@ function App() {
           <Route path="budgetCodeEdit/:id" element={<BudgetCodeEdit/>}/>
           <Route path="setting" element={<Setting/>}/>
           <Route path="productAdd" element={<ProductAdd/>}/>
+          <Route path="productEdit/:id" element={<ProductEdit/>}/>
          
 
         </Route>

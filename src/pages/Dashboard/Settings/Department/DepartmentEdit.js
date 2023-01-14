@@ -8,14 +8,14 @@ const DepartmentEdit = () => {
     const navigate = useNavigate();
     const {id} = useParams();
     const [departments, setDepartments] = useState([])
-
+// --------------update show method-----
     useEffect(() => {
         const url = `http://localhost:5000/department/${id}`
           console.log("department id",url);
         fetch(url)
             .then(res => res.json())
             .then(data => setDepartments(data))
-    }, [])
+    }, []);
     const onSubmit = (data) =>{
         const url = `http://localhost:5000/department/${id}`;
 
@@ -110,7 +110,7 @@ const DepartmentEdit = () => {
                   <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
                   
                    <Link to='/dashboard/department' className="btn btn-sm mx-1 bg-warning text-white">
-                 cancle</Link>
+                 cancel</Link>
                    
                    
                 </form>

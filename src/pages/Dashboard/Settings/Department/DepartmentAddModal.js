@@ -37,7 +37,7 @@ const DepartmentAddModal = () => {
             <input type="checkbox" id="my-modal-6" className="modal-toggle" />
             <div className="modal justify-start ml-96 mt-28  modal-bottom sm:modal-middle">
                 <div className="modal-box w-11/12 max-w-5xl ">
-                <label for="my-modal-6" className="btn btn-sm btn-circle absolute  right-2 bg-green-600 text-white hover:bg-green-900">✕</label>
+                <label for="my-modal-6" className=" btn btn-sm btn-circle bg-red-600 text-white absolute right-2 top-2">✕</label>
                     <h3 className="font-bold text-xl   bg-green-600 text-white p-1 mb-5">Create Department</h3>
                     <form onSubmit={handleSubmit(onSubmit)} >
                       <div>

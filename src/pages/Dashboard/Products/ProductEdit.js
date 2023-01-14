@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const ProductAdd = () => {
+const ProductEdit = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
     const navigate  = useNavigate()
+    const {id} = useParams();
 
     // ---------- Drop down budgetCodes get method ----------
     const [budgetCodes, setBudgetCodes] = useState([]);
@@ -15,44 +16,54 @@ const ProductAdd = () => {
         .then(res => res.json())
         .then(data => setBudgetCodes(data))
      },[])
-    // ---------------- post method product -----------
-    const onSubmit = (data) => {
-        const url = "http://localhost:5000/product"
+     //---------- update data show method----------
+     const [products, setProducts] = useState([]);
+     useEffect(() => {
+        const url = `http://localhost:5000/product/${id}`
+          console.log("product id",url);
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, []);
+     const onSubmit = (data) =>{
+        const url = `http://localhost:5000/product/${id}`;
+
+        console.log(url)
+
         fetch(url, {
-         method: "POST",
-         body: JSON.stringify(data),
-         headers: {
-            'Content-type' : 'application/json; charset=UTF-8', 
-         },
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
-        .then(res => res.json())
-        .then(data =>{
-         console.log(data)
-         toast.success('Data added Successfully!!!');
-         setUpdated(!updated)
-         reset();
-        })
-        navigate('/dashboard/product');
-        
-    }
+            .then(res => res.json())
+            .then(data => {
+                console.log('success', data);
+                toast.success('Data Update Successfully !!!');
+                reset();
+            })
+        navigate('/dashboard/product')
+     }
     return (
         <div className='mt-10 ml-8 '>
            
             <div classNam="  shadow  rounded-lg  ">
-            <h1 className='text-2xl font-bold mb-5'>Add New Product </h1>
-            <div className=''>
+            <h1 className='text-2xl font-bold mb-5'>Create/Update Product </h1>
+            <div className='card-body bg-gray-200  w-3/4 shadow-lg rounded-lg duration-300 '>
 
                 <form className='mr-3' onSubmit={handleSubmit(onSubmit)}>
                     {/* -----------------------Key type Field ------------------------------ */}
 
-                    <div className='lg:flex lg:gap-3 '>
+                    <div className='flex gap-3 '>
                         {/* -------------------- Product Name/ Brand Input Field --------------------   */}
                         <div className="form-control">
                             <label className='font-bold'>Product Brand/Name</label>
                             <input
                                 type="text"
+                                Value={products.brandName}
                                 placeholder='e.g:CocaCola, Pepsi, Lux .. '
-                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-72 focus:border-blue-700  login-container-input ${errors.brandName && 'border-red-600 focus:border-red-600'}`}
+                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-64 focus:border-blue-700  login-container-input ${errors.brandName && 'border-red-600 focus:border-red-600'}`}
                                 {...register("brandName", {
                                     required: {
                                         value: true,
@@ -70,8 +81,9 @@ const ProductAdd = () => {
                             <label className='font-bold'>Size/Varient</label>
                             <input
                                 type="text"
+                                Value={products.size}
                                 placeholder='e.g: 500ml, 100gm'
-                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-72 focus:border-blue-700  login-container-input ${errors.size && 'border-red-600 focus:border-red-600'}`}
+                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-64 focus:border-blue-700  login-container-input ${errors.size && 'border-red-600 focus:border-red-600'}`}
                                 {...register("size", {
                                     required: {
                                         value: true,
@@ -87,14 +99,11 @@ const ProductAdd = () => {
                         {/* -------------------- Budget Code Input Field -----------------------   */}
                         <div className="form-control">
                             <label className='text-start font-bold'>Budget Code</label>
-                            <select   {...register("budgetCode", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
-                                className={`input    focus:outline-0 rounded-lg  border-green-700 mt-1  w-72 focus:border-blue-500  login-container-input ${errors.budgetCode && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option  value=''>--Select Budget Code--</option>
+                            <select   {...register("budgetCode")}
+
+                                Value={products.budgetCode}
+                                className={`input    focus:outline-0 rounded-lg  border-green-700 mt-1  w-64 focus:border-blue-500  login-container-input ${errors.budgetCode && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                {/* <option  value=''>--Select Budget Code--</option> */}
                                 
                                 {
                                     budgetCodes.map((budgetCode) => <option>{budgetCode.budgetCode}</option>)
@@ -108,7 +117,7 @@ const ProductAdd = () => {
                         </div>
                         {/* ------------------------- Add button ---------------------  */}
                     </div>
-                    <div className='lg:flex lg:gap-3'>
+                    <div className='flex gap-3'>
                         {/* -------------------- Measure Unit Input Field --------------------   */}
                         <div className="form-control">
                             <label className='font-bold'>Measures Unit</label>
@@ -118,8 +127,9 @@ const ProductAdd = () => {
                                     message: "❌  Please Fillup  Input Field"
                                 }
                             })}
-                                className={`input  focus:outline-0 rounded-lg  border-green-700 mt-1  w-72 focus:border-blue-500  login-container-input ${errors.measureUnit && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''>--Select Measures Unit--</option>
+                            Value={products.measureUnit}
+                                className={`input  focus:outline-0 rounded-lg  border-green-700 mt-1  w-64 focus:border-blue-500  login-container-input ${errors.measureUnit && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                {/* <option value=''>--Select Measures Unit--</option> */}
                                 <option >Qnty</option>
                                 <option >KG</option>
                                 <option >Pack</option>
@@ -140,8 +150,9 @@ const ProductAdd = () => {
                                     message: "❌  Please Fillup  Input Field"
                                 }
                             })}
-                                className={`input   focus:outline-0 rounded-lg  border-green-700 mt-1  w-72 focus:border-blue-500  login-container-input ${errors.packUnit && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''>--Select Pack Unit--</option>
+                            Value={products.pactUnit}
+                                className={`input   focus:outline-0 rounded-lg  border-green-700 mt-1  w-64 focus:border-blue-500  login-container-input ${errors.packUnit && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                {/* <option value=''>--Select Pack Unit--</option> */}
                                 <option >Bosta</option>
                                 <option >Box</option>
                                 <option >Ream</option>
@@ -158,7 +169,8 @@ const ProductAdd = () => {
                             <input
                                 type="text"
                                 placeholder='Ctn/Bag Quantity'
-                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-72 focus:border-blue-700  login-container-input ${errors.qnty && 'border-red-600 focus:border-red-600'}`}
+                                Value={products.qnty}
+                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-64 focus:border-blue-700  login-container-input ${errors.qnty && 'border-red-600 focus:border-red-600'}`}
                                 {...register("qnty", {
                                     required: {
                                         value: true,
@@ -173,14 +185,15 @@ const ProductAdd = () => {
                         </div>
 
                     </div>
-                    <div className='lg:flex lg:gap-3'>
+                    <div className='flex gap-3'>
                         {/* -------------------- Sort Order Input Field -----------------------   */}
                         <div className="form-control">
                             <label className='font-bold'>Sort Order</label>
                             <input
                                 type="text"
                                 placeholder='Sort Order'
-                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-72 focus:border-blue-700  login-container-input ${errors.sortOrder && 'border-red-600 focus:border-red-600'}`}
+                                Value={products.sortOrder}
+                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-64 focus:border-blue-700  login-container-input ${errors.sortOrder && 'border-red-600 focus:border-red-600'}`}
                                 {...register("sortOrder", {
                                     required: {
                                         value: true,
@@ -199,7 +212,8 @@ const ProductAdd = () => {
                             <input
                                 type="text"
                                 placeholder='Alert Quantity'
-                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-72 focus:border-blue-700  login-container-input ${errors.alertQty && 'border-red-600 focus:border-red-600'}`}
+                                Value={products.alertQty}
+                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-64 focus:border-blue-700  login-container-input ${errors.alertQty && 'border-red-600 focus:border-red-600'}`}
                                 {...register("alertQty", {
                                     required: {
                                         value: true,
@@ -218,7 +232,8 @@ const ProductAdd = () => {
                             <input
                                 type="text"
                                 placeholder='Invoice Notes'
-                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-72 focus:border-blue-700  login-container-input ${errors.invoice && 'border-red-600 focus:border-red-600'}`}
+                                Value={products.invoice}
+                                className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-64 focus:border-blue-700  login-container-input ${errors.invoice && 'border-red-600 focus:border-red-600'}`}
                                 {...register("invoice", {
                                     required: {
                                         value: true,
@@ -233,9 +248,9 @@ const ProductAdd = () => {
                         </div>
                     </div>
                     {/* -------------------- Submit and Cancel button--------- */}
-                    <div className='lg:flex lg:gap-3'>
-                        <input className='input focus:outline-0 input-bordered input-primary  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='Submit' />
-                        <Link to="/dashboard/product" className='btn btn-success btn-outline'>Cancel</Link>
+                    <div className='flex gap-3'>
+                        <input className='input focus:outline-0 input-bordered input-primary  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='Update' />
+                        <Link to="/dashboard/product" className='btn btn-success btn-outline'>back</Link>
                     </div>
                 </form>
 
@@ -247,4 +262,4 @@ const ProductAdd = () => {
     );
 };
 
-export default ProductAdd;
+export default ProductEdit;

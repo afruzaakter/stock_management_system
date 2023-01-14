@@ -43,7 +43,7 @@ const Dashboard = () => {
         </div>
 
         <div className="drawer-side ">
-          <label for="my-drawer-2" className="drawer-overlay"></label>
+          
           <ul className="menu p-4 overflow-y-auto rounded-r-xl    text-base-content">
             <div>
               <div className={`bg-gray-200  h-full p-5 rounded-md duration-300   relative ${open ? "w-69" : "w-20"}`}>
@@ -54,15 +54,15 @@ const Dashboard = () => {
 
                   {/* ***************************** Dashboard menu   *********************************** */}
 
-                  <li className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='/dashboard' className='w-full font-medium border-b border-gray-400 rounded-md  hover:bg-gray-400  '>
+                  <li className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300    rounded-md mt-2  `}><Link to='/dashboard' className='w-full font-medium border-b border-gray-400 rounded-md  hover:bg-gray-400  '>
 
-                    <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <MdOutlineDashboardCustomize className='' /></span>
+                    <span className={`text-md text-gray-800 hover:text-gray-700 block  ${!open ? "text-md" : "ml-0"} `} >  <MdOutlineDashboardCustomize className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Dashboard</span></Link></li>
 
                   {/* ***************************** Dashboard menu  Start *********************************** */}
 
                   {/* -----------------------------Requisition dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-xl  flex items-start   hover:bg-gray-400 hover:text-rose-300 rounded-md mt-2  `}><Link to='/dashboard/requisition' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-gray-400  '>
+                  <li className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300   rounded-md mt-2  `}><Link to='/dashboard/requisition' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-gray-400  '>
                     <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiFillDiff className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition</span></Link></li>
                   {/* -----------------------------Requisition dashboard menu End ---------------------------- */}
@@ -114,13 +114,13 @@ const Dashboard = () => {
 
 
                   {/* ----------------------------Reports dashboard menu Start ---------------------------- */}
-                    <li onClick={() => setSubReportOpen(!subReportOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl mt-2  w-full font-medium border-b border-gray-400  rounded-md `}>
-                      <div className='flex justify-between'>
-                        <span className={`text-xl text-gray-800 hover:text-gray-800 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <HiDocumentReport className='' /></span>
-                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Reports </span> 
-                        <span className={` text-gray-800 pl-20 ${!open && 'hidden'}`}> <FaChevronDown/></span>
-                        </div>
-                    </li>
+                  <li onClick={() => setSubReportOpen(!subReportOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl  rounded-md mt-2  w-full font-medium border-b border-gray-400  `}>
+                   <div className='flex justify-between'>
+                   <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <HiDocumentReport className='' /></span>
+                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Reports </span> 
+                    <span className={` text-gray-800 pl-20 ${!open && 'hidden'}`}> <FaChevronDown/></span>
+                   </div>
+                     </li>
                     {
                       subReportOpen && <>
                        {/* ------------------------------ Product issue ----------------------- */}
@@ -154,15 +154,15 @@ const Dashboard = () => {
 
                   {/* ------------------------User Management  dashboard menu Start ---------------------------- */}
                   <li className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl  rounded-md mt-2  `}><Link to='/dashboard/userManagement' className='w-full font-medium border-b border-gray-400  rounded-md  hover:bg-gray-400  '>
-                    <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <FaUsersCog className='' /></span>
+                    <span className={`text-xl text-gray-700 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <FaUsersCog className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>User Management </span></Link></li>
                   {/* -----------------------------User Management  dashboard menu End ---------------------- */}
 
                   {/* ----------------------------Settings dashboard Sub menu Start ---------------------------- */}
-                  <li onClick={() => setSubMenuOpen(!subMenuOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400 hover:text-rose-300  text-xl  rounded-md mt-2  w-full font-medium border-b border-gray-400 `}>
+                  <li onClick={() => setSubMenuOpen(!subMenuOpen)} className={`text-gray-300 text-md  flex items-start   hover:bg-gray-400   text-xl  rounded-md mt-2   w-full font-medium border-b border-gray-400   `}>
                     
                     <div className='flex justify-between'>
-                    <span className={`text-xl text-gray-800 hover:text-gray-700 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiFillSetting className='' /></span>
+                    <span className={`text-xl text-gray-800 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiFillSetting className='' /></span>
                     <span className={` text-gray-800 pr-2 ${!open && 'hidden'}`}>Settings </span> 
                     <span className={` text-gray-800 pl-16 ${!open && 'hidden'}`}> <FaChevronDown/></span>
                     </div>
