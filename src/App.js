@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 import Login from "./pages/Auth/Login";
 import Navbar from "./pages/Shared/Navbar";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -14,9 +16,9 @@ import CurrentStock from "./pages/Dashboard/CurrentStock/CurrentStock";
 import StockAdjust from "./pages/Dashboard/StockAdjust/StockAdjust";
 import Supplier from "./pages/Dashboard/Supplier/Supplier";
 import Product from "./pages/Dashboard/Products/Product";
-
 import Employee from "./pages/Dashboard/Employee/Employee";
 import UserManagement from "./pages/Dashboard/UserManagement/UserManagement";
+import AddNewUser from "./pages/Dashboard/UserManagement/AddNewUser";
 import KeyType from "./pages/Dashboard/Settings/Library/KeyType";
 import Department from "./pages/Dashboard/Settings/Department/Department";
 import Designation from "./pages/Dashboard/Settings/Designation/Designation";
@@ -24,8 +26,6 @@ import ProductKey from "./pages/Dashboard/Settings/Productkey/ProductKey";
 import ProductIssue from "./pages/Dashboard/Reports/ProductIssue";
 import Inventory from "./pages/Dashboard/Reports/Inventory";
 import EmployeeUser from "./pages/Dashboard/Reports/EmployeeUser";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from "react-toastify";
 import EditKeyType from "./pages/Dashboard/Settings/Library/EditKeyType";
 import AddNewEmployee from "./pages/Dashboard/Employee/AddNewEmployee";
 import DesignationAdd from "./pages/Dashboard/Settings/Designation/DesignationAdd";
@@ -71,6 +71,7 @@ function App() {
           <Route path="employee" element={<Employee/>}/>
           <Route path="addNewEmployee" element={< AddNewEmployee />}/>
           <Route path="userManagement" element={<UserManagement/>}/>
+          <Route path="addNewUser" element={<AddNewUser/>}/>
           <Route path="keyType" element={<KeyType/>}/>
           <Route path="keyEdit/:id" element={<EditKeyType/>}/>
           <Route path="department" element={<Department/>}/>

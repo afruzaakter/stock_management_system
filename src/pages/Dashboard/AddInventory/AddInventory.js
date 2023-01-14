@@ -3,16 +3,14 @@ import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { TbMessageReport } from 'react-icons/tb';
 import AddInventoryModal from './AddInventoryModal';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const AddInventory = () => {
     const[addInventorys, setAddInventorys] = useState([]);
     const [updated, setUpdated] = useState(false);
-    const [rowId, setRowId] = useState('');
-    const [checkboxClicked, setCheckboxClicked] = useState(false);
-
-    // console.log( "Row Id", rowId);
-    // console.log("Clicked", checkboxClicked);
+    // const [rowId, setRowId] = useState('');
+    // const [checkboxClicked, setCheckboxClicked] = useState(false);
 
     useEffect(() =>{
         fetch('http://localhost:5000/addInventory')
@@ -22,21 +20,16 @@ const AddInventory = () => {
     },[updated])
 
     const handleDelete = (id) =>{
-        if (checkboxClicked === true) {
-            const url = `http://localhost:5000/addInventory/${id}`
-            fetch(url, {
-                method: 'DELETE'
-              })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    const remaining = addInventorys.filter(department => department._id !== id)
-                    setAddInventorys(remaining);
-                })
-
-        }else{
-            toast("Please, Select Any Row")
-        }
+        const url = `http://localhost:5000/addInventory/${id}`
+        fetch(url, {
+            method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                const remaining = addInventorys.filter(department => department._id !== id)
+                setAddInventorys(remaining);
+        })
     }
 
     return (
@@ -58,11 +51,6 @@ const AddInventory = () => {
 
             <div className='mb-2 '>
                 <button> <AddInventoryModal setUpdated={setUpdated} />  </button>
-
-                <button className="btn btn-sm mx-1 bg-success text-white">
-                    <FiEdit /> Edit</button>
-                <button onClick={()=> handleDelete(rowId)} className="btn btn-sm mx-1 bg-error
-                 text-white"> <AiOutlineDelete /> Delete</button>
                 <button className="btn btn-sm mx-1 bg-warning   text-white">
                     <TbMessageReport /> Reports</button>
             </div>
@@ -71,31 +59,32 @@ const AddInventory = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th>    </th>
-                            <th>Date</th>
+                            <th>Sl No.</th>
                             <th>#Purchase</th>
                             <th>Supplier</th>
                             <th>Mobile </th>
                             <th>Accepted Note </th>
                             <th>Created </th>
                             <th>Last Update </th>
+                            <th className='text-center '>Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {
                             addInventorys.map((addInventory,index)=>
-                            <tr className='bg-blue-900' key={addInventory._id}  onClick={() => setRowId(addInventory._id)}  >
-                                <th onClick={()=> setCheckboxClicked(!checkboxClicked)}> 
-                                    <label> <input type="checkbox" className="checkbox" /> </label>
-                                </th>
+                            <tr className='bg-blue-900' key={addInventory._id} >
                                 <th> {index+1 } </th>
-                                <th> { addInventory.purchase } </th>
-                                <th> { addInventory.supplierName } </th>
-                                <th> { addInventory.mobile } </th>
-                                <th> { addInventory.acceptedNote } </th>
-                                <th> { addInventory.createdNumber } </th>
-                                <th> { addInventory.lastUpdateDate } </th>                                
+                                <td> { addInventory.purchase } </td>
+                                <td> { addInventory.supplierName } </td>
+                                <td> { addInventory.mobile } </td>
+                                <td> { addInventory.acceptedNote } </td>
+                                <td> { addInventory.createdNumber } </td>
+                                <td> { addInventory.lastUpdateDate } </td>                                
+                                <td className='flex gap-3'>
+                                <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/EditAddInventory/${addInventory._id}`}> <FiEdit /> </Link>
+                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(addInventory._id)}> <AiOutlineDelete /></button>
+                                </td>                                
                             </tr>
 
                             )
