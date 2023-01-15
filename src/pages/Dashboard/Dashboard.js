@@ -37,13 +37,13 @@ const Dashboard = () => {
   }
   return (
       <div className="drawer drawer-mobile ">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+        <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           <Outlet></Outlet>
         </div>
 
         <div className="drawer-side ">
-          
+        <label for="dashboard-sidebar" className="drawer-overlay"></label>
           <ul className="menu p-4 overflow-y-auto rounded-r-xl    text-base-content">
             <div>
               <div className={`bg-gray-200  h-full p-5 rounded-md duration-300   relative ${open ? "w-69" : "w-20"}`}>
