@@ -188,13 +188,13 @@ const ProductEdit = () => {
                     <div className='flex gap-3'>
                         {/* -------------------- Sort Order Input Field -----------------------   */}
                         <div className="form-control">
-                            <label className='font-bold'>Sort Order</label>
+                            <label className='font-bold'>Stock Order</label>
                             <input
                                 type="text"
-                                placeholder='Sort Order'
-                                Value={products.sortOrder}
+                                placeholder='Stock Order'
+                                Value={products.stockOrder}
                                 className={`input font-bold max-w-xs  focus:outline-0 rounded-lg border-green-700 mt-1  w-64 focus:border-blue-700  login-container-input ${errors.sortOrder && 'border-red-600 focus:border-red-600'}`}
-                                {...register("sortOrder", {
+                                {...register("stockOrder", {
                                     required: {
                                         value: true,
                                         message: "❌  Please Fillup  Input Field"
@@ -202,7 +202,7 @@ const ProductEdit = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.sortOrder?.type === 'required' && <span className="label-text-alt text-red-700">{errors.sortOrder.message}</span>}
+                                {errors.stockOrder?.type === 'required' && <span className="label-text-alt text-red-700">{errors.stockOrder.message}</span>}
 
                             </label>
                         </div>

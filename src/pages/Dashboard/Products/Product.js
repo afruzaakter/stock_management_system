@@ -70,12 +70,12 @@ const Product = () => {
 
                     <tbody>
                         {
-                            products.slice(0).reverse().map((product, index) => <tr>
+                            products.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <th>{index+1}</th>
                                 <td>{product.budgetCode} </td>
                                 <td>{product.brandName} </td>
                                 <td>{product.size}</td>
-                                <td>{product.measureUnit} </td>
+                                <td>{product.stockOrder} </td>
                                 <td>{product.alertQty}</td>
                                 <td>{product.sortOrder}</td>
                                 <td className='flex gap-1'>
