@@ -19,7 +19,7 @@ const UserManagement = () => {
     },[])
 
     return (
-        <div className='border m-1 p-1 rounded-lg'>
+        <div className='border m-2 pl-2 rounded-lg'>
             
             {/*------------ navbar-------- */}
             <div className="navbar bg-base-100">
@@ -88,7 +88,7 @@ const UserManagement = () => {
                         {
                             users.map((user)=>
                             <tr key={user._id}>
-                                <td>{user.fullName }</td>
+                                <th>{user.fullName }</th>
                                 <td>{user.userName }</td>
                                 <td>{user.userRole }</td>
                                 <td>{user.organization }</td>

@@ -37,7 +37,7 @@ const AddNewUser = () => {
 
 
     return (
-        <div className='border m-1 p-2 rounded-lg'>
+        <div className='border m-2 p-2 rounded-lg'>
             <div className='p-1 mb-2'>
                 <h1 className='text-2xl font-bold'>Create User Account </h1>
             </div>
@@ -56,8 +56,8 @@ const AddNewUser = () => {
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                className={`input font-bold w-80  focus:outline-0 rounded-sm  border-gray-400 mt-1 focus:border-blue-500  login-container-input ${errors.profile  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''>Select ---- </option>
+                                className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.profile  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''>Select your profile </option>
                                 {
                                     employees.map((employee)=><option>{employee.employeeId}-
                                     {employee.employeeName}-[{employee.email}]</option>)
@@ -75,7 +75,7 @@ const AddNewUser = () => {
                             <label className='text-start '>Full Name </label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.fullName && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.fullName && 'border-red-600 focus:border-red-600'}`}
                                 {...register("fullName", {
                                     required: {
                                         value: true,
@@ -93,7 +93,7 @@ const AddNewUser = () => {
                             <label className='text-start '> Email </label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96  login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
                                 {...register("email", {
                                     required: {
                                         value: true,
@@ -111,7 +111,7 @@ const AddNewUser = () => {
                             <label className='text-start'> User Name </label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.userName && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.userName && 'border-red-600 focus:border-red-600'}`}
                                 {...register("userName", {
                                     required: {
                                         value: true,
@@ -134,8 +134,8 @@ const AddNewUser = () => {
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                className={`input font-bold w-80  focus:outline-0 rounded-sm  border-gray-400 mt-1 focus:border-blue-500  login-container-input ${errors.organization  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option disabled>Select User Organization </option>
+                                className={`input input-sm w-80  focus:outline-0 rounded-sm border border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.organization  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''>Select User Organization </option>
                                 <option > Head Quarter </option>
                             </select>
                             
@@ -154,8 +154,8 @@ const AddNewUser = () => {
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                className={`input font-bold w-80  focus:outline-0 rounded-sm  border-gray-400 mt-1 focus:border-blue-500  login-container-input ${errors.userRole  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                    <option disabled> Select User Role </option>
+                                className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.userRole  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                    <option value=''> Select User Role </option>
                                     <option> Role_User </option>
                                     <option> Role_Admin </option>
                                     <option> Role_Approve </option>
@@ -169,7 +169,6 @@ const AddNewUser = () => {
 
                             </label>
                         </div>
-
                     </div>  
 
                     <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />

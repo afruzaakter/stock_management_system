@@ -109,7 +109,7 @@ const AddNewEmployee = () => {
                             <label className='text-start '> Email </label>
                             <input
                                 type="text"
-                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96  login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
                                 {...register("email", {
                                     required: {
                                         value: true,
@@ -132,8 +132,9 @@ const AddNewEmployee = () => {
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                className={`input input-sm w-80  focus:outline-0 rounded-sm border border-green-700 mt-1         login-container-input ${errors.designation  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option>Select designation </option>
+                                className={`input input-sm   border border-green-700 mt-1 w-80 focus:outline-0 rounded-sm  
+                                 focus:border-blue-500 login-container-input ${errors.designation  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''>Select designation </option>
                                 {
                                     designations.map((designation)=><option>{designation.name}</option>)
                                 }
@@ -154,8 +155,8 @@ const AddNewEmployee = () => {
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                className={`input input-sm  w-80  focus:outline-0 rounded-sm  border-gray-400 mt-1 focus:border-blue-500  login-container-input ${errors.department  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                    <option> Select Department</option>
+                                className={`input input-sm  w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.department  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                    <option value=''> Select Department</option>
                                 {
                                     departments.map((department)=><option>{department.name}</option>)
                                 }
@@ -195,7 +196,8 @@ const AddNewEmployee = () => {
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                className={`input input-sm w-80  focus:outline-0 rounded-sm  border-gray-400 mt-1 focus:border-blue-500  login-container-input ${errors.createUser  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.createUser  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''> Yes/No </option>
                                 <option> Yes </option>
                                 <option> No </option>
                             </select>
