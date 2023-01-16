@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { TbMessageReport } from 'react-icons/tb';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { MdRefresh } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+import { FaEdit } from 'react-icons/fa';
+import { MdDeleteForever } from 'react-icons/md';
 
 const StockAdjust = () => {
+     // ---------- Drop down budgetCodes get method ----------
+     const [products, setProducts] = useState([]);
+     useEffect(() => {
+         fetch('http://localhost:5000/product')
+             .then(res => res.json())
+             .then(data => setProducts(data))
+     }, [])
+
+     const handleDelete = (data) =>{
+
+     }
+    
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -54,13 +69,21 @@ const StockAdjust = () => {
                     </thead>
 
                     <tbody>
-                        <tr >
-                            <th>PC </th>
-                            <th>03-01-2023 </th>
-                            <th>Ok </th>
-                            <th> 10</th>
-                            <th>ok </th>
-                        </tr>
+                    {
+                            products.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                                <th>{index+1}</th>
+                                <td>{product.budgetCode} </td>
+                                <td>{product.brandName} </td>
+                                <td>{product.size}</td>
+                                <td>{product.stockOrder} </td>
+                                <td>{product.alertQty}</td>
+                                <td>{product.sortOrder}</td>
+                                <td className='flex gap-1'>
+                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
+                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
+                                    </td>
+                            </tr>)
+                        }
                     </tbody>
                 </table>
             </div>

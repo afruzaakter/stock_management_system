@@ -88,11 +88,11 @@ const UserManagement = () => {
                         {
                             users.map((user)=>
                             <tr key={user._id}>
-                                <th>{user.fullName }</th>
-                                <th>{user.userName }</th>
-                                <th>{user.userRole }</th>
-                                <th>{user.organization }</th>
-                                <th>{user.email }</th>
+                                <td>{user.fullName }</td>
+                                <td>{user.userName }</td>
+                                <td>{user.userRole }</td>
+                                <td>{user.organization }</td>
+                                <td>{user.email }</td>
                                 <td>Yes </td>
                                 <td> No </td>
                                 <td> No </td>

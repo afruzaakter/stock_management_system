@@ -39,7 +39,7 @@ const Login = () => {
     }
     return (
         <div className='h-screen m-auto mt-16 '>
-            <div className="card   bg-gray-200 border border-blue-800 bg-gradient-to-r bg-opacity-30 shadow-md ">
+            <div className="card  bg-gray-200 border border-blue-800 bg-gradient-to-r bg-opacity-30 shadow-md ">
            
                 <div className="card-body items-center">
                 <h2 className="text-4xl  text-center uppercase  text-blue-800 font-bold ">Create An Account</h2>

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { TbMessageReport } from 'react-icons/tb';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { MdRefresh } from 'react-icons/md';
-
+import { Link } from 'react-router-dom';
+import { FaEdit } from 'react-icons/fa';
+import { MdDeleteForever } from 'react-icons/md';
 const CurrentStock = () => {
+    const [products, setProducts] = useState([]);
+     useEffect(() => {
+         fetch('http://localhost:5000/product')
+             .then(res => res.json())
+             .then(data => setProducts(data))
+     }, []);
+     const handleDelete = (data) =>{
+
+     }
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -46,51 +57,39 @@ const CurrentStock = () => {
                 </div>
             </div>
 
-            {/* <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th>Code </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>1001 </th>
-                            <td>Laptop</td>
-                            <td>Qnty </td>
-                            <td> 46</td>
-                            <td>84999.00</td>
-                            <td>5</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> */}
+          
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th> </th>
+                            <th> SL</th>
                             <th>Code </th>
                             <th>Product Name </th>
                             <th>Unit </th>
                             <th>Stock </th>
                             <th>Sale Price </th>
                             <th>Alert Qty </th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     
                     <tbody>
-                        <tr>
-                            <th>
-                                <label> <input type="checkbox" className="checkbox" /> </label>
-                            </th>
-                            <th>1001 </th>
-                            <td>Laptop</td>
-                            <td>Qnty </td>
-                            <td> 46</td>
-                            <td>84999.00</td>
-                            <td>5</td>
-                        </tr>
+                    {
+                            products.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                                <th>{index+1}</th>
+                                <td>2001</td>
+                                <td>{product.brandName} </td>
+                                <td>{product.size}</td>
+                                <td>{product.stockOrder} </td>
+                                <td>200</td>
+                                <td>{product.alertQty}</td>
+                              
+                                <td className='flex gap-1'>
+                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
+                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
+                                    </td>
+                            </tr>)
+                        }
                     </tbody>
                 </table>
             </div>
