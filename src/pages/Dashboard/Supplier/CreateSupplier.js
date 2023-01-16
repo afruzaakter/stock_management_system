@@ -27,12 +27,12 @@ const CreateSupplier = () => {
         navigate('/dashboard/supplier');
     }
     return (
-        <div className='   lg:flex  lg:justify-center lg:items-center '>
+        <div className='m-10  '>
        
         <div>
-        <h1 className='text-2xl font-bold mb-5'>Create Supplier</h1>
+        <h1 className='text-2xl  mb-5'>Create Supplier</h1>
         <form onSubmit={handleSubmit(onSubmit)} >
-                  <div className='lg:flex lg:gap-3'>
+                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                       {/* -----------------------Supplier Company Name Field ------------------------------ */}
 
                       <div className="form-control">
@@ -40,7 +40,7 @@ const CreateSupplier = () => {
                         <input
                             type="text"
                             placeholder='Supplier Name'
-                            className={`input input-sm font-bold max-w-xs border border-green-800 focus:outline-0 rounded-sm  mt-1  w-96  focus:border-blue-800  login-container-input ${errors.suppliercompany && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm  max-w-xs border border-green-800 focus:outline-0 rounded-sm    w-full  focus:border-blue-800  login-container-input ${errors.suppliercompany && 'border-red-600 focus:border-red-600'}`}
                             {...register("suppliercompany", {
                                 required: {
                                     value: true,
@@ -61,7 +61,7 @@ const CreateSupplier = () => {
                         <input
                             type="text"
                             placeholder='Code'
-                            className={`input input-sm font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  w-36 focus:border-blue-500  login-container-input ${errors.code && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm    w-full focus:border-blue-500  login-container-input ${errors.code && 'border-red-600 focus:border-red-600'}`}
                             {...register("code", {
                                 required: {
                                     value: true,
@@ -81,7 +81,7 @@ const CreateSupplier = () => {
                         <input
                             type="email"
                             placeholder='E-mail'
-                            className={`input input-sm font-bold lg:w-72 max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  focus:border-blue-500  login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm  w-full max-w-xs border-green-700 focus:outline-0 rounded-sm    focus:border-blue-500  login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
                             {...register("email", {
                                 required: {
                                     value: true,
@@ -98,16 +98,16 @@ const CreateSupplier = () => {
 
                         </label>
                     </div> 
-                  </div>  
-                  <div className='lg:flex lg:gap-3'>
+                 
+                  
                       {/* -----------------------Supplier Contact Person Field ------------------------------ */}
 
                       <div className="form-control">
-                        <label className='text-start w'>Contact Person</label>
+                        <label className='text-start '>Contact Person</label>
                         <input
                             type="text"
                             placeholder='Contact Person'
-                            className={`input input-sm font-bold w-64 max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  focus:border-blue-500  login-container-input ${errors.contactPerson && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm  w-full max-w-xs border-green-700 focus:outline-0 rounded-sm    focus:border-blue-500  login-container-input ${errors.contactPerson && 'border-red-600 focus:border-red-600'}`}
                             {...register("contactPerson", {
                                 required: {
                                     value: true,
@@ -127,7 +127,7 @@ const CreateSupplier = () => {
                         <input
                             type="phone"
                             placeholder='01✕✕✕✕✕✕✕✕'
-                            className={`input input-sm font-bold lg:w-52 max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  focus:border-blue-500  login-container-input ${errors.contactNumber && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm  w-full max-w-xs border-green-700 focus:outline-0 rounded-sm    focus:border-blue-500  login-container-input ${errors.contactNumber && 'border-red-600 focus:border-red-600'}`}
                             {...register("contactNumber", {
                                 required: {
                                     value: true,
@@ -143,11 +143,11 @@ const CreateSupplier = () => {
                       {/* -----------------------Supplier Address Field ------------------------------ */}
 
                       <div className="form-control">
-                        <label className='text-start w'>Address</label>
+                        <label className='text-start '>Address</label>
                         <input
                             type="text"
                             placeholder='Address'
-                            className={`input input-sm font-bold w-72 max-w-xs border-green-700 border-bold focus:outline-0 rounded-sm  mt-1  focus:border-blue-500  login-container-input ${errors.address && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm  w-full max-w-xs border-green-700 border-bold focus:outline-0 rounded-sm    focus:border-blue-500  login-container-input ${errors.address && 'border-red-600 focus:border-red-600'}`}
                             {...register("address", {
                                 required: {
                                     value: true,
@@ -163,11 +163,11 @@ const CreateSupplier = () => {
 
                   </div>
 
-                  <input className='input btn btn-xs
-                   mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
+                  <input className=' rounded-md btn btn-xs
+                   mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
                    {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
                  <BiRefresh className='text-xl ' /> Reset</button> */}
-                   <Link to='/dashboard/supplier' className="btn btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white">
+                   <Link to='/dashboard/supplier' className="btn rounded-md btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white">
                  cancel</Link>
                    
                    

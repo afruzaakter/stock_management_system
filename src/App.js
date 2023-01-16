@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
-import Login from "./pages/Auth/Login";
 import Navbar from "./pages/Shared/Navbar";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Home from "./pages/Home/Home";
@@ -40,6 +39,8 @@ import ProductAdd from "./pages/Dashboard/Products/ProductAdd";
 import ProductEdit from "./pages/Dashboard/Products/ProductEdit";
 import CreateSupplier from "./pages/Dashboard/Supplier/CreateSupplier";
 import SupplierEdit from "./pages/Dashboard/Supplier/SupplierEdit";
+import Login from "./pages/Auth/Login";
+import StockAdjustAdd from "./pages/Dashboard/StockAdjust/StockAdjustAdd";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
           <Route path="addInventory" element={<AddInventory/>}/>
           <Route path="currentStock" element={<CurrentStock/>}/>
           <Route path="stockAdjust" element={<StockAdjust/>}/>
+          <Route path="stockAdjustAdd" element={<StockAdjustAdd/>}/>
           <Route path="supplier" element={<Supplier/>}/>
           <Route path="supplierEdit/:id" element={<SupplierEdit/>}/>
           <Route path="createSupplier" element={<CreateSupplier/>}/>

@@ -1,14 +1,11 @@
+
+
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "./Loading";
-// import { FaSignOutAlt } from 'react-icons/fa';
-// import { FaUserCircle } from 'react-icons/fa';
-// import { FiSettings } from 'react-icons/fi';
-// import { IoMdHand } from 'react-icons/io';
-// import { IoIosNotifications } from 'react-icons/io';
-// import { BsSearch } from 'react-icons/bs';
+
 
 const Navbar = ({children}) => {
     const [ user, loading ] = useAuthState(auth)
