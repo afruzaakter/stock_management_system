@@ -52,10 +52,10 @@ const AddNewEmployee = () => {
 
                         {/* ----------------------- Name Field ------------------------------ */}
                         <div className="form-control">
-                            <label className='text-start '>Name </label>
+                            <label className='text-start'>Name </label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.employeeName && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.employeeName && 'border-red-600 focus:border-red-600'}`}
                                 {...register("employeeName", {
                                     required: {
                                         value: true,
@@ -73,7 +73,7 @@ const AddNewEmployee = () => {
                             <label className='text-start'> Mobile No </label>
                             <input
                                 type="number"
-                                className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.mobileNo && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.mobileNo && 'border-red-600 focus:border-red-600'}`}
                                 {...register("mobileNo", {
                                     required: {
                                         value: true,
@@ -91,7 +91,7 @@ const AddNewEmployee = () => {
                             <label className='text-start '>Id/Code</label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.employeeId && 'border-red-600 focus:border-red-600'}`}
+                                className={`input  max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.employeeId && 'border-red-600 focus:border-red-600'}`}
                                 {...register("employeeId", {
                                     required: {
                                         value: true,
@@ -212,7 +212,6 @@ const AddNewEmployee = () => {
                     <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
                     <Link to='/dashboard/employee' className="btn btn-sm mx-1 bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2/> Cancel 
                     </Link>
-                    
                 </form>
             </div>
         </div>
