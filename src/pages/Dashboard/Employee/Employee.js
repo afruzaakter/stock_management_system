@@ -13,7 +13,7 @@ const Employee = () => {
 
 
     return (
-        <div className='border m-1 p-1 rounded-lg'>
+        <div className='border m-2 pl-2 rounded-lg'>
 
             <div className="navbar bg-base-100">
                 <div className="flex-1">
@@ -31,11 +31,11 @@ const Employee = () => {
             
             {/* ----------------- Add/Manage Btn ---------------- */}
             <div className='mb-2'>
-                <Link to='/dashboard/addNewEmployee' className="btn btn-sm mx-1 bg-primary
-                    text-white hover:bg-success hover:text-white">
+                <Link to='/dashboard/addNewEmployee' className="btn btn-sm mx-1 bg-green-700
+                    text-white hover:bg-primary hover:text-white">
                     <FaPlus/> Add New Employee
                 </Link>
-                <button className="btn btn-sm mx-1 bg-primary text-white hover:bg-success">
+                <button className="btn btn-sm mx-1 bg-success text-white hover:bg-primary">
                     Manage 
                 </button>
             </div>
