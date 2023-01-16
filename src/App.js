@@ -43,62 +43,55 @@ import Login from "./pages/Auth/Login";
 import StockAdjustAdd from "./pages/Dashboard/StockAdjust/StockAdjustAdd";
 
 function App() {
-  return (
-    <Navbar>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp/>} />
-        <Route path="/dashboard" element={<Dashboard />}>
+  return ( 
+  <>
+    <Navbar> </Navbar>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp/>} />
+      <Route path="/dashboard" element={<Dashboard />}>
 
-          <Route index element={<DashboardHome/>}/>
-          <Route path="requisition" element={<Requisition />}/>
-          <Route path="requisitionAuthorize" element={<RequisitionAuthorize/>}/>
-          <Route path="requisitionApproval" element={<RequisitionApproval/>}/>
-          <Route path="requisitionIssue" element={<RequisitionIssue/>}/>
-          <Route path="addInventory" element={<AddInventory/>}/>
-          <Route path="currentStock" element={<CurrentStock/>}/>
-          <Route path="stockAdjust" element={<StockAdjust/>}/>
-          <Route path="stockAdjustAdd" element={<StockAdjustAdd/>}/>
-          <Route path="supplier" element={<Supplier/>}/>
-          <Route path="supplierEdit/:id" element={<SupplierEdit/>}/>
-          <Route path="createSupplier" element={<CreateSupplier/>}/>
-          <Route path="product" element={<Product/>}/>
-          {/* <Route path="reports" element={<Reports/>}/> */}
-          <Route path="reports/productIssue" element={<ProductIssue/>}/>
-          <Route path="reports/inventory" element={ <Inventory />}/>
-          <Route path="reports/employeeUser" element={ <EmployeeUser />} />
-
-          <Route path="employee" element={<Employee/>}/>
-          <Route path="addNewEmployee" element={< AddNewEmployee />}/>
-          <Route path="userManagement" element={<UserManagement/>}/>
-          <Route path="addNewUser" element={<AddNewUser/>}/>
-          <Route path="keyType" element={<KeyType/>}/>
-          <Route path="keyEdit/:id" element={<EditKeyType/>}/>
-          <Route path="department" element={<Department/>}/>
-          <Route path="designation" element={<Designation/>}/>
-          <Route path="departmentEdit/:id" element={<DepartmentEdit/>}/>
-          <Route path="designationAdd" element={<DesignationAdd/>}/>
-          <Route path="designationEdit/:id" element={<DesignationEdit/>}/>
-          <Route path="productKey" element={<ProductKey/>}/>
-          <Route path="productKeyAdd" element={<ProductAddKey/>}/>
-          <Route path="productKeyEdit/:id" element={<ProductKeyEdit/>}/>
-          <Route path="budgetCode" element={<BudgetCode/>}/>
-          <Route path="budgetCodeEdit/:id" element={<BudgetCodeEdit/>}/>
-          <Route path="setting" element={<Setting/>}/>
-          <Route path="productAdd" element={<ProductAdd/>}/>
-          <Route path="productEdit/:id" element={<ProductEdit/>}/>
-         
-
-        </Route>
-       
-      
-          
-        
-      </Routes>
-      <ToastContainer />
-    </Navbar>
+      <Route index element={<DashboardHome/>}/>
+        <Route path="requisition" element={<Requisition />}/>
+        <Route path="requisitionAuthorize" element={<RequisitionAuthorize/>}/>
+        <Route path="requisitionApproval" element={<RequisitionApproval/>}/>
+        <Route path="requisitionIssue" element={<RequisitionIssue/>}/>
+        <Route path="addInventory" element={<AddInventory/>}/>
+        <Route path="currentStock" element={<CurrentStock/>}/>
+        <Route path="stockAdjust" element={<StockAdjust/>}/>
+        <Route path="supplier" element={<Supplier/>}/>
+        <Route path="supplierEdit/:id" element={<SupplierEdit/>}/>
+        <Route path="createSupplier" element={<CreateSupplier/>}/>
+        <Route path="product" element={<Product/>}/>
+        {/* <Route path="reports" element={<Reports/>}/> */}
+        <Route path="reports/productIssue" element={<ProductIssue/>}/>
+        <Route path="reports/inventory" element={ <Inventory />}/>
+        <Route path="reports/employeeUser" element={ <EmployeeUser />} />
+        <Route path="employee" element={<Employee/>}/>
+        <Route path="addNewEmployee" element={< AddNewEmployee />}/>
+        <Route path="userManagement" element={<UserManagement/>}/>
+        <Route path="addNewUser" element={<AddNewUser/>}/>
+        <Route path="keyType" element={<KeyType/>}/>
+        <Route path="keyEdit/:id" element={<EditKeyType/>}/>
+        <Route path="department" element={<Department/>}/>
+        <Route path="designation" element={<Designation/>}/>
+        <Route path="departmentEdit/:id" element={<DepartmentEdit/>}/>
+        <Route path="designationAdd" element={<DesignationAdd/>}/>
+        <Route path="designationEdit/:id" element={<DesignationEdit/>}/>
+        <Route path="productKey" element={<ProductKey/>}/>
+        <Route path="productKeyAdd" element={<ProductAddKey/>}/>
+        <Route path="productKeyEdit/:id" element={<ProductKeyEdit/>}/>
+        <Route path="budgetCode" element={<BudgetCode/>}/>
+        <Route path="budgetCodeEdit/:id" element={<BudgetCodeEdit/>}/>
+        <Route path="setting" element={<Setting/>}/>
+        <Route path="productAdd" element={<ProductAdd/>}/>
+        <Route path="productEdit/:id" element={<ProductEdit/>}/>
+      </Route>
+    </Routes>
+    <ToastContainer />
+  </>
   );
 }
 

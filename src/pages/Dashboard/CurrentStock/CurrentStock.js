@@ -49,12 +49,7 @@ const CurrentStock = () => {
                     <button className="btn btn-sm mx-1 bg-warning   text-white">
                         <TbMessageReport /> Reports</button>
                 </div>
-                <div>
-                    <button className="btn btn-sm mx-1 bg-info text-white">
-                        < FiRefreshCcw />  Reset</button>
-                    <button className="btn btn-sm mx-1 bg-primary text-white">
-                        < MdRefresh /> Refresh</button>
-                </div>
+               
             </div>
 
           
@@ -63,7 +58,7 @@ const CurrentStock = () => {
                     <thead>
                         <tr>
                             <th> SL</th>
-                            <th>Code </th>
+                            <th>Budget Code </th>
                             <th>Product Name </th>
                             <th>Unit </th>
                             <th>Stock </th>                         

@@ -12,8 +12,8 @@ const Social = () => {
     }
     return (
         <div>
-             <button className="btn  mt-2 mb-3 text-2xl  btn-outline" onClick={() => signInWithGoogle()}>  
-                <img className='text-white object-cover h-6 w-6 mr-3' src={google} alt=""/>
+             <button className="btn  mt-2 mb-3 text-xl lg:w-80 btn-outline" onClick={() => signInWithGoogle()}>  
+                <img className='text-white object-cover h-5 w-5 mr-3' src={google} alt=""/>
                 Login with Google</button>
                 <p className='text-xl text-center font-bold m-1 text-blue-800'>Or Sign Up Using Details</p>
         </div>

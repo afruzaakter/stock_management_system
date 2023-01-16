@@ -47,7 +47,7 @@ const DepartmentAddModal = () => {
                             <label className='text-start ml-16'>Department Name</label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm border-gray-400 mt-1  w-full ml-16 focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  w-full ml-16 focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
                                 {...register("name", {
                                     required: {
                                         value: true,
@@ -66,7 +66,7 @@ const DepartmentAddModal = () => {
                             <label className='text-start ml-16'>Description</label>
                             <textarea
                                 type="text"
-                                className={`input font-bold max-w-xs  border-green-700 ml-16 focus:outline-0 rounded-sm border-gray-400 mt-1  w-full focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm  max-w-xs  border-green-700 ml-16 focus:outline-0 rounded-sm  mt-1  w-full focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
                                 {...register("description", {
                                     required: {
                                         value: true,
@@ -85,7 +85,7 @@ const DepartmentAddModal = () => {
                             <label className='text-start ml-16'>Show Order</label>
                             <input
                                 type="number"
-                                className={`input font-bold max-w-xs border-green-700 ml-16  focus:outline-0 rounded-sm border-gray-400 mt-1  w-full focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm  max-w-xs border-green-700 ml-16  focus:outline-0 rounded-sm mt-1  w-full focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
                                 {...register("order", {
                                     required: {
                                         value: true,
@@ -100,7 +100,7 @@ const DepartmentAddModal = () => {
                         </div> 
                       </div>  
 
-                       <input className='input  focus:outline-0 input-bordered input-primary  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='Submit' />
+                       <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white ' type="submit" value='Submit' />
                      
                        
                        

@@ -79,8 +79,8 @@ const Product = () => {
                                 <td>{product.alertQty}</td>
                                 <td>{product.sortOrder}</td>
                                 <td className='flex gap-1'>
-                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
-                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
+                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
+                                        <button className='btn btn-xs bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
                                     </td>
                             </tr>)
                         }
