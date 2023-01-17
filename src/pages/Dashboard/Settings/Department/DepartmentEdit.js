@@ -49,7 +49,7 @@ const DepartmentEdit = () => {
                         <input
                             type="text"
                             Value={departments.name}
-                            className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm border-gray-400 mt-1  w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
+                            className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
                             {...register("name", {
                                 required: {
                                     value: true,

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { RxCross2 } from 'react-icons/rx';
 
 const AddNewInventory = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -35,7 +36,7 @@ const AddNewInventory = () => {
 
             <div>
                 <form onSubmit={handleSubmit(onSubmit)} >
-                    <div className='grid place-content-center'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1'>
 
                         {/* ----------Purchase Field ------------- */}
                         <div className="form-control">
@@ -159,9 +160,9 @@ const AddNewInventory = () => {
 
                     </div>  
 
-                    <input className='input  focus:outline-0 input-bordered input-primary 
-                        max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' 
-                        type="submit" value='Submit' />
+                    <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' /> 
+                    <Link to='/dashboard/AddInventory' className="btn btn-sm mx-1 bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2/> Cancel 
+                    </Link>
                 </form>
             </div>
 

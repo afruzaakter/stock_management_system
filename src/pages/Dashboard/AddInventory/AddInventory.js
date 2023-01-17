@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { TbMessageReport } from 'react-icons/tb';
-
 import { Link } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const AddInventory = () => {
     const[addInventorys, setAddInventorys] = useState([]);
@@ -24,7 +24,8 @@ const AddInventory = () => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
+                toast.success('Data Deleted Successfully!');
                 const remaining = addInventorys.filter(department => department._id !== id)
                 setAddInventorys(remaining);
         })

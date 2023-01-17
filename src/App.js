@@ -41,6 +41,7 @@ import ProductEdit from "./pages/Dashboard/Products/ProductEdit";
 import CreateSupplier from "./pages/Dashboard/Supplier/CreateSupplier";
 import SupplierEdit from "./pages/Dashboard/Supplier/SupplierEdit";
 import AddNewInventory from "./pages/Dashboard/AddInventory/AddNewInventory";
+import UserEdit from "./pages/Dashboard/UserManagement/UserEdit";
 
 function App() {
   return ( 
@@ -74,6 +75,7 @@ function App() {
         <Route path="addNewEmployee" element={< AddNewEmployee />}/>
         <Route path="userManagement" element={<UserManagement/>}/>
         <Route path="addNewUser" element={<AddNewUser/>}/>
+        <Route path="userEdit/:id" element={<UserEdit />}/>
         <Route path="keyType" element={<KeyType/>}/>
         <Route path="keyEdit/:id" element={<EditKeyType/>}/>
         <Route path="department" element={<Department/>}/>
