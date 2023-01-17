@@ -40,6 +40,7 @@ import ProductAdd from "./pages/Dashboard/Products/ProductAdd";
 import ProductEdit from "./pages/Dashboard/Products/ProductEdit";
 import CreateSupplier from "./pages/Dashboard/Supplier/CreateSupplier";
 import SupplierEdit from "./pages/Dashboard/Supplier/SupplierEdit";
+import AddNewInventory from "./pages/Dashboard/AddInventory/AddNewInventory";
 
 function App() {
   return ( 
@@ -58,6 +59,7 @@ function App() {
         <Route path="requisitionApproval" element={<RequisitionApproval/>}/>
         <Route path="requisitionIssue" element={<RequisitionIssue/>}/>
         <Route path="addInventory" element={<AddInventory/>}/>
+        <Route path="addNewInventory" element={<AddNewInventory />}/>
         <Route path="currentStock" element={<CurrentStock/>}/>
         <Route path="stockAdjust" element={<StockAdjust/>}/>
         <Route path="supplier" element={<Supplier/>}/>
