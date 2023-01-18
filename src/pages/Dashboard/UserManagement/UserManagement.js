@@ -86,10 +86,10 @@ const UserManagement = () => {
                     <thead>
                         <tr>
                             <th> Full Name </th>
-                            <th>User Name  </th>
-                            <th> Assign Role </th>
-                            <th> Organization </th>
                             <th> Email </th>
+                            <th>User Name  </th>
+                            <th> Organization </th>
+                            <th> Assign Role </th>
                             <th> Active </th>
                             <th> Locked </th>
                             <th> Topic Sub </th>
@@ -103,10 +103,10 @@ const UserManagement = () => {
                             users.map((user)=>
                             <tr key={user._id}>
                                 <th>{user.fullName } </th>
-                                <td>{user.userName } </td>
-                                <td>{user.userRole } </td>
-                                <td>{user.organization} </td>
                                 <td>{user.email} </td>
+                                <td>{user.userName } </td>
+                                <td>{user.organization} </td>
+                                <td>{user.userRole } </td>
                                 <td> Yes </td>
                                 <td> No </td>
                                 <td> No </td>
