@@ -57,26 +57,23 @@ const UserEdit = () => {
                         {/* -----------------------Employee Profile Field ------------------------------ */}
                         <div className="form-control">
                             <label className='text-start'>Employee Profile </label>
-                            <select  
-                                inputProps={register("profile", {
+                            <select 
+                                Value={users.profile} 
+                                {...register("profile", {
                                     required: {
-                                        Value: true,
+                                        value: true,
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                defaultValue={users.profile}
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.profile  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                
                                 <option value=''> {users.profile}</option>
                                 {
                                     employees.map((employee)=><option>{employee.employeeId}-
                                     {employee.employeeName}-[{employee.email}]</option>)
                                 }
                             </select>
-                            
                             <label className="label">
                                 {errors.profile?.type === 'required' && <span className="label-text-alt text-red-700">{errors.profile.message}</span>}
-
                             </label>
                         </div>
 
@@ -86,15 +83,14 @@ const UserEdit = () => {
                             <input
                                 type="text"
                                 placeholder="Your Full Name "
-
+                                Value={users.fullName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.fullName && 'border-red-600 focus:border-red-600'}`}
-                                inputProps={register("fullName", {
+                                {...register("fullName", {
                                     required: {
-                                        Value: true,
+                                        value: true,
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                defaultValue={users.fullName}
                             />
                             <label className="label">
                                 {errors.fullName?.type === 'required' && <span className="label-text-alt text-red-700"> {errors.fullName.message} </span>}
@@ -107,15 +103,14 @@ const UserEdit = () => {
                             <input
                                 type="text"
                                 placeholder="Your Email "
-                        
+                                Value={users.email}
                                 className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
-                                inputProps={register("email", {
+                                {...register("email", {
                                     required: {
-                                        Value: true,
+                                        value: true,
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                defaultValue={users.email}
                             />
                             <label className="label">
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-700">{errors.email.message}</span>}
@@ -128,15 +123,14 @@ const UserEdit = () => {
                             <input
                                 type="text"
                                 placeholder="Your User Name "
-                               
+                                Value={users.userName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.userName && 'border-red-600 focus:border-red-600'}`}
-                                inputProps={register("userName", {
+                                {...register("userName", {
                                     required: {
-                                        Value: true,
+                                        value: true,
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                defaultValue={users.userName}
                             />
                             <label className="label">
                                 {errors.userName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.userName.message}</span>}
@@ -147,15 +141,14 @@ const UserEdit = () => {
                         <div className="form-control">
                             <label className='text-start'>Organization </label>
                             <select   
-                                inputProps={register("organization", {
+                                Value={users.organization}
+                                {...register("organization", {
                                     required: {
-                                        Value: true,
+                                        value: true,
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                defaultValue={users.organization}
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm border border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.organization  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                
                                 <option value=''> {users.organization}</option>
                                 <option > Head Quarter </option>
                             </select>
@@ -169,16 +162,16 @@ const UserEdit = () => {
                         {/* ----------------------Assign Role Field --------------------------- */}
                         <div className="form-control">
                             <label className='text-start'>Assign User Role </label>
-                            <select   
-                                inputProps={register("userRole", {
+                            <select
+                                Value={users.userRole}
+                                {...register("userRole", {
                                     required: {
-                                        Value: true,
+                                        value: true,
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                defaultValue={users.userRole}
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.userRole  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>   
-                                 <option value=''> {users.userRole} </option>
+                                <option value=''> {users.userRole} </option>
                                 <option> Role_User </option>
                                 <option> Role_Admin </option>
                                 <option> Role_Approve </option>
