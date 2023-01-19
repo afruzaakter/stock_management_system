@@ -39,10 +39,10 @@ const Login = () => {
     }
     return (
         <div className='h-screen m-auto mt-16 '>
-            <div className="card  bg-gray-200 border border-blue-800 bg-gradient-to-r bg-opacity-30 shadow-md ">
+            <div className="card    flex justify-center items-center  bg-gradient-to-r bg-opacity-30 shadow-md ">
            
-                <div className="card-body items-center">
-                <h2 className="text-4xl  text-center uppercase  text-blue-800 font-bold ">Create An Account</h2>
+                <div className="card-body items-center w-96 rounded-md   bg-gray-200 shadow-md">
+                <h2 className="text-2xl  text-center uppercase  text-blue-800 font-bold ">Create An Account</h2>
             
                  <Social/>
                     
@@ -52,11 +52,11 @@ const Login = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {/* ----------------------Email input field ------------------------- */}
                         <div className="form-control   max-w-xs">
-                            <label className='mb-2  text-xl flex items-center gap-2 font-bold'> <MdOutlineMailOutline className='font-bold text-2xl text-blue-800' /> Your Email</label>
+                            <label className='mb-2  text-xl flex items-center gap-2 font-bold'> <MdOutlineMailOutline className='font-bold text-xl text-blue-800' /> Your Email</label>
                             <input
                                 type="email"
-                                // placeholder="Your Email"
-                                className="input  border border-blue-900   focus:border-pink-900   w-96  opacity-60 max-w-xs login-container-input"
+                                placeholder="Your Email"
+                                className="input input-sm border text-gray-900 border-blue-900  rounded-sm focus:border-pink-900   lg:w-96  opacity-60 max-w-xs login-container-input"
                                 {...register("email", {
                                     required: {
                                         value: true,
@@ -76,11 +76,11 @@ const Login = () => {
                         </div>
                         {/* ------------- Password input field ----------------------- */}
                         <div className="form-control w-full max-w-xs">
-                        <label className='mb-2 text-xl font-bold flex items-center gap-2'> <RiLockPasswordLine className='font-bold text-2xl text-blue-800' /> Password</label>
+                        <label className='mb-2 text-xl  font-bold flex items-center gap-2'> <RiLockPasswordLine className='font-bold text-xl text-blue-800' /> Password</label>
                             <input
                                 type="password"
-                              
-                                className="input border border-blue-900   focus:border-pink-900 opacity-60  w-full max-w-xs login-container-input"
+                                placeholder='Password'
+                                className="input input-sm border rounded-sm text-gray-900 border-blue-900 mb-2  focus:border-pink-900 opacity-60  lg:w-96 max-w-xs login-container-input"
                                 {...register("password", {
                                     required: {
                                         value: true,
@@ -99,11 +99,11 @@ const Login = () => {
                             </label>
                         </div>
                         {signInError}
-                        <input className='btn w-full btn-outline  text-xl max-w-xs' type="submit" value='Login' />
+                        <input className='btn btn-sm lg:w-96 btn-outline rounded-sm  text-xl max-w-xs' type="submit" value='Login' />
                     </form>
 
                     {/* ------------- Login Form end ----------------------- */}
-                    <p > <Link className='flex  items-center gap-3 text-xl font-bold mt-4 ml-15' to="/signup">Create New Account <span ><BsArrowRight className='text-3xl font-bold text-blue-800 ' /></span> </Link> </p>
+                    <p > <Link className='flex  items-center gap-3 text-xl  font-bold mt-4 ml-15' to="/signup">Create New Account <span ><BsArrowRight className='text-3xl font-bold text-blue-800 ' /></span> </Link> </p>
                     {/* <p className='text-info text-xl font-bold'>Forgot Password? <Link className='text-white font-bold' to="/reset">Reset Password</Link> </p> */}
 
                     {/* <div className="divider text-white">OR</div> */}

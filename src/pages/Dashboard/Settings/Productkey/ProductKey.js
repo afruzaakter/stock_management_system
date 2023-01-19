@@ -49,7 +49,7 @@ const ProductKey = () => {
 
 
         <div className="overflow-x-auto">
-            <table className="table w-full">
+            <table className="table w-96">
                 <thead>
                     <tr>
                         <th>SL.</th> 
@@ -72,9 +72,9 @@ const ProductKey = () => {
                             <td>No</td> 
                             <td>
                               
-                              <Link to={`/dashboard/productKeyEdit/${productkey._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                              <Link to={`/dashboard/productKeyEdit/${productkey._id}`} className="btn btn-xs mx-1 bg-success text-white">
                               <FiEdit /> </Link> 
-                              <button className='btn btn-sm mx-1 bg-red-500 text-white' onClick={() => handleDelete(productkey._id)}><AiOutlineDelete /> </button> 
+                              <button className='btn btn-xs mx-1 bg-red-500 text-white' onClick={() => handleDelete(productkey._id)}><AiOutlineDelete /> </button> 
                             </td> 
                             </tr>
                             )

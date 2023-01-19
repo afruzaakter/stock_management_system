@@ -1,6 +1,8 @@
+
+
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, NavLink } from "react-router-dom";
+import {  Link, NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "./Loading";
 
@@ -41,8 +43,8 @@ const Navbar = () => {
                 <Link className="btn btn-ghost normal-case text-xl">BFSA MANAGEMENT  </Link>
             </div>
 
-            <div className="navbar-end hidden lg:flex">
-                <ul className="menu menu-horizontal p-0">
+            <div className="navbar-end hidden lg:flex   ">
+                <ul className="menu menu-horizontal  ">
                     {menuItems}
                 </ul>
             </div>

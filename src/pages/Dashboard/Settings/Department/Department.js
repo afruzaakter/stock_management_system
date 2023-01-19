@@ -53,22 +53,9 @@ const Department = ({ department }) => {
                         > </DepartmentAddModal>
                     </button>
 
-                    {/* <label 
                    
-                    for="my-modal-6" className="btn btn-sm mx-1 bg-green-700 text-white"><FaPlus />  Add</label> */}
-
-                    {/* <button className="btn btn-sm mx-1 bg-success text-white">
-                    <FiEdit /> Edit</button> */}
-
-                    {/* <button onClick={()=> handleDelete(department._id)} className="btn btn-sm mx-1 bg-blue-700 text-white">
-                    <AiOutlineDelete /> Delete</button> */}
                 </div>
-                {/* <div >
-                <button className="btn btn-sm mx-1 bg-gray-600   text-white">
-                    <BiRefresh className='text-xl ' /> Reset</button>
-                <button className="btn btn-sm mx-1 bg-blue-700   text-white">
-                    <IoMdRefresh /> Refresh</button>
-                </div> */}
+              
             </div>
 
 
@@ -97,9 +84,9 @@ const Department = ({ department }) => {
                                     <td>{department.order}</td>
                                     <td>Yes</td>
                                     <td>
-                                        <Link to={`/dashboard/departmentEdit/${department._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                        <Link to={`/dashboard/departmentEdit/${department._id}`} className="btn btn-xs mx-1 bg-success text-white">
                                             <FiEdit /> </Link>
-                                        <button className="btn btn-sm mx-1 bg-red-500 text-white" onClick={() => handleDelete(department._id)}><AiOutlineDelete /> </button>
+                                        <button className="btn btn-xs mx-1 bg-red-500 text-white" onClick={() => handleDelete(department._id)}><AiOutlineDelete /> </button>
 
                                     </td>
 

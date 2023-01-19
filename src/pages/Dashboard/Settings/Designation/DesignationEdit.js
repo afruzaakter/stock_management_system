@@ -39,10 +39,10 @@ const DesignationEdit = () => {
     }
     return (
         <div className='m-10'>
-        <h1 className='text-2xl font-bold'>Update Designation</h1>
-        <div>
+        <h1 className='lg:text-2xl font-bold'>Update Designation</h1>
+        <div className='mt-5'>
         <form onSubmit={handleSubmit(onSubmit)} >
-                  <div className='flex gap-5'>
+                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                       {/* -----------------------Department Name Field ------------------------------ */}
 
                       <div className="form-control">
@@ -50,7 +50,7 @@ const DesignationEdit = () => {
                         <input
                             type="text"
                             Value={designations.name}
-                            className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  lg:w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
                             {...register("name", {
                                 required: {
                                     value: true,
@@ -73,7 +73,7 @@ const DesignationEdit = () => {
                             type="text"
                             Value={designations.description}
                            
-                            className={`input font-bold max-w-xs text-red-900  border-green-700  focus:outline-0 rounded-sm  mt-1  w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm max-w-xs text-red-900  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
                             {...register("description", {
                                 required: {
                                     value: true,
@@ -93,7 +93,7 @@ const DesignationEdit = () => {
                         <input
                             type="number"
                             Value={designations.order}
-                            className={`input font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
                             {...register("order", {
                                 required: {
                                     value: true,
@@ -108,10 +108,9 @@ const DesignationEdit = () => {
                     </div> 
                   </div>  
 
-                  <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
-                   <button className="btn btn-sm mx-1 bg-gray-600  text-white">
-                 <BiRefresh className='text-xl ' /> Reset</button>
-                   <Link to='/dashboard/designation' className="btn btn-sm mx-1 bg-warning text-white"><RxCross2/>
+                  <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
+                   
+                   <Link to='/dashboard/designation' className="btn btn-xs mx-1 bg-warning text-white"><RxCross2/>
                  cancel</Link>
                    
                    

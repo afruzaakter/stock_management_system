@@ -29,11 +29,11 @@ const Designation = () => {
         }
     }
     return (
-        <div className='border m-1 p-1 rounded-lg m-6'>
+        <div className='border  p-1 rounded-lg m-6'>
 
             <div className="navbar bg-base-100">
                 <div className="flex-1">
-                    <h1 className='text-3xl'> Employee Designation</h1>
+                    <h1 className='md:text-xl lg:text-3xl'> Employee Designation</h1>
                 </div>
 
             </div>
@@ -74,9 +74,9 @@ const Designation = () => {
                                     <td>{designation.order}</td>
                                     <td>No</td>
                                     <td>
-                                        <Link to={`/dashboard/designationEdit/${designation._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                        <Link to={`/dashboard/designationEdit/${designation._id}`} className="btn btn-xs mx-1 bg-success text-white">
                                             <FiEdit /> </Link>
-                                        <button className="btn btn-sm mx-1 bg-red-500 text-white" onClick={() => handleDelete(designation._id)}><AiOutlineDelete /> </button>
+                                        <button className="btn btn-xs mx-1 bg-red-500 text-white" onClick={() => handleDelete(designation._id)}><AiOutlineDelete /> </button>
 
                                     </td>
                                 </tr>

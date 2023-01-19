@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BiRefresh } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const DesignationAdd = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -30,16 +29,16 @@ const DesignationAdd = () => {
     return (
         <div className='m-10'>
             <h1 className='text-2xl font-bold'>Create Designation</h1>
-            <div>
+            <div className='mt-5'>
             <form onSubmit={handleSubmit(onSubmit)} >
-                      <div className='flex gap-5'>
+                      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                           {/* -----------------------Department Name Field ------------------------------ */}
 
                           <div className="form-control">
                             <label className='text-start '>Designation Name</label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
                                 {...register("name", {
                                     required: {
                                         value: true,
@@ -58,7 +57,7 @@ const DesignationAdd = () => {
                             <label className='text-start '>Description</label>
                             <textarea
                                 type="text"
-                                className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm  mt-1  w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
                                 {...register("description", {
                                     required: {
                                         value: true,
@@ -77,7 +76,7 @@ const DesignationAdd = () => {
                             <label className='text-start'>Show Order</label>
                             <input
                                 type="number"
-                                className={`input font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
                                 {...register("order", {
                                     required: {
                                         value: true,
@@ -92,10 +91,10 @@ const DesignationAdd = () => {
                         </div> 
                       </div>  
 
-                      <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
+                      <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
                        {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
                      <BiRefresh className='text-xl ' /> Reset</button> */}
-                       <Link to='/dashboard/designation' className="btn btn-sm mx-1 bg-warning text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white"><RxCross2/>
+                       <Link to='/dashboard/designation' className="btn btn-xs mx-1 bg-warning text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white"><RxCross2/>
                      cancel</Link>
                        
                        

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import { RxCross2 } from 'react-icons/rx';
 const DepartmentEdit = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
@@ -38,10 +38,10 @@ const DepartmentEdit = () => {
     }
     return (
         <div className='m-10'>
-        <h1 className='text-2xl font-bold'>Update Department</h1>
-        <div>
+        <h1 className='lg:text-2xl font-bold'>Update Department</h1>
+        <div className='mt-5'>
         <form onSubmit={handleSubmit(onSubmit)} >
-                  <div className='flex gap-5'>
+                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                       {/* -----------------------Department Name Field ------------------------------ */}
 
                       <div className="form-control">
@@ -49,7 +49,7 @@ const DepartmentEdit = () => {
                         <input
                             type="text"
                             Value={departments.name}
-                            className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
                             {...register("name", {
                                 required: {
                                     value: true,
@@ -72,7 +72,7 @@ const DepartmentEdit = () => {
                             type="text"
                             Value={departments.description}
                            
-                            className={`input font-bold max-w-xs text-red-900  border-green-700  focus:outline-0 rounded-sm  mt-1  w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm max-w-xs text-red-900  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
                             {...register("description", {
                                 required: {
                                     value: true,
@@ -92,7 +92,7 @@ const DepartmentEdit = () => {
                         <input
                             type="number"
                             Value={departments.order}
-                            className={`input font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm border-gray-400 mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
                             {...register("order", {
                                 required: {
                                     value: true,
@@ -107,9 +107,9 @@ const DepartmentEdit = () => {
                     </div> 
                   </div>  
 
-                  <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
+                  <input className='input rounded-sm  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
                   
-                   <Link to='/dashboard/department' className="btn btn-sm mx-1 bg-warning text-white">
+                   <Link to='/dashboard/department' className="btn btn-xs rounded-sm mx-1 bg-warning text-white"><RxCross2/>
                  cancel</Link>
                    
                    

@@ -50,10 +50,10 @@ const SignUp = () => {
     }
     return (
         <div className='h-screen m-auto  mt-10'>
-        <div className="card  h-4/4 bg-gray-200 border border-blue-800 bg-gradient-to-r bg-opacity-30 shadow-md ">
+        <div className="card  flex justify-center items-center  bg-gradient-to-r bg-opacity-30 shadow-md ">
        
-            <div className="card-body items-center">
-            <h2 className="text-4xl  text-center uppercase text-blue-800 font-bold ">Create An Account</h2>
+            <div className="card-body items-center lg:w-96 rounded-md   bg-gray-200 shadow-md">
+            <h2 className="text-2xl  text-center uppercase text-blue-800 font-bold ">Create An Account</h2>
         
              <Social/>
                 
@@ -66,8 +66,8 @@ const SignUp = () => {
                         <label className='mb-2 text-xl flex items-center gap-2 font-bold'> <FaRegUser className='font-bold text-2xl text-blue-800' /> Your Name</label>
                         <input
                             type="text"
-                           
-                            className="input  border border-blue-900   focus:border-pink-900   w-96  opacity-60 max-w-xs login-container-input"
+                            placeholder='Your Name'
+                            className="input input-sm rounded-sm border border-blue-900   focus:border-pink-900   lg:w-96  opacity-60 max-w-xs login-container-input"
                             {...register("name", {
                                 required: {
                                     value: true,
@@ -89,8 +89,8 @@ const SignUp = () => {
                         <label className='mb-1 text-xl flex items-center gap-2 font-bold'> <MdOutlineMailOutline className='font-bold text-2xl text-blue-800' /> Your Email</label>
                         <input
                             type="email"
-                            // placeholder="Your Email"
-                            className="input  border border-blue-900   focus:border-pink-900   w-96  opacity-60 max-w-xs login-container-input"
+                            placeholder="Your Email"
+                            className="input input-sm rounded-sm border border-blue-900   focus:border-pink-900   lg:w-96  opacity-60 max-w-xs login-container-input"
                             {...register("email", {
                                 required: {
                                     value: true,
@@ -109,12 +109,12 @@ const SignUp = () => {
                         </label>
                     </div>
                     {/* ------------- Password input field ----------------------- */}
-                    <div className="form-control w-full max-w-xs">
+                    <div className="form-control  max-w-xs">
                     <label className='mb-1 text-xl font-bold flex items-center gap-2'> <RiLockPasswordLine className='font-bold text-2xl text-blue-800' /> Password</label>
                         <input
                             type="password"
-                          
-                            className="input border border-blue-900   focus:border-pink-900 opacity-60  w-full max-w-xs login-container-input"
+                           placeholder='Password'
+                            className="input input-sm rounded-sm border border-blue-900   focus:border-pink-900 opacity-60  lg:w-96  max-w-xs login-container-input"
                             {...register("password", {
                                 required: {
                                     value: true,
@@ -133,7 +133,7 @@ const SignUp = () => {
                         </label>
                     </div>
                     {signUpError}
-                    <input className='btn w-full btn-outline  text-xl max-w-xs' type="submit" value='Create Account' />
+                    <input className='btn lg:w-96 btn-sm rounded-sm btn-outline  text-xl max-w-xs' type="submit" value='Create Account' />
                 </form>
 
                 {/* ------------- Login Form end ----------------------- */}

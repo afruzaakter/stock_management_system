@@ -49,12 +49,7 @@ const CurrentStock = () => {
                     <button className="btn btn-sm mx-1 bg-warning   text-white">
                         <TbMessageReport /> Reports</button>
                 </div>
-                <div>
-                    <button className="btn btn-sm mx-1 bg-info text-white">
-                        < FiRefreshCcw />  Reset</button>
-                    <button className="btn btn-sm mx-1 bg-primary text-white">
-                        < MdRefresh /> Refresh</button>
-                </div>
+               
             </div>
 
           
@@ -63,13 +58,12 @@ const CurrentStock = () => {
                     <thead>
                         <tr>
                             <th> SL</th>
-                            <th>Code </th>
+                            <th>Budget Code </th>
                             <th>Product Name </th>
                             <th>Unit </th>
-                            <th>Stock </th>
-                            <th>Sale Price </th>
+                            <th>Stock </th>                         
                             <th>Alert Qty </th>
-                            <th>Action</th>
+                            
                         </tr>
                     </thead>
                     
@@ -77,17 +71,13 @@ const CurrentStock = () => {
                     {
                             products.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <th>{index+1}</th>
-                                <td>2001</td>
-                                <td>{product.brandName} </td>
+                                <td>{product.budgetCode}</td>
+                                <td>{product.brandName}</td>
                                 <td>{product.size}</td>
-                                <td>{product.stockOrder} </td>
-                                <td>200</td>
+                                <td>{product.stockOrder}</td>                              
                                 <td>{product.alertQty}</td>
                               
-                                <td className='flex gap-1'>
-                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
-                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
-                                    </td>
+                               
                             </tr>)
                         }
                     </tbody>

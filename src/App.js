@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
-import Login from "./pages/Auth/Login";
 import Navbar from "./pages/Shared/Navbar";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Home from "./pages/Home/Home";
@@ -42,6 +41,9 @@ import CreateSupplier from "./pages/Dashboard/Supplier/CreateSupplier";
 import SupplierEdit from "./pages/Dashboard/Supplier/SupplierEdit";
 import AddNewInventory from "./pages/Dashboard/AddInventory/AddNewInventory";
 import UserEdit from "./pages/Dashboard/UserManagement/UserEdit";
+import Login from "./pages/Auth/Login";
+import StockAdjustAdd from "./pages/Dashboard/StockAdjust/StockAdjustAdd";
+import RequisitionCreate from "./pages/Dashboard/Requisition/RequisitionCreate";
 
 function App() {
   return ( 
@@ -56,13 +58,15 @@ function App() {
 
       <Route index element={<DashboardHome/>}/>
         <Route path="requisition" element={<Requisition />}/>
+        <Route path="requisitionCreate" element={<RequisitionCreate />}/>
         <Route path="requisitionAuthorize" element={<RequisitionAuthorize/>}/>
         <Route path="requisitionApproval" element={<RequisitionApproval/>}/>
         <Route path="requisitionIssue" element={<RequisitionIssue/>}/>
         <Route path="addInventory" element={<AddInventory/>}/>
         <Route path="addNewInventory" element={<AddNewInventory />}/>
         <Route path="currentStock" element={<CurrentStock/>}/>
-        <Route path="stockAdjust" element={<StockAdjust/>}/>
+        <Route path="stockAdjust" element={<StockAdjust/>}/>   
+        <Route path="stockAdjustAdd" element={<StockAdjustAdd/>}/>   
         <Route path="supplier" element={<Supplier/>}/>
         <Route path="supplierEdit/:id" element={<SupplierEdit/>}/>
         <Route path="createSupplier" element={<CreateSupplier/>}/>
