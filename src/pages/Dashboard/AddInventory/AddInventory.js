@@ -2,22 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { TbMessageReport } from 'react-icons/tb';
-import AddInventoryModal from './AddInventoryModal';
-// import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { FaPlus } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const AddInventory = () => {
     const[addInventorys, setAddInventorys] = useState([]);
-    const [updated, setUpdated] = useState(false);
-    // const [rowId, setRowId] = useState('');
-    // const [checkboxClicked, setCheckboxClicked] = useState(false);
-
+    // const [updated, setUpdated] = useState(false);
+  
     useEffect(() =>{
         fetch('http://localhost:5000/addInventory')
         .then(res => res.json())
         .then(data => setAddInventorys(data))
         
-    },[updated])
+    },[])
 
     const handleDelete = (id) =>{
         const url = `http://localhost:5000/addInventory/${id}`
@@ -26,7 +24,8 @@ const AddInventory = () => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
+                toast.success('Data Deleted Successfully!');
                 const remaining = addInventorys.filter(department => department._id !== id)
                 setAddInventorys(remaining);
         })
@@ -49,8 +48,13 @@ const AddInventory = () => {
                 </div>
             </div>
 
+            {/* ----------------- Add/Report Btn ---------------- */}
             <div className='mb-2 '>
-                <button> <AddInventoryModal setUpdated={setUpdated} />  </button>
+                <Link to='/dashboard/addNewInventory' className="btn btn-sm mx-1 bg-green-700
+                    text-white hover:bg-primary hover:text-white">
+                    <FaPlus/> Add
+                </Link>
+                {/* <button> <AddInventoryModal setUpdated={setUpdated} />  </button> */}
                 <button className="btn btn-sm mx-1 bg-warning   text-white">
                     <TbMessageReport /> Reports</button>
             </div>

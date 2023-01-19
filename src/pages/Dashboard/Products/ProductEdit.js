@@ -18,6 +18,7 @@ const ProductEdit = () => {
      },[])
      //---------- update data show method----------
      const [products, setProducts] = useState([]);
+     console.log("product",products);
      useEffect(() => {
         const url = `http://localhost:5000/product/${id}`
           console.log("product id",url);

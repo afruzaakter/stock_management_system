@@ -8,6 +8,8 @@ import { MdDone } from 'react-icons/md';
 import { MdBlock } from 'react-icons/md';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { toast } from 'react-toastify';
 
 const UserManagement = () => {
     const [users, setUsers]= useState([])
@@ -18,8 +20,22 @@ const UserManagement = () => {
         .then(data=> setUsers(data))
     },[])
 
+    const handleDelete = (id) =>{
+        const url = `http://localhost:5000/user/${id}`
+        fetch(url, {
+            method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                toast.success('Data Deleted Successfully!');
+                const remaining = users.filter(user => user._id !== id)
+                setUsers(remaining);
+        })
+    }
+
     return (
-        <div className='border m-1 p-1 rounded-lg'>
+        <div className='border m-2 pl-2 rounded-lg'>
             
             {/*------------ navbar-------- */}
             <div className="navbar bg-base-100">
@@ -52,11 +68,9 @@ const UserManagement = () => {
                         <li><a>Item 2</a></li>
                     </ul>
                 </div>
-                <Link to='/dashboard/addNewUser' className="btn btn-sm mx-1 bg-primary
-                    text-white hover:bg-success hover:text-white">
+                <Link to='/dashboard/addNewUser' className="btn btn-sm mx-1 bg-green-700  
+                    text-white hover:bg-primary hover:text-white">
                     <FaPlus/> Add</Link>
-                <button className="btn btn-sm mx-1 bg-success text-white">
-                    <FiEdit /> Edit</button>
                 <button className="btn btn-sm mx-1 bg-primary text-white">
                     <MdDone /> Active </button>
                 <button className="btn btn-sm mx-1 bg-error text-white">
@@ -72,10 +86,10 @@ const UserManagement = () => {
                     <thead>
                         <tr>
                             <th> Full Name </th>
-                            <th>User Name  </th>
-                            <th> Assign Role </th>
-                            <th> Organization </th>
                             <th> Email </th>
+                            <th>User Name  </th>
+                            <th> Organization </th>
+                            <th> Assign Role </th>
                             <th> Active </th>
                             <th> Locked </th>
                             <th> Topic Sub </th>
@@ -88,17 +102,18 @@ const UserManagement = () => {
                         {
                             users.map((user)=>
                             <tr key={user._id}>
-                                <td>{user.fullName }</td>
-                                <td>{user.userName }</td>
-                                <td>{user.userRole }</td>
-                                <td>{user.organization }</td>
-                                <td>{user.email }</td>
-                                <td>Yes </td>
+                                <th>{user.fullName } </th>
+                                <td>{user.email} </td>
+                                <td>{user.userName } </td>
+                                <td>{user.organization} </td>
+                                <td>{user.userRole } </td>
+                                <td> Yes </td>
                                 <td> No </td>
                                 <td> No </td>
-                                <td>
-                                    <Link>edit </Link>
-                                </td>
+                                <td className='flex gap-3'>
+                                    <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/userEdit/${user._id}`}> <FiEdit /> </Link>
+                                    <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(user._id)}> <AiOutlineDelete /></button>
+                                </td> 
                              </tr>
                             )
                         }

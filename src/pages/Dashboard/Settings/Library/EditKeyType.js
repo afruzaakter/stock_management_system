@@ -10,7 +10,7 @@ const EditKeyType = () => {
 
        // -------------------- Update show data method ----------------
        const [keyTypes, setKeyTypes] = useState([])
-       console.log(keyTypes)
+    //    console.log(keyTypes)
        useEffect(()=>{
         const url = `http://localhost:5000/key/${id}`
         fetch(url)

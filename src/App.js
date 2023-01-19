@@ -39,6 +39,8 @@ import ProductAdd from "./pages/Dashboard/Products/ProductAdd";
 import ProductEdit from "./pages/Dashboard/Products/ProductEdit";
 import CreateSupplier from "./pages/Dashboard/Supplier/CreateSupplier";
 import SupplierEdit from "./pages/Dashboard/Supplier/SupplierEdit";
+import AddNewInventory from "./pages/Dashboard/AddInventory/AddNewInventory";
+import UserEdit from "./pages/Dashboard/UserManagement/UserEdit";
 import Login from "./pages/Auth/Login";
 import StockAdjustAdd from "./pages/Dashboard/StockAdjust/StockAdjustAdd";
 import RequisitionCreate from "./pages/Dashboard/Requisition/RequisitionCreate";
@@ -61,6 +63,7 @@ function App() {
         <Route path="requisitionApproval" element={<RequisitionApproval/>}/>
         <Route path="requisitionIssue" element={<RequisitionIssue/>}/>
         <Route path="addInventory" element={<AddInventory/>}/>
+        <Route path="addNewInventory" element={<AddNewInventory />}/>
         <Route path="currentStock" element={<CurrentStock/>}/>
         <Route path="stockAdjust" element={<StockAdjust/>}/>   
         <Route path="stockAdjustAdd" element={<StockAdjustAdd/>}/>   
@@ -76,6 +79,7 @@ function App() {
         <Route path="addNewEmployee" element={< AddNewEmployee />}/>
         <Route path="userManagement" element={<UserManagement/>}/>
         <Route path="addNewUser" element={<AddNewUser/>}/>
+        <Route path="userEdit/:id" element={<UserEdit />}/>
         <Route path="keyType" element={<KeyType/>}/>
         <Route path="keyEdit/:id" element={<EditKeyType/>}/>
         <Route path="department" element={<Department/>}/>

@@ -41,14 +41,14 @@ const AddNewEmployee = () => {
 
 
     return (
-        <div className='border m-1 p-1 rounded-lg'>
+        <div className='border m-2 p-2 rounded-lg'>
             <div className='p-1 mb-2'>
-                <h1 className='text-2xl font-bold'>Add New Employee </h1>
+                <h1 className='text-xl font-medium'>Add New Employee </h1>
             </div>
         
             <div>
                 <form onSubmit={handleSubmit(onSubmit)} >
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1'>
 
                         {/* ----------------------- Name Field ------------------------------ */}
                         <div className="form-control">
@@ -91,7 +91,7 @@ const AddNewEmployee = () => {
                             <label className='text-start '>Id/Code</label>
                             <input
                                 type="text"
-                                className={`input  max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.employeeId && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.employeeId && 'border-red-600 focus:border-red-600'}`}
                                 {...register("employeeId", {
                                     required: {
                                         value: true,
@@ -109,7 +109,7 @@ const AddNewEmployee = () => {
                             <label className='text-start '> Email </label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96  login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
                                 {...register("email", {
                                     required: {
                                         value: true,
@@ -132,7 +132,8 @@ const AddNewEmployee = () => {
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                className={`input font-bold w-80  focus:outline-0 rounded-sm  border-gray-400 mt-1 focus:border-blue-500  login-container-input ${errors.designation  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                className={`input input-sm   border border-green-700 mt-1 w-80 focus:outline-0 rounded-sm  
+                                 focus:border-blue-500 login-container-input ${errors.designation  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''>Select designation </option>
                                 {
                                     designations.map((designation)=><option>{designation.name}</option>)
@@ -154,7 +155,7 @@ const AddNewEmployee = () => {
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                className={`input font-bold w-80  focus:outline-0 rounded-sm  border-gray-400 mt-1 focus:border-blue-500  login-container-input ${errors.department  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                className={`input input-sm  w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.department  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                     <option value=''> Select Department</option>
                                 {
                                     departments.map((department)=><option>{department.name}</option>)
@@ -172,7 +173,7 @@ const AddNewEmployee = () => {
                             <label className='text-start'> Show Order </label>
                             <input
                                 type="number"
-                                className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
                                 {...register("order", {
                                     required: {
                                         value: true,
@@ -195,7 +196,8 @@ const AddNewEmployee = () => {
                                         message: "❌  Please fill out this field"
                                     }
                                 })}
-                                className={`input font-bold w-80  focus:outline-0 rounded-sm  border-gray-400 mt-1 focus:border-blue-500  login-container-input ${errors.createUser  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.createUser  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''> Yes/No </option>
                                 <option> Yes </option>
                                 <option> No </option>
                             </select>
