@@ -8,6 +8,8 @@ import Loading from "./Loading";
 import { FaSignOutAlt } from 'react-icons/fa';
 import { FaUserCircle } from 'react-icons/fa';
 import { FiSettings } from 'react-icons/fi';
+import { BsPinFill } from 'react-icons/bs';
+import { MdEmail } from 'react-icons/md';
 
 const Navbar = () => {
     const [user, loading] = useAuthState(auth)
@@ -74,8 +76,8 @@ const Navbar = () => {
                         <label tabindex="0" class="flex justify-between items-end  m-1">{profile}</label>
                         <ul tabindex="0" class="dropdown-content menu rounded-md p-2 w-64 lg:bg-gray-200">
                             <li className='text-primary mb-2 ml-5 '><NavLink to='/profile'> <FaUserCircle /> Business(es)</NavLink></li>
-                            <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <FaUserCircle /> Your Preferences</NavLink></li>
-                            <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <FaUserCircle /> Sms Preferences</NavLink></li>
+                            <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <BsPinFill /> Your Preferences</NavLink></li>
+                            <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <MdEmail /> Sms Preferences</NavLink></li>
                             <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <FaUserCircle /> Manage Profile</NavLink></li>
                             <li className='text-primary mb-2  ml-5'><NavLink to='/profileEdit'> <FiSettings />Change Password</NavLink></li>
                             <li className='text-primary ml-5  mb-2'><Link to='/dashboard'>
