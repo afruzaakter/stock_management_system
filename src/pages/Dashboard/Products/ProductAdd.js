@@ -234,7 +234,7 @@ const ProductAdd = () => {
                     <div className='lg:flex lg:gap-3 justify-start'>
                         <input className='rounded-sm w-36 btn btn-xs
                    mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white  ' type="submit" value='◲ Submit' />
-                        <Link to="/dashboard/product" className='btn rounded-sm w-36 btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white'> <RxCross2 className="font-bold"/> Cancel</Link>
+                        <Link to="/dashboard/product" className='btn rounded-sm w-36 btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white'> <RxCross2 /> Cancel</Link>
                     </div>
                 </form>
 

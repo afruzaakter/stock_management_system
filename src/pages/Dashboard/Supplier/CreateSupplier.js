@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import { RxCross2 } from 'react-icons/rx';
 const CreateSupplier = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
@@ -163,11 +163,11 @@ const CreateSupplier = () => {
 
                   </div>
 
-                  <input className=' rounded-md btn btn-xs
+                  <input className=' rounded-sm btn btn-xs
                    mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
                    {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
                  <BiRefresh className='text-xl ' /> Reset</button> */}
-                   <Link to='/dashboard/supplier' className="btn rounded-md btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white">
+                   <Link to='/dashboard/supplier' className="btn rounded-sm btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>
                  cancel</Link>
                    
                    
