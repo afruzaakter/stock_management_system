@@ -1,6 +1,8 @@
+
+
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, NavLink } from "react-router-dom";
+import {  Link, NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "./Loading";
 
@@ -14,14 +16,14 @@ const Navbar = () => {
     }
 
     const menuItems = <>
-        <li> <NavLink to="/home" className="rounded-lg">Home</NavLink> </li>
+        <li> <NavLink to="/home" className="rounded-md ml-3">Home</NavLink> </li>
         
         {
-            user && <li><NavLink to="/dashboard" className="rounded-lg">Dashboard </NavLink></li>
+            user && <li><NavLink to="/dashboard" className="rounded-md btn ml-3 pl-3 btn-md">Dashboard </NavLink></li>
         }
 
         {
-        user? <button className="btn" onClick={handleSignOut} >Sign Out</button> :
+        user? <button className="btn  ml-3" onClick={handleSignOut} >Sign Out</button> :
         <li> <NavLink to="/login" className="rounded-lg"> Login </NavLink> </li> 
         }
     </>
@@ -41,8 +43,8 @@ const Navbar = () => {
                 <Link className="btn btn-ghost normal-case text-xl">BFSA  </Link>
             </div>
 
-            <div className="navbar-end hidden lg:flex">
-                <ul className="menu menu-horizontal p-0">
+            <div className="navbar-end hidden lg:flex   ">
+                <ul className="menu menu-horizontal  ">
                     {menuItems}
                 </ul>
             </div>

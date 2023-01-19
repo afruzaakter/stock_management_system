@@ -34,22 +34,20 @@ const ProductAddKey = () => {
       navigate('/dashboard/productKey');
     }
 
-   
-
 
     return (
         <div className='m-10'>
-        <h1 className='text-2xl font-bold'>Create Product Key</h1>
-        <div>
+        <h1 className='text-2xl '>Create Product Key</h1>
+        <div className='mt-5'>
         <form onSubmit={handleSubmit(onSubmit)} >
-                  <div className='flex gap-5'>
+                  <div className='lg:flex lg:gap-5'>
                       {/* -----------------------Department Name Field ------------------------------ */}
 
                       <div className="form-control">
                         <label className='text-start '>Product key Code</label>
                         <input
                             type="text"
-                            className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm border-gray-400 mt-1  w-96  focus:border-blue-500  login-container-input ${errors.productkey && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96  focus:border-blue-500  login-container-input ${errors.productkey && 'border-red-600 focus:border-red-600'}`}
                             {...register("productkey", {
                                 required: {
                                     value: true,
@@ -68,7 +66,7 @@ const ProductAddKey = () => {
                         <label className='text-start '>Description</label>
                         <textarea
                             type="text"
-                            className={`input font-bold max-w-xs  border-green-700  focus:outline-0 rounded-sm border-gray-400 mt-1  w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                            className={`input input-sm  max-w-xs  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
                             {...register("description", {
                                 required: {
                                     value: true,
@@ -91,7 +89,7 @@ const ProductAddKey = () => {
                                     message: "❌  Please Fillup  Input Field"
                                 }
                             })}
-                            className={`input font-bold w-64  focus:outline-0 rounded-sm  border-gray-400 mt-1  w-full focus:border-blue-500  login-container-input ${errors.keytype  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                            className={`input input-sm  lg:w-64 md:w-52  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input ${errors.keytype  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''>--Select key type--</option>
                             {
                                 keys.map((key)=><option>{key.key}</option>)
@@ -105,9 +103,9 @@ const ProductAddKey = () => {
                     </div> 
                   </div>  
                  
-                  <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
+                  <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
                    
-                  <Link to='/dashboard/productKey' className="btn btn-sm mx-1 bg-warning text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white"><RxCross2/>
+                  <Link to='/dashboard/productKey' className="btn btn-xs mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>
                  cancel</Link>
 
                    

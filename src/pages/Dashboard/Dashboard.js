@@ -56,7 +56,7 @@ const Dashboard = () => {
 
                   {/* ***************************** Dashboard menu   *********************************** */}
 
-                  <li className={`text-gray-300 text-md  flex items-start  rounded-md `}><Link to='/dashboard' className='w-full font-medium border-b border-gray-400 rounded-md    '>
+                  <li className={`text-gray-300 text-md  flex items-start mt-2  rounded-md `}><Link to='/dashboard' className='w-full font-medium border-b border-gray-400 rounded-md    '>
 
                     <span className={`text-md text-gray-800  block  ${!open ? "text-md" : "ml-0"} `} >  <MdOutlineDashboardCustomize className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Dashboard</span></Link>
@@ -65,59 +65,59 @@ const Dashboard = () => {
                   {/* ***************************** Dashboard menu  Start *********************************** */}
 
                   {/* -----------------------------Requisition dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start  rounded-md `}><Link to='/dashboard/requisition' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md `}><Link to='/dashboard/requisition' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "" : "ml-0"} `} >  <AiFillDiff className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition</span></Link></li>
                   {/* -----------------------------Requisition dashboard menu End ---------------------------- */}
                   {/* -----------------------------Requisition dashboard Authorize menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start rounded-md `}><Link to='/dashboard/requisitionAuthorize' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md `}><Link to='/dashboard/requisitionAuthorize' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={`text-md text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <TbFileDatabase className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition(Authorize) </span></Link></li>
                   {/* -----------------------------Requisition Authorize dashboard menu End ---------------------------- */}
 
                   {/* -----------------------------Requisition Approval dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start  rounded-md`}><Link to='/dashboard/requisitionApproval' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md`}><Link to='/dashboard/requisitionApproval' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiOutlineFieldTime className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition(Approval)</span></Link></li>
                   {/* -----------------------------Requisition Approval dashboard menu End ---------------------------- */}
 
                   {/* -----------------------------Requisition Issue dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start rounded-md`}><Link to='/dashboard/requisitionIssue' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md`}><Link to='/dashboard/requisitionIssue' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <GoIssueClosed className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition(Issue) </span></Link></li>
                   {/* -----------------------------Requisition Issue dashboard menu End ---------------------------- */}
 
                   {/* -----------------------------Add Inventory dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start rounded-md`}><Link to='/dashboard/addInventory' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md`}><Link to='/dashboard/addInventory' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <MdInventory className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Add Inventory</span></Link></li>
                   {/* -----------------------------Add Inventory dashboard menu End ---------------------------- */}
                   {/* -----------------------------Current Stock dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md flex items-start rounded-md`}><Link to='/dashboard/currentStock' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md flex items-start mt-2 rounded-md`}><Link to='/dashboard/currentStock' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <BiStore className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Current Stock </span></Link></li>
                   {/* -----------------------------Current Stock dashboard menu End ---------------------------- */}
                   {/* -----------------------------Stock Adjust  dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start rounded-md`}><Link to='/dashboard/stockAdjust' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md`}><Link to='/dashboard/stockAdjust' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <MdOutlineDashboardCustomize className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Stock Adjust </span></Link></li>
                   {/* -----------------------------Stock Adjust dashboard menu End ---------------------------- */}
 
                   {/* ---------------------------Supplier dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md flex items-start rounded-md`}><Link to='/dashboard/supplier' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md flex items-start mt-2 rounded-md`}><Link to='/dashboard/supplier' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <BsCartPlusFill className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Supplier </span></Link></li>
                   {/* -----------------------------Supplier dashboard menu End ---------------------------- */}
 
                   {/* ----------------------------Product dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start rounded-md`}><Link to='/dashboard/product' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md`}><Link to='/dashboard/product' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <MdProductionQuantityLimits className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Product </span></Link></li>
                   {/* -----------------------------Product dashboard menu End ---------------------------- */}
 
 
                   {/* ----------------------------Reports dashboard menu Start ---------------------------- */}
-                  <li onClick={() =>{ setSubReportOpen(!subReportOpen); setOpenReports(!openReports) }} className={`text-gray-300 text-md  flex items-start rounded-md      w-full font-medium border-b border-gray-400  `}>
+                  <li onClick={() =>{ setSubReportOpen(!subReportOpen); setOpenReports(!openReports) }} className={`text-gray-300 text-md  flex items-start rounded-md   mt-2   w-full font-medium border-b border-gray-400  `}>
                    <div className='flex justify-between'>
                     <span className={` text-gray-800  block ${!open ? "text-xl" : "ml-0"} `} >  <HiDocumentReport className='' /></span>
                     <span className={` text-gray-800 pr-20 ${!open && 'hidden'}`}>Reports </span> 
@@ -127,15 +127,15 @@ const Dashboard = () => {
                     {
                       subReportOpen && <>
                        {/* ------------------------------ Product issue ----------------------- */}
-                       <li className={`text-gray-300 text-md  flex items-start ml-5 rounded-md `}><Link to="/dashboard/reports/productIssue" className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                       <li className={`text-gray-300 text-md mt-2 flex items-start ml-5 rounded-md `}><Link to="/dashboard/reports/productIssue" className='w-full font-medium border-b border-gray-400  rounded-md    '>
                         <span className={` text-gray-800  block ${!open ? "text-xl" : "ml-0"} `} >  <GoIssueReopened className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Product issue </span></Link></li>
                       {/* ------------------------------ Inventory  ----------------------- */}
-                      <li className={`text-gray-300 text-md  flex items-start ml-5  rounded-md`}><Link to="/dashboard/reports/inventory" className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                      <li className={`text-gray-300 text-md mt-2 flex items-start ml-5  rounded-md`}><Link to="/dashboard/reports/inventory" className='w-full font-medium border-b border-gray-400  rounded-md    '>
                         <span className={` text-gray-800  block ${!open ? "text-xl" : "ml-0"} `} >  <MdOutlineInventory className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Inventory </span></Link></li>
                       {/* ------------------------------ Employee User -------------------- */}
-                      <li className={`text-gray-300 text-md  flex items-start ml-5 rounded-md `}><Link to="/dashboard/reports/employeeUser" className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                      <li className={`text-gray-300 text-md mt-2 flex items-start ml-5 rounded-md `}><Link to="/dashboard/reports/employeeUser" className='w-full font-medium border-b border-gray-400  rounded-md    '>
                         <span className={` text-gray-800  block ${!open ? "text-xl" : "ml-0"} `} >  <FaUserFriends className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Employee User </span></Link></li>
                       </>
@@ -145,19 +145,19 @@ const Dashboard = () => {
 
 
                   {/* ----------------------------Employee dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start rounded-md mt-1`}><Link to='/dashboard/employee' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md mt-2 flex items-start rounded-md `}><Link to='/dashboard/employee' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <HiUserGroup className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Employee </span></Link></li>
                   {/* -----------------------Employee dashboard menu End ---------------------- */}
 
                   {/* ------------------------User Management  dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start rounded-md`}><Link to='/dashboard/userManagement' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  <li className={`text-gray-300 text-md mt-2 flex items-start rounded-md`}><Link to='/dashboard/userManagement' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-700  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <FaUsersCog className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>User Management </span></Link></li>
                   {/* -----------------------------User Management  dashboard menu End ---------------------- */}
 
                   {/* ----------------------------Settings dashboard Sub menu Start ---------------------------- */}
-                  <li onClick={() => {setSubMenuOpen(!subMenuOpen); setOpenSettings(!openSettings)}} className={`text-gray-300 text-md  flex items-start rounded-md w-full font-medium border-b border-gray-400   `}>
+                  <li onClick={() => {setSubMenuOpen(!subMenuOpen); setOpenSettings(!openSettings)}} className={`text-gray-300 text-md  flex items-start rounded-md w-full mt-2 font-medium border-b border-gray-400   `}>
                     
                     <div className='flex justify-between'>
                     <span className={` text-gray-800 block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiFillSetting className='' /></span>
@@ -169,29 +169,29 @@ const Dashboard = () => {
                   {
                     subMenuOpen && <ul>
                       {/* ------------------------------ Setting Department ----------------------- */}
-                      <li className={`text-gray-300 text-md  flex items-start ml-4 rounded-md `}><Link to="/dashboard/department" className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                      <li className={`text-gray-300 text-md mt-2 flex items-start ml-4 rounded-md `}><Link to="/dashboard/department" className='w-full font-medium border-b border-gray-400  rounded-md    '>
                         <span className={` text-gray-800  block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Department </span></Link></li>
                       {/* ------------------------------ Setting Designation ----------------------- */}
-                      <li className={`text-gray-300 text-md  flex items-start ml-4  rounded-md `}><Link to="/dashboard/designation" className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                      <li className={`text-gray-300 text-md mt-2 flex items-start ml-4  rounded-md `}><Link to="/dashboard/designation" className='w-full font-medium border-b border-gray-400  rounded-md    '>
                         <span className={` text-gray-800  block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Designation </span></Link></li>
                       {/* ------------------------------ Setting Product Key ----------------------- */}
-                      <li className={`text-gray-300 text-md  flex items-start ml-4  rounded-md`}><Link to="/dashboard/productKey" className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                      <li className={`text-gray-300 text-md mt-2 flex items-start ml-4  rounded-md`}><Link to="/dashboard/productKey" className='w-full font-medium border-b border-gray-400  rounded-md    '>
                         <span className={` text-gray-800  block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Product Key </span></Link></li>
 
                       {/* ------------------------ Setting Library ------------------- */}
-                      <li onClick={() => setLibrarySubMenuOpen(!librarySubMenuOpen)} className={`text-gray-300 text-md  flex items-start ml-4  rounded-md `}><Link className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                      <li onClick={() => setLibrarySubMenuOpen(!librarySubMenuOpen)} className={`text-gray-300 text-md  flex items-start ml-4  rounded-md `}><Link className='w-full mt-2 font-medium border-b border-gray-400  rounded-md    '>
                         <span className={` text-gray-800  block   ${!open ? "text-xl" : "ml-0"} `} >  <MdLocalLibrary className='' /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Library </span></Link></li>
                       {
                         librarySubMenuOpen && <ul>
-                          <li className={`text-gray-300 text-md  flex items-start ml-8 rounded-md`}><Link to='/dashboard/keyType' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                          <li className={`text-gray-300 text-md mt-2 flex items-start ml-8 rounded-md`}><Link to='/dashboard/keyType' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                             <span className={` text-gray-800  block   ${!open ? "text-xl" : "ml-0"} `} >  <AiOutlineRightSquare className='' /></span>
                             <span className={` text-gray-800 ${!open && 'hidden'}`}>Key Type </span></Link></li>
                             {/* ---------------------- Submenu Budget code----------------- */}
-                          <li className={`text-gray-300 text-md  flex items-start ml-8 rounded-md `}><Link to='/dashboard/budgetCode' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                          <li className={`text-gray-300 text-md mt-2 flex items-start ml-8 rounded-md `}><Link to='/dashboard/budgetCode' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                             <span className={` text-gray-800  block   ${!open ? "text-xl" : "ml-0"} `} >  <AiOutlineRightSquare className='' /></span>
                             <span className={` text-gray-800 ${!open && 'hidden'}`}>Budget Code </span></Link></li>
 

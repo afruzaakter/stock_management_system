@@ -40,31 +40,28 @@ const StockAdjust = () => {
 
             <div className='mb-2 flex justify-between'>
                 <div>
-                    <button className="btn btn-sm mx-1 bg-primary text-white">
-                        <AiOutlineShoppingCart /> Adjust Stoke</button>
-                    <button className="btn btn-sm mx-1 bg-error text-white">
-                        <AiOutlineDelete /> Delete</button>
+                    <Link to="/dashboard/stockAdjustAdd" className="btn btn-sm mx-1 bg-primary text-white">
+                        <AiOutlineShoppingCart /> Adjust Stock</Link>
+                   
                     <button className="btn btn-sm mx-1 bg-warning   text-white">
                         <TbMessageReport /> Reports</button>
                 </div>
-                <div>
-                    <button className="btn btn-sm mx-1 bg-info text-white">
-                        < FiRefreshCcw />  Reset</button>
-                    <button className="btn btn-sm mx-1 bg-primary text-white">
-                        < MdRefresh /> Refresh</button>
-                </div>
+               
             </div>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
-                        <tr>
-                            <th>Entry Type </th>
-                            <th>Date </th>
-                            <th>#Adjust </th>
-                            <th> Adjust Amount</th>
-                            <th> Adjust Note </th>
-
+                     <tr>
+                            <th> SL</th>
+                            <th>Code </th>
+                            <th>Product Name </th>
+                            <th>Unit </th>
+                            <th>Stock </th>                         
+                            <th>Sort Order </th>                         
+                            <th>Alert Qty </th>
+                            <th>Action</th>
+                            
                         </tr>
                     </thead>
 
@@ -79,7 +76,7 @@ const StockAdjust = () => {
                                 <td>{product.alertQty}</td>
                                 <td>{product.sortOrder}</td>
                                 <td className='flex gap-1'>
-                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
+                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
                                         <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
                                     </td>
                             </tr>)

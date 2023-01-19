@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { AiOutlineEye } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const Requisition = () => {
     return (
@@ -21,8 +22,8 @@ const Requisition = () => {
             </div>
 
             <div className='mb-2 '>
-                <button className="btn btn-sm mx-1 bg-primary text-white">
-                    <FaPlus /> New Requisition Request</button>
+                <Link to="/dashboard/requisitionCreate" className="btn btn-sm mx-1 bg-primary text-white">
+                    <FaPlus /> New Requisition Request</Link>
                 <button className="btn btn-sm mx-1 bg-success text-white">
                     <AiOutlineEye/> Preview </button>
             </div>
