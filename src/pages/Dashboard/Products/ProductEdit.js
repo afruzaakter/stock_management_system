@@ -62,13 +62,13 @@ const ProductEdit = () => {
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                         {/* -------------------- Product Name/ Brand Input Field --------------------   */}
                         <div className="form-control">
-                            <label >Product Brand/Name</label>
+                            <label >Product Name</label>
                             <input
                                 type="text"
-                                Value={products.brandName}
+                                Value={products.productName}
                             
-                                className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.brandName && 'border-red-600 focus:border-red-600'}`}
-                                {...register("brandName", {
+                                className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.productName && 'border-red-600 focus:border-red-600'}`}
+                                {...register("productName", {
                                     required: {
                                         value: true,
                                         message: "❌  Please Fillup  Input Field"
@@ -76,31 +76,11 @@ const ProductEdit = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.brandName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.brandName.message}</span>}
+                                {errors.productName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.productName.message}</span>}
 
                             </label>
                         </div>
-                        {/* -------------------- Size / Varient Input Field -----------------------   */}
-                        <div className="form-control">
-                            <label >Size/Varient</label>
-                            <input
-                                type="text"
-                                
-                           Value={products.size}
-  
-                                className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.size && 'border-red-600 focus:border-red-600'}`}
-                                {...register("size", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please Fillup  Input Field"
-                                    }
-                                })}
-                            />
-                            <label className="label">
-                                {errors.size?.type === 'required' && <span className="label-text-alt text-red-700">{errors.size.message}</span>}
-
-                            </label>
-                        </div>
+                   
                         {/* -------------------- Budget Code Input Field -----------------------   */}
                         <div className="form-control">
                             <label className='text-start '>Budget Code</label>
@@ -127,6 +107,27 @@ const ProductEdit = () => {
                             </label>
                         </div>
                         {/* ------------------------- Add button ---------------------  */}
+                             {/* -------------------- Size / Varient Input Field -----------------------   */}
+                             <div className="form-control">
+                            <label >Size/Varient</label>
+                            <input
+                                type="text"
+                                
+                           Value={products.size}
+  
+                                className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.size && 'border-red-600 focus:border-red-600'}`}
+                                {...register("size", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please Fillup  Input Field"
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.size?.type === 'required' && <span className="label-text-alt text-red-700">{errors.size.message}</span>}
+
+                            </label>
+                        </div>
                     
                         {/* -------------------- Measure Unit Input Field --------------------   */}
                         <div className="form-control">
@@ -257,10 +258,10 @@ const ProductEdit = () => {
                         </div>
                     </div>
                     {/* -------------------- Submit and Cancel button--------- */}
-                    <div className='lg:flex lg:gap-3 justify-start'>
-                        <input className='rounded-sm w-36 btn btn-xs
-                   mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white  ' type="submit" value='◲ Submit' />
-                        <Link to="/dashboard/product" className='btn rounded-sm w-36 btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white'> <RxCross2 className="font-bold"/> Cancel</Link>
+                    <div className='lg:flex  justify-start'>
+                        <input className='rounded-md  btn btn-sm
+                   mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white  ' type="submit" value='◲ Update' />
+                        <Link to="/dashboard/product" className='btn rounded-md px-6 btn-sm outline-2 mx-1 bg-red-600 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white'> <RxCross2 /> back</Link>
                     </div>
                 </form>
 

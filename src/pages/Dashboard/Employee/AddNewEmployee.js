@@ -186,33 +186,13 @@ const AddNewEmployee = () => {
                             </label>
                         </div>
 
-                        {/* --------------------Create User (Yes/No) Field ------------------- */}
-                        <div className="form-control">
-                            <label className='text-start'>Create User? </label>
-                            <select   
-                                {...register("createUser", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
-                                className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.createUser  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''> Yes/No </option>
-                                <option> Yes </option>
-                                <option> No </option>
-                            </select>
-                            
-                            <label className="label">
-                                {errors.createUser?.type === 'required' && <span className="label-text-alt text-red-700">{errors.createUser.message}</span>}
-
-                            </label>
-                        </div> 
+                  
 
 
                     </div>  
 
-                    <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
-                    <Link to='/dashboard/employee' className="btn btn-sm mx-1 bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2/> Cancel 
+                    <input className='input  btn btn-sm px-8  mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
+                    <Link to='/dashboard/employee' className="btn btn-sm px-6 font-bold mx-1 bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2/> Cancel 
                     </Link>
                 </form>
             </div>

@@ -66,8 +66,8 @@ const Supplier = () => {
                             <th> Name </th>
                             <th> Contact Person </th>
                             <th> Contact No. </th>
-                            <th> Code </th>
-                            <th> Address-1 </th>
+                            <th> Supplier-Id</th>
+                            <th> Address </th>
                             <th> Action </th>
                         </tr>
                     </thead>

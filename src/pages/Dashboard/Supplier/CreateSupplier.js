@@ -163,14 +163,11 @@ const CreateSupplier = () => {
 
                   </div>
 
-                  <input className=' rounded-sm btn btn-xs
+                  <input className=' rounded-md px-6 btn btn-sm
                    mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
-                   {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
-                 <BiRefresh className='text-xl ' /> Reset</button> */}
-                   <Link to='/dashboard/supplier' className="btn rounded-sm btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>
-                 cancel</Link>
-                   
-                   
+                  
+                   <Link to='/dashboard/supplier' className="btn outline-2 mx-1 bg-red-600 px-6  rounded-md btn-sm  text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>
+                 cancel</Link>       
                 </form>
         </div>
     </div>

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaEdit } from 'react-icons/fa';
+import { RxCross2 } from 'react-icons/rx';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 const StockAdjustAdd = () => {
@@ -245,11 +246,10 @@ const StockAdjustAdd = () => {
                          </div>
 
                         </div>
-                        <input className='input btn btn-xs rounded-sm bg-green-700 text-white w-28  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Save' />
-                        {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
-                        <BiRefresh className='text-xl ' /> Reset</button> */}
-                        {/* <Link to='/dashboard/stockAdjust' className="btn btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white">
-                         cancel</Link> */}
+                        <input className='input  input-sm rounded-md bg-green-700 text-white px-6 max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Submit' />
+                       
+                        <Link to='/dashboard/stockAdjust' className="btn bg-red-600 px-6 rounded-md btn-sm  outline-2 mx-1  text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white">
+                        <RxCross2/> cancel</Link>
                     </form>
                 </div>
 
@@ -264,7 +264,7 @@ const StockAdjustAdd = () => {
                             className={`input input-sm font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1 lg:w-36  focus:border-blue-500  login-container-input `}
                         
                         />
-                        <button className='input btn btn-xs rounded-sm mt-4 bg-green-700 text-white lg:w-36  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white '>Submit</button>
+                        <button className='input input-sm rounded-md mt-4 bg-green-700 text-white lg:w-36  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white '>Submit</button>
                     </div>
                 </div>
             </div>
@@ -297,7 +297,7 @@ const StockAdjustAdd = () => {
                                 {/* <td>{stockAdjust.totalAmount} </td> */}
                                 <td>{totalAmount} </td>
                                 <td>
-                                    {/* <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/supplierEdit/${supplier._id}`}><FaEdit /></Link> */}
+                                    <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/supplierEdit/${stockAdjust._id}`}><FaEdit /></Link>
                                     <button className='btn btn-xs bg-red-500 text-white' onClick={() => handleDelete(stockAdjust._id)}><AiOutlineDelete /></button>
                                 </td>
                             </tr>)

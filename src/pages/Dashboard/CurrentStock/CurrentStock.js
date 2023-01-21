@@ -58,9 +58,9 @@ const CurrentStock = () => {
                     <thead>
                         <tr>
                             <th> SL</th>
-                            <th>Budget Code </th>
                             <th>Product Name </th>
-                            <th>Unit </th>
+                            <th>Budget Code </th>
+                            <th>UoM </th>
                             <th>Stock </th>                         
                             <th>Alert Qty </th>
                             
@@ -71,9 +71,9 @@ const CurrentStock = () => {
                     {
                             products.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <th>{index+1}</th>
+                                <td>{product.productName}</td>
                                 <td>{product.budgetCode}</td>
-                                <td>{product.brandName}</td>
-                                <td>{product.size}</td>
+                                <td>{product.measureUnit}</td>
                                 <td>{product.stockOrder}</td>                              
                                 <td>{product.alertQty}</td>
                               

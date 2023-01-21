@@ -48,12 +48,12 @@ const ProductAdd = () => {
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                         {/* -------------------- Product Name/ Brand Input Field --------------------   */}
                         <div className="form-control">
-                            <label >Product Brand/Name</label>
+                            <label >Product Name</label>
                             <input
                                 type="text"
                                 placeholder='e.g:CocaCola, Pepsi, Lux .. '
-                                className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.brandName && 'border-red-600 focus:border-red-600'}`}
-                                {...register("brandName", {
+                                className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.productName && 'border-red-600 focus:border-red-600'}`}
+                                {...register("productName", {
                                     required: {
                                         value: true,
                                         message: "❌  Please Fillup  Input Field"
@@ -61,7 +61,29 @@ const ProductAdd = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.brandName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.brandName.message}</span>}
+                                {errors.productName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.productName.message}</span>}
+
+                            </label>
+                        </div>
+                           {/* -------------------- Budget Code Input Field -----------------------   */}
+                           <div className="form-control">
+                            <label className='text-start '>Budget Code</label>
+                            <select   {...register("budgetCode", {
+                                required: {
+                                    value: true,
+                                    message: "❌  Please Fillup  Input Field"
+                                }
+                            })}
+                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.budgetCode && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option  value=''>--Select Budget Code--</option>
+                                
+                                {
+                                    budgetCodes.map((budgetCode) => <option>{budgetCode.budgetCode}</option>)
+                                }
+                            </select>
+
+                            <label className="label">
+                                {errors.budgetCode?.type === 'required' && <span className="label-text-alt text-red-700">{errors.budgetCode.message}</span>}
 
                             </label>
                         </div>
@@ -83,30 +105,7 @@ const ProductAdd = () => {
                                 {errors.size?.type === 'required' && <span className="label-text-alt text-red-700">{errors.size.message}</span>}
 
                             </label>
-                        </div>
-                        {/* -------------------- Budget Code Input Field -----------------------   */}
-                        <div className="form-control">
-                            <label className='text-start '>Budget Code</label>
-                            <select   {...register("budgetCode", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
-                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.budgetCode && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option  value=''>--Select Budget Code--</option>
-                                
-                                {
-                                    budgetCodes.map((budgetCode) => <option>{budgetCode.budgetCode}</option>)
-                                }
-                            </select>
-
-                            <label className="label">
-                                {errors.budgetCode?.type === 'required' && <span className="label-text-alt text-red-700">{errors.budgetCode.message}</span>}
-
-                            </label>
-                        </div>
-                        {/* ------------------------- Add button ---------------------  */}
+                        </div>                   
                     
                         {/* -------------------- Measure Unit Input Field --------------------   */}
                         <div className="form-control">
@@ -120,7 +119,9 @@ const ProductAdd = () => {
                                 className={`input input-sm  focus:outline-0 rounded-sm  border-green-700   lg:w-80 md:w-64 focus:border-blue-500  login-container-input ${errors.measureUnit && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''>--Select Measures Unit--</option>
                                 <option >Qnty</option>
-                                <option >KG</option>
+                                <option >kg</option>
+                                <option >gm</option>
+                                <option >ml</option>
                                 <option >Pack</option>
 
                             </select>
@@ -231,10 +232,10 @@ const ProductAdd = () => {
                         </div>
                     </div>
                     {/* -------------------- Submit and Cancel button--------- */}
-                    <div className='lg:flex lg:gap-3 justify-start'>
-                        <input className='rounded-sm w-36 btn btn-xs
-                   mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white  ' type="submit" value='◲ Submit' />
-                        <Link to="/dashboard/product" className='btn rounded-sm w-36 btn-xs outline-2 mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white'> <RxCross2 /> Cancel</Link>
+                    <div className='lg:flex justify-start'>
+                        <input className='rounded-md  btn btn-sm 
+                   mx-1 bg-green-700 text-white  px-6 max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white  ' type="submit" value='◲ Submit' />
+                        <Link to="/dashboard/product" className='btn rounded-md btn-sm px-6 outline-2 mx-1 bg-red-600 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white'> <RxCross2 /> Cancel</Link>
                     </div>
                 </form>
 

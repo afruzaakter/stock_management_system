@@ -41,7 +41,7 @@ const Designation = () => {
             <div className='mb-2 flex justify-between '>
                 <div>
 
-                    <Link to="/dashboard/designationAdd" className='btn btn-sm mx-1 bg-green-700 text-white'><FaPlus /> Add Designation</Link>
+                    <Link to="/dashboard/designationAdd" className='btn btn-sm mx-1 bg-green-700 text-white hover:bg-gray-600 '><FaPlus /> Add Designation</Link>
 
 
                 </div>

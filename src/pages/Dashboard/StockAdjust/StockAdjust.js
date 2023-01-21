@@ -54,9 +54,9 @@ const StockAdjust = () => {
                     <thead>
                      <tr>
                             <th> SL</th>
-                            <th>Code </th>
                             <th>Product Name </th>
-                            <th>Unit </th>
+                            <th>Budget Code </th>
+                            <th>UoM </th>
                             <th>Stock </th>                         
                             <th>Sort Order </th>                         
                             <th>Alert Qty </th>
@@ -69,15 +69,15 @@ const StockAdjust = () => {
                     {
                             products.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <th>{index+1}</th>
+                                <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
-                                <td>{product.brandName} </td>
-                                <td>{product.size}</td>
+                                <td>{product.measureUnit}</td>
                                 <td>{product.stockOrder} </td>
-                                <td>{product.alertQty}</td>
                                 <td>{product.sortOrder}</td>
+                                <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
-                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
-                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
+                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
+                                        <button className='btn btn-xs bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
                                     </td>
                             </tr>)
                         }
