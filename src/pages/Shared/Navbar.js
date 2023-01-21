@@ -10,6 +10,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { FiSettings } from 'react-icons/fi';
 import { BsPinFill } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
+import { AiFillTool } from 'react-icons/ai';
 
 const Navbar = () => {
     const [user, loading] = useAuthState(auth)
@@ -78,7 +79,7 @@ const Navbar = () => {
                             <li className='text-primary mb-2 ml-5 '><NavLink to='/profile'> <FaUserCircle /> Business(es)</NavLink></li>
                             <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <BsPinFill /> Your Preferences</NavLink></li>
                             <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <MdEmail /> Sms Preferences</NavLink></li>
-                            <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <FaUserCircle /> Manage Profile</NavLink></li>
+                            <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <AiFillTool /> Manage Profile</NavLink></li>
                             <li className='text-primary mb-2  ml-5'><NavLink to='/profileEdit'> <FiSettings />Change Password</NavLink></li>
                             <li className='text-primary ml-5  mb-2'><Link to='/dashboard'>
                                 <span className='flex items-center mr-8' onClick={handleSignOut} ><FaSignOutAlt className='mr-2' /> Sign Out</span>

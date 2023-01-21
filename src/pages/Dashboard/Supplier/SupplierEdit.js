@@ -178,11 +178,11 @@ const SupplierEdit = () => {
 
                   </div>
 
-                  <input className='input btn btn-xs
-                   mx-1 bg-green-700 text-white  rounded-xs max-w-xs cursor-pointer font-bold  hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
+                  <input className='input btn btn-sm
+                   mx-1 bg-green-700 text-white  rounded-md px-4 max-w-xs cursor-pointer font-bold  hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
                    {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
                  <BiRefresh className='text-xl ' /> Reset</button> */}
-                   <Link to='/dashboard/supplier' className="btn btn-xs outline-2 rounded-xs mx-1 bg-warning text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white"> <RxCross2/>
+                   <Link to='/dashboard/supplier' className="btn bg-red-600 px-6 rounded-md btn-sm  outline-2  mx-1 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white"> <RxCross2/>
                  back</Link>
                    
                    

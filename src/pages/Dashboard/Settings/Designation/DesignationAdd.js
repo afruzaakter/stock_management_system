@@ -91,10 +91,9 @@ const DesignationAdd = () => {
                         </div> 
                       </div>  
 
-                      <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
-                       {/* <button className="btn btn-sm mx-1 bg-gray-600  text-white">
-                     <BiRefresh className='text-xl ' /> Reset</button> */}
-                       <Link to='/dashboard/designation' className="btn btn-xs mx-1 bg-warning text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white"><RxCross2/>
+                      <input className='input rounded-md px-6  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
+                     
+                       <Link to='/dashboard/designation' className="btn btn-sm rounded-md px-6 mx-1 bg-red-600 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white"><RxCross2/>
                      cancel</Link>
                        
                        

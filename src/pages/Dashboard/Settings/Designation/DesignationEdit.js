@@ -108,10 +108,10 @@ const DesignationEdit = () => {
                     </div> 
                   </div>  
 
-                  <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
+                  <input className='input  btn btn-sm rounded-md px-4 mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
                    
-                   <Link to='/dashboard/designation' className="btn btn-xs mx-1 bg-warning text-white"><RxCross2/>
-                 cancel</Link>
+                   <Link to='/dashboard/designation' className="btn btn-sm font-bold rounded-md  mx-1 px-6 bg-red-600  text-white hover:bg-gray-700  "><RxCross2/>
+                 Back</Link>
                    
                    
                 </form>
