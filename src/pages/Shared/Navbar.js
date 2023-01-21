@@ -1,5 +1,3 @@
-
-
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink } from "react-router-dom";
@@ -17,7 +15,7 @@ const Navbar = () => {
     if (loading) {
         return <Loading />
     }
-    console.log(user)
+    // console.log(user)
     const handleSignOut = () => {
         signOut(auth);
     }
@@ -44,13 +42,13 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar bg-purple-300 ">
+        <div className="navbar bg-purple-300">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    {/* *************************** User Profile Responsive Mobile Device************************************/}
+                    {/* ------------------ User Profile Responsive Mobile Device ------- */}
                     <ul tabIndex="0" className="menu menu-compact dropdown-content  shadow bg-base-100 rounded-box w-52">
                         {menuItems}
                         <div class="dropdown dropdown-end ">
@@ -65,10 +63,10 @@ const Navbar = () => {
                         </div>
                     </ul>
                 </div>
-                <Link className="btn btn-ghost normal-case text-xl">BFSA MANAGEMENT  </Link>
+                <Link className="text-xl">BFSA  </Link>
             </div>
-
-{/* *************************** User Profile Desktop Device************************************** */}
+            
+            {/* --------------- User Profile Desktop Device ----------- */}
             <div className="navbar-end hidden lg:flex   ">
                 <ul className="menu menu-horizontal  ">
                     {menuItems}
@@ -89,8 +87,9 @@ const Navbar = () => {
 
                 </ul>
             </div>
-{/* ***************************Dashboard Responsive Mobile Device************************************** */}
-            <div className='flex '>
+            
+            {/* ---------Dashboard Responsive Mobile Device----------- */}
+            <div className='flex'>
                 <label tabIndex="1" for="dashboard-sidebar" className="btn btn-ghost lg:hidden">
                     <svg xmlns="http:www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>

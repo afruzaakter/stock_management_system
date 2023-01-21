@@ -29,22 +29,22 @@ const AddNewInventory = () => {
     }
 
     return (
-        <div className='border m-2 p-2 rounded-lg'>
+        <div className='border m-2 p-2 rounded-lg bg-slate-100'>
             <div className='p-1 mb-2'>
                 <h1 className='text-xl font-medium'>Add New Inventory </h1>
             </div>
 
             <div>
                 <form onSubmit={handleSubmit(onSubmit)} >
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 '>
 
-                        {/* ----------Purchase Field ------------- */}
+                        {/* ----------Product Name Field ------------- */}
                         <div className="form-control">
-                            <label className='text-start'>Purchase </label>
+                            <label className='text-start'>Product Name </label>
                             <input
                                 type="text"
-                                className={`input input-md max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-full  focus:border-blue-500  login-container-input ${errors.purchase && 'border-red-600 focus:border-red-600'}`}
-                                {...register("purchase", {
+                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-full  focus:border-blue-500  login-container-input ${errors.productName && 'border-red-600 focus:border-red-600'}`}
+                                {...register("productName", {
                                     required: {
                                         value: true,
                                         message: "❌  Please fill out  this field"
@@ -52,18 +52,18 @@ const AddNewInventory = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.purchase?.type === 'required' && <span className="label-text-alt text-red-700"> 
-                                    {errors.purchase.message} </span>}
+                                {errors.productName?.type === 'required' && <span className="label-text-alt text-red-700"> 
+                                    {errors.productName.message} </span>}
                             </label>
                         </div>
 
-                        {/* ----------------Supplier Name Field ------------------ */}
+                        {/* ----------------Brand Name Field ------------------ */}
                         <div className="form-control">
-                            <label className='text-start'>Supplier Name </label>
+                            <label className='text-start'>Brand Name </label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.supplierName && 'border-red-600 focus:border-red-600'}`}
-                                {...register("supplierName", {
+                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.brandName && 'border-red-600 focus:border-red-600'}`}
+                                {...register("brandName", {
                                     required: {
                                         value: true,
                                         message: "❌  Please fill out  this field"
@@ -71,18 +71,18 @@ const AddNewInventory = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.supplierName?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.supplierName.message}</span>}
+                                {errors.brandName?.type === 'required' && <span className="label-text-alt text-red-700">
+                                    {errors.brandName.message}</span>}
                             </label>
                         </div> 
 
-                        {/* --------------------Mobile ----------------------- */}
+                        {/* --------------------Ctn/bag  ----------------------- */}
                         <div className="form-control">
-                            <label className='text-start'>Mobile </label>
+                            <label className='text-start'>Ctn/Bag </label>
                             <input
-                                type="text"
-                                className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.mobile && 'border-red-600 focus:border-red-600'}`}
-                                {...register("mobile", {
+                                type="number"
+                                className={`input input-sm max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.ctn_bag && 'border-red-600 focus:border-red-600'}`}
+                                {...register("ctn_bag", {
                                     required: {
                                         value: true,
                                         message: "❌  Please fill out  this field"
@@ -90,18 +90,18 @@ const AddNewInventory = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.mobile?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.mobile.message} </span>}
+                                {errors.ctn_bag?.type === 'required' && <span className="label-text-alt text-red-700">
+                                    {errors.ctn_bag.message} </span>}
                             </label>
                         </div> 
-                        {/* -----------------------Accepted Note Field ------------------------------ */}
+                        {/* -----------------------Unit Field ------------------------------ */}
 
                         <div className="form-control">
-                            <label className='text-start'>Accepted Note </label>
-                            <textarea
-                                type="text"
-                                className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.acceptedNote && 'border-red-600 focus:border-red-600'}`}
-                                {...register("acceptedNote", {
+                            <label className='text-start'>Unit </label>
+                            <input
+                                type="number"
+                                className={`input input-sm max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.unit && 'border-red-600 focus:border-red-600'}`}
+                                {...register("unit", {
                                     required: {
                                         value: true,
                                         message: "❌  Please fill out  this field"
@@ -109,20 +109,20 @@ const AddNewInventory = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.acceptedNote?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.acceptedNote.message} </span>}
+                                {errors.unit?.type === 'required' && <span className="label-text-alt text-red-700">
+                                    {errors.unit.message} </span>}
                             </label>
                         </div> 
-                        {/* ----------------------- Creator Number ------------------------------ */}
+                        {/* ----------------------- Total Quantity ------------------------------ */}
 
                         <div className="form-control">
-                            <label className='text-start'>Created Number </label>
+                            <label className='text-start'>Total Quantity </label>
                             <input
-                                type="text"
-                                className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1
-                                w-full focus:border-blue-500  login-container-input ${errors.createdNumber && 
+                                type="number"
+                                className={`input input-sm max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1
+                                w-full focus:border-blue-500  login-container-input ${errors.totalQuantity && 
                                 'border-red-600 focus:border-red-600'}`}
-                                {...register("createdNumber", {
+                                {...register("totalQuantity", {
                                     required: {
                                         value: true,
                                         message: "❌  Please fill out  this field"
@@ -130,30 +130,11 @@ const AddNewInventory = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.createdNumber?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.createdNumber.message} </span>}
+                                {errors.totalQuantity?.type === 'required' && <span className="label-text-alt text-red-700">
+                                    {errors.totalQuantity.message} </span>}
                             </label>
                         </div> 
-                        {/* ----------------------- last Update date  ------------------------------ */}
-                        <div className="form-control">
-                            <label className='text-start'>Last Update Date  </label>
-                            <input
-                                type="date"
-                                className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1
-                                w-full focus:border-blue-500  login-container-input ${errors.lastUpdateDate && 
-                                'border-red-600 focus:border-red-600'}`}
-                                {...register("lastUpdateDate", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out  this field"
-                                    }
-                                })}
-                            />
-                            <label className="label">
-                                {errors.lastUpdateDate?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.lastUpdateDate.message} </span>}
-                            </label>
-                        </div> 
+                        
                         {/* -----------------------   ------------------------------ */}
 
 
