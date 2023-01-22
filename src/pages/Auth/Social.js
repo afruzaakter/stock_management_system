@@ -2,21 +2,23 @@ import React from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
-import google from '../Images/Afruza/googleicon.webp';
+import { FcGoogle } from 'react-icons/fc';
 
 const Social = () => {
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const navigate = useNavigate()
     if(gUser){
         navigate('/dashboard')
     }
     return (
-        <div>
-             <button className="btn  mt-2 mb-3 text-xl lg:w-80 btn-outline" onClick={() => signInWithGoogle()}>  
-                <img className='text-white object-cover h-5 w-5 mr-3' src={google} alt=""/>
-                Login with Google</button>
-                <p className='text-xl text-center font-bold m-1 text-blue-800'>Or Sign Up Using Details</p>
-        </div>
+        <>
+            <button 
+                className="btn btn-sm btn-outline hover:bg-primary" 
+                onClick={() => signInWithGoogle()}>  
+                <FcGoogle className='pr-2 text-2xl' />
+                Login with Google
+            </button>
+        </>
     );
 };
 

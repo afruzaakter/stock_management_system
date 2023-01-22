@@ -3,12 +3,32 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { RxCross2 } from 'react-icons/rx';
+import { useEffect } from 'react';
 const CreateSupplier = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const [updated, setUpdated] = useState(false);
+    const [updated, setUpdated] = useState(false); 
     const navigate = useNavigate();
+    
+    //------- for auto generate code 
+    const [autoCode, setAutoCode] = useState(); 
+    const [suppliers, setSuppliers] = useState([]);
+    useEffect(() => {
+       const url = `http://localhost:5000/supplier`
+       fetch(url)
+           .then(res => res.json())
+           .then(data => setSuppliers(data))
+   }, []);
+
+   const Counter=()=>{
+        const code=suppliers.code;
+        setAutoCode(code+1);
+        console.log("update code", autoCode);
+   }
+
+
     //-------- Suppler Post mehton-----------
     const onSubmit =(data)=>{
+        console.log(data);
         const url = "http://localhost:5000/supplier"
         fetch(url, {
          method: "POST",
@@ -19,7 +39,7 @@ const CreateSupplier = () => {
         })
         .then(res => res.json())
         .then(data =>{
-         console.log(data)
+        //  console.log(data)
          toast.success('Data added Successfully!!!');
          setUpdated(!updated)
          reset();
@@ -60,6 +80,7 @@ const CreateSupplier = () => {
                         <label className='text-start'>Code</label>
                         <input
                             type="text"
+                            value= {autoCode}
                             placeholder='Code'
                             className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm    w-full focus:border-blue-500  login-container-input ${errors.code && 'border-red-600 focus:border-red-600'}`}
                             {...register("code", {
@@ -163,7 +184,9 @@ const CreateSupplier = () => {
 
                   </div>
 
-                  <input className=' rounded-md px-6 btn btn-sm
+                  <input 
+                    onClick={()=> Counter()}
+                    className=' rounded-md px-6 btn btn-sm 
                    mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
                   
                    <Link to='/dashboard/supplier' className="btn outline-2 mx-1 bg-red-600 px-6  rounded-md btn-sm  text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>

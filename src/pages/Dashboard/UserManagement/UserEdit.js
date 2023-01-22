@@ -58,7 +58,7 @@ const UserEdit = () => {
                         <div className="form-control">
                             <label className='text-start'>Employee Profile </label>
                             <select 
-                                Value={users.profile} 
+                                Value={users.profile}
                                 {...register("profile", {
                                     required: {
                                         value: true,
