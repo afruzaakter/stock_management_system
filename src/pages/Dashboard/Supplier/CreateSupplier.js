@@ -7,6 +7,7 @@ const CreateSupplier = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
     const navigate = useNavigate();
+    const [count, setCount] = useState(0);
     //-------- Suppler Post mehton-----------
     const onSubmit =(data)=>{
         const url = "http://localhost:5000/supplier"
@@ -57,11 +58,16 @@ const CreateSupplier = () => {
                     {/* -----------------------Supplier Code Field ------------------------------ */}
 
                     <div className="form-control">
-                        <label className='text-start'>Code</label>
+                        <label className='text-start'>Supplier Id</label>
                         <input
                             type="text"
-                            placeholder='Code'
-                            className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm    w-full focus:border-blue-500  login-container-input ${errors.code && 'border-red-600 focus:border-red-600'}`}
+                            placeholder='Auto Generated'
+                           
+                          
+                            className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm    w-full focus:border-blue-500  login-container-input
+                             ${errors.code && 'border-red-600 focus:border-red-600'}`
+                            
+                            }
                             {...register("code", {
                                 required: {
                                     value: true,

@@ -94,13 +94,15 @@ const ProductKeyEdit = () => {
 
                     <div className="form-control">
                         <label className='text-start'>Key Type</label>
-                        <select   {...register("keytype", {
+                        <select 
+                        Value={productkeys.keytype} 
+                        {...register("keytype", {
                                 required: {
                                     value: true,
                                     message: "❌  Please Fillup  Input Field"
                                 }
                             })}
-                            Value={productkeys.keytype} 
+                            
                             className={`input input-sm  lg:w-64 md:w-52  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input ${errors.keytype  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 {/* <option value=''>--Select key type--</option> */}
                             {
@@ -115,9 +117,9 @@ const ProductKeyEdit = () => {
                     </div> 
                   </div>  
                  
-                  <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
+                  <input className='input  btn btn-sm rounded-md mx-1 bg-green-700 px-6 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
                    
-                  <Link to='/dashboard/productKey' className="btn btn-xs mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>
+                  <Link to='/dashboard/productKey' className="btn btn-sm rounded-md px-6 mx-1 bg-red-600 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>
                  cancel</Link>
 
                    

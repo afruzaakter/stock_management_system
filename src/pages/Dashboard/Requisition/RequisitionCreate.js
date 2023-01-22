@@ -135,15 +135,17 @@ const RequisitionCreate = () => {
 
                     <tbody>
 
-                        {
-                               products.filter((val) =>{
-                                if(searchVal == " "){
+                    {/* filter((val) =>{
+                                if(searchVal === " "){
                                    return val;
-                                }else if(val.brandName.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())){
+                                }else if(val.brandName.includes(searchVal)){
                                    return val ;
                                 }
                                 
-                               }).slice(0,5).map((product) =>
+                               }).slice(0,5) */}
+
+                        {
+                               products.map((product) =>
                                 <tr key={product._id}>
                                    
                                     <td>{product.brandName}</td>
