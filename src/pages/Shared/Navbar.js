@@ -51,9 +51,9 @@ const Navbar = () => {
                     {/* ------------------ User Profile Responsive Mobile Device ------- */}
                     <ul tabIndex="0" className="menu menu-compact dropdown-content  shadow bg-base-100 rounded-box w-52">
                         {menuItems}
-                        <div class="dropdown dropdown-end ">
-                            <label tabindex="0" class="flex justify-between items-end  m-1">{profile}</label>
-                            <ul tabindex="0" class="dropdown-content menu p-2 w-52">
+                        <div className="dropdown dropdown-end ">
+                            <label tabIndex="0" className="flex justify-between items-end  m-1">{profile}</label>
+                            <ul tabIndex="0" className="dropdown-content menu p-2 w-52">
                                 <li className='text-primary mb-2 font-bold '><NavLink to='/profile'> <FaUserCircle /> Profile</NavLink></li>
                                 <li className='text-primary mb-2 font-bold '><NavLink to='/profileEdit'> <FiSettings />  Setting</NavLink></li>
                                 <li className='text-primary  font-bold '><Link to='/dashboard'>
@@ -71,9 +71,9 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal  ">
                     {menuItems}
 
-                    <div class="dropdown dropdown-end ">
-                        <label tabindex="0" class="flex justify-between items-end  m-1">{profile}</label>
-                        <ul tabindex="0" class="dropdown-content menu rounded-md p-2 w-64 lg:bg-gray-200">
+                    <div className="dropdown dropdown-end ">
+                        <label tabIndex="0" className="flex justify-between items-end  m-1">{profile}</label>
+                        <ul tabIndex="0" className="dropdown-content menu rounded-md p-2 w-64 lg:bg-gray-200">
                             <li className='text-primary mb-2 ml-5 '><NavLink to='/profile'> <FaUserCircle /> Business(es)</NavLink></li>
                             <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <BsPinFill /> Your Preferences</NavLink></li>
                             <li className='text-primary mb-2  ml-5'><NavLink to='/profile'> <MdEmail /> Sms Preferences</NavLink></li>
@@ -90,7 +90,7 @@ const Navbar = () => {
             
             {/* ---------Dashboard Responsive Mobile Device----------- */}
             <div className='flex'>
-                <label tabIndex="1" for="dashboard-sidebar" className="btn btn-ghost lg:hidden">
+                <label tabIndex="1" htmlFor="dashboard-sidebar" className="btn btn-ghost lg:hidden">
                     <svg xmlns="http:www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>
             </div>
