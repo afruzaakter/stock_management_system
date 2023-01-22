@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
-import DepartmentAddModal from './DepartmentAddModal';
+import DepartmentAddModal from './DepartmentAdd';
 import { Link } from 'react-router-dom';
-
+import { FaPlus } from 'react-icons/fa';
 
 const Department = ({ department }) => {
     const [departments, setDepartments] = useState([]);
@@ -47,13 +47,13 @@ const Department = ({ department }) => {
 
             <div className='mb-2 flex justify-between '>
                 <div>
-
+{/* 
                     <button>
                         <DepartmentAddModal
                         > </DepartmentAddModal>
-                    </button>
+                    </button> */}
 
-                   
+                    <Link to="/dashboard/departmentAdd" className='btn btn-sm mx-1 bg-green-700 text-white hover:bg-gray-600 '><FaPlus /> Add Department</Link>
                 </div>
               
             </div>

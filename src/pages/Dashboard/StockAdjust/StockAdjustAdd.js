@@ -18,17 +18,7 @@ const StockAdjustAdd = () => {
             .then(res => res.json())
             .then(data => setProducts(data));
     }, [])
-    //------------- stock adjust update show data get method ---------
-
-    // const [stockAdjust, setStockAdjust] = useState([]);
-    // useEffect(() => {
-    //     const url = `http://localhost:5000/stockadjust/${id}`
-    //     fetch(url)
-    //         .then(res => res.json())
-    //         .then(data => setStockAdjust(data));
-    // }, []);
-    // console.log("kkkkkkkkkk",stockAdjust)
-
+  
     //------------- stock adjust data get method ---------
     const [stockAdjusts, setStockAdjusts] = useState([]);
     useEffect(() => {
@@ -37,31 +27,35 @@ const StockAdjustAdd = () => {
             .then(data => setStockAdjusts(data));
     }, [updated])
   
-
-    console.log(stockAdjusts)
-     const totalAmount = () =>{
-        const quantity = stockAdjusts.quantity;
-        console.log(quantity)
-        const price = stockAdjusts.price;
-        const totalAmount = quantity * price;
-        console.log(totalAmount)
-     }
-
-    // const [total, setTotalAmount] = useState(0)
-
-    console.log(totalAmount)
+        
+        
     const onSubmit = (data) => {
+        const quantity = data.quantity;
+        const price = data.price;
+        const total = quantity * price;
+         const updateData = {
+            date:data.date,
+            notes:data.notes,
+            adjustReason:data.adjustReason,
+            productName: data.productName,
+            quantity : data.quantity,
+            price :data.price,
+            itemsNotes: data.itemsNotes,
+            total: total
+         }
+        console.log("total",total)
+        // console.log(quantity)
         const url = 'http://localhost:5000/stockadjust'
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(updateData),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                console.log("update data",data)
                 toast.success("Data Added Successfully!!!");
                 setUpdated(!updated)
                 reset();
@@ -73,7 +67,6 @@ const StockAdjustAdd = () => {
         const proceed = window.confirm('Are you sure?')
         if (proceed) {
             const url = `http://localhost:5000/stockadjust/${id}`
-            console.log(url)
             fetch(url, {
                 method: 'DELETE'
             })
@@ -85,6 +78,19 @@ const StockAdjustAdd = () => {
                 })
         }
     }
+
+    
+   //---------------- Calculation for totalAmount-------------
+    const singleAmount = stockAdjusts.map(stockAdjust => stockAdjust.total);
+    // console.log(singleAmount)
+    let sum = 0;
+    for (let i = 0; i < singleAmount.length; i++) {
+        sum += singleAmount[i];    
+    }
+ 
+
+    
+        
     return (
         <div className='ml-8  m-3  '>
           <h1 className='text-2xl font-bold mb-5'>Stock Adjust</h1>
@@ -175,7 +181,7 @@ const StockAdjustAdd = () => {
                                 })} className={`input input-sm  focus:outline-0 rounded-sm  border-green-700 mt-1  lg:w-52 md:w-48 focus:border-blue-500  login-container-input ${errors.productName && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                     <option value="">--Selete Product Name--</option>
                                     {
-                                        products.map((product) => <option>{product.brandName}</option>)
+                                        products.map((product) => <option>{product.productName}</option>)
                                     }
                                 </select>
                                 <label className="label">
@@ -224,6 +230,26 @@ const StockAdjustAdd = () => {
 
                                 </label>
                             </div>
+                            {/* -----------------------Price input Field ------------------------------ */}
+                            {/* <div className="form-control">
+                                <label className='text-start'>Total <span className='text-red-900 font-bold text-xl'>*</span></label>
+                                <input
+                                    type="text"
+                                    placeholder='0'
+                                    value = {total}
+                                    className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1 lg:w-36  focus:border-blue-500  login-container-input ${errors.price && 'border-red-600 focus:border-red-600'}`}
+                                    {...register("total", {
+                                        required: {
+                                            value: true,
+                                            message: "❌  Please Fill-Up  Input Field"
+                                        }
+                                    })}
+                                />
+                                <label className="label">
+                                    {errors.price?.type === 'required' && <span className="label-text-alt text-red-700">{errors.price.message}</span>}
+
+                                </label>
+                            </div> */}
                             {/* -----------------------Item short notes input Field ------------------------------ */}
                             <div className="form-control">
                                 <label className='text-start'>Items Short Notes <span className='text-red-900 font-bold text-xl'>*</span> </label>
@@ -259,11 +285,11 @@ const StockAdjustAdd = () => {
                         <label className='text-start font-bold' >Total Amount</label>
                         <input
                             type="text"
-                            placeholder='0'
-                            value={totalAmount}
+                            value={sum}                          
                             className={`input input-sm font-bold max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1 lg:w-36  focus:border-blue-500  login-container-input `}
                         
                         />
+                      
                         <button className='input input-sm rounded-md mt-4 bg-green-700 text-white lg:w-36  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white '>Submit</button>
                     </div>
                 </div>
@@ -294,8 +320,8 @@ const StockAdjustAdd = () => {
                                 <td>{stockAdjust.itemsNotes} </td>
                                 <td> {stockAdjust.quantity}</td>
                                 <td>{stockAdjust.price} </td>
-                                {/* <td>{stockAdjust.totalAmount} </td> */}
-                                <td>{totalAmount} </td>
+                                <td>{stockAdjust.total} </td>
+                                {/* <td>{totalAmount} </td> */}
                                 <td>
                                     <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/supplierEdit/${stockAdjust._id}`}><FaEdit /></Link>
                                     <button className='btn btn-xs bg-red-500 text-white' onClick={() => handleDelete(stockAdjust._id)}><AiOutlineDelete /></button>

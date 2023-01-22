@@ -3,6 +3,7 @@ import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Setting from '../Setting';
 
 const Designation = () => {
     const [designations, setDesignations] = useState([]);
@@ -87,6 +88,7 @@ const Designation = () => {
                     </tbody>
                 </table>
             </div>
+         
         </div>
     );
 };

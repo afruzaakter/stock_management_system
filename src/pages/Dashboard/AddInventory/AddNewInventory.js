@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -7,6 +7,20 @@ import { RxCross2 } from 'react-icons/rx';
 const AddNewInventory = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate()
+      // ---------- Drop down Product get method ----------
+      const [products, setProducts] = useState([]);
+      useEffect(()=>{
+         fetch('http://localhost:5000/product')
+         .then(res => res.json())
+         .then(data => setProducts(data))
+      },[])
+      // ---------- Drop down Product get method ----------
+      const [suppliers, setSuppliers] = useState([]);
+      useEffect(()=>{
+         fetch('http://localhost:5000/supplier')
+         .then(res => res.json())
+         .then(data => setSuppliers(data))
+      },[])
 
     // ------------- AddInventory Data post method -----------
     const onSubmit = (data) => {
@@ -40,41 +54,49 @@ const AddNewInventory = () => {
 
                         {/* ----------Product Name Field ------------- */}
                         <div className="form-control">
-                            <label className='text-start'>Product Name </label>
-                            <input
-                                type="text"
-                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-full  focus:border-blue-500  login-container-input ${errors.productName && 'border-red-600 focus:border-red-600'}`}
-                                {...register("productName", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out  this field"
-                                    }
-                                })}
-                            />
+                            <label className='text-start '>Product Name</label>
+                            <select   {...register("productName", {
+                                required: {
+                                    value: true,
+                                    message: "❌  Please Fillup  Input Field"
+                                }
+                            })}
+                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.productName && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option  value=''>--Select Product Name--</option>
+                                
+                                {
+                                    products.map((product) => <option>{product.productName}</option>)
+                                }
+                            </select>
+
                             <label className="label">
-                                {errors.productName?.type === 'required' && <span className="label-text-alt text-red-700"> 
-                                    {errors.productName.message} </span>}
+                                {errors.productName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.productName.message}</span>}
+
                             </label>
                         </div>
 
                         {/* ----------------Brand Name Field ------------------ */}
                         <div className="form-control">
-                            <label className='text-start'>Brand Name </label>
-                            <input
-                                type="text"
-                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.brandName && 'border-red-600 focus:border-red-600'}`}
-                                {...register("brandName", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out  this field"
-                                    }
-                                })}
-                            />
+                            <label className='text-start '>Supplier Name</label>
+                            <select   {...register("supplierName", {
+                                required: {
+                                    value: true,
+                                    message: "❌  Please Fillup  Input Field"
+                                }
+                            })}
+                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.supplierName && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option  value=''>--Select Supplier Name--</option>
+                                
+                                {
+                                    suppliers.map((supplier) => <option>{supplier.suppliercompany}</option>)
+                                }
+                            </select>
+
                             <label className="label">
-                                {errors.brandName?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.brandName.message}</span>}
+                                {errors.supplierName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.supplierName.message}</span>}
+
                             </label>
-                        </div> 
+                        </div>
 
                         {/* --------------------Ctn/bag  ----------------------- */}
                         <div className="form-control">

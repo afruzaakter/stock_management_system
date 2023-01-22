@@ -41,7 +41,7 @@ const ProductKey = () => {
         <div className='mb-2 flex justify-between '>
            <div>
         
-              <Link to="/dashboard/productKeyAdd" className='btn btn-sm mx-1 bg-green-700 text-white'><FaPlus />  Add Product Key</Link>
+              <Link to="/dashboard/productKeyAdd" className='btn btn-sm mx-1 bg-green-700 hover:bg-gray-600 text-white'><FaPlus />  Add Product Key</Link>
           
            </div>
            

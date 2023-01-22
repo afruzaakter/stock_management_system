@@ -77,7 +77,7 @@ const CreateSupplier = () => {
                     {/* -----------------------Supplier Code Field ------------------------------ */}
 
                     <div className="form-control">
-                        <label className='text-start'>Code</label>
+                        <label className='text-start'>Supplier Id</label>
                         <input
                             type="text"
                             value= {autoCode}

@@ -44,6 +44,7 @@ import UserEdit from "./pages/Dashboard/UserManagement/UserEdit";
 import Login from "./pages/Auth/Login";
 import StockAdjustAdd from "./pages/Dashboard/StockAdjust/StockAdjustAdd";
 import RequisitionCreate from "./pages/Dashboard/Requisition/RequisitionCreate";
+import DepartmentAdd from "./pages/Dashboard/Settings/Department/DepartmentAdd";
 
 function App() {
   return ( 
@@ -83,8 +84,9 @@ function App() {
         <Route path="keyType" element={<KeyType/>}/>
         <Route path="keyEdit/:id" element={<EditKeyType/>}/>
         <Route path="department" element={<Department/>}/>
-        <Route path="designation" element={<Designation/>}/>
+        <Route path="departmentAdd" element={<DepartmentAdd/>}/>
         <Route path="departmentEdit/:id" element={<DepartmentEdit/>}/>
+        <Route path="designation" element={<Designation/>}/>
         <Route path="designationAdd" element={<DesignationAdd/>}/>
         <Route path="designationEdit/:id" element={<DesignationEdit/>}/>
         <Route path="productKey" element={<ProductKey/>}/>

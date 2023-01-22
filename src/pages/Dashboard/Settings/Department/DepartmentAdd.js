@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FaPlus } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { RxCross2 } from 'react-icons/rx';
 
-const DepartmentAddModal = () => {
+const DepartmentAdd = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     // const [updated, setUpdated] = useState(false);
     const navigate = useNavigate()
@@ -29,29 +29,22 @@ const DepartmentAddModal = () => {
        navigate('/dashboard/department')
     }
     return (
-        <div>
-
-            <label for="my-modal-6" className="btn btn-sm mx-1 bg-green-700 text-white"><FaPlus /> Add Department</label>
-
-
-            <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-            <div className="modal justify-start ml-96 mt-28  modal-bottom sm:modal-middle">
-                <div className="modal-box w-11/12 max-w-5xl ">
-                <label for="my-modal-6" className=" btn btn-sm btn-circle bg-red-600 text-white absolute right-2 top-2">✕</label>
-                    <h3 className="font-bold text-xl   bg-green-600 text-white p-1 mb-5">Create Department</h3>
-                    <form onSubmit={handleSubmit(onSubmit)} >
-                      <div>
+        <div className='m-10'>
+          <h1 className='text-2xl font-bold'>Create Department</h1>
+         <div className=''>
+         <form onSubmit={handleSubmit(onSubmit)} >
+                      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                           {/* -----------------------Department Name Field ------------------------------ */}
 
                           <div className="form-control">
-                            <label className='text-start ml-16'>Department Name</label>
+                            <label className='text-start '>Department Name</label>
                             <input
                                 type="text"
-                                className={`input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  w-full ml-16 focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
                                 {...register("name", {
                                     required: {
                                         value: true,
-                                        message: "❌  Please Fillup  Input Field"
+                                        message: "❌  Please Fill-Up  Input Field"
                                     }
                                 })}
                             />
@@ -60,17 +53,17 @@ const DepartmentAddModal = () => {
 
                             </label>
                         </div>   
-                        {/* -----------------------Department Name Field ------------------------------ */}
+                        {/* -----------------------Department Description Field ------------------------------ */}
 
                         <div className="form-control">
-                            <label className='text-start ml-16'>Description</label>
+                            <label className='text-start '>Description</label>
                             <textarea
                                 type="text"
-                                className={`input input-sm  max-w-xs  border-green-700 ml-16 focus:outline-0 rounded-sm  mt-1  w-full focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
                                 {...register("description", {
                                     required: {
                                         value: true,
-                                        message: "❌  Please Fillup  Input Field"
+                                        message: "❌  Please Fill-Up  Input Field"
                                     }
                                 })}
                             />
@@ -79,17 +72,17 @@ const DepartmentAddModal = () => {
 
                             </label>
                         </div> 
-                        {/* -----------------------Department Name Field ------------------------------ */}
+                        {/* -----------------------Department Show Order Field ------------------------------ */}
 
                         <div className="form-control">
-                            <label className='text-start ml-16'>Show Order</label>
+                            <label className='text-start'>Show Order</label>
                             <input
                                 type="number"
-                                className={`input input-sm  max-w-xs border-green-700 ml-16  focus:outline-0 rounded-sm mt-1  w-full focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
+                                className={`input input-sm max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
                                 {...register("order", {
                                     required: {
                                         value: true,
-                                        message: "❌  Please Fillup  Input Field"
+                                        message: "❌  Please Fill-Up  Input Field"
                                     }
                                 })}
                             />
@@ -100,17 +93,17 @@ const DepartmentAddModal = () => {
                         </div> 
                       </div>  
 
-                       <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white ' type="submit" value='Submit' />
+                      <input className='input rounded-md px-6  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
                      
+                       <Link to='/dashboard/department' className="btn btn-sm rounded-md px-6 mx-1 bg-red-600 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white"><RxCross2/>
+                     cancel</Link>
                        
                        
                     </form>
-
-                </div>
-            </div>
+         </div>
            
         </div >
     );
 };
 
-export default DepartmentAddModal;
+export default DepartmentAdd;

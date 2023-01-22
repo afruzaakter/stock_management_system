@@ -107,9 +107,9 @@ const DepartmentEdit = () => {
                     </div> 
                   </div>  
 
-                  <input className='input rounded-sm  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
+                  <input className='input rounded-md  btn btn-sm px-6 mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Update' />
                   
-                   <Link to='/dashboard/department' className="btn btn-xs rounded-sm mx-1 bg-warning text-white"><RxCross2/>
+                   <Link to='/dashboard/department' className="btn btn-sm  rounded-md px-6 mx-1 bg-red-600 text-white"><RxCross2/>
                  cancel</Link>
                    
                    
