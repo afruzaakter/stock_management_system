@@ -32,7 +32,7 @@ const DesignationAdd = () => {
             <div className='mt-5'>
             <form onSubmit={handleSubmit(onSubmit)} >
                       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                          {/* -----------------------Department Name Field ------------------------------ */}
+                          {/* -----------------------Designation Name Field ------------------------------ */}
 
                           <div className="form-control">
                             <label className='text-start '>Designation Name</label>
@@ -51,7 +51,7 @@ const DesignationAdd = () => {
 
                             </label>
                         </div>   
-                        {/* -----------------------Department Name Field ------------------------------ */}
+                        {/* -----------------------Designation Description Field ------------------------------ */}
 
                         <div className="form-control">
                             <label className='text-start '>Description</label>
@@ -70,7 +70,7 @@ const DesignationAdd = () => {
 
                             </label>
                         </div> 
-                        {/* -----------------------Department Name Field ------------------------------ */}
+                        {/* -----------------------Designation show Order Field ------------------------------ */}
 
                         <div className="form-control">
                             <label className='text-start'>Show Order</label>

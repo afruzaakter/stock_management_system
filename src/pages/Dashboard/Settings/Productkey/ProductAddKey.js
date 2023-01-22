@@ -103,9 +103,9 @@ const ProductAddKey = () => {
                     </div> 
                   </div>  
                  
-                  <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
+                  <input className='input  btn btn-sm rounded-md px-6 mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
                    
-                  <Link to='/dashboard/productKey' className="btn btn-xs mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>
+                  <Link to='/dashboard/productKey' className="btn btn-sm rounded-md px-6 mx-1 bg-red-600 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>
                  cancel</Link>
 
                    

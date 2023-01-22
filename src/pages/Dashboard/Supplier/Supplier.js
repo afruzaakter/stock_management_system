@@ -79,7 +79,7 @@ const Supplier = () => {
                                 <td> {supplier.suppliercompany} </td>
                                 <td>{supplier.contactPerson}</td>
                                 <td>{supplier.contactNumber} </td>
-                                <td> {supplier.code}</td>
+                                <td> {supplier.count}</td>
                                 <td>{supplier.address} </td>
                                 <td>
                                 <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/supplierEdit/${supplier._id}`}><FaEdit /></Link>

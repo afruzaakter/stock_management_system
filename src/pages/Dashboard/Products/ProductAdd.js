@@ -174,7 +174,7 @@ const ProductAdd = () => {
 
                    
                         {/* -------------------- Sort Order Input Field -----------------------   */}
-                        <div className="form-control">
+                        {/* <div className="form-control">
                             <label >Sort Order</label>
                             <input
                                 type="text"
@@ -191,7 +191,7 @@ const ProductAdd = () => {
                                 {errors.sortOrder?.type === 'required' && <span className="label-text-alt text-red-700">{errors.sortOrder.message}</span>}
 
                             </label>
-                        </div>
+                        </div> */}
                         {/* ----------------------alert Qty input field ------------ */}
                         <div className="form-control">
                             <label >Alert Qty</label>
