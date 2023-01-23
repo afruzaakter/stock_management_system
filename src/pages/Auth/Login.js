@@ -2,21 +2,22 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init'
-import { useSignInWithEmailAndPassword  } from 'react-firebase-hooks/auth';
-import Social from './Social';
-import { BsArrowRight } from 'react-icons/bs';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle  } from 'react-firebase-hooks/auth';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
+    const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate();
+
     // if (gLoading || loading) {
     //     return <Loading />
     // }
 
-    if( user){
+    if( user || gUser){
         navigate("/dashboard");
     }
 
@@ -29,7 +30,6 @@ const Login = () => {
         console.log(data)
         signInWithEmailAndPassword(data.email, data.password);
     }
-
     return (
         <div className='flex h-screen justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl ">
@@ -42,7 +42,7 @@ const Login = () => {
                         {/* -------------Email input field ------- */}
                         <div className="form-control w-full max-w-xs">
                             <label className='flex items-center gap-1 font-bold'>
-                                <MdOutlineMailOutline className='font-bold' /> Your Email
+                                <MdOutlineMailOutline className='font-bold' />Email
                             </label>
                             <input
                                 type="email"
@@ -99,7 +99,12 @@ const Login = () => {
                     
                     <p>New to BFSA? <Link className='text-green-800' to="/signup">Create New Account</Link></p>
                     <div className="divider">OR</div>
-                    <Social/>
+
+                    <button 
+                        onClick={() => signInWithGoogle()} 
+                        className="btn btn-sm btn-outline hover:bg-primary"> 
+                        <FcGoogle className='pr-2 text-2xl' /> Login with Google
+                    </button>
 
                 </div>
             </div>

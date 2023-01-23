@@ -21,7 +21,7 @@ const Navbar = () => {
     }
 
     const menuItems = <>
-        <li> <NavLink to="/home" className="rounded-lg mr-3">Home</NavLink> </li>
+        {/* <li> <NavLink to="/home" className="rounded-lg mr-3">Home</NavLink> </li> */}
 
         {
             user && <li><NavLink to="/dashboard" className="rounded-lg mr-3">Dashboard </NavLink></li>

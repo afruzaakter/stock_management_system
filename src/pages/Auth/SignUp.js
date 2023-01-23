@@ -5,10 +5,11 @@ import auth from '../../firebase.init';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { FaRegUser } from 'react-icons/fa';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import Social from './Social';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignUp = () => {
+    const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [ createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const SignUp = () => {
     //     return <Loading />
     // }
 
-    if(user){
+    if(user || gUser ){
         navigate("/dashboard");
     }
 
@@ -43,7 +44,7 @@ const SignUp = () => {
                         {/* ------------Your Name input field ---------- */}
                         <div className="form-control w-full max-w-xs">
                             <label className='flex items-center gap-1 font-bold'> 
-                                <FaRegUser className='font-bold' /> Your Name
+                                <FaRegUser className='font-bold' /> Name
                             </label>
                             <input
                                 type="text"
@@ -65,7 +66,7 @@ const SignUp = () => {
                         {/* -------------Email input field ------- */}
                         <div className="form-control w-full max-w-xs">
                             <label className='flex items-center gap-1 font-bold'>
-                                <MdOutlineMailOutline className='font-bold' /> Your Email
+                                <MdOutlineMailOutline className='font-bold' />  Email
                             </label>
                             <input
                                 type="email"
@@ -125,7 +126,12 @@ const SignUp = () => {
                     
                     <p> Already have an Account? <Link className='text-green-800' to="/login">Please Login</Link> </p>
                     <div className="divider">OR</div>
-                    <Social/>
+
+                    <button 
+                        onClick={() => signInWithGoogle()} 
+                        className="btn btn-sm btn-outline hover:bg-primary"> 
+                        <FcGoogle className='pr-2 text-2xl' /> Login with Google
+                    </button>
 
                 </div>
             </div>
