@@ -8,9 +8,8 @@ const UserEdit = () => {
     const { register , formState: { errors }, handleSubmit, reset  } = useForm();
     const navigate = useNavigate();
     const {id} = useParams();
-    const [users, setUsers] = useState([])
+    // ------fetch 
     const [employees, setEmployees]= useState([])
-
     useEffect(()=>{
         fetch("http://localhost:5000/employee")
         .then(res=>res.json())
@@ -18,12 +17,15 @@ const UserEdit = () => {
     },[])
     
     // --------------update method-----
+    const [users, setUsers] = useState({})
     useEffect(() => {
         const url = `http://localhost:5000/user/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setUsers(data))
     },[]);
+
+    console.log("fetch user",users);
 
     const onSubmit = (data) =>{
         console.log("user edit", data );
@@ -83,11 +85,11 @@ const UserEdit = () => {
                             <input
                                 type="text"
                                 placeholder="Your Full Name "
-                                Value={users.fullName}
+                                // Value={users.fullName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.fullName && 'border-red-600 focus:border-red-600'}`}
                                 {...register("fullName", {
                                     required: {
-                                        value: true,
+                                        value: users.fullName,
                                         message: "❌  Please fill out this field"
                                     }
                                 })}

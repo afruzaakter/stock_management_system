@@ -4,48 +4,65 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { RxCross2 } from 'react-icons/rx';
 import { useEffect } from 'react';
+
 const CreateSupplier = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false); 
     const navigate = useNavigate();
     
     //------- for auto generate code 
-    const [autoCode, setAutoCode] = useState(); 
     const [suppliers, setSuppliers] = useState([]);
+    const [autoCode, setAutoCode] = useState(); 
+   
     useEffect(() => {
        const url = `http://localhost:5000/supplier`
        fetch(url)
            .then(res => res.json())
            .then(data => setSuppliers(data))
    }, []);
+   useEffect(() => {
+        const codeList = suppliers?.map(supplier => supplier.autoCode);
+        const length =codeList.length;
+        if(length === 0){
+            setAutoCode(1000)
+        }else{
+            const lastValue =codeList[length-1]; 
+            const lastCode = +lastValue;
+            setAutoCode(lastCode+1)
+        }
+   }, [suppliers]);
 
-   const Counter=()=>{
-        const code=suppliers.code;
-        setAutoCode(code+1);
-        console.log("update code", autoCode);
-   }
-
-
-    //-------- Suppler Post mehton-----------
+    //-------- Suppler Post method -----------
     const onSubmit =(data)=>{
+
+        const updateData={
+            supplierCompany: data.supplierCompany,
+            autoCode: autoCode ,
+            email: data.email ,
+            contactPerson: data.contactPerson ,
+            contactNumber: data.contactNumber ,
+            address: data.address ,
+        }
+
         console.log(data);
         const url = "http://localhost:5000/supplier"
         fetch(url, {
          method: "POST",
-         body: JSON.stringify(data),
+         body: JSON.stringify(updateData),
          headers: {
             'Content-type' : 'application/json; charset=UTF-8', 
          },
         })
         .then(res => res.json())
         .then(data =>{
-        //  console.log(data)
+         console.log(data)
          toast.success('Data added Successfully!!!');
          setUpdated(!updated)
          reset();
         })
         navigate('/dashboard/supplier');
     }
+
     return (
         <div className='m-10  '>
        
@@ -60,8 +77,8 @@ const CreateSupplier = () => {
                         <input
                             type="text"
                             placeholder='Supplier Name'
-                            className={`input input-sm  max-w-xs border border-green-800 focus:outline-0 rounded-sm    w-full  focus:border-blue-800  login-container-input ${errors.suppliercompany && 'border-red-600 focus:border-red-600'}`}
-                            {...register("suppliercompany", {
+                            className={`input input-sm  max-w-xs border border-green-800 focus:outline-0 rounded-sm    w-full  focus:border-blue-800  login-container-input ${errors.supplierCompany && 'border-red-600 focus:border-red-600'}`}
+                            {...register("supplierCompany", {
                                 required: {
                                     value: true,
                                     message: "❌  Please Fill-Up  Input Field"
@@ -69,18 +86,17 @@ const CreateSupplier = () => {
                             })}
                         />
                         <label className="label">
-                            {errors.suppliercompany?.type === 'required' && <span className="label-text-alt text-red-700">{errors.suppliercompany.message}</span>}
+                            {errors.supplierCompany?.type === 'required' && <span className="label-text-alt text-red-700">{errors.supplierCompany.message}</span>}
 
                         </label>
                     </div>   
                    
                     {/* -----------------------Supplier Code Field ------------------------------ */}
 
-                    <div className="form-control">
+                    {/* <div className="form-control">
                         <label className='text-start'>Supplier Id</label>
                         <input
                             type="text"
-                            value= {autoCode}
                             placeholder='Code'
                             className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm    w-full focus:border-blue-500  login-container-input ${errors.code && 'border-red-600 focus:border-red-600'}`}
                             {...register("code", {
@@ -94,7 +110,7 @@ const CreateSupplier = () => {
                             {errors.code?.type === 'required' && <span className="label-text-alt text-red-700">{errors.code.message}</span>}
 
                         </label>
-                    </div> 
+                    </div>  */}
                     {/* -----------------------Supplier Email Field ------------------------------ */}
 
                     <div className="form-control">
@@ -184,10 +200,7 @@ const CreateSupplier = () => {
 
                   </div>
 
-                  <input 
-                    onClick={()=> Counter()}
-                    className=' rounded-md px-6 btn btn-sm 
-                   mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
+                  <input  className="rounded-md px-6 btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white " type="submit"  value='◲ Submit' />
                   
                    <Link to='/dashboard/supplier' className="btn outline-2 mx-1 bg-red-600 px-6  rounded-md btn-sm  text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2/>
                  cancel</Link>       
