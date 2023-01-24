@@ -45,6 +45,7 @@ import Login from "./pages/Auth/Login";
 import StockAdjustAdd from "./pages/Dashboard/StockAdjust/StockAdjustAdd";
 import RequisitionCreate from "./pages/Dashboard/Requisition/RequisitionCreate";
 import DepartmentAdd from "./pages/Dashboard/Settings/Department/DepartmentAdd";
+import RequireAuth from "./pages/Auth/RequireAuth";
 
 function App() {
   return ( 
@@ -57,7 +58,7 @@ function App() {
       <Route path="/signup" element={<SignUp/>} />
       <Route path="/dashboard" element={<Dashboard />}>
 
-      <Route index element={<DashboardHome/>}/>
+      <Route index element={ <RequireAuth> <DashboardHome/> </RequireAuth>}/>
         <Route path="requisition" element={<Requisition />}/>
         <Route path="requisitionCreate" element={<RequisitionCreate />}/>
         <Route path="requisitionAuthorize" element={<RequisitionAuthorize/>}/>

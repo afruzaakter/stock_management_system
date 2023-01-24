@@ -20,17 +20,14 @@ const Navbar = () => {
    
     const handleSignOut = () => {
         signOut(auth);
-        navigate("/")
+        navigate("/login")
     }
 
     const menuItems = <>
         <li> <NavLink to="/home" className="rounded-lg mr-3">Home</NavLink> </li>
-
         {
             user && <li><NavLink to="/dashboard" className="rounded-lg mr-3">Dashboard </NavLink></li>
         }
-
-
     </>
 
     const profile = <>
@@ -38,8 +35,8 @@ const Navbar = () => {
             user ?
                 <span className='flex items-center'>
                     <img className='w-12 h-12 mr-1 rounded-full cursor-pointer' src={user.photoURL} alt=""/>
-                     {user.displayName}
-                </span> : <li className='m-4' > <NavLink className="rounded-lg " to='/login'> Login </NavLink> </li>
+                     {/* {user.displayName} */}
+                </span> : <li className='rounded-lg mr-3' > <NavLink className="rounded-lg " to='/login'> Login </NavLink> </li>
         }
     </>
 
@@ -54,15 +51,17 @@ const Navbar = () => {
                     {/* ------------------ User Profile Responsive Mobile Device ------- */}
                     <ul tabIndex="0" className="menu menu-compact dropdown-content  shadow bg-base-100 rounded-box w-52">
                         {menuItems}
-                        <div className="dropdown dropdown-end ">
+                        <div className="dropdown dropdown-end  ">
                             <label tabIndex="0" className="flex justify-between items-end  m-1">{profile}</label>
-                            <ul tabIndex="0" className="dropdown-content menu p-2 w-52">
+
+                            <ul tabIndex="0" className="dropdown-content menu bg-base-100 p-2 w-52">
                                 <li className='text-primary mb-2 font-bold '><NavLink to='/profile'> <FaUserCircle /> Profile</NavLink></li>
                                 <li className='text-primary mb-2 font-bold '><NavLink to='/profileEdit'> <FiSettings />  Setting</NavLink></li>
                                 <li className='text-primary  font-bold '><Link to='/dashboard'>
                                     <span className='flex items-center mr-8' onClick={handleSignOut} ><FaSignOutAlt className='mr-2' /> Logout</span>
                                 </Link></li>
                             </ul>
+
                         </div>
                     </ul>
                 </div>
@@ -76,28 +75,33 @@ const Navbar = () => {
 
                     <div className="dropdown dropdown-end ">
                         <label tabIndex="0" className="flex justify-between items-end  m-1">{profile}</label>
-                        <ul tabIndex="0" className="dropdown-content menu rounded-md p-2 w-64 lg:bg-gray-200">
-                            <li className='text-primary mb-2 ml-5 '>
-                                <NavLink to='/profile'> <FaUserCircle /> Business(es)</NavLink>
-                            </li>
-                            <li className='text-primary mb-2  ml-5'>
-                                <NavLink to='/profile'> <BsPinFill /> Your Preferences</NavLink>
-                            </li>
-                            <li className='text-primary mb-2  ml-5'>
-                                <NavLink to='/profile'> <MdEmail /> Sms Preferences</NavLink>
-                            </li>
-                            <li className='text-primary mb-2  ml-5'>
-                                <NavLink to='/profile'> <AiFillTool /> Manage Profile</NavLink>
-                            </li>
-                            <li className='text-primary mb-2  ml-5'>
-                                <NavLink to='/profileEdit'> <FiSettings />Change Password </NavLink>
-                            </li>
-                            <li className='text-primary ml-5  mb-2'>
-                                <Link to='/dashboard'>
-                                    <span className='flex items-center mr-8' onClick={handleSignOut} ><FaSignOutAlt className='mr-2' /> Sign Out</span>
-                                </Link>
-                            </li>
-                        </ul>
+                        {
+                            user &&  <>
+                                <ul tabIndex="0" className="dropdown-content menu rounded-md p-2 w-64 lg:bg-gray-200">
+                                    <li className='text-primary mb-2 ml-5 '>
+                                        <NavLink to='/profile'> <FaUserCircle /> Business(es)</NavLink>
+                                    </li>
+                                    <li className='text-primary mb-2  ml-5'>
+                                        <NavLink to='/profile'> <BsPinFill /> Your Preferences</NavLink>
+                                    </li>
+                                    <li className='text-primary mb-2  ml-5'>
+                                        <NavLink to='/profile'> <MdEmail /> Sms Preferences</NavLink>
+                                    </li>
+                                    <li className='text-primary mb-2  ml-5'>
+                                        <NavLink to='/profile'> <AiFillTool /> Manage Profile</NavLink>
+                                    </li>
+                                    <li className='text-primary mb-2  ml-5'>
+                                        <NavLink to='/profileEdit'> <FiSettings />Change Password </NavLink>
+                                    </li>
+                                    <li className='text-primary ml-5  mb-2'>
+                                        <Link to='/dashboard'>
+                                            <span className='flex items-center mr-8' onClick={handleSignOut} >
+                                                <FaSignOutAlt className='mr-2' /> Sign Out</span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </>
+                        }
                     </div>
 
                 </ul>
