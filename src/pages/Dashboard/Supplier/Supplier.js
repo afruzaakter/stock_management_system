@@ -16,21 +16,22 @@ const Supplier = () => {
       }, []);
       //-------- supplier delete method -----------
       const handleDelete = (id) =>{
-        const proceed = window.confirm('Are you sure?')
-        if (proceed) {
-            const url = `http://localhost:5000/supplier/${id}`
-            console.log(url)
-            fetch(url, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    const remaining = suppliers.filter(supplier => supplier._id !== id)
-                    setSuppliers(remaining);
-                })
+        console.log(id)
+        // const proceed = window.confirm('Are you sure?')
+        // if (proceed) {
+        //     const url = `http://localhost:5000/supplier/${id}`
+        //     console.log(url)
+        //     fetch(url, {
+        //         method: 'DELETE'
+        //     })
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             console.log(data)
+        //             const remaining = suppliers.filter(supplier => supplier._id !== id)
+        //             setSuppliers(remaining);
+        //         })
 
-        }
+        // }
       }
     return (
         <div className='border m-1 p-1 rounded-lg'>
