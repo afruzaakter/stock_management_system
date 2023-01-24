@@ -8,9 +8,8 @@ const UserEdit = () => {
     const { register , formState: { errors }, handleSubmit, reset  } = useForm();
     const navigate = useNavigate();
     const {id} = useParams();
-    const [users, setUsers] = useState([])
+    // ------fetch 
     const [employees, setEmployees]= useState([])
-
     useEffect(()=>{
         fetch("http://localhost:5000/employee")
         .then(res=>res.json())
@@ -18,6 +17,7 @@ const UserEdit = () => {
     },[])
     
     // --------------update method-----
+    const [users, setUsers] = useState({})
     useEffect(() => {
         const url = `http://localhost:5000/user/${id}`
         fetch(url)
@@ -25,15 +25,33 @@ const UserEdit = () => {
             .then(data => setUsers(data))
     },[]);
 
+    // console.log("fetch user",users);
+
     const onSubmit = (data) =>{
-        console.log("user edit", data );
+        const profile= data.profile==="" ? users.profile : data.profile ;
+        const fullName= data.fullName==="" ? users.fullName : data.fullName ;
+        const email= data.email==="" ? users.email : data.email ;
+        const userName= data.userName==="" ? users.userName : data.userName ;
+        const organization= data.organization==="" ? users.organization : data.organization ;
+        const userRole= data.userRole==="" ? users.userRole : data.userRole ;
+
+        const updateData={
+            profile,
+            fullName,
+            email,
+            userName,
+            organization,
+            userRole
+        }
+        console.log("updateData User Management", updateData );
+
         const url = `http://localhost:5000/user/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(updateData)
         })
         .then(res => res.json())
         .then(data => {
@@ -58,13 +76,9 @@ const UserEdit = () => {
                         <div className="form-control">
                             <label className='text-start'>Employee Profile </label>
                             <select 
-                                Value={users.profile} 
-                                {...register("profile", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
+                                Value={users.profile}
+                                {...register("profile")}
+
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.profile  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''> {users.profile}</option>
                                 {
@@ -85,12 +99,7 @@ const UserEdit = () => {
                                 placeholder="Your Full Name "
                                 Value={users.fullName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.fullName && 'border-red-600 focus:border-red-600'}`}
-                                {...register("fullName", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
+                                {...register("fullName")}
                             />
                             <label className="label">
                                 {errors.fullName?.type === 'required' && <span className="label-text-alt text-red-700"> {errors.fullName.message} </span>}
@@ -105,12 +114,7 @@ const UserEdit = () => {
                                 placeholder="Your Email "
                                 Value={users.email}
                                 className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
-                                {...register("email", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
+                                {...register("email")}
                             />
                             <label className="label">
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-700">{errors.email.message}</span>}
@@ -125,12 +129,7 @@ const UserEdit = () => {
                                 placeholder="Your User Name "
                                 Value={users.userName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.userName && 'border-red-600 focus:border-red-600'}`}
-                                {...register("userName", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
+                                {...register("userName")}
                             />
                             <label className="label">
                                 {errors.userName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.userName.message}</span>}
@@ -142,12 +141,8 @@ const UserEdit = () => {
                             <label className='text-start'>Organization </label>
                             <select   
                                 Value={users.organization}
-                                {...register("organization", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
+                                {...register("organization")}
+
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm border border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.organization  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''> {users.organization}</option>
                                 <option > Head Quarter </option>
@@ -164,12 +159,7 @@ const UserEdit = () => {
                             <label className='text-start'>Assign User Role </label>
                             <select
                                 Value={users.userRole}
-                                {...register("userRole", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
+                                {...register("userRole")}
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.userRole  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>   
                                 <option value=''> {users.userRole} </option>
                                 <option> Role_User </option>

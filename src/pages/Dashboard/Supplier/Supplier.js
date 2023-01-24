@@ -74,12 +74,12 @@ const Supplier = () => {
 
                     <tbody>
                         {
-                            suppliers.slice(0).reverse().map((supplier,index) =><tr key={supplier._id}>
+                            suppliers.map((supplier,index) =><tr key={supplier._id}>
                                 <th>{index+1}</th>
-                                <td> {supplier.suppliercompany} </td>
+                                <td> {supplier.supplierCompany} </td>
                                 <td>{supplier.contactPerson}</td>
                                 <td>{supplier.contactNumber} </td>
-                                <td> {supplier.count}</td>
+                                <td> {supplier.autoCode}</td>
                                 <td>{supplier.address} </td>
                                 <td>
                                 <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/supplierEdit/${supplier._id}`}><FaEdit /></Link>

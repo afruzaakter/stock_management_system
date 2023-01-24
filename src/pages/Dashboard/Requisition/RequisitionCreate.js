@@ -125,8 +125,7 @@ const RequisitionCreate = () => {
                              <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
-                        <tr>
-                            
+                        <tr>  
                             <th>Product Name</th>
                             
 

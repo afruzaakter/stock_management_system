@@ -45,7 +45,7 @@ const Dashboard = () => {
         </div>
 
         <div className="drawer-side ">
-        <label for="dashboard-sidebar" className="drawer-overlay"></label>
+        <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
           <ul className="menu p-3 overflow-y-auto rounded-r-xl    text-base-content">
             <div>
               <div className={`bg-gray-200  h-full p-4 rounded-md duration-300   relative ${open ? "lg:w-64" : "w-20"}`}>

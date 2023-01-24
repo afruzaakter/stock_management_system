@@ -32,7 +32,7 @@ const AddInventory = () => {
     }
 
     return (
-        <div className='border m-1 p-1 rounded-lg'>
+        <div className='border m-2 p-2 rounded-lg '>
 
             <div className="navbar bg-base-100">
                 <div className="flex-1">
