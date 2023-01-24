@@ -43,14 +43,14 @@ const AddNewInventory = () => {
     }
 
     return (
-        <div className='border m-2 p-2 rounded-lg'>
+        <div className='border m-2 p-2 rounded-lg bg-slate-100'>
             <div className='p-1 mb-2'>
                 <h1 className='text-xl font-medium'>Add New Inventory </h1>
             </div>
 
             <div>
                 <form onSubmit={handleSubmit(onSubmit)} >
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 '>
 
                         {/* ----------Product Name Field ------------- */}
                         <div className="form-control">
@@ -75,7 +75,7 @@ const AddNewInventory = () => {
                             </label>
                         </div>
 
-                        {/* ----------------Supplier Name Field ------------------ */}
+                        {/* ----------------Brand Name Field ------------------ */}
                         <div className="form-control">
                             <label className='text-start '>Supplier Name</label>
                             <select   {...register("supplierName", {
