@@ -9,9 +9,6 @@ import { toast } from 'react-toastify';
 const AddInventory = () => {
     const [addInventorys, setAddInventorys] = useState([]);
 
-    
- 
-
     useEffect(() => {
         fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
