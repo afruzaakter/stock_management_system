@@ -52,13 +52,12 @@ function App() {
   <>
     <Navbar> </Navbar>
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp/>} />
-      <Route path="/dashboard" element={<Dashboard />}>
-
-      <Route index element={ <RequireAuth> <DashboardHome/> </RequireAuth>}/>
+      {/* <Route path="/" element={<RequireAuth> <Dashboard /> </RequireAuth> } /> */}
+      
+      <Route path="/dashboard" element={<RequireAuth> <Dashboard /> </RequireAuth>}>
+        <Route index element={ <DashboardHome/> }/>
         <Route path="requisition" element={<Requisition />}/>
         <Route path="requisitionCreate" element={<RequisitionCreate />}/>
         <Route path="requisitionAuthorize" element={<RequisitionAuthorize/>}/>
