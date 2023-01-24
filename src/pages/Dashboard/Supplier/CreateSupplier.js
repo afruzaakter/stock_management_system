@@ -168,7 +168,7 @@ const CreateSupplier = () => {
                     </div> 
 
                   </div>
-
+                                                        
                   <input className=' rounded-md px-6 btn btn-sm
                    mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
                   

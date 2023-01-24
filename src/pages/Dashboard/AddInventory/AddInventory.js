@@ -7,32 +7,37 @@ import { FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 const AddInventory = () => {
-    const[addInventorys, setAddInventorys] = useState([]);
-    // const [updated, setUpdated] = useState(false);
-  
-    useEffect(() =>{
-        fetch('http://localhost:5000/addInventory')
-        .then(res => res.json())
-        .then(data => setAddInventorys(data))
-        
-    },[])
+    const [addInventorys, setAddInventorys] = useState([]);
 
-    const handleDelete = (id) =>{
+    
+ 
+
+    useEffect(() => {
+        fetch('http://localhost:5000/addInventory')
+            .then(res => res.json())
+            .then(data => setAddInventorys(data))
+
+    }, [])
+
+    const handleDelete = (id) => {
+        
+        console.log(id)
         const url = `http://localhost:5000/addInventory/${id}`
         fetch(url, {
             method: 'DELETE'
-            })
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data)
-                toast.success('Data Deleted Successfully!');
-                const remaining = addInventorys.filter(department => department._id !== id)
-                setAddInventorys(remaining);
         })
+            .then(res => res.json())
+            .then(data => {               
+                const remaining = addInventorys.filter(addInventory => addInventory._id !== id)
+                setAddInventorys(remaining);
+            })
     }
+
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
+
+
 
             <div className="navbar bg-base-100">
                 <div className="flex-1">
@@ -52,7 +57,7 @@ const AddInventory = () => {
             <div className='mb-2 '>
                 <Link to='/dashboard/addNewInventory' className="btn btn-sm mx-1 bg-green-700
                     text-white hover:bg-primary hover:text-white">
-                    <FaPlus/> Add
+                    <FaPlus /> Add
                 </Link>
                 {/* <button> <AddInventoryModal setUpdated={setUpdated} />  </button> */}
                 <button className="btn btn-sm mx-1 bg-warning   text-white">
@@ -63,36 +68,59 @@ const AddInventory = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th>Sl No.</th>
-                            <th>#Purchase</th>
-                            <th>Supplier</th>
-                            <th>Mobile </th>
-                            <th>Accepted Note </th>
-                            <th>Created </th>
-                            <th>Last Update </th>
+                            <th>Sl</th>
+                            <th>Product Name</th>
+                            <th>Supplier Name</th>
+                            <th>Purchase Notes </th>
+                            <th>Product Code </th>
+                            <th>UoM </th>
+                            <th>Pack Size</th>
+                            <th>Qnty</th>
+                            <th>Total Qnty</th>
                             <th className='text-center '>Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            addInventorys.map((addInventory,index)=>
-                            <tr className='bg-blue-900' key={addInventory._id} >
-                                <th> {index+1 } </th>
-                                <td> { addInventory.purchase } </td>
-                                <td> { addInventory.supplierName } </td>
-                                <td> { addInventory.mobile } </td>
-                                <td> { addInventory.acceptedNote } </td>
-                                <td> { addInventory.createdNumber } </td>
-                                <td> { addInventory.lastUpdateDate } </td>                                
-                                <td className='flex gap-3'>
-                                <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/EditAddInventory/${addInventory._id}`}> <FiEdit /> </Link>
-                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(addInventory._id)}> <AiOutlineDelete /></button>
-                                </td>                                
-                            </tr>
+                            addInventorys.map((addInventory, index) =>
+                                <tr className='bg-blue-900' key={addInventory._id} >
+                                    <th> {index + 1} </th>
+                                    <td> {addInventory.productName} </td>
+                                    <td> {addInventory.supplierCompany} </td>
+                                    <td> {addInventory.purchase} </td>
+                                    <td> {addInventory.productCode} </td>
+                                    <td> {addInventory.unitMeasurement} </td>
+                                    <td> {addInventory.packSize} </td>
+                                    <td> {addInventory.quantity} </td>
+                                    <td> {addInventory.totalQuantity} </td>
+                                    <td className='flex gap-3'>
+                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/EditAddInventory/${addInventory._id}`}> <FiEdit /> </Link>
+
+                                        <label  for="my-modal-6" className="btn btn-xs bg-red-500 text-white" >
+                                            <AiOutlineDelete />
+                                        </label>
+                                        {/* -------- delete modal ----------------- */}
+                                        <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+                                        <div className="modal modal-bottom justify-around sm:modal-middle ">
+                                            <div className="bg-gray-300 p-5 rounded-md  lg:max-w-52">
+                                                <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
+
+                                                <div className="mr-14 modal-action">
+                                                    <label for="my-modal-6" onClick={() =>handleDelete (addInventory._id)}
+                                                     className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
+                                                    <label for="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* -------- delete modal ----------------- */}
+
+                                    </td>
+                                </tr>
 
                             )
                         }
+
                     </tbody>
                 </table>
             </div>

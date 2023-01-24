@@ -98,13 +98,13 @@ const AddNewInventory = () => {
                             </label>
                         </div>
 
-                        {/* --------------------Mobile ----------------------- */}
+                        {/* --------------------Purchase Notes field ----------------------- */}
                         <div className="form-control">
-                            <label className='text-start'>Mobile </label>
+                            <label className='text-start'>Purchase Notes</label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.mobile && 'border-red-600 focus:border-red-600'}`}
-                                {...register("mobile", {
+                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.purchase && 'focus:border-red-600 border-red-600 focus:ring-red-600'}`}
+                                {...register("purchase", {
                                     required: {
                                         value: true,
                                         message: "❌  Please fill out  this field"
@@ -112,39 +112,78 @@ const AddNewInventory = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.mobile?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.mobile.message} </span>}
+                                {errors.purchase?.type === 'required' && <span className="label-text-alt text-red-700">
+                                    {errors.purchase.message} </span>}
                             </label>
                         </div> 
-                        {/* -----------------------Accepted Note Field ------------------------------ */}
+                            {/* --------------------Product code field ----------------------- */}
+                            <div className="form-control">
+                            <label className='text-start'>Product Code</label>
+                            <input
+                                type="text"
+                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.productCode && 'focus:border-red-600 border-red-600 focus:ring-red-600'}`}
+                                {...register("productCode", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please fill out  this field"
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.productCode?.type === 'required' && <span className="label-text-alt text-red-700">
+                                    {errors.productCode.message} </span>}
+                            </label>
+                        </div>
 
-                        <div className="form-control">
-                            <label className='text-start'>Accepted Note </label>
-                            <textarea
-                                type="text"
-                                className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1 w-full focus:border-blue-500  login-container-input ${errors.acceptedNote && 'border-red-600 focus:border-red-600'}`}
-                                {...register("acceptedNote", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out  this field"
-                                    }
-                                })}
-                            />
+                          {/* --------------------Unit of Measurement  field ----------------------- */}
+                          <div className="form-control">
+                            <label >Unit of Measurement</label>
+                            <select   {...register("unitMeasurement", {
+                                required: {
+                                    value: true,
+                                    message: "❌  Please Fillup  Input Field"
+                                }
+                            })}
+                                className={`input input-sm  focus:outline-0 rounded-sm  border-green-700   lg:w-80 md:w-64 focus:border-blue-500  login-container-input ${errors.unitMeasurement && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''>--Select Unit of Measurement--</option>
+                                <option >Qnty</option>
+                                <option >kg</option>
+                                <option >gm</option>
+                                <option >ml</option>
+                                <option >Pack</option>
+                            </select>
                             <label className="label">
-                                {errors.acceptedNote?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.acceptedNote.message} </span>}
-                            </label>
-                        </div> 
-                        {/* ----------------------- Creator Number ------------------------------ */}
+                                {errors.unitMeasurement?.type === 'required' && <span className="label-text-alt text-red-700">{errors.unitMeasurement.message}</span>}
 
+                            </label>
+                        </div>
+                        {/* --------------------Pack Size  field ----------------------- */}
                         <div className="form-control">
-                            <label className='text-start'>Created Number </label>
+                            <label >Pack Size</label>
+                            <select   {...register("packSize", {
+                                required: {
+                                    value: true,
+                                    message: "❌  Please Fillup  Input Field"
+                                }
+                            })}
+                                className={`input input-sm  focus:outline-0 rounded-sm  border-green-700   lg:w-80 md:w-64 focus:border-blue-500  login-container-input ${errors.packSize && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''>--Select Pack Size--</option>
+                                <option >Box</option>
+                                <option >Bosta</option>
+                                <option >Ream</option>                              
+                            </select>
+                            <label className="label">
+                                {errors.packSize?.type === 'required' && <span className="label-text-alt text-red-700">{errors.packSize.message}</span>}
+
+                            </label>
+                        </div>
+                        {/* --------------------Quantity  field ----------------------- */}
+                        <div className="form-control">
+                            <label className='text-start'>Quantity</label>
                             <input
                                 type="text"
-                                className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1
-                                w-full focus:border-blue-500  login-container-input ${errors.createdNumber && 
-                                'border-red-600 focus:border-red-600'}`}
-                                {...register("createdNumber", {
+                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.quantity && 'focus:border-red-600 border-red-600 focus:ring-red-600'}`}
+                                {...register("quantity", {
                                     required: {
                                         value: true,
                                         message: "❌  Please fill out  this field"
@@ -152,19 +191,17 @@ const AddNewInventory = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.createdNumber?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.createdNumber.message} </span>}
+                                {errors.quantity?.type === 'required' && <span className="label-text-alt text-red-700">
+                                    {errors.quantity.message} </span>}
                             </label>
-                        </div> 
-                        {/* ----------------------- last Update date  ------------------------------ */}
+                        </div>
+                        {/* --------------------Total Quantity  field ----------------------- */}
                         <div className="form-control">
-                            <label className='text-start'>Last Update Date  </label>
+                            <label className='text-start'>Total Quantity</label>
                             <input
-                                type="date"
-                                className={`input font-bold max-w-xs  border-green-700 focus:outline-0 rounded-sm mt-1
-                                w-full focus:border-blue-500  login-container-input ${errors.lastUpdateDate && 
-                                'border-red-600 focus:border-red-600'}`}
-                                {...register("lastUpdateDate", {
+                                type="text"
+                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.totalQuantity && 'focus:border-red-600 border-red-600 focus:ring-red-600'}`}
+                                {...register("totalQuantity", {
                                     required: {
                                         value: true,
                                         message: "❌  Please fill out  this field"
@@ -172,18 +209,18 @@ const AddNewInventory = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.lastUpdateDate?.type === 'required' && <span className="label-text-alt text-red-700">
-                                    {errors.lastUpdateDate.message} </span>}
+                                {errors.totalQuantity?.type === 'required' && <span className="label-text-alt text-red-700">
+                                    {errors.totalQuantity.message} </span>}
                             </label>
-                        </div> 
+                        </div>
                         {/* -----------------------   ------------------------------ */}
 
 
 
                     </div>  
 
-                    <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' /> 
-                    <Link to='/dashboard/AddInventory' className="btn btn-sm mx-1 bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2/> Cancel 
+                    <input className='input  btn btn-sm mx-1 px-6 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' /> 
+                    <Link to='/dashboard/AddInventory' className="btn btn-sm mx-1 px-6  bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2/> Cancel 
                     </Link>
                 </form>
             </div>
