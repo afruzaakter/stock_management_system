@@ -1,34 +1,39 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { FaRegUser } from 'react-icons/fa';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { FcGoogle } from 'react-icons/fc';
+import Loading from '../Shared/Loading';
 
 const SignUp = () => {
-    const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
-    const [ createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [ createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const navigate = useNavigate();
     
-    // if (gLoading || loading) {
-    //     return <Loading />
-    // }
+    if (gLoading || loading||updating) {
+        return <Loading />
+    }
 
     if(user || gUser ){
         navigate("/dashboard");
     }
 
     let signUpError;
-    if(error ){
-        signUpError=<p className='text-red-500'> <small>{error.message }</small> </p>
+    if(error || gError ||updateError){
+        signUpError= <p className='text-red-500'><small>
+             {error?.message || gError?.message || updateError?.message } </small>
+        </p>
     }
 
-    const onSubmit = data => {
-        createUserWithEmailAndPassword( data.email, data.password)
+    const onSubmit =async(data)=> {
+        await createUserWithEmailAndPassword( data.email, data.password)
+        await updateProfile({ displayName: data.name })
     }
 
     return (
@@ -105,7 +110,6 @@ const SignUp = () => {
                                         value: true,
                                         message: "❌ Password is Required"
                                     },
-
                                     minLength: {
                                         value: 6,
                                         message: '❌ Must be 6 characters or longer'
