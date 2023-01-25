@@ -28,13 +28,12 @@ const SupplierEdit = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('success', data);
                 toast.success('Data Update Successfully !!!');
                 reset();
             })
-        navigate('/dashboard/supplier')
-     
+        navigate('/dashboard/supplier');
     }
+    
     return (
         <div className='m-10'>
        

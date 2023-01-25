@@ -80,9 +80,9 @@ const UserEdit = () => {
                                 {...register("profile")}
 
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.profile  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''> {users.profile}</option>
+                                <option Value=''> {users.profile}</option>
                                 {
-                                    employees.map((employee)=><option>{employee.employeeId}-
+                                    employees.map((employee)=><option key={employee._id}>{employee.employeeId}-
                                     {employee.employeeName}-[{employee.email}]</option>)
                                 }
                             </select>
@@ -144,7 +144,7 @@ const UserEdit = () => {
                                 {...register("organization")}
 
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm border border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.organization  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''> {users.organization}</option>
+                                <option Value=''> {users.organization}</option>
                                 <option > Head Quarter </option>
                             </select>
                             
@@ -161,7 +161,7 @@ const UserEdit = () => {
                                 Value={users.userRole}
                                 {...register("userRole")}
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.userRole  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>   
-                                <option value=''> {users.userRole} </option>
+                                <option Value=''> {users.userRole} </option>
                                 <option> Role_User </option>
                                 <option> Role_Admin </option>
                                 <option> Role_Approve </option>

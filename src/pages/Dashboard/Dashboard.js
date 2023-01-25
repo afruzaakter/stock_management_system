@@ -54,15 +54,11 @@ const Dashboard = () => {
                 {/* ***************************** Dashboard menu  Start *********************************** */}
                 <ul className='  animate__animated animate__fadeInLeft'>
 
-                  {/* ***************************** Dashboard menu   *********************************** */}
-
-                  <li className={`text-gray-300 text-md  flex items-start mt-2  rounded-md `}><Link to='/dashboard' className='w-full font-medium border-b border-gray-400 rounded-md    '>
-
+                  {/* ---------- Dashboard  ---------------- */}
+                  <li className={`text-gray-300 text-md  flex items-start mt-2  rounded-md `}><Link to='/dashboard' className='w-full font-medium border-b border-gray-400 rounded-md'>
                     <span className={`text-md text-gray-800  block  ${!open ? "text-md" : "ml-0"} `} >  <MdOutlineDashboardCustomize className='' /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Dashboard</span></Link>
                   </li>
-
-                  {/* ***************************** Dashboard menu  Start *********************************** */}
 
                   {/* -----------------------------Requisition dashboard menu Start ---------------------------- */}
                   <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md `}><Link to='/dashboard/requisition' className='w-full font-medium border-b border-gray-400  rounded-md    '>
