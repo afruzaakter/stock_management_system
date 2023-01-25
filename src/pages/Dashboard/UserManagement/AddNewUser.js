@@ -59,7 +59,7 @@ const AddNewUser = () => {
                                 className={`input input-sm w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.profile  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''>Select your profile </option>
                                 {
-                                    employees.map((employee)=><option>{employee.employeeId}-
+                                    employees.map((employee)=><option key={employee._id}>{employee.employeeId}-
                                     {employee.employeeName}-[{employee.email}]</option>)
                                 }
                             </select>

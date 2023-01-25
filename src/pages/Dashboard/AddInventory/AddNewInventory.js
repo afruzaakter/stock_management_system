@@ -34,7 +34,6 @@ const AddNewInventory = () => {
        })
        .then(res => res.json())
        .then(data =>{
-        console.log(data)
         toast.success('Data added Successfully!!!');
         // setUpdated(true)
         reset();
@@ -65,7 +64,7 @@ const AddNewInventory = () => {
                                 <option  value=''>--Select Product Name--</option>
                                 
                                 {
-                                    products.map((product) => <option>{product.productName}</option>)
+                                    products.map((product) => <option key={product._id}>{product.productName}</option>)
                                 }
                             </select>
 
@@ -88,7 +87,7 @@ const AddNewInventory = () => {
                                 <option  value=''>--Select Supplier Name--</option>
                                 
                                 {
-                                    suppliers.map((supplier) => <option>{supplier.suppliercompany}</option>)
+                                    suppliers.map((supplier) => <option key={supplier._id}>{supplier.supplierCompany}</option>)
                                 }
                             </select>
 

@@ -52,11 +52,8 @@ const Supplier = () => {
 
             <div className='mb-2'>
                 <Link to='/dashboard/createSupplier' className="btn btn-sm mx-1 bg-primary text-white">
-                    <FaPlus /> Add New Supplier</Link>
-                {/* <button className="btn btn-sm mx-1 bg-success text-white">
-                    <FiEdit /> Edit Supplier</button>
-                <button className="btn btn-sm mx-1 bg-error text-white">
-                    <AiOutlineDelete /> Delete Supplier</button> */}
+                    <FaPlus /> Add New Supplier
+                </Link>
             </div>
 
             <div className="overflow-x-auto">

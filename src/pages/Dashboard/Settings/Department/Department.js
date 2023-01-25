@@ -23,16 +23,15 @@ const Department = ({ department }) => {
             fetch(url, {
                 method: 'DELETE'
             })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    const remaining = departments.filter(department => department._id !== id)
-                    setDepartments(remaining);
-                })   
+            .then(res => res.json())
+            .then(data => {
+                const remaining = departments.filter(department => department._id !== id)
+                setDepartments(remaining);
+            })   
     }
 
     return (
-        <div className='border m-1 p-1 rounded-lg m-6'>
+        <div className='border m-1 p-1 rounded-lg '>
 
             <div className="navbar bg-base-100">
                 <div className="flex-1">
@@ -43,12 +42,6 @@ const Department = ({ department }) => {
 
             <div className='mb-2 flex justify-between '>
                 <div>
-{/* 
-                    <button>
-                        <DepartmentAddModal
-                        > </DepartmentAddModal>
-                    </button> */}
-
                     <Link to="/dashboard/departmentAdd" className='btn btn-sm mx-1 bg-green-700 text-white hover:bg-gray-600 '><FaPlus /> Add Department</Link>
                 </div>
               
@@ -83,7 +76,7 @@ const Department = ({ department }) => {
                                         <Link to={`/dashboard/departmentEdit/${department._id}`} className="btn btn-xs mx-1 bg-success text-white">
                                             <FiEdit /> </Link>
 
-                                          <label for="my-modal-6" className="btn btn-xs bg-red-500 text-white" >
+                                          <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white" >
                                             <AiOutlineDelete />
                                         </label>
                                         {/* -------- delete modal ----------------- */}
@@ -93,8 +86,8 @@ const Department = ({ department }) => {
                                                 <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
 
                                                 <div className="mr-14 modal-action">
-                                                    <label for="my-modal-6" onClick={() => handleDelete(department._id)} className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
-                                                    <label for="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
+                                                    <label htmlFor="my-modal-6" onClick={() => handleDelete(department._id)} className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
+                                                    <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
                                                 </div>
                                             </div>
                                         </div>
