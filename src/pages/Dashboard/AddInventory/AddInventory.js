@@ -26,8 +26,8 @@ const AddInventory = () => {
             .then(data => {
                 const remaining = addInventories.filter(addInventory => addInventory._id !== id)
                 setAddInventories(remaining);
-                toast.success('Data was Deleted Successfully!');
                 setDeleteID('');
+                toast.success('Data was Deleted Successfully!');
             })
     }
 

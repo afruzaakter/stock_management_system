@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { MdDeleteForever } from 'react-icons/md';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { FaEdit } from 'react-icons/fa';
 
 const KeyType = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
+    const [ deleteID, setDeleteID] = useState('');
 
     // -------------get method ----------------
     const [keys, setKeys] = useState([]);
@@ -47,8 +48,6 @@ const KeyType = () => {
     }
     // ------------ data post method  start --------------
     const handleDelete = (id) => {
-        const proceed = window.confirm('Are you sure?')
-        if (proceed) {
             const url = `http://localhost:5000/key/${id}`
             fetch(url, {
                 method: 'DELETE'
@@ -56,9 +55,11 @@ const KeyType = () => {
                 .then(res => res.json())
                 .then(data => {
                     const remaining = keys.filter(key => key._id !== id)
-                    setKeys(remaining)
+                    setKeys(remaining);
+                    setDeleteID('');
+                    toast.success('Data was Deleted Successfully!');
                 })
-        }
+        
 
     }
 
@@ -117,7 +118,25 @@ const KeyType = () => {
                                     <td>{key.key}</td>
                                     <td className='flex gap-1'>
                                         <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/keyEdit/${key._id}`}><FaEdit /></Link>
-                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(key._id)}><MdDeleteForever /></button>
+                                        <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
+                                            onClick={() => setDeleteID(key._id)} >
+                                            <AiOutlineDelete />
+                                        </label>
+
+                                        {/* -------- delete modal ----------------- */}
+                                        <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+                                        <div className="modal modal-bottom justify-around sm:modal-middle ">
+                                            <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
+                                                <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
+
+                                                <div className="mr-14 modal-action">
+                                                    <label htmlFor="my-modal-6" onClick={() => handleDelete(deleteID)}
+                                                        className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
+                                                    <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* -------- delete modal ----------------- */}
                                     </td>
 
 

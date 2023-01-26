@@ -17,6 +17,14 @@ const DepartmentEdit = () => {
             .then(data => setDepartments(data))
     }, []);
     const onSubmit = (data) =>{
+        const name = data.name ==="" ? departments.name : data.name;
+        const description = data.description ==="" ? departments.description : data.description;
+        const order = data.order ==="" ? departments.order : data.order;
+        const updateData = {
+            name,
+            description,
+            order
+        }
         const url = `http://localhost:5000/department/${id}`;
 
         console.log(url)
@@ -26,7 +34,7 @@ const DepartmentEdit = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(updateData)
         })
             .then(res => res.json())
             .then(data => {
@@ -50,12 +58,7 @@ const DepartmentEdit = () => {
                             type="text"
                             Value={departments.name}
                             className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96  focus:border-blue-500  login-container-input ${errors.name && 'border-red-600 focus:border-red-600'}`}
-                            {...register("name", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
+                            {...register("name")}
                         />
                         <label className="label">
                             {errors.name?.type === 'required' && <span className="label-text-alt text-red-700">{errors.name.message}</span>}
@@ -73,12 +76,7 @@ const DepartmentEdit = () => {
                             Value={departments.description}
                            
                             className={`input input-sm max-w-xs text-red-900  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
-                            {...register("description", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
+                            {...register("description")}
                         />
                         <label className="label">
                             {errors.description?.type === 'required' && <span className="label-text-alt text-red-700">{errors.description.message}</span>}
@@ -93,12 +91,7 @@ const DepartmentEdit = () => {
                             type="number"
                             Value={departments.order}
                             className={`input input-sm max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
-                            {...register("order", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
+                            {...register("order")}
                         />
                         <label className="label">
                             {errors.order?.type === 'required' && <span className="label-text-alt text-red-700">{errors.order.message}</span>}

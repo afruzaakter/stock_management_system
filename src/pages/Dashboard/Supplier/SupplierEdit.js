@@ -16,15 +16,34 @@ const SupplierEdit = () => {
              .then(res => res.json())
              .then(data => setSuppliers(data))
      }, []);
+
+   
      
     const onSubmit = (data) =>{
+        const supplierCompany = data.supplierCompany ==="" ? suppliers.supplierCompany : data.supplierCompany;
+        const autoCode = data.autoCode ==="" ? suppliers.autoCode : data.autoCode;
+        const email = data.email ==="" ? suppliers.email : data.email;
+        const contactPerson = data.contactPerson ==="" ? suppliers.contactPerson : data.contactPerson;
+        const contactNumber = data.contactNumber ==="" ? suppliers.contactNumber : data.contactNumber;
+        const address = data.address ==="" ? suppliers.address : data.address;
+        const updateData = {
+            supplierCompany,
+            autoCode,
+            email,
+            contactPerson,
+            contactNumber,
+            address
+        }
+
+        // console.log("update data", updateData);
+
         const url = `http://localhost:5000/supplier/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(updateData)
         })
             .then(res => res.json())
             .then(data => {
@@ -47,18 +66,13 @@ const SupplierEdit = () => {
                         <label className='text-start '>Name (Company,Distributor,Dealer)</label>
                         <input
                             type="text"
-                            Value={suppliers.suppliercompany}
+                            Value={suppliers.supplierCompany}
                             placeholder='Supplier Name'
                             className={`input input-sm max-w-xs border border-green-800 focus:outline-0 rounded-sm  mt-1  lg:w-80   focus:border-blue-800  login-container-input ${errors.suppliercompany && 'border-red-600 focus:border-red-600'}`}
-                            {...register("suppliercompany", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fill-Up  Input Field"
-                                }
-                            })}
+                            {...register("supplierCompany")}
                         />
                         <label className="label">
-                            {errors.suppliercompany?.type === 'required' && <span className="label-text-alt text-red-700">{errors.suppliercompany.message}</span>}
+                            {errors.supplierCompany?.type === 'required' && <span className="label-text-alt text-red-700">{errors.supplierCompany.message}</span>}
 
                         </label>
                     </div>   
@@ -66,21 +80,16 @@ const SupplierEdit = () => {
                     {/* -----------------------Supplier Code Field ------------------------------ */}
 
                     <div className="form-control">
-                        <label className='text-start'>Code</label>
+                        <label className='text-start'>Auto Code</label>
                         <input
                             type="text"
-                            Value={suppliers.code}
-                            placeholder='Code'
-                            className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-80 focus:border-blue-500  login-container-input ${errors.code && 'border-red-600 focus:border-red-600'}`}
-                            {...register("code", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fill-Up  Input Field"
-                                }
-                            })}
+                            Value={suppliers.autoCode}
+                            placeholder='autoCode'
+                            className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-80 focus:border-blue-500  login-container-input ${errors.autoCode && 'border-red-600 focus:border-red-600'}`}
+                            {...register("code")}
                         />
                         <label className="label">
-                            {errors.code?.type === 'required' && <span className="label-text-alt text-red-700">{errors.code.message}</span>}
+                            {errors.autoCode?.type === 'required' && <span className="label-text-alt text-red-700">{errors.autoCode.message}</span>}
 
                         </label>
                     </div> 
@@ -93,16 +102,7 @@ const SupplierEdit = () => {
                             Value={suppliers.email}
                             placeholder='E-mail'
                             className={`input input-sm  lg:w-80 max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  focus:border-blue-500  login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
-                            {...register("email", {
-                                required: {
-                                    value: true,
-                                    message: "❌ Email is Required"
-                                },
-                                pattern: {
-                                    value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                                    message: '❌ Provide a valid Email'
-                                }
-                            })}
+                            {...register("email")}
                         />
                         <label className="label">
                             {errors.email?.type === 'required' && <span className="label-text-alt text-red-700">{errors.email.message}</span>}
@@ -120,12 +120,7 @@ const SupplierEdit = () => {
                             Value={suppliers.contactPerson}
                             placeholder='Contact Person'
                             className={`input input-sm  lg:w-80  max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  focus:border-blue-500  login-container-input ${errors.contactPerson && 'border-red-600 focus:border-red-600'}`}
-                            {...register("contactPerson", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fill-Up  Input Field"
-                                }
-                            })}
+                            {...register("contactPerson")}
                         />
                         <label className="label">
                             {errors.contactPerson?.type === 'required' && <span className="label-text-alt text-red-700">{errors.contactPerson.message}</span>}
@@ -141,12 +136,7 @@ const SupplierEdit = () => {
                             Value={suppliers.contactNumber}
                             placeholder='01✕✕✕✕✕✕✕✕'
                             className={`input input-sm  lg:w-80 max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  focus:border-blue-500  login-container-input ${errors.contactNumber && 'border-red-600 focus:border-red-600'}`}
-                            {...register("contactNumber", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fill-Up  Input Field"
-                                }
-                            })}
+                            {...register("contactNumber")}
                         />
                         <label className="label">
                             {errors.contactNumber?.type === 'required' && <span className="label-text-alt text-red-700">{errors.contactNumber.message}</span>}
@@ -162,12 +152,7 @@ const SupplierEdit = () => {
                             Value={suppliers.address}
                             placeholder='Address'
                             className={`input input-sm  lg:w-80 max-w-xs border-green-700 border-bold focus:outline-0 rounded-sm  mt-1  focus:border-blue-500  login-container-input ${errors.address && 'border-red-600 focus:border-red-600'}`}
-                            {...register("address", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fill-Up  Input Field"
-                                }
-                            })}
+                            {...register("address")}
                         />
                         <label className="label">
                             {errors.address?.type === 'required' && <span className="label-text-alt text-red-700">{errors.address.message}</span>}
