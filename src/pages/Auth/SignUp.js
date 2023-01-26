@@ -16,7 +16,7 @@ const SignUp = () => {
     const [ createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth); // for send UserName
     const navigate = useNavigate();
-    const [token]=useToken(user || gUser) // for send allUsers information
+    const [token]=useToken(user || gUser) //Hook: for send allUsers information
     
     if (gLoading || loading||updating) {
         return <Loading />
