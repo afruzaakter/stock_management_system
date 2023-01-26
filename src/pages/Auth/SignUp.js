@@ -8,19 +8,21 @@ import { RiLockPasswordLine } from 'react-icons/ri';
 import { FaRegUser } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import Loading from '../Shared/Loading';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const [ createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
-    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth); // for send UserName
     const navigate = useNavigate();
+    const [token]=useToken(user || gUser) // for send allUsers information
     
     if (gLoading || loading||updating) {
         return <Loading />
     }
 
-    if(user || gUser ){
+    if(token){
         navigate("/dashboard");
     }
 

@@ -7,34 +7,33 @@ import { FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 const AddInventory = () => {
-    const [addInventorys, setAddInventorys] = useState([]);
+    const [addInventories, setAddInventories] = useState([]);
+    const [deleteID, setDeleteID] = useState('');
 
     useEffect(() => {
         fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
-            .then(data => setAddInventorys(data))
+            .then(data => setAddInventories(data))
 
     }, [])
 
-    const handleDelete = (id) => {
-        
-        console.log(id)
+    const handleDelete = (id) => {        
         const url = `http://localhost:5000/addInventory/${id}`
         fetch(url, {
             method: 'DELETE'
         })
             .then(res => res.json())
-            .then(data => {               
-                const remaining = addInventorys.filter(addInventory => addInventory._id !== id)
-                setAddInventorys(remaining);
+            .then(data => {
+                const remaining = addInventories.filter(addInventory => addInventory._id !== id)
+                setAddInventories(remaining);
+                setDeleteID('');
+                toast.success('Data was Deleted Successfully!');
             })
     }
 
 
     return (
         <div className='border m-2 p-2 rounded-lg '>
-
-
 
             <div className="navbar bg-base-100">
                 <div className="flex-1">
@@ -80,7 +79,7 @@ const AddInventory = () => {
 
                     <tbody>
                         {
-                            addInventorys.map((addInventory, index) =>
+                            addInventories.map((addInventory, index) =>
                                 <tr className='bg-blue-900' key={addInventory._id} >
                                     <th> {index + 1} </th>
                                     <td> {addInventory.productName} </td>
@@ -94,19 +93,20 @@ const AddInventory = () => {
                                     <td className='flex gap-3'>
                                         <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/EditAddInventory/${addInventory._id}`}> <FiEdit /> </Link>
 
-                                        <label  for="my-modal-6" className="btn btn-xs bg-red-500 text-white" >
+                                        <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
+                                            onClick={() =>setDeleteID(addInventory._id) } >
                                             <AiOutlineDelete />
                                         </label>
                                         {/* -------- delete modal ----------------- */}
                                         <input type="checkbox" id="my-modal-6" className="modal-toggle" />
                                         <div className="modal modal-bottom justify-around sm:modal-middle ">
-                                            <div className="bg-gray-300 p-5 rounded-md  lg:max-w-52">
+                                            <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
                                                 <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
 
                                                 <div className="mr-14 modal-action">
-                                                    <label for="my-modal-6" onClick={() =>handleDelete (addInventory._id)}
-                                                     className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
-                                                    <label for="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
+                                                    <label htmlFor="my-modal-6" onClick={() =>handleDelete(deleteID)}
+                                                        className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
+                                                    <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,10 +114,8 @@ const AddInventory = () => {
 
                                     </td>
                                 </tr>
-
                             )
                         }
-
                     </tbody>
                 </table>
             </div>

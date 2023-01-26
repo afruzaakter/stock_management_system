@@ -5,9 +5,11 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import DepartmentAddModal from './DepartmentAdd';
 import { Link } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const Department = ({ department }) => {
     const [departments, setDepartments] = useState([]);
+    const [ deleteID, setDeleteID] = useState('')
     const [updated, setUpdated] = useState(false);
     useEffect(() => {
         fetch('http://localhost:5000/department')
@@ -23,16 +25,17 @@ const Department = ({ department }) => {
             fetch(url, {
                 method: 'DELETE'
             })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    const remaining = departments.filter(department => department._id !== id)
-                    setDepartments(remaining);
-                })   
+            .then(res => res.json())
+            .then(data => {
+                const remaining = departments.filter(department => department._id !== id)
+                setDepartments(remaining);
+                setDeleteID('');
+                toast.success('Data was Deleted Successfully!');
+            })   
     }
 
     return (
-        <div className='border m-1 p-1 rounded-lg m-6'>
+        <div className='border m-1 p-1 rounded-lg '>
 
             <div className="navbar bg-base-100">
                 <div className="flex-1">
@@ -43,12 +46,6 @@ const Department = ({ department }) => {
 
             <div className='mb-2 flex justify-between '>
                 <div>
-{/* 
-                    <button>
-                        <DepartmentAddModal
-                        > </DepartmentAddModal>
-                    </button> */}
-
                     <Link to="/dashboard/departmentAdd" className='btn btn-sm mx-1 bg-green-700 text-white hover:bg-gray-600 '><FaPlus /> Add Department</Link>
                 </div>
               
@@ -83,22 +80,25 @@ const Department = ({ department }) => {
                                         <Link to={`/dashboard/departmentEdit/${department._id}`} className="btn btn-xs mx-1 bg-success text-white">
                                             <FiEdit /> </Link>
 
-                                          <label for="my-modal-6" className="btn btn-xs bg-red-500 text-white" >
+                                            <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
+                                            onClick={() =>setDeleteID(department._id) } >
                                             <AiOutlineDelete />
                                         </label>
-                                        {/* -------- delete modal ----------------- */}
+
+                                     {/* -------- delete modal ----------------- */}
                                         <input type="checkbox" id="my-modal-6" className="modal-toggle" />
                                         <div className="modal modal-bottom justify-around sm:modal-middle ">
-                                            <div className="bg-gray-300 p-5 rounded-md  lg:max-w-52">
+                                            <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
                                                 <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
 
                                                 <div className="mr-14 modal-action">
-                                                    <label for="my-modal-6" onClick={() => handleDelete(department._id)} className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
-                                                    <label for="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
+                                                    <label htmlFor="my-modal-6" onClick={() =>handleDelete(deleteID)}
+                                                        className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
+                                                    <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* -------- delete modal ----------------- */}
+                                        {/* -------- delete modal ----------------- */}  
 
                                     </td>
 

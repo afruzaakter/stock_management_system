@@ -92,7 +92,7 @@ const ProductAddKey = () => {
                             className={`input input-sm  lg:w-64 md:w-52  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input ${errors.keytype  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''>--Select key type--</option>
                             {
-                                keys.map((key)=><option>{key.key}</option>)
+                                keys.map((key)=><option key={key._id}>{key.key}</option>)
                             }
                         </select>
                      

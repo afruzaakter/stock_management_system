@@ -20,12 +20,12 @@ const SupplierEdit = () => {
    
      
     const onSubmit = (data) =>{
-        const supplierCompany = data.supplierCompany ===" " ? suppliers.supplierCompany : data.supplierCompany;
-        const autoCode = data.autoCode ===" " ? suppliers.autoCode : data.autoCode;
-        const email = data.email ===" " ? suppliers.email : data.email;
-        const contactPerson = data.contactPerson ===" " ? suppliers.contactPerson : data.contactPerson;
-        const contactNumber = data.contactNumber ===" " ? suppliers.contactNumber : data.contactNumber;
-        const address = data.address ===" " ? suppliers.address : data.address;
+        const supplierCompany = data.supplierCompany ==="" ? suppliers.supplierCompany : data.supplierCompany;
+        const autoCode = data.autoCode ==="" ? suppliers.autoCode : data.autoCode;
+        const email = data.email ==="" ? suppliers.email : data.email;
+        const contactPerson = data.contactPerson ==="" ? suppliers.contactPerson : data.contactPerson;
+        const contactNumber = data.contactNumber ==="" ? suppliers.contactNumber : data.contactNumber;
+        const address = data.address ==="" ? suppliers.address : data.address;
         const updateData = {
             supplierCompany,
             autoCode,
@@ -34,6 +34,8 @@ const SupplierEdit = () => {
             contactNumber,
             address
         }
+
+        // console.log("update data", updateData);
 
         const url = `http://localhost:5000/supplier/${id}`;
         fetch(url, {
@@ -45,13 +47,12 @@ const SupplierEdit = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('success', data);
                 toast.success('Data Update Successfully !!!');
                 reset();
             })
-        navigate('/dashboard/supplier')
-     
+        navigate('/dashboard/supplier');
     }
+    
     return (
         <div className='m-10'>
        
@@ -79,16 +80,16 @@ const SupplierEdit = () => {
                     {/* -----------------------Supplier Code Field ------------------------------ */}
 
                     <div className="form-control">
-                        <label className='text-start'>Code</label>
+                        <label className='text-start'>Auto Code</label>
                         <input
                             type="text"
-                            Value={suppliers.code}
-                            placeholder='Code'
-                            className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-80 focus:border-blue-500  login-container-input ${errors.code && 'border-red-600 focus:border-red-600'}`}
+                            Value={suppliers.autoCode}
+                            placeholder='autoCode'
+                            className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-80 focus:border-blue-500  login-container-input ${errors.autoCode && 'border-red-600 focus:border-red-600'}`}
                             {...register("code")}
                         />
                         <label className="label">
-                            {errors.code?.type === 'required' && <span className="label-text-alt text-red-700">{errors.code.message}</span>}
+                            {errors.autoCode?.type === 'required' && <span className="label-text-alt text-red-700">{errors.autoCode.message}</span>}
 
                         </label>
                     </div> 

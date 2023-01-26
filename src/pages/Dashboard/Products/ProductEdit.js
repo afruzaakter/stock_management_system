@@ -27,6 +27,25 @@ const ProductEdit = () => {
             .then(data => setProducts(data))
     }, []);
      const onSubmit = (data) =>{
+        const productName = data.productName ==="" ? products.productName : data.productName;
+        const size = data.size ==="" ? products.size : data.size;
+        const budgetCode = data.budgetCode ==="" ? products.budgetCode : data.budgetCode;
+        const measureUnit = data.measureUnit ==="" ? products.measureUnit : data.measureUnit;
+        const packUnit = data.packUnit ==="" ? products.packUnit : data.packUnit;
+        const qnty = data.qnty ==="" ? products.qnty : data.qnty;
+        const alertQty = data.alertQty ==="" ? products.alertQty : data.alertQty;
+        const invoice = data.invoice ==="" ? products.invoice : data.invoice;
+        const updateData = {
+            productName,
+            size,
+            budgetCode,
+            measureUnit,
+            packUnit,
+            qnty,
+            alertQty,
+            invoice
+        }
+
         const url = `http://localhost:5000/product/${id}`;
 
         console.log(url)
@@ -36,7 +55,7 @@ const ProductEdit = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(updateData)
         })
             .then(res => res.json())
             .then(data => {
@@ -68,12 +87,7 @@ const ProductEdit = () => {
                                 Value={products.productName}
                             
                                 className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.productName && 'border-red-600 focus:border-red-600'}`}
-                                {...register("productName", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please Fillup  Input Field"
-                                    }
-                                })}
+                                {...register("productName")}
                             />
                             <label className="label">
                                 {errors.productName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.productName.message}</span>}
@@ -84,20 +98,15 @@ const ProductEdit = () => {
                         {/* -------------------- Budget Code Input Field -----------------------   */}
                         <div className="form-control">
                             <label className='text-start '>Budget Code</label>
-                            <select   {...register("budgetCode", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
+                            <select   {...register("budgetCode")}
                              
                               Value={products.budgetCode}
   
                                 className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.budgetCode && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                {/* <option  value=''>--Select Budget Code--</option> */}
+                                <option  value=''>{products.budgetCode}</option>
                                 
                                 {
-                                    budgetCodes.map((budgetCode) => <option>{budgetCode.budgetCode}</option>)
+                                    budgetCodes.map((budgetCode) => <option key={budgetCode._id}>{budgetCode.budgetCode}</option>)
                                 }
                             </select>
 
@@ -116,12 +125,7 @@ const ProductEdit = () => {
                            Value={products.size}
   
                                 className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.size && 'border-red-600 focus:border-red-600'}`}
-                                {...register("size", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please Fillup  Input Field"
-                                    }
-                                })}
+                                {...register("size")}
                             />
                             <label className="label">
                                 {errors.size?.type === 'required' && <span className="label-text-alt text-red-700">{errors.size.message}</span>}
@@ -132,16 +136,11 @@ const ProductEdit = () => {
                         {/* -------------------- Measure Unit Input Field --------------------   */}
                         <div className="form-control">
                             <label >Measures Unit</label>
-                            <select   {...register("measureUnit", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
+                            <select   {...register("measureUnit")}
                               Value={products.measureUnit}
     
                                 className={`input input-sm  focus:outline-0 rounded-sm  border-green-700   lg:w-80 md:w-64 focus:border-blue-500  login-container-input ${errors.measureUnit && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                {/* <option value=''>--Select Measures Unit--</option> */}
+                                <option value=''>{products.measureUnit}</option>
                                 <option >Qnty</option>
                                 <option >KG</option>
                                 <option >Pack</option>
@@ -156,16 +155,11 @@ const ProductEdit = () => {
                         {/* -------------------- Pack Unit Input Field -----------------------   */}
                         <div className="form-control">
                             <label >Pack Unit</label>
-                            <select   {...register("packUnit", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
-                               Value={products.pactUnit}
+                            <select   {...register("packUnit")}
+                               Value={products.packUnit}
  
                                 className={`input input-sm   focus:outline-0 rounded-sm  border-green-700   lg:w-80 md:w-64 focus:border-blue-500  login-container-input ${errors.packUnit && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''>--Select Pack Unit--</option>
+                                <option value=''>{products.packUnit}</option>
                                 <option >Bosta</option>
                                 <option >Box</option>
                                 <option >Ream</option>
@@ -184,12 +178,7 @@ const ProductEdit = () => {
    
                                  Value={products.qnty}
                                 className={`input  max-w-xs input-sm  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.qnty && 'border-red-600 focus:border-red-600'}`}
-                                {...register("qnty", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please Fillup  Input Field"
-                                    }
-                                })}
+                                {...register("qnty")}
                             />
                             <label className="label">
                                 {errors.qnty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.qnty.message}</span>}
@@ -198,26 +187,7 @@ const ProductEdit = () => {
                         </div>
 
                    
-                        {/* -------------------- Sort Order Input Field -----------------------   */}
-                        <div className="form-control">
-                            <label >Sort Order</label>
-                            <input
-                                type="text"
-                                placeholder='Sort Order'
-                             Value={products.sortOrder}
-                                className={`input input-sm  max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.sortOrder && 'border-red-600 focus:border-red-600'}`}
-                                {...register("sortOrder", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please Fillup  Input Field"
-                                    }
-                                })}
-                            />
-                            <label className="label">
-                                {errors.sortOrder?.type === 'required' && <span className="label-text-alt text-red-700">{errors.sortOrder.message}</span>}
-
-                            </label>
-                        </div>
+                      
                         {/* ----------------------alert Qty input field ------------ */}
                         <div className="form-control">
                             <label >Alert Qty</label>
@@ -225,12 +195,7 @@ const ProductEdit = () => {
                                 type="text"
                                Value={products.alertQty}
                                 className={`input input-sm  max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.alertQty && 'border-red-600 focus:border-red-600'}`}
-                                {...register("alertQty", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please Fillup  Input Field"
-                                    }
-                                })}
+                                {...register("alertQty")}
                             />
                             <label className="label">
                                 {errors.alertQty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.alertQty.message}</span>}
@@ -242,14 +207,10 @@ const ProductEdit = () => {
                             <label >Invoice Notes</label>
                             <input
                                 type="text"
+                                Value={products.invoice}
                                 placeholder='Invoice Notes'
                                 className={`input input-sm  max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.invoice && 'border-red-600 focus:border-red-600'}`}
-                                {...register("invoice", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please Fillup  Input Field"
-                                    }
-                                })}
+                                {...register("invoice")}
                             />
                             <label className="label">
                                 {errors.invoice?.type === 'required' && <span className="label-text-alt text-red-700">{errors.invoice.message}</span>}

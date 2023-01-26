@@ -7,8 +7,10 @@ import { MdRefresh } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 const StockAdjust = () => {
+    const [ deleteID, setDeleteID] = useState('')
      // ---------- Drop down budgetCodes get method ----------
      const [products, setProducts] = useState([]);
      useEffect(() => {
@@ -17,8 +19,20 @@ const StockAdjust = () => {
              .then(data => setProducts(data))
      }, [])
 
-     const handleDelete = (data) =>{
-
+     const handleDelete = (id) =>{
+        const url = `http://localhost:5000/product/${id}`
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    const remaining = products.filter(product => product._id !== id)
+                    setProducts(remaining);
+                    setDeleteID(' ');
+                    toast.success('Data was Deleted Successfully!');
+                })
+      
      }
     
     return (
@@ -77,7 +91,25 @@ const StockAdjust = () => {
                                 <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
                                         <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
-                                        <button className='btn btn-xs bg-red-500 text-white' onClick={() => handleDelete(product._id)}><MdDeleteForever /></button>
+                                        <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
+                                            onClick={() =>setDeleteID(product._id) } >
+                                            <MdDeleteForever />
+                                        </label>
+
+                                     {/* -------- delete modal ----------------- */}
+                                        <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+                                        <div className="modal modal-bottom justify-around sm:modal-middle ">
+                                            <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
+                                                <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
+
+                                                <div className="mr-14 modal-action">
+                                                    <label htmlFor="my-modal-6" onClick={() =>handleDelete(deleteID)}
+                                                        className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
+                                                    <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* -------- delete modal ----------------- */}  
                                     </td>
                             </tr>)
                         }

@@ -154,12 +154,12 @@ const ProductAdd = () => {
                         </div>
                         {/* -------------------- Pack Size/Qnty Input Field -----------------------   */}
                         <div className="form-control">
-                            <label >Pack Size/Qnty</label>
+                            <label >Total Quantity</label>
                             <input
                                 type="text"
-                                placeholder='Ctn/Bag Quantity'
-                                className={`input  max-w-xs input-sm  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.qnty && 'border-red-600 focus:border-red-600'}`}
-                                {...register("qnty", {
+                                placeholder='Total Quantity'
+                                className={`input  max-w-xs input-sm  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.totalQnty && 'border-red-600 focus:border-red-600'}`}
+                                {...register("totalQnty", {
                                     required: {
                                         value: true,
                                         message: "❌  Please Fillup  Input Field"
@@ -167,31 +167,13 @@ const ProductAdd = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.qnty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.qnty.message}</span>}
+                                {errors.totalQnty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.totalQnty.message}</span>}
 
                             </label>
                         </div>
 
                    
-                        {/* -------------------- Sort Order Input Field -----------------------   */}
-                        {/* <div className="form-control">
-                            <label >Sort Order</label>
-                            <input
-                                type="text"
-                                placeholder='Sort Order'
-                                className={`input input-sm  max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.sortOrder && 'border-red-600 focus:border-red-600'}`}
-                                {...register("sortOrder", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please Fillup  Input Field"
-                                    }
-                                })}
-                            />
-                            <label className="label">
-                                {errors.sortOrder?.type === 'required' && <span className="label-text-alt text-red-700">{errors.sortOrder.message}</span>}
-
-                            </label>
-                        </div> */}
+                    
                         {/* ----------------------alert Qty input field ------------ */}
                         <div className="form-control">
                             <label >Alert Qty</label>
