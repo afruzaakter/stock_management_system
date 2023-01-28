@@ -4,10 +4,12 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Setting from '../Setting';
+import { toast } from 'react-toastify';
 
 const Designation = () => {
     const [designations, setDesignations] = useState([]);
-    // const [updated, setUpdated] = useState(false);
+    const [ deleteID, setDeleteID] = useState('');
+    
     useEffect(() => {
         fetch('http://localhost:5000/designation')
             .then(res => res.json())
@@ -16,8 +18,6 @@ const Designation = () => {
     }, [])
 
     const handleDelete = (id) => {
-        const proceed = window.confirm('Are you sure !!!')
-        if (proceed) {
             const url = `http://localhost:5000/designation/${id}`
             fetch(url, {
                 method: "DELETE"
@@ -26,8 +26,10 @@ const Designation = () => {
                 .then(data => {
                     const remaining = designations.filter(designation => designation._id !== id)
                     setDesignations(remaining);
+                    setDeleteID('');
+                    toast.success('Data was Deleted Successfully!');
                 })
-        }
+        
     }
     return (
         <div className='border  p-1 rounded-lg m-6'>
@@ -77,7 +79,25 @@ const Designation = () => {
                                     <td>
                                         <Link to={`/dashboard/designationEdit/${designation._id}`} className="btn btn-xs mx-1 bg-success text-white">
                                             <FiEdit /> </Link>
-                                        <button className="btn btn-xs mx-1 bg-red-500 text-white" onClick={() => handleDelete(designation._id)}><AiOutlineDelete /> </button>
+                                            <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
+                                            onClick={() =>setDeleteID(designation._id) } >
+                                            <AiOutlineDelete />
+                                        </label>
+
+                                     {/* -------- delete modal ----------------- */}
+                                        <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+                                        <div className="modal modal-bottom justify-around sm:modal-middle ">
+                                            <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
+                                                <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
+
+                                                <div className="mr-14 modal-action">
+                                                    <label htmlFor="my-modal-6" onClick={() =>handleDelete(deleteID)}
+                                                        className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
+                                                    <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* -------- delete modal ----------------- */}  
 
                                     </td>
                                 </tr>

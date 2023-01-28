@@ -19,8 +19,9 @@ const [budgetCodes, setBudgetCodes] = useState([])
 
    console.log(budgetCodes)
     const onSubmit = (data) =>{
-        const budgetCode ={
-            budgetCode: data.budgetCode
+        const budgetCode = data.budgetCode ==="" ? budgetCodes.budgetCode : data.budgetCode;
+        const updateData ={
+            budgetCode,
         };
        const url = `http://localhost:5000/budgetcode/${id}`
        fetch(url,{
@@ -28,7 +29,7 @@ const [budgetCodes, setBudgetCodes] = useState([])
         headers: {
             'content-type' : 'application/json'
         },
-        body: JSON.stringify(budgetCode)
+        body: JSON.stringify(updateData)
        })
        .then(res => res.json())
        .then(data =>{
@@ -38,23 +39,6 @@ const [budgetCodes, setBudgetCodes] = useState([])
        })
        navigate('/dashboard/budgetCode')
     }
-
-    // const key = {
-    //     key: data.key
-    //  };
-    //  const url = `http://localhost:5000/key/${id}`
-    //  fetch(url, {
-    //     method: 'PUT',
-    //     headers:{
-    //         'content-type': 'application/json'
-    //     },
-    //     body: JSON.stringify(key)
-    //  })
-    //  .then(res =>res.json())
-    //  .then(data =>{
-    //     toast.success(' Data Update Successfully !!!')
-    //     reset();
-    //  })
 
 
     return (
@@ -69,12 +53,7 @@ const [budgetCodes, setBudgetCodes] = useState([])
                         type="text"
                         Value={budgetCodes.budgetCode}
                         className={`input font-bold max-w-xs  focus:outline-0 rounded-sm border-gray-400 mt-1  w-full focus:border-blue-500  login-container-input ${errors.budgetCode && 'border-red-600 focus:border-red-600'}`}
-                        {...register("budgetCode", {
-                            required: {
-                                value: true,
-                                message: "❌  Please Fillup  Input Field"
-                            }
-                        })}
+                        {...register("budgetCode")}
                     />
                     <label className="label">
                         {errors.budgetCode?.type === 'required' && <span className="label-text-alt text-red-700">{errors.budgetCode.message}</span>}

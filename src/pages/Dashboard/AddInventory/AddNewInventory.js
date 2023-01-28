@@ -77,13 +77,13 @@ const AddNewInventory = () => {
                         {/* ----------------Brand Name Field ------------------ */}
                         <div className="form-control">
                             <label className='text-start '>Supplier Name</label>
-                            <select   {...register("supplierName", {
+                            <select   {...register("supplierCompany", {
                                 required: {
                                     value: true,
                                     message: "❌  Please Fillup  Input Field"
                                 }
                             })}
-                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.supplierName && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.supplierCompany && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option  value=''>--Select Supplier Name--</option>
                                 
                                 {
@@ -92,7 +92,7 @@ const AddNewInventory = () => {
                             </select>
 
                             <label className="label">
-                                {errors.supplierName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.supplierName.message}</span>}
+                                {errors.supplierCompany?.type === 'required' && <span className="label-text-alt text-red-700">{errors.supplierCompany.message}</span>}
 
                             </label>
                         </div>
