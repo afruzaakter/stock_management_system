@@ -38,6 +38,7 @@ const Requisition = () => {
                             <th> Requested By </th>
                             <th> Request Status </th>
                             <th> Note </th>
+                            
                         </tr>
                     </thead>
 
