@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 
 const useToken= user=>{
     const [token, setToken]=useState('');
@@ -17,10 +16,11 @@ const useToken= user=>{
             .then(res=> res.json())
             .then(data=>{
                 console.log("inside token", data);
-                toast.success("wow! Account Created Successfully! ")
+                const accessToken=data.token;
+                localStorage.setItem('accessToken', accessToken);
+                setToken(accessToken);
             })
         }
-
 
     },[user]);
     return [token];

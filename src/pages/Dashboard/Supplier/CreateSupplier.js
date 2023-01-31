@@ -10,7 +10,7 @@ const CreateSupplier = () => {
     const [updated, setUpdated] = useState(false); 
     const navigate = useNavigate();
     
-    //------- for auto generate code 
+    //===========for auto generate code ========
     const [suppliers, setSuppliers] = useState([]);
     const [autoCode, setAutoCode] = useState(); 
    
@@ -22,9 +22,9 @@ const CreateSupplier = () => {
    }, []);
    useEffect(() => {
         const codeList = suppliers?.map(supplier => supplier.autoCode);
-        const length =codeList.length;
+        const length =codeList.length; 
         if(length === 0){
-            setAutoCode(1000)
+            setAutoCode(1001)
         }else{
             const lastValue =codeList[length-1]; 
             const lastCode = +lastValue;

@@ -7,19 +7,27 @@ import { RiLockPasswordLine } from 'react-icons/ri';
 import { FcGoogle } from 'react-icons/fc';
 import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken';
+import { useEffect } from 'react';
 
 const Login = () => {
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     
+    // ------ if user ? then-> navigate --------- 
+    const [token]=useToken(user || gUser )
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/dashboard";
-    if( user || gUser){
+    useEffect(()=>{
+       if( token){
         navigate(from, { replace: true });
-    }
+    }  
+    },[token,from,navigate])
+   
 
+    // -----------------
     if (gLoading || loading) {
         return <Loading />
     }

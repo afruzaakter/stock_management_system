@@ -149,7 +149,13 @@ const Dashboard = () => {
                   {/* ------------------------User Management  dashboard menu Start ---------------------------- */}
                   <li className={`text-gray-300 text-md mt-2 flex items-start rounded-md`}><Link to='/dashboard/userManagement' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-700  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <FaUsersCog className='' /></span>
-                    <span className={` text-gray-800 ${!open && 'hidden'}`}>User Management </span></Link></li>
+                    <span className={` text-gray-800 ${!open && 'hidden'}`}>User Management </span></Link>
+                  </li>
+                  {/* ---------------------- All Users ---------------- */}
+                  <li className={`text-gray-300 text-md mt-2 flex items-start rounded-md`}><Link to='/dashboard/allUsers' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                    <span className={` text-gray-700  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <FaUsersCog className='' /></span>
+                    <span className={` text-gray-800 ${!open && 'hidden'}`}>All Users </span></Link>
+                  </li>
                   {/* -----------------------------User Management  dashboard menu End ---------------------- */}
 
                   {/* ----------------------------Settings dashboard Sub menu Start ---------------------------- */}

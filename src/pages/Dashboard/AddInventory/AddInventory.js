@@ -2,17 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { TbMessageReport } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { signOut } from 'firebase/auth';
+import auth from '../../../firebase.init';
 
 const AddInventory = () => {
     const [addInventories, setAddInventories] = useState([]);
     const [deleteID, setDeleteID] = useState('');
-
+    const navigate=useNavigate();
+    
     useEffect(() => {
-        fetch('http://localhost:5000/addInventory')
-            .then(res => res.json())
+        fetch('http://localhost:5000/addInventory',{
+            method:'GET',
+            headers:{
+                'authorization':`Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => {
+               console.log('res', res);
+               if(res.status===401 || res.status===403){
+                    signOut(auth)
+                    localStorage.removeItem('accessToken')
+                    navigate('/')
+               }
+                return res.json()
+            })
             .then(data => setAddInventories(data))
 
     }, [])
