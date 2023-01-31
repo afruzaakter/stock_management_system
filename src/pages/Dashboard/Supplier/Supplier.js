@@ -14,6 +14,7 @@ const Supplier = () => {
             .then(res => res.json())
             .then(data => setSuppliers(data))
     }, []);
+    console.log(suppliers)
     //-------- supplier delete method -----------
     const handleDelete = (id) => {
         const url = `http://localhost:5000/supplier/${id}`

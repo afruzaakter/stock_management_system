@@ -22,12 +22,46 @@ const AddNewInventory = () => {
          .then(data => setSuppliers(data))
       },[])
 
+          //------- for auto generate code 
+    const [addInventories, setAddInventories] = useState([]);
+    const [autoCode, setAutoCode] = useState(); 
+    console.log("auto inventory",addInventories)
+    useEffect(() => {
+        fetch('http://localhost:5000/addInventory')
+            .then(res => res.json())
+            .then(data => setAddInventories(data))
+
+    }, [])
+   useEffect(() => {
+        const codeList = addInventories?.map(addInventorie => addInventorie.autoCode);
+        const length =codeList.length;
+        if(length === 0){
+            setAutoCode(1000)
+        }else{
+            const lastValue =codeList[length-1]; 
+            const lastCode = +lastValue;
+            setAutoCode(lastCode+1)
+        }
+   }, [addInventories]);
+
+  
+
     // ------------- AddInventory Data post method -----------
     const onSubmit = (data) => {
+        const updateData = {
+            productName : data.productName,
+            supplierCompany: data.supplierCompany,
+            purchase: data.purchase,
+            unitMeasurement: data.unitMeasurement,
+            packSize: data.packSize,
+            quantity: data.quantity,
+            totalQuantity: data.totalQuantity,
+            autoCode: autoCode,
+        }
        const url = "http://localhost:5000/addInventory"
        fetch(url, {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(updateData),
         headers: {
            'Content-type' : 'application/json; charset=UTF-8', 
         },
@@ -116,7 +150,7 @@ const AddNewInventory = () => {
                             </label>
                         </div> 
                             {/* --------------------Product code field ----------------------- */}
-                            <div className="form-control">
+                            {/* <div className="form-control">
                             <label className='text-start'>Product Code</label>
                             <input
                                 type="text"
@@ -132,7 +166,7 @@ const AddNewInventory = () => {
                                 {errors.productCode?.type === 'required' && <span className="label-text-alt text-red-700">
                                     {errors.productCode.message} </span>}
                             </label>
-                        </div>
+                        </div> */}
 
                           {/* --------------------Unit of Measurement  field ----------------------- */}
                           <div className="form-control">
