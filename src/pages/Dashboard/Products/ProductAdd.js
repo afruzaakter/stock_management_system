@@ -78,7 +78,7 @@ const ProductAdd = () => {
                                 <option  value=''>--Select Budget Code--</option>
                                 
                                 {
-                                    budgetCodes.map((budgetCode) => <option>{budgetCode.budgetCode}</option>)
+                                    budgetCodes.map((budgetCode) => <option key={budgetCode._id}>{budgetCode.budgetCode}</option>)
                                 }
                             </select>
 

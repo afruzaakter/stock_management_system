@@ -85,7 +85,7 @@ const AddInventory = () => {
                                     <td> {addInventory.productName} </td>
                                     <td> {addInventory.supplierCompany} </td>
                                     <td> {addInventory.purchase} </td>
-                                    <td> {addInventory.productCode} </td>
+                                    <td> {addInventory.autoCode} </td>
                                     <td> {addInventory.unitMeasurement} </td>
                                     <td> {addInventory.packSize} </td>
                                     <td> {addInventory.quantity} </td>

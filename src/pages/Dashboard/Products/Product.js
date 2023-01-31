@@ -62,10 +62,8 @@ const Product = () => {
                             <th>SL.</th>
                             <th>Product Name</th>
                             <th>Budget Code </th>
-                            <th>Unit</th>
-                            <th>Stock </th>
+                            <th>UoM</th>
                             <th>Alert Qty </th>
-                            <th>Order </th>
                             <th>Action </th>
                         </tr>
                     </thead>
@@ -76,10 +74,8 @@ const Product = () => {
                                 <th>{index+1}</th>
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
-                                <td>{product.size}</td>
-                                <td>{product.stockOrder} </td>
+                                <td>{product.measureUnit}</td>
                                 <td>{product.alertQty}</td>
-                                <td>{product.sortOrder}</td>
                                 <td className='flex gap-1'>
                                         <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
                                         <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
