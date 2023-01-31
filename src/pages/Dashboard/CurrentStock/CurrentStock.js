@@ -2,11 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { TbMessageReport } from 'react-icons/tb';
-import { FiRefreshCcw } from 'react-icons/fi';
-import { MdRefresh } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-import { FaEdit } from 'react-icons/fa';
-import { MdDeleteForever } from 'react-icons/md';
 const CurrentStock = () => {
     const [products, setProducts] = useState([]);
      useEffect(() => {
@@ -14,9 +9,25 @@ const CurrentStock = () => {
              .then(res => res.json())
              .then(data => setProducts(data))
      }, []);
-     const handleDelete = (data) =>{
 
-     }
+     const [addInventories, setAddInventories] = useState([]);
+     useEffect(() => {
+         fetch('http://localhost:5000/addInventory')
+             .then(res => res.json())
+             .then(data => setAddInventories(data))
+ 
+     }, [])
+    //  console.log(addInventories)
+
+      //---------------- Calculation for stock-------------
+      const stock = addInventories.map(addInventorie => addInventorie.quantity);
+      console.log(stock)
+      let sum = 0;
+      for (let i = 0; i < stock.length; i++) {
+          sum += parseInt(stock[i]);  
+          console.log(sum)  
+      }
+   
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -60,9 +71,9 @@ const CurrentStock = () => {
                             <th> SL</th>
                             <th>Product Name </th>
                             <th>Budget Code </th>
-                            <th>UoM </th>
-                            <th>Stock </th>                         
+                            <th>UoM </th>                        
                             <th>Alert Qty </th>
+                            <th>Stock </th> 
                             
                         </tr>
                     </thead>
@@ -73,9 +84,9 @@ const CurrentStock = () => {
                                 <th>{index+1}</th>
                                 <td>{product.productName}</td>
                                 <td>{product.budgetCode}</td>
-                                <td>{product.measureUnit}</td>
-                                <td>{product.stockOrder}</td>                              
+                                <td>{product.measureUnit}</td>                            
                                 <td>{product.alertQty}</td>
+                                <td>{sum}</td>
                               
                                
                             </tr>)
