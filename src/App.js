@@ -46,12 +46,14 @@ import StockAdjustAdd from "./pages/Dashboard/StockAdjust/StockAdjustAdd";
 import RequisitionCreate from "./pages/Dashboard/Requisition/RequisitionCreate";
 import DepartmentAdd from "./pages/Dashboard/Settings/Department/DepartmentAdd";
 import RequireAuth from "./pages/Auth/RequireAuth";
+import AllUsers from "./pages/Dashboard/AllUsers/AllUsers";
 
 function App() {
   return ( 
   <>
     <Navbar> </Navbar>
     <Routes>
+      <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp/>} />
       {/* <Route path="/" element={<RequireAuth> <Dashboard /> </RequireAuth> } /> */}
@@ -87,6 +89,8 @@ function App() {
         <Route path="addNewUser" element={<AddNewUser/>}/>
         <Route path="userEdit/:id" element={<UserEdit />}/>
         
+        <Route path="allUsers" element={<AllUsers/>}/>
+
         <Route path="setting" element={<Setting/>}/>
         <Route path="keyType" element={<KeyType/>}/>
         <Route path="keyEdit/:id" element={<EditKeyType/>}/>
