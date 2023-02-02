@@ -10,8 +10,12 @@ import { FiRefreshCcw } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { toast } from 'react-toastify';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
 
 const UserManagement = () => {
+    const [user, loading] = useAuthState(auth)
+    console.log(user)
     const [users, setUsers]= useState([])
 
     useEffect(()=>{
@@ -102,7 +106,7 @@ const UserManagement = () => {
                         {
                             users.map((user)=>
                             <tr key={user._id}>
-                                <th>{user.fullName } </th>
+                                <td>{user.fullName } </td>
                                 <td>{user.email} </td>
                                 <td>{user.userName } </td>
                                 <td>{user.organization} </td>

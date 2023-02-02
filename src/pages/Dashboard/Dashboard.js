@@ -23,6 +23,8 @@ import { FaChevronDown } from 'react-icons/fa';
 import { GoIssueReopened } from 'react-icons/go';
 import { MdOutlineInventory } from 'react-icons/md';
 import { FaUserFriends } from 'react-icons/fa';
+import useAdmin from '../../hooks/useAdmin';
+import useApprove from '../../hooks/useApprove';
 
 const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
@@ -32,6 +34,8 @@ const Dashboard = () => {
   const [subReportOpen, setSubReportOpen] = useState(false);
   const [subMenuOpen, setSubMenuOpen] = useState(false);
   const [librarySubMenuOpen, setLibrarySubMenuOpen] = useState(false);
+  const [admin] = useAdmin(user);
+  const [approve] = useApprove(user);
 
 
   if (loading) {
@@ -72,9 +76,9 @@ const Dashboard = () => {
                   {/* -----------------------------Requisition Authorize dashboard menu End ---------------------------- */}
 
                   {/* -----------------------------Requisition Approval dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md`}><Link to='/dashboard/requisitionApproval' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                 {approve && <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md`}><Link to='/dashboard/requisitionApproval' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiOutlineFieldTime className='' /></span>
-                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition(Approval)</span></Link></li>
+                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition(Approval)</span></Link></li>}
                   {/* -----------------------------Requisition Approval dashboard menu End ---------------------------- */}
 
                   {/* -----------------------------Requisition Issue dashboard menu Start ---------------------------- */}
@@ -141,9 +145,9 @@ const Dashboard = () => {
 
 
                   {/* ----------------------------Employee dashboard menu Start ---------------------------- */}
-                  <li className={`text-gray-300 text-md mt-2 flex items-start rounded-md `}><Link to='/dashboard/employee' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  { admin && <li className={`text-gray-300 text-md mt-2 flex items-start rounded-md `}><Link to='/dashboard/employee' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <HiUserGroup className='' /></span>
-                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Employee </span></Link></li>
+                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Employee </span></Link></li> }
                   {/* -----------------------Employee dashboard menu End ---------------------- */}
 
                   {/* ------------------------User Management  dashboard menu Start ---------------------------- */}

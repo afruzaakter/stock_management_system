@@ -3,10 +3,13 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { RxCross2 } from 'react-icons/rx';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
 
 const AddNewEmployee = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
+    const [user, loading] = useAuthState(auth)
     const [designations, setDesignations] = useState([]);
     const [departments, setDepartments] = useState([]);
 
@@ -55,13 +58,10 @@ const AddNewEmployee = () => {
                             <label className='text-start'>Name </label>
                             <input
                                 type="text"
+                                
+                                value={user.displayName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.employeeName && 'border-red-600 focus:border-red-600'}`}
-                                {...register("employeeName", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
+                                {...register("employeeName")}
                             />
                             <label className="label">
                                 {errors.employeeName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.employeeName.message}</span>}
@@ -109,13 +109,10 @@ const AddNewEmployee = () => {
                             <label className='text-start '> Email </label>
                             <input
                                 type="text"
+                              
+                                value={user.email}
                                 className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
-                                {...register("email", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
+                                {...register("email")}
                             />
                             <label className="label">
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-700">{errors.email.message}</span>}
