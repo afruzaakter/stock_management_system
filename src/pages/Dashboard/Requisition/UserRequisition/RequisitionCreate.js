@@ -8,39 +8,33 @@ const RequisitionCreate = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
 
-    const [searchVal, setSearchVal] = useState("");
-    const [selectVal, setSelectVal] = useState([]);
-
-  console.log("select value",selectVal)
-
-    // -------------------- budgetCode get method----------------------
+    // -------- budgetCode get method--------------
     const [budgetCodes, setBudgetCodes] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, []);
-    // -------------------- budgetCode get method----------------------
+    // -------------- budgetCode get method--------
     const [products, setProducts] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
-    // console.log(products)
-
-    // onClick={()=>setSelectVal(val.productName)} 
-    //=================================
-    const [data, setData] = useState({
-        productName: "",
-    })
-    const handleInputChange = (e) => {
-        console.log("onChange data", e.target.value)
-        setData({
-            ...data,
-            [e.target.name]: e.target.value
-        })
-    }
+    console.log(products);
+    // ============================================
+    // --For searching product---
+    const [searchVal, setSearchVal] = useState("");
+    // --selectedBudgetCode and filter data form under BudgetCode ---------
+    const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
+    const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode)
+    // --Multiple productName selected and show the table------
+    const [selectedProductName, setSelectedProductName] = useState([]);
+    const handleRowClick = (selectedItem) => {
+        setSelectedProductName([...selectedProductName, selectedItem]);
+    };
+console.log('aaa',selectedProductName);
     //==============================================
     const onSubmit = (data) => {
         const url = 'http://localhost:5000/productkey'
@@ -59,20 +53,24 @@ const RequisitionCreate = () => {
             })
         navigate('/dashboard/productKey');
     }
+
     return (
-        <div className='m-10'>
-            <h1 className='text-2xl '>Create Requisition</h1>
-            <div className='mt-5'>
+        <div className='border m-2 p-2 rounded-lg'>
+             <div className='p-1 mb-2'>
+                <h1 className='text-2xl font-bold'>Create Requisition </h1>
+            </div>
+
+            <div>
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className='lg:flex lg:gap-5'>
-                        {/* ---------------------Requisition Notes Input Field --------------------------- */}
-                        <div className='flex flex-col'>
-                            <div className="form-control">
+                        {/* ----------Left side >>>- Requisition Notes Input Field ----------------- */}
+                        <div className='flex flex-col lg:w-8/12 '>
+                            <div className="form-control w-full ">
                                 <label className='text-start '>Requisition Notes</label>
                                 <input
                                     type="text"
                                     placeholder='Requisition Notes'
-                                    className={`input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-96  focus:border-blue-500  login-container-input ${errors.requisitionNotes && 'border-red-600 focus:border-red-600'}`}
+                                    className={`input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1    focus:border-blue-500  login-container-input ${errors.requisitionNotes && 'border-red-600 focus:border-red-600'}`}
                                     {...register("requisitionNotes", {
                                         required: {
                                             value: true,
@@ -98,47 +96,47 @@ const RequisitionCreate = () => {
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            <th>1</th>
-                                            <td>
-
-                                                 {selectVal}
-
-                                            </td>
-                                            <td>
-
-                                                <input type="number" className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' ></input>
-
-                                            </td>
-                                        </tr>
+                                            {
+                                                selectedProductName?.map((product,index)=> <tr key={product._id}>
+                                                    <th>{index+1} </th>
+                                                    <td>{product.productName} </td>
+                                                    <td>
+                                                        <input
+                                                            type="number" 
+                                                            className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
+                                                        </input>
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="number" 
+                                                            className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
+                                                        </input>
+                                                    </td>
+                                                </tr>)
+                                            }
+                                       
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                        {/* ----------------- */}
+                       
+                        {/* --------------------Right side>>> Budget Code Field ------------- */}
 
+                        <div className="form-control lg:w-4/12">
+                            <div className="form-control">
+                                <label className='text-start'>Budget Code</label>
+                                <select    
+                                    onChange={e=>setSelectedBudgetCode(e.target.value)}    
+                                    className={`input input-sm  lg:w-96 md:w-64  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input `}>
+                                    <option value=''>--Select Budget Code-- </option>
+                                    {
+                                        budgetCodes.map((budgetCode) => <option> {budgetCode.budgetCode} </option>)
+                                    }
 
+                                </select>
+                            </div>
 
-                        {/* -----------------------Department Name Field ------------------------------ */}
-
-                        <div className="form-control">
-                            <label className='text-start'>Budget Code</label>
-                            <select onChange={handleInputChange}  {...register("budgetCode")}
-                                name="budgetCode"
-                               
-                                className={`input input-sm  lg:w-96 md:w-64  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input ${errors.keytype && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''>--Select key type--</option>
-                                {
-                                    products.map((budgetCode) => <option>{budgetCode.budgetCode}</option>)
-                                }
-
-                            </select>
-
-                            <label className="label">
-                                {errors.keytype?.type === 'required' && <span className="label-text-alt text-red-700">{errors.keytype.message}</span>}
-
-                            </label>
 
                             <div className="flex flex-col">
 
@@ -151,45 +149,39 @@ const RequisitionCreate = () => {
                                         </button>
                                     </div>
                                     <div className='form-control'>
-
-
-                                        <label className='text-start'>Product Name</label>
+                                        <label className='text-start'>---Product Name---</label>
                                       
-                                    
-                                            {products.filter((val) => {
-                                                if (searchVal === "") {
-                                                    return val;
-                                                } else if (val.productName.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())) {
-                                                    return val
-                                                }
-                                            }).map((val, key) => <ul >
-                                                <li onClick={()=>setSelectVal(val.productName)}   onChange={handleInputChange}>{val.productName}</li>
-                                            </ul>
+                                        {
+                                            selectedProducts.length===0 && <>
+                                            {
+                                                products.filter((val) => {
+                                                    if (searchVal === "") {
+                                                        return val;
+                                                    } else if (val.productName.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())) {
+                                                        return val
+                                                    }
+                                                }).map((val) => <ul key={val._id}>
+                                                    <li onClick={()=>handleRowClick(val)}>
+                                                        {val.productName}</li>
+                                                </ul>
 
-                                            )}
+                                                )
+                                            }
+                                            </>
+                                           
+                                        }
 
-                                     
+                                        {
+                                            selectedProducts?.map((product)=> <ul>
+                                                <li onClick={()=>handleRowClick(product)} >
+                                                    {product.productName}</li>
+                                            </ul>)
 
-
+                                        }
 
                                     </div>
                                 </div>
                             </div>
-
-                            {/* ----------------- */}
-                            {/* <label className='text-start'>Product Name</label> */}
-                            {/* <select   {...register("productName", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
-                                className={`input input-sm  lg:w-96 md:w-64  focus:outline-0 rounded-sm   mt-1     login-container-input ${errors.keytype && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}> 
-                            <option value=''>--Select key type--</option>
-                          
-                            </select> */}
-
-
                         </div>
 
                     </div>
