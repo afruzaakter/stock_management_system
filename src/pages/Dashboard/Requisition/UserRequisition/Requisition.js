@@ -2,6 +2,7 @@ import React from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { AiOutlineEye } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import Print from '../../../Shared/Print';
 
 const Requisition = () => {
     return (
@@ -53,6 +54,7 @@ const Requisition = () => {
                     </tbody>
                 </table>
             </div>
+            <Print/>
         </div>
     );
 };

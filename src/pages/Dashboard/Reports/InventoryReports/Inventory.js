@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import Print from '../../../Shared/Print';
+import CurrentStockSR from './CurrentStockSR';
+import InventoryReport from './InventoryReport';
 
 const Inventory = () => {
  
     return (
-      <>
-      
-         <p>This field is required</p>
-      </>
+      <div>
+           <div className='border-pink-400 rounded-lg border-b '>
+           <CurrentStockSR/>
+           </div>
+           <div className='border-pink-400 rounded-lg border-b '>
+          <InventoryReport/>
+           </div>
+          
+        </div>
     );
   };
 
