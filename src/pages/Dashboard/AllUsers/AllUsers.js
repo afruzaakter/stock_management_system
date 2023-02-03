@@ -1,9 +1,12 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-// import { useQuery } from 'react-query';
+import { FiEdit } from 'react-icons/fi';
+import { AiOutlineDelete } from 'react-icons/ai';
 import {useQuery , QueryClientProvider, QueryClient } from 'react-query'
+import { Link } from 'react-router-dom';
 import Loading from '../../Shared/Loading';
+import { toast } from 'react-toastify';
 
 const queryClient = new QueryClient()
 const AllUsers = () => {
@@ -15,16 +18,31 @@ const AllUsers = () => {
     //     }
     // }).then(res => res.json()))
 
-    const [AllUsers, setAllUsers]= useState([])
-
+    const [allUsers, setAllUsers]= useState([])
+  
     useEffect(()=>{
-        fetch("http://localhost:5000/allUsers")
+        fetch("http://localhost:5000/user")
         .then(res=>res.json())
         .then(data=> setAllUsers(data))
     },[])
 
+console.log(allUsers)
 
+const {email, role} = allUsers;
+const makeAdmin = () =>{
+ const url = `http://localhost:5000/user/admin/${email}`
+ fetch(url,{
+    method: 'PUT'
+ })
+ .then(res => res.json())
+ .then(data =>{
+    toast.success('Successfully made an admin');
+    console.log(data)
+ })
+}
+const handleDelete = () =>{
 
+}
 
     return (
         <div className='border m-2 pl-2 rounded-lg'>
@@ -32,7 +50,7 @@ const AllUsers = () => {
             {/*------------AllUsers navbar-------- */}
             <div className="navbar bg-base-100">
                 <div className="flex-1">
-                    <h1 className='text-3xl'>All Users Account: {AllUsers.length} </h1> 
+                    <h1 className='text-3xl'>All Users Account: {allUsers.length} </h1> 
                 </div>
                 <div className="form-control">
                     <div className="input-group">
@@ -52,23 +70,23 @@ const AllUsers = () => {
                             <th> SL No. </th>
                             <th> Name  </th>
                             <th> Email </th>
+                            <th> Role Manage</th>
                             <th> Action </th>
                            
                         </tr>
                     </thead>
 
                     <tbody>
-                        {/* {
-                            users.map((user)=>
+                        {
+                            allUsers.map((user,index)=>
                             <tr key={user._id}>
-                                <th>{user.fullName } </th>
-                                <td>{user.email} </td>
-                                <td>{user.userName } </td>
-                                <td>{user.organization} </td>
-                                <td>{user.userRole } </td>
+                                <td>{index+1 } </td>
+                                <td>{user.fullName} </td>
+                                <td>{user.email } </td>
+                                {/* <td>{user.userRole } </td>
                                 <td> Yes </td>
-                                <td> No </td>
-                                <td> No </td>
+                                <td> No </td> */}
+                                <td> {role !== 'admin' && <button className='btn btn-sm bg-red-500 text-white' onClick={makeAdmin}> Make Admin</button>} </td>
                                 <td className='flex gap-3'>
                                     <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/userEdit/${user._id}`}> <FiEdit /> </Link>
                                     <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(user._id)}> <AiOutlineDelete /></button>
@@ -76,7 +94,7 @@ const AllUsers = () => {
                              </tr>
                             )
                         }
-                    */}
+                   
                         
                     </tbody>
                 </table>
