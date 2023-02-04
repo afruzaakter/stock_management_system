@@ -31,6 +31,9 @@ const IssueReportsPBC = () => {
                                 <option value=''>This Week </option>
                                 <option value=''>This Month </option>
                                 <option value=''>This Year </option>
+                                <option value=''>On Date </option>
+                                <option value=''>Date Between </option>
+                                <option value=''>Invoice Between </option>
                       
                             </select>
                          

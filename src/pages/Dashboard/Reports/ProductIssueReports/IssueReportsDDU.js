@@ -13,7 +13,9 @@ const IssueReportsDDU = () => {
                             className={`input input-sm   border border-green-700 mt-1 w-80 focus:outline-0 rounded-sm  
                              focus:border-blue-500 login-container-input `}>
                             <option value=''>All </option>
-                            <option value=''>Budget Code </option>
+                            <option value=''>Department </option>
+                            <option value=''>Designation </option>
+                            <option value=''>User </option>
                           
                         </select>
                         
