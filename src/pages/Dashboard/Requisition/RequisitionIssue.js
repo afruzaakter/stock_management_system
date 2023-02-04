@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
+import Setting from '../Settings/Setting';
 
 const RequisitionIssue = () => {
     return (
@@ -48,6 +49,8 @@ const RequisitionIssue = () => {
                 </tbody>
             </table>
         </div>
+
+       
     </div>
 );
 };

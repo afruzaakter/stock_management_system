@@ -1,9 +1,12 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import DepartmentDesignationReport from './DepartmentDesignationReport';
 import EmployeeReport from './EmployeeReport';
 import UserReport from './UserReport';
 
 const EmployeeUser = () => {
+  
     return (
         <div>
         <div className='border-pink-400 rounded-lg border-b '>
@@ -15,7 +18,6 @@ const EmployeeUser = () => {
         <div className='border-pink-400 rounded-lg border-b '>
        <DepartmentDesignationReport/>
         </div>
-       
      </div>
     );
 };
