@@ -7,9 +7,10 @@ import Setting from '../Setting';
 import { toast } from 'react-toastify';
 
 const Designation = () => {
-    const [designations, setDesignations] = useState([]);
+   
     const [ deleteID, setDeleteID] = useState('');
-    
+  //------ Designation Fetch method -----------------  
+    const [designations, setDesignations] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/designation')
             .then(res => res.json())
@@ -17,6 +18,7 @@ const Designation = () => {
 
     }, [])
 
+//--------- Designation Delete method------------
     const handleDelete = (id) => {
             const url = `http://localhost:5000/designation/${id}`
             fetch(url, {

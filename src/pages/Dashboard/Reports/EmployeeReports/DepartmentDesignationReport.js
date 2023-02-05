@@ -13,9 +13,8 @@ const DepartmentDesignationReport = () => {
                         className={`input input-sm   border border-green-700 mt-1 lg:w-80 focus:outline-0 rounded-sm  
                          focus:border-blue-500 login-container-input `}>
                         <option value='' className='text-gray-500'>Department</option>
-                        <option value=''>This Week </option>
-                        <option value=''>This Month </option>
-                        <option value=''>This Year </option>
+                        <option value=''>Designation</option>
+                      
 
                     </select>
 

@@ -1,7 +1,24 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import Print from '../../../Shared/Print';
 
 const UserReport = () => {
+          //------ Departments Fetch method -----------------  
+          const [departments, setDepartments] = useState([]);
+          useEffect(() => {
+              fetch('http://localhost:5000/department')
+                  .then(res => res.json())
+                  .then(data => setDepartments(data))
+          }, []);
+            //------ Designation Fetch method -----------------  
+          const [designations, setDesignations] = useState([]);
+          useEffect(() => {
+              fetch('http://localhost:5000/designation')
+                  .then(res => res.json())
+                  .then(data => setDesignations(data))
+          }, []);
+
     return (
         <div className='m-5'>
         <h1 className='text-xl font-bold'>User Report</h1>
@@ -10,12 +27,12 @@ const UserReport = () => {
                 <label className='text-start'>Department</label>
                 <select
 
-                    className={`input input-sm   border border-green-700 mt-1 w-80 focus:outline-0 rounded-sm  
+                    className={`input input-sm   border border-green-700 mt-1 lg:w-80 focus:outline-0 rounded-sm  
                          focus:border-blue-500 login-container-input `}>
                     <option value='' className='text-gray-500'>All Department</option>
-                    <option value=''>This Week </option>
-                    <option value=''>This Month </option>
-                    <option value=''>This Year </option>
+                    {
+                    departments.map((department) => <option key={department._id}>{department.name}</option>)
+                    } 
 
                 </select>
 
@@ -24,12 +41,12 @@ const UserReport = () => {
                 <label className='text-start'>Designation</label>
                 <select
 
-                    className={`input input-sm   border border-green-700 mt-1 w-80 focus:outline-0 rounded-sm  
+                    className={`input input-sm   border border-green-700 mt-1 lg:w-80 focus:outline-0 rounded-sm  
                          focus:border-blue-500 login-container-input `}>
                     <option value='' className='text-gray-400'>All Designation</option>
-                    <option value=''>This Week </option>
-                    <option value=''>This Month </option>
-                    <option value=''>This Year </option>
+                    {
+                    designations.map((designation) => <option key={designation._id}>{designation.name}</option>)
+                    } 
 
                 </select>
 
@@ -43,10 +60,12 @@ const UserReport = () => {
                     className={`input input-sm   border border-green-700 mt-1 lg:w-80 focus:outline-0 rounded-sm  
                          focus:border-blue-500 login-container-input `}>
                     <option value='' className='text-gray-500'>All Role</option>
-                    <option value=''>This Week </option>
-                    <option value=''>This Month </option>
-                    <option value=''>This Year </option>
-
+                    <option value=''>Role_Inventory </option>
+                    <option value=''>Role_Store</option>
+                    <option value=''>Role_Approve </option>
+                    <option value=''>Role_Authorization </option>
+                    <option value=''>Role_Admin</option>
+                    <option value=''>Role_User</option>
                 </select>
 
             </div>

@@ -47,6 +47,7 @@ import RequisitionCreate from "./pages/Dashboard/Requisition/UserRequisition/Req
 import DepartmentAdd from "./pages/Dashboard/Settings/Department/DepartmentAdd";
 import RequireAuth from "./pages/Auth/RequireAuth";
 import AllUsers from "./pages/Dashboard/AllUsers/AllUsers";
+import NotFoundPage from "./pages/Shared/NotFoundPage";
 
 function App() {
   return ( 
@@ -112,6 +113,7 @@ function App() {
         <Route path="productAdd" element={<ProductAdd/>}/>
         <Route path="productEdit/:id" element={<ProductEdit/>}/>
       </Route>
+      <Route path="*" element={<NotFoundPage/>} />
     </Routes>
     <ToastContainer />
   </>

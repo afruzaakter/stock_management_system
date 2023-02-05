@@ -75,7 +75,7 @@ const KeyType = () => {
                             <input
                                 type="text"
                                 placeholder='Key Type'
-                                className={`input font-bold max-w-xs  focus:outline-0 rounded-sm border-gray-400 mt-1  w-full focus:border-blue-500  login-container-input ${errors.key && 'border-red-600 focus:border-red-600'}`}
+                                className={`input font-bold max-w-xs  focus:outline-0 rounded-sm border-primary mt-1  w-full focus:border-blue-500  login-container-input ${errors.key && 'border-red-600 focus:border-red-600'}`}
                                 {...register("key", {
                                     required: {
                                         value: true,

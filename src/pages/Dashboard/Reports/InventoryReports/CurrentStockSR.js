@@ -14,9 +14,8 @@ const CurrentStockSR = () => {
                             className={`input input-sm   border border-green-700 mt-1 w-80 focus:outline-0 rounded-sm  
                              focus:border-blue-500 login-container-input `}>
                             <option value=''>All Product</option>
-                            <option value=''>This Week </option>
-                            <option value=''>This Month </option>
-                            <option value=''>This Year </option>
+                            <option value=''>Budget Code</option>
+                           
                   
                         </select>
                      
