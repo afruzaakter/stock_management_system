@@ -118,17 +118,15 @@ const RequisitionCreate = () => {
                                             selectedProductName?.map((product, index) => <tr key={product._id}>
                                                 <th>{index + 1} </th>
                                                 <td 
-                                                name="productName" 
-                                                 onChange={(event)=>setSelectProductData(event.target.value)} 
-
-                                                setValue={product.productName}
-                                                 >
+                                                    name="productName" 
+                                                    onChange={(event)=>setSelectProductData(event.target.value)}
+                                                    setValue={product.productName} >
                                                     
                                                     {product.productName} 
                                                  
                                                  
                                                  
-                                                 </td>
+                                                </td>
 
                                                 <td>
                                                     <input

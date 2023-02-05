@@ -54,7 +54,6 @@ const Requisition = () => {
                     </tbody>
                 </table>
             </div>
-            <Print/>
         </div>
     );
 };
