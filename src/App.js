@@ -24,7 +24,7 @@ import Designation from "./pages/Dashboard/Settings/Designation/Designation";
 import ProductKey from "./pages/Dashboard/Settings/Productkey/ProductKey";
 import ProductIssue from "./pages/Dashboard/Reports/ProductIssueReports/ProductIssue";
 import Inventory from "./pages/Dashboard/Reports/InventoryReports/Inventory";
-import EmployeeUser from "./pages/Dashboard/Reports/EmployeeReports/AllReport";
+import UserReport from "./pages/Dashboard/Reports/EmployeeReports/UserReport";
 import EditKeyType from "./pages/Dashboard/Settings/Library/EditKeyType";
 import AddNewEmployee from "./pages/Dashboard/Employee/AddNewEmployee";
 import DesignationAdd from "./pages/Dashboard/Settings/Designation/DesignationAdd";
@@ -48,6 +48,8 @@ import DepartmentAdd from "./pages/Dashboard/Settings/Department/DepartmentAdd";
 import RequireAuth from "./pages/Auth/RequireAuth";
 import AllUsers from "./pages/Dashboard/AllUsers/AllUsers";
 import NotFoundPage from "./pages/Shared/NotFoundPage";
+import EmployeeReport from "./pages/Dashboard/Reports/EmployeeReports/EmployeeReport";
+import DepartmentDesignationReport from "./pages/Dashboard/Reports/EmployeeReports/DepartmentDesignationReport";
 
 function App() {
   return ( 
@@ -81,7 +83,9 @@ function App() {
         
         <Route path="reports/productIssue" element={<ProductIssue/>}/>
         <Route path="reports/inventory" element={ <Inventory />}/>
-        <Route path="reports/employeeUser" element={ <EmployeeUser />} />
+        <Route path="reports/employeeReport" element={ <EmployeeReport />} />
+        <Route path="reports/userReport" element={ <UserReport/>} />
+        <Route path="reports/departmentDesignationReport" element={ <DepartmentDesignationReport/>} />
         
         <Route path="employee" element={<Employee/>}/>
         <Route path="addNewEmployee" element={< AddNewEmployee />}/>

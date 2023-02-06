@@ -134,10 +134,18 @@ const Dashboard = () => {
                       <li className={`text-gray-300 text-md mt-2 flex items-start ml-5  rounded-md`}><Link to="/dashboard/reports/inventory" className='w-full font-medium border-b border-gray-400  rounded-md    '>
                         <span className={` text-gray-800  block ${!open ? "text-xl" : "ml-0"} `} >  <MdOutlineInventory  /></span>
                         <span className={` text-gray-800 ${!open && 'hidden'}`}>Inventory </span></Link></li>
-                      {/* ------------------------------ Employee User -------------------- */}
-                      <li className={`text-gray-300 text-md mt-2 flex items-start ml-5 rounded-md `}><Link to="/dashboard/reports/employeeUser" className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                      {/* ------------------------------ Employee Report-------------------- */}
+                      <li className={`text-gray-300 text-md mt-2 flex items-start ml-5 rounded-md `}><Link to="/dashboard/reports/employeeReport" className='w-full font-medium border-b border-gray-400  rounded-md    '>
                         <span className={` text-gray-800  block ${!open ? "text-xl" : "ml-0"} `} >  <FaUserFriends  /></span>
-                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Employee User </span></Link></li>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>Employee Report </span></Link></li>
+                      {/* ------------------------------User Report-------------------- */}
+                      <li className={`text-gray-300 text-md mt-2 flex items-start ml-5 rounded-md `}><Link to="/dashboard/reports/userReport" className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                        <span className={` text-gray-800  block ${!open ? "text-xl" : "ml-0"} `} >  <FaUserFriends  /></span>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>User Report </span></Link></li>
+                      {/* ------------------------------User Report-------------------- */}
+                      <li className={`text-gray-300 text-md mt-2 flex items-start ml-5 rounded-md `}><Link to="/dashboard/reports/departmentDesignationReport" className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                        <span className={` text-gray-800  block ${!open ? "text-xl" : "ml-0"} `} >  <FaUserFriends  /></span>
+                        <span className={` text-gray-800 ${!open && 'hidden'}`}>DD Report </span></Link></li>
                       </>
                     }
 
