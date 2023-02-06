@@ -12,13 +12,13 @@ const RequisitionCreate = () => {
 
 
 
-    //------------Quantity count -------------
-    const [count, setCount] = useState(1)
-    //-------------- onchange  table data pass---------
-    const [selectProductData, setSelectProductData] = useState('');
-    useEffect(()=>{
-        setValue('productName', selectProductData);
-    },[selectProductData,setValue])
+    // //------------Quantity count -------------
+    // const [count, setCount] = useState(1)
+    // //-------------- onchange  table data pass---------
+    // const [selectProductData, setSelectProductData] = useState('');
+    // useEffect(()=>{
+    //     setValue('productName', selectProductData);
+    // },[selectProductData,setValue])
    
 
 
@@ -39,38 +39,44 @@ const RequisitionCreate = () => {
             .then(data => setProducts(data))
     }, []);
     // console.log(products);
+
     // ============================================
     // --For searching product---
     const [searchVal, setSearchVal] = useState("");
+
     // --selectedBudgetCode and filter data form under BudgetCode ---------
     const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
-    const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode)
+    const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
+
     // --Multiple productName selected and show the table------
     const [selectedProductName, setSelectedProductName] = useState([]);
     const handleRowClick = (selectedItem) => {
         setSelectedProductName([...selectedProductName, selectedItem]);
-        setCount(count)
     };
     // console.log('aaa',selectedProductName);
+
     //==============================================
     const onSubmit = (data) => {
         console.log("table data", data)
-        const url = 'http://localhost:5000/productkey'
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                toast.success("Data Added Successfully!!!");
-                reset();
-            })
+        // const url = 'http://localhost:5000/createRequisition'
+        // fetch(url, {
+        //     method: 'POST',
+        //     body: JSON.stringify(data),
+        //     headers: {
+        //         'Content-type': 'application/json; charset=UTF-8',
+        //     },
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data)
+        //         toast.success("Requisition Created Successfully");
+        //         reset();
+        //     })
         navigate('/dashboard/requisition');
     }
+
+    const date = new Date();
+console.log(date);
 
     return (
         <div className='border m-2 p-2 rounded-lg'>
@@ -83,12 +89,12 @@ const RequisitionCreate = () => {
                     <div className='lg:flex lg:gap-5'>
                         {/* ----------Left side >>>- Requisition Notes Input Field ----------------- */}
                         <div className='flex flex-col lg:w-8/12 '>
-                            <div className="form-control w-full ">
+                            <div className="form-control w-full">
                                 <label className='text-start '>Requisition Notes</label>
                                 <input
                                     type="text"
                                     placeholder='Requisition Notes'
-                                    className={`input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1    focus:border-blue-500  login-container-input ${errors.requisitionNotes && 'border-red-600 focus:border-red-600'}`}
+                                    className={`input input-sm w-full max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1    focus:border-blue-500  login-container-input ${errors.requisitionNotes && 'border-red-600 focus:border-red-600'}`}
                                     {...register("requisitionNotes", {
                                         required: {
                                             value: true,
@@ -106,47 +112,34 @@ const RequisitionCreate = () => {
                                 <table className="table w-full">
                                     <thead>
                                         <tr>
-                                            <th>Sl</th>
-                                            <th>Product</th>
-                                            <th>Unit Qnty</th>
-                                            <th>Total Qnty</th>
+                                            <th className='w-1/12'>Sl</th>
+                                            <th className='w-8/4'>Product</th>
+                                            <th className='w-3/12'>Total Qnty</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         {
-                                            selectedProductName?.map((product, index) => <tr key={product._id}>
+                                            selectedProductName?.map((product, index) =>
+                                            <tr key={product._id}>
                                                 <th>{index + 1} </th>
-                                                <td 
-                                                name="productName" 
-                                                 onChange={(event)=>setSelectProductData(event.target.value)} 
-
-                                                setValue={product.productName}
-                                                 >
-                                                    
-                                                    {product.productName} 
-                                                 
-                                                 
-                                                 
-                                                 </td>
-
+                                               
                                                 <td>
-                                                    <input
-                                                        type="number"
-                                                        Value={count}
-                                                        {...register("Quantity", {
-                                                            required: {
-                                                                value: true,
-                                                                message: "❌  Please Fillup  Input Field"
-                                                            }
-                                                        })}
-                                                        className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
+                                                    <span>
+                                                        {product.productName} 
+                                                    </span>
+                                                
+                                                    <input 
+                                                    defaultValue={product.productName}
+                                                    className="hidden"
+                                                    {...(register(`${index + 1} ${product.productName}`))}> 
                                                     </input>
                                                 </td>
+                                                
                                                 <td>
                                                     <input
                                                         type="number"
-                                                        {...register("TotalQuantity", {
+                                                        {...register(`${product.productName}`, {
                                                             required: {
                                                                 value: true,
                                                                 message: "❌  Please Fillup  Input Field"
@@ -160,6 +153,9 @@ const RequisitionCreate = () => {
 
                                     </tbody>
                                 </table>
+                            </div>
+                            <div>
+
                             </div>
                             <input className='input  btn btn-xs mx-1 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Request' />
 
@@ -175,10 +171,10 @@ const RequisitionCreate = () => {
                                 <label className='text-start'>Budget Code</label>
                                 <select
                                     onChange={e => setSelectedBudgetCode(e.target.value)}
-                                    className={`input input-sm  lg:w-96 md:w-64  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input `}>
+                                    className={`input input-sm  lg:w-full md:w-64  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input `}>
                                     <option value=''>--Select Budget Code-- </option>
                                     {
-                                        budgetCodes.map((budgetCode) => <option> {budgetCode.budgetCode} </option>)
+                                        budgetCodes.map((budgetCode) => <option key={budgetCode._id}> {budgetCode.budgetCode} </option>)
                                     }
 
                                 </select>
@@ -196,7 +192,8 @@ const RequisitionCreate = () => {
                                         </button>
                                     </div>
                                     <div className='form-control'>
-                                        <label className='text-start'>---Product Name---</label>
+                                        <label className='text-start text-green-700 font-semibold '>---Add Your Product ---</label>
+                                        <hr />
 
                                         {
                                             selectedProducts.length === 0 && <>
@@ -208,8 +205,15 @@ const RequisitionCreate = () => {
                                                             return val
                                                         }
                                                     }).map((val) => <ul key={val._id}>
-                                                        <li onClick={() => handleRowClick(val)}>
-                                                            {val.productName}</li>
+                                                       
+                                                        <li className=" flex justify-between">
+                                                            <h2>  {val.productName}</h2>  
+                                                            <button 
+                                                                onClick={() => handleRowClick(val)}
+                                                                className='btn btn-sm bg-green-600 text-white rounded-md px-4 hover:bg-primary hover:text-white'>
+                                                                    Add 
+                                                            </button>
+                                                        </li>
                                                     </ul>
 
                                                     )
@@ -219,11 +223,16 @@ const RequisitionCreate = () => {
                                         }
 
                                         {
-                                            selectedProducts?.map((product) => <ul>
-                                                <li onClick={() => handleRowClick(product)} >
-                                                    {product.productName}</li>
+                                            selectedProducts?.map((product) => 
+                                            <ul>
+                                                <li className=" flex justify-between">
+                                                    <h2> {product.productName} </h2>  
+                                                    <button 
+                                                        onClick={() => handleRowClick(product)}
+                                                        className='btn btn-sm bg-green-600 text-white rounded-md px-4 hover:bg-primary hover:text-white'>Add</button>
+                                                </li>
+                                                <hr />
                                             </ul>)
-
                                         }
 
                                     </div>
