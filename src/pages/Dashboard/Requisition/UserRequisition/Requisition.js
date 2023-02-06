@@ -4,7 +4,6 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
-import Setting from '../../Settings/Setting';
 
 const Requisition = () => {
     const [user]= useAuthState(auth);

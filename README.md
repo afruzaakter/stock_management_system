@@ -13,6 +13,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 7. Firebase ( npm install firebase ) .
 8. Spinner ( npm i react-spinners )
 9. React Toastify (npm i react-toastify)
+10. React to print and pdf file (npm i react-to-print)
 
 ### `Package Install Website`
 1. Tailwind CSS (https://tailwindcss.com/docs/guides/create-react-app).
@@ -24,6 +25,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 7. Firebase (https://console.firebase.google.com/) .
 8. Spinner (https://www.npmjs.com/package/react-spinners).
 9. React Toastify (https://www.npmjs.com/package/react-toastify).
+10. React to print and pdf file (https://www.npmjs.com/package/react-to-print).
 
 
 
