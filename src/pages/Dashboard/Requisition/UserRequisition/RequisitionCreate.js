@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { RxCross2 } from 'react-icons/rx';
 
 const RequisitionCreate = () => {
-    const { register, formState: { errors }, handleSubmit,setValue , reset } = useForm();
+    const { register, formState: { errors }, handleSubmit, setValue, reset } = useForm();
     const navigate = useNavigate();
 
 
@@ -19,7 +19,7 @@ const RequisitionCreate = () => {
     // useEffect(()=>{
     //     setValue('productName', selectProductData);
     // },[selectProductData,setValue])
-   
+
 
 
 
@@ -57,26 +57,34 @@ const RequisitionCreate = () => {
 
     //==============================================
     const onSubmit = (data) => {
+
         console.log("table data", data)
-        // const url = 'http://localhost:5000/createRequisition'
-        // fetch(url, {
-        //     method: 'POST',
-        //     body: JSON.stringify(data),
-        //     headers: {
-        //         'Content-type': 'application/json; charset=UTF-8',
-        //     },
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data)
-        //         toast.success("Requisition Created Successfully");
-        //         reset();
-        //     })
+        const url = 'http://localhost:5000/createRequisition'
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toast.success("Requisition Created Successfully");
+                reset();
+            })
         navigate('/dashboard/requisition');
     }
 
+    //------------------- Auto Date -------------
     const date = new Date();
-console.log(date);
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const currentDate = day + '-' + month + '-' + year;
+  
+
+
 
     return (
         <div className='border m-2 p-2 rounded-lg'>
@@ -107,6 +115,13 @@ console.log(date);
 
                                 </label>
                             </div>
+                            {/* //--------------Date -Month -and- year-------------- */}
+                            <input
+                                type="text"
+                                className='hidden'
+                                defaultValue={currentDate}
+                                {...register("date")}
+                            />
                             {/* ------------------------------------------------- */}
                             <div className="overflow-x-auto">
                                 <table className="table w-full">
@@ -121,34 +136,34 @@ console.log(date);
                                     <tbody>
                                         {
                                             selectedProductName?.map((product, index) =>
-                                            <tr key={product._id}>
-                                                <th>{index + 1} </th>
-                                               
-                                                <td>
-                                                    <span>
-                                                        {product.productName} 
-                                                    </span>
-                                                
-                                                    <input 
-                                                    defaultValue={product.productName}
-                                                    className="hidden"
-                                                    {...(register(`${index + 1} ${product.productName}`))}> 
-                                                    </input>
-                                                </td>
-                                                
-                                                <td>
-                                                    <input
-                                                        type="number"
-                                                        {...register(`${product.productName}`, {
-                                                            required: {
-                                                                value: true,
-                                                                message: "❌  Please Fillup  Input Field"
-                                                            }
-                                                        })}
-                                                        className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
-                                                    </input>
-                                                </td>
-                                            </tr>)
+                                                <tr key={product._id}>
+                                                    <th>{index + 1} </th>
+
+                                                    <td>
+                                                        <span>
+                                                            {product.productName}
+                                                        </span>
+
+                                                        <input
+                                                            defaultValue={product.productName}
+                                                            className="hidden"
+                                                            {...(register(`${index + 1} ${product.productName}`))}>
+                                                        </input>
+                                                    </td>
+
+                                                    <td>
+                                                        <input
+                                                            type="number"
+                                                            {...register(`${product.productName}`, {
+                                                                required: {
+                                                                    value: true,
+                                                                    message: "❌  Please Fillup  Input Field"
+                                                                }
+                                                            })}
+                                                            className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
+                                                        </input>
+                                                    </td>
+                                                </tr>)
                                         }
 
                                     </tbody>
@@ -205,13 +220,13 @@ console.log(date);
                                                             return val
                                                         }
                                                     }).map((val) => <ul key={val._id}>
-                                                       
+
                                                         <li className=" flex justify-between">
-                                                            <h2>  {val.productName}</h2>  
-                                                            <button 
+                                                            <h2>  {val.productName}</h2>
+                                                            <button
                                                                 onClick={() => handleRowClick(val)}
                                                                 className='btn btn-sm bg-green-600 text-white rounded-md px-4 hover:bg-primary hover:text-white'>
-                                                                    Add 
+                                                                Add
                                                             </button>
                                                         </li>
                                                     </ul>
@@ -223,16 +238,16 @@ console.log(date);
                                         }
 
                                         {
-                                            selectedProducts?.map((product) => 
-                                            <ul>
-                                                <li className=" flex justify-between">
-                                                    <h2> {product.productName} </h2>  
-                                                    <button 
-                                                        onClick={() => handleRowClick(product)}
-                                                        className='btn btn-sm bg-green-600 text-white rounded-md px-4 hover:bg-primary hover:text-white'>Add</button>
-                                                </li>
-                                                <hr />
-                                            </ul>)
+                                            selectedProducts?.map((product) =>
+                                                <ul>
+                                                    <li className=" flex justify-between">
+                                                        <h2> {product.productName} </h2>
+                                                        <button
+                                                            onClick={() => handleRowClick(product)}
+                                                            className='btn btn-sm bg-green-600 text-white rounded-md px-4 hover:bg-primary hover:text-white'>Add</button>
+                                                    </li>
+                                                    <hr />
+                                                </ul>)
                                         }
 
                                     </div>

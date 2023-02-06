@@ -4,7 +4,7 @@ const useApprove = user =>{
     const [approve, setApprove] = useState(false)
     useEffect( () =>{
     const email = user?.email;
-    console.log(email)
+    // console.log(email)
     if(email){
         fetch(`http://localhost:5000/approve/${email}`, {
             method: 'GET',

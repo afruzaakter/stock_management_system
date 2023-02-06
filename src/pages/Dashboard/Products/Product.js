@@ -71,7 +71,7 @@ const Product = () => {
                     <tbody>
                         {
                             products.slice(0).reverse().map((product, index) => <tr key={product._id}>
-                                <th>{index+1}</th>
+                                <td>{index+1}</td>
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
                                 <td>{product.measureUnit}</td>

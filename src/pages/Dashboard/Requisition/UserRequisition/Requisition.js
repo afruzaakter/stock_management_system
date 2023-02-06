@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { AiOutlineEye } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../../firebase.init';
+import Setting from '../../Settings/Setting';
 
 const Requisition = () => {
+    const [user]= useAuthState(auth);
+    const [createRequisitions, setCreateRequisitions]= useState([]);
+    useEffect(()=>{
+        fetch("http://localhost:5000/createRequisition")
+        .then(res=>res.json())
+        .then(data=>setCreateRequisitions(data))
+    },[])
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -42,16 +52,21 @@ const Requisition = () => {
                     </thead>
 
                     <tbody>
-                        <tr >
-                            <td> 03-01-2023 </td>
-                            <td>PO-0001</td>
-                            <td>Razu Molla</td>
-                            <td>  ok </td>
-                            <td> Yes  </td>
-                        </tr>
+                        {
+                            createRequisitions.map((createRequisition, index) =><tr key={createRequisition._id}>
+                                <td>{createRequisition.date}</td>
+                                <td></td>
+                                <td>{user.displayName}</td>
+                                <td>pending</td>
+                                <td>{createRequisition.requisitionNotes}</td>
+                            </tr>)
+                        }
+                     
                     </tbody>
                 </table>
-            </div>        
+            </div>  
+
+            <Setting/>      
         </div>
     );
 };
