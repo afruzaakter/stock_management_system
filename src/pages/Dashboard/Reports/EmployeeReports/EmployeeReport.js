@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Print from '../../../Shared/Print';
+import { AiFillFilePdf } from 'react-icons/ai';
+import { AiFillFileExcel } from 'react-icons/ai';
+import ReactToPrint from 'react-to-print';
+import { useRef } from 'react';
 
 const EmployeeReport = () => {
+    const ref = useRef()
       //------ Departments Fetch method -----------------  
       const [departments, setDepartments] = useState([]);
       useEffect(() => {
@@ -15,7 +20,16 @@ const EmployeeReport = () => {
           fetch('http://localhost:5000/designation')
               .then(res => res.json())
               .then(data => setDesignations(data))
-      }, [])
+      }, []);
+
+      // all employee data show method-------------
+      const [employees, setEmployees]= useState([])
+
+      useEffect(()=>{
+          fetch("http://localhost:5000/employee")
+          .then(res=>res.json())
+          .then(data=> setEmployees(data))
+      },[])
 
     return (
         <div className='m-5'>
@@ -117,7 +131,55 @@ const EmployeeReport = () => {
                     </select>
 
                 </div>
-                <Print />
+
+                {/* //---------------- Pdf and print ---------- */}
+                <div >
+            <p className='text-center mr-14 mb-2'>print</p>
+            <div className='flex justify-center gap-2 items-center '>
+               
+                <ReactToPrint trigger={()=> <button  className='h-10 w-12  bg-pink-600 rounded-l-md hover:bg-black  group-hover:opacity-100 transition-all duration-300 '><AiFillFilePdf className=' text-xl text-white ml-4' />
+                </button> }  content = {()=> ref.current} />
+                <button className='border absolute  bg-white border-gray-600 rounded-full h-7 flex items-center p-1  w-7'>or</button>
+                <button className='h-10 w-12  bg-blue-600 rounded-r-md'><AiFillFileExcel className=' text-xl text-white ml-4' /></button>
+            </div>
+        </div>
+                {/* <Print /> */}
+            </div>
+            <div ref={ref}>
+                {/*------------------ table ------------------- */}
+            <div className="overflow-x-auto w-full">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            <th>Employee_ID </th>
+                            <th>Name </th>
+                            <th>Mobile  </th>
+                            <th>Email  </th>
+                            {/* <th>Order </th> */}
+                            <th>Designation  </th>
+                            <th> Department</th>
+                            <th> Active </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {
+                            employees.map((employee)=>
+                            <tr key={employee._id}>
+                                <td>{employee.employeeId} </td>
+                                <td>{employee.employeeName} </td>
+                                <td>{employee.mobileNo} </td>
+                                <td>{employee.email} </td>
+                                {/* <th>{employee.order} </th> */}
+                                <td>{employee.designation} </td>
+                                <td>{employee.department} </td>
+                                <td>{employee.createUser} </td>
+                            </tr>
+                            ) 
+                        }
+                    </tbody>
+                </table>
+            </div>
             </div>
         </div>
     );
