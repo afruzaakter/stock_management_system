@@ -66,7 +66,7 @@ const Requisition = () => {
                 </table>
             </div>  
 
-            <Setting/>      
+          <Setting/>
         </div>
     );
 };

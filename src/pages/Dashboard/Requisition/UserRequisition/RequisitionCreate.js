@@ -106,7 +106,8 @@ const RequisitionCreate = () => {
                                     {...register("requisitionNotes", {
                                         required: {
                                             value: true,
-                                            message: "❌  Please Fillup  Input Field"
+                                            message: "❌  Please Fillup  Input Field",
+                                           
                                         }
                                     })}
                                 />
@@ -157,7 +158,8 @@ const RequisitionCreate = () => {
                                                             {...register(`${product.productName}`, {
                                                                 required: {
                                                                     value: true,
-                                                                    message: "❌  Please Fillup  Input Field"
+                                                                    message: "❌  Please Fillup  Input Field",
+                                                                    
                                                                 }
                                                             })}
                                                             className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
