@@ -4,7 +4,6 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
-import Setting from '../../Settings/Setting';
 
 const Requisition = () => {
     const [user]= useAuthState(auth);
@@ -14,6 +13,7 @@ const Requisition = () => {
         .then(res=>res.json())
         .then(data=>setCreateRequisitions(data))
     },[])
+
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -47,7 +47,6 @@ const Requisition = () => {
                             <th> Requested By </th>
                             <th> Request Status </th>
                             <th> Note </th>
-                            
                         </tr>
                     </thead>
 
@@ -61,12 +60,10 @@ const Requisition = () => {
                                 <td>{createRequisition.requisitionNotes}</td>
                             </tr>)
                         }
-                     
                     </tbody>
                 </table>
-            </div>  
-
-          <Setting/>
+                
+            </div>
         </div>
     );
 };
