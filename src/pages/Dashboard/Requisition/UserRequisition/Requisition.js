@@ -7,13 +7,22 @@ import auth from '../../../../firebase.init';
 
 const Requisition = () => {
     const [user]= useAuthState(auth);
-    const [createRequisitions, setCreateRequisitions]= useState([]);
+
+    
+    const [allRequisitions, setAllRequisitions]= useState([]);
     useEffect(()=>{
         fetch("http://localhost:5000/createRequisition")
         .then(res=>res.json())
-        .then(data=>setCreateRequisitions(data))
+        .then(data=>setAllRequisitions(data))
     },[])
 
+    // filter My requisition
+    const [myRequisitions, setMyRequisitions]= useState([]);
+    useEffect(()=>{
+        const myReq=allRequisitions.filter( requisition=>requisition.email === user.email )
+        setMyRequisitions(myReq);
+    },[allRequisitions,user])
+  
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -52,9 +61,9 @@ const Requisition = () => {
 
                     <tbody>
                         {
-                            createRequisitions.map((createRequisition, index) =><tr key={createRequisition._id}>
+                            myRequisitions.map((createRequisition, index) =><tr key={createRequisition._id}>
                                 <td>{createRequisition.date}</td>
-                                <td></td>
+                                <td> {createRequisition.autoCode}</td>
                                 <td>{user.displayName}</td>
                                 <td>pending</td>
                                 <td>{createRequisition.requisitionNotes}</td>

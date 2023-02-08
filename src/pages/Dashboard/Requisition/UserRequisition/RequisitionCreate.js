@@ -4,11 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { RxCross2 } from 'react-icons/rx';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../../firebase.init';
 
 const RequisitionCreate = () => {
     const { register, formState: { errors }, handleSubmit, setValue, reset } = useForm();
     const navigate = useNavigate();
-
+    const [user] =useAuthState(auth)
 
     // -------- budgetCode get method--------------
     const [budgetCodes, setBudgetCodes] = useState([]);
@@ -59,6 +61,33 @@ const RequisitionCreate = () => {
         const remaining = selectedProduct.filter(product => product._id !== deleteId);
         setSelectedProduct(remaining);
     }
+    //===========for auto generate code ========
+    const [allRequisitions, setAllRequisitions]= useState([]);
+    const [autoCode, setAutoCode] = useState(); 
+   
+    useEffect(()=>{
+        fetch("http://localhost:5000/createRequisition")
+        .then(res=>res.json())
+        .then(data=>setAllRequisitions(data))
+    },[])
+
+    useEffect(() => {
+        const codeList = allRequisitions?.map(requisition => requisition.autoCode);
+        const length =codeList.length; 
+        console.log("code list", codeList)
+        console.log("code length", length)
+        if(length === 0){
+            setAutoCode(100001)
+        }else{
+            const lastValue =codeList[length-1]; 
+            const lastCode = +lastValue;
+            setAutoCode(lastCode+1)
+        }
+    }, [allRequisitions]);
+
+    console.log('auto code',autoCode)
+
+
     //==============================================
     const onSubmit = (data) => {
 
@@ -116,6 +145,26 @@ const RequisitionCreate = () => {
                                 className='hidden'
                                 defaultValue={currentDate}
                                 {...register("date")}>
+                            </input>
+                        </div>
+                        
+                        {/* ------- email field ---------- */}
+                        <div className='form-control'>
+                            <input
+                                type="email"
+                                className='hidden'
+                                defaultValue={user.email}
+                                {...register("email")}>
+                            </input>
+                        </div>
+                        
+                        {/* ------- email field ---------- */}
+                        <div className='form-control'>
+                            <input
+                                type="text"
+                                className='hidden'
+                                defaultValue={autoCode}
+                                {...register("autoCode")}>
                             </input>
                         </div>
                         
