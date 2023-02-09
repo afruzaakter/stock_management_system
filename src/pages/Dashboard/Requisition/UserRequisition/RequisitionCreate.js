@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { RxCross2 } from 'react-icons/rx';
 
 const RequisitionCreate = () => {
-    const { register, formState: { errors }, handleSubmit, setValue, reset } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
 
 
@@ -82,7 +82,7 @@ const RequisitionCreate = () => {
     const month = date.getMonth();
     const year = date.getFullYear();
     const currentDate = day + '-' + month + '-' + year;
-  
+
 
 
 
@@ -107,7 +107,7 @@ const RequisitionCreate = () => {
                                         required: {
                                             value: true,
                                             message: "❌  Please Fillup  Input Field",
-                                           
+
                                         }
                                     })}
                                 />
@@ -159,7 +159,7 @@ const RequisitionCreate = () => {
                                                                 required: {
                                                                     value: true,
                                                                     message: "❌  Please Fillup  Input Field",
-                                                                    
+
                                                                 }
                                                             })}
                                                             className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >

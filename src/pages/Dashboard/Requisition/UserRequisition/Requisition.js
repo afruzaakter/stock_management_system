@@ -7,13 +7,13 @@ import auth from '../../../../firebase.init';
 import Setting from '../../Settings/Setting';
 
 const Requisition = () => {
-    const [user]= useAuthState(auth);
-    const [createRequisitions, setCreateRequisitions]= useState([]);
-    useEffect(()=>{
+    const [user] = useAuthState(auth);
+    const [createRequisitions, setCreateRequisitions] = useState([]);
+    useEffect(() => {
         fetch("http://localhost:5000/createRequisition")
-        .then(res=>res.json())
-        .then(data=>setCreateRequisitions(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setCreateRequisitions(data))
+    }, [])
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -34,8 +34,7 @@ const Requisition = () => {
             <div className='mb-2 '>
                 <Link to="/dashboard/requisitionCreate" className="btn btn-sm mx-1 bg-primary text-white">
                     <FaPlus /> New Requisition Request</Link>
-                <button className="btn btn-sm mx-1 bg-success text-white">
-                    <AiOutlineEye/> Preview </button>
+
             </div>
 
             <div className="overflow-x-auto">
@@ -47,26 +46,31 @@ const Requisition = () => {
                             <th> Requested By </th>
                             <th> Request Status </th>
                             <th> Note </th>
-                            
+                            <th className='text-center'> Action </th>
+
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            createRequisitions.map((createRequisition, index) =><tr key={createRequisition._id}>
+                            createRequisitions.map((createRequisition, index) => <tr key={createRequisition._id}>
                                 <td>{createRequisition.date}</td>
                                 <td></td>
                                 <td>{user.displayName}</td>
                                 <td>pending</td>
                                 <td>{createRequisition.requisitionNotes}</td>
+                                <td className='text-center'>
+                                    <Link to={`/dashboard/previewRequisition/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                        <AiOutlineEye /> Preview </Link>
+                                </td>
                             </tr>)
                         }
-                     
+
                     </tbody>
                 </table>
-            </div>  
+            </div>
 
-          <Setting/>
+            <Setting />
         </div>
     );
 };

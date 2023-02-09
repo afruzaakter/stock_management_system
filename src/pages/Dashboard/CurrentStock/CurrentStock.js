@@ -20,13 +20,13 @@ const CurrentStock = () => {
     //  console.log(addInventories)
 
       //---------------- Calculation for stock-------------
-      const stock = addInventories.map(addInventorie => addInventorie.quantity);
-      console.log(stock)
-      let sum = 0;
-      for (let i = 0; i < stock.length; i++) {
-          sum += parseInt(stock[i]);  
-          console.log(sum)  
-      }
+    //   const stock = addInventories.map(addInventorie => addInventorie.quantity);
+    //   console.log(stock)
+    //   let sum = 0;
+    //   for (let i = 0; i < stock.length; i++) {
+    //       sum += parseInt(stock[i]);  
+    //       console.log(sum)  
+    //   }
    
     return (
         <div className='border m-1 p-1 rounded-lg'>
@@ -86,7 +86,7 @@ const CurrentStock = () => {
                                 <td>{product.budgetCode}</td>
                                 <td>{product.measureUnit}</td>                            
                                 <td>{product.alertQty}</td>
-                                <td>{sum}</td>
+                                {/* <td>{sum}</td> */}
                               
                                
                             </tr>)
