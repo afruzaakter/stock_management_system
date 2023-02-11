@@ -6,23 +6,23 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 
 const Requisition = () => {
-    const [user]= useAuthState(auth);
+    const [user] = useAuthState(auth);
 
-    
-    const [allRequisitions, setAllRequisitions]= useState([]);
-    useEffect(()=>{
+
+    const [allRequisitions, setAllRequisitions] = useState([]);
+    useEffect(() => {
         fetch("http://localhost:5000/createRequisition")
-        .then(res=>res.json())
-        .then(data=>setAllRequisitions(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setAllRequisitions(data))
+    }, [])
 
     // filter My requisition
-    const [myRequisitions, setMyRequisitions]= useState([]);
-    useEffect(()=>{
-        const myReq=allRequisitions.filter( requisition=>requisition.email === user.email )
+    const [myRequisitions, setMyRequisitions] = useState([]);
+    useEffect(() => {
+        const myReq = allRequisitions.filter(requisition => requisition.email === user.email)
         setMyRequisitions(myReq);
-    },[allRequisitions,user])
-  
+    }, [allRequisitions, user])
+
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -43,8 +43,7 @@ const Requisition = () => {
             <div className='mb-2 '>
                 <Link to="/dashboard/requisitionCreate" className="btn btn-sm mx-1 bg-primary text-white">
                     <FaPlus /> New Requisition Request</Link>
-                <button className="btn btn-sm mx-1 bg-success text-white">
-                    <AiOutlineEye/> Preview </button>
+
             </div>
 
             <div className="overflow-x-auto">
@@ -56,22 +55,27 @@ const Requisition = () => {
                             <th> Requested By </th>
                             <th> Request Status </th>
                             <th> Note </th>
+                            <th> Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            myRequisitions.map((createRequisition, index) =><tr key={createRequisition._id}>
+                            myRequisitions.map((createRequisition, index) => <tr key={createRequisition._id}>
                                 <td>{createRequisition.date}</td>
                                 <td> {createRequisition.autoCode}</td>
                                 <td>{user.displayName}</td>
                                 <td>pending</td>
                                 <td>{createRequisition.requisitionNotes}</td>
+                                <td className='text-center'>
+                                    <Link to={`/dashboard/previewRequisition/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                        <AiOutlineEye /> Preview </Link>
+                                </td>
                             </tr>)
                         }
                     </tbody>
                 </table>
-                
+
             </div>
         </div>
     );

@@ -8,8 +8,8 @@ import { useRef } from 'react';
 
 const UserReport = () => {
     const ref = useRef()
-   
- //------ Departments Fetch method -----------------  
+
+    //------ Departments Fetch method -----------------  
     const [departments, setDepartments] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/department')
@@ -27,7 +27,7 @@ const UserReport = () => {
     const [allUsers, setAllUsers] = useState([])
     console.log(allUsers)
     useEffect(() => {
-        fetch("http://localhost:5000/user")
+        fetch("http://localhost:5000/allUsers")
             .then(res => res.json())
             .then(data => setAllUsers(data))
     }, [])
@@ -110,7 +110,6 @@ const UserReport = () => {
                     <thead>
                         <tr>
                             <td> SL No. </td>
-                            <td> Name  </td>
                             <td> Email </td>
 
 
@@ -122,7 +121,6 @@ const UserReport = () => {
                             allUsers.map((user, index) =>
                                 <tr key={user._id}>
                                     <td>{index + 1} </td>
-                                    <td>{user.fullName} </td>
                                     <td>{user.email} </td>
 
 

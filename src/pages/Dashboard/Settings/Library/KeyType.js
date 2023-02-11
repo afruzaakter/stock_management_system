@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { FaEdit } from 'react-icons/fa';
 
+
 const KeyType = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
@@ -117,7 +118,7 @@ const KeyType = () => {
                                     <th>{index + 1}</th>
                                     <td>{key.key}</td>
                                     <td className='flex gap-1'>
-                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/keyEdit/${key._id}`}><FaEdit /></Link>
+                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/keyEdit/${key._id}`}><FaEdit /></Link>
                                         <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
                                             onClick={() => setDeleteID(key._id)} >
                                             <AiOutlineDelete />
@@ -146,8 +147,11 @@ const KeyType = () => {
 
                     </tbody>
                 </table>
+              
             </div>
+          
         </div>
+         
     );
 };
 

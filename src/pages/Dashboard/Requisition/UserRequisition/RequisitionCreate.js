@@ -8,9 +8,9 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 
 const RequisitionCreate = () => {
-    const { register, formState: { errors }, handleSubmit, setValue, reset } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
-    const [user] =useAuthState(auth)
+    const [user] = useAuthState(auth)
 
     // -------- budgetCode get method--------------
     const [budgetCodes, setBudgetCodes] = useState([]);
@@ -55,42 +55,52 @@ const RequisitionCreate = () => {
         const newValue = Number(event.target.value);
         setMinValue(newValue >= 1 ? newValue : 1);
     };
-//    
-    const deleteProduct= (deleteId) =>{
-        console.log(deleteId );
+    //    
+    const deleteProduct = (deleteId) => {
+        console.log(deleteId);
         const remaining = selectedProduct.filter(product => product._id !== deleteId);
         setSelectedProduct(remaining);
     }
     //===========for auto generate code ========
-    const [allRequisitions, setAllRequisitions]= useState([]);
-    const [autoCode, setAutoCode] = useState(); 
-   
-    useEffect(()=>{
+    const [allRequisitions, setAllRequisitions] = useState([]);
+    const [autoCode, setAutoCode] = useState();
+
+    useEffect(() => {
         fetch("http://localhost:5000/createRequisition")
-        .then(res=>res.json())
-        .then(data=>setAllRequisitions(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setAllRequisitions(data))
+    }, [])
+
 
     useEffect(() => {
         const codeList = allRequisitions?.map(requisition => requisition.autoCode);
-        const length =codeList.length; 
+        // console.log("124", codeList)
+        const length = codeList.length;
         console.log("code list", codeList)
-        console.log("code length", length)
-        if(length === 0){
-            setAutoCode(100001)
-        }else{
-            const lastValue =codeList[length-1]; 
-            const lastCode = +lastValue;
-            setAutoCode(lastCode+1)
+
+        if (length === 0) {
+            setAutoCode(10001)
+        } else {
+            const lastValue = codeList[length - 1];
+            const lastCode = parseInt(+lastValue);
+            setAutoCode(lastCode + 1)
         }
     }, [allRequisitions]);
 
-    console.log('auto code',autoCode)
+    console.log('auto code', autoCode)
 
 
     //==============================================
     const onSubmit = (data) => {
-
+        // const updateData = {
+        //     requisitionNotes: data.requisitionNotes,
+        //     date: data.date,
+        //     email: data.email,
+        //     autoCode: autoCode,
+        //     product: data.productName,
+        //     quantity: data.productName,
+        // }
+        // console.log("table data", updateData)
         console.log("table data", data)
         const url = 'http://localhost:5000/createRequisition'
         fetch(url, {
@@ -147,7 +157,7 @@ const RequisitionCreate = () => {
                                 {...register("date")}>
                             </input>
                         </div>
-                        
+
                         {/* ------- email field ---------- */}
                         <div className='form-control'>
                             <input
@@ -157,8 +167,8 @@ const RequisitionCreate = () => {
                                 {...register("email")}>
                             </input>
                         </div>
-                        
-                        {/* ------- email field ---------- */}
+
+                        {/* ------- autocode field ---------- */}
                         <div className='form-control'>
                             <input
                                 type="text"
@@ -167,7 +177,7 @@ const RequisitionCreate = () => {
                                 {...register("autoCode")}>
                             </input>
                         </div>
-                        
+
                         {/* ------------------------------------------------- */}
                         <div className="overflow-x-auto">
                             <table className="table w-full">
@@ -202,7 +212,7 @@ const RequisitionCreate = () => {
                                                     <input
                                                         type="number"
                                                         min="1"
-                                                        Value={minValue} 
+                                                        Value={minValue}
                                                         onChange={handleChange}
                                                         {...register(`${product.productName}`, {
                                                             required: {
@@ -214,8 +224,8 @@ const RequisitionCreate = () => {
                                                         className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
                                                     </input>
                                                 </td>
-                                                <td onClick={()=> deleteProduct(product._id)}>
-                                                    <RiDeleteBin2Fill  className='text-xl text-red-600 hover:cursor-pointer'/>
+                                                <td onClick={() => deleteProduct(product._id)}>
+                                                    <RiDeleteBin2Fill className='text-xl text-red-600 hover:cursor-pointer' />
                                                 </td>
                                             </tr>)
                                     }
@@ -223,7 +233,7 @@ const RequisitionCreate = () => {
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <input className='input  btn btn-xs  bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Request' />
 
                         <Link to='/dashboard/requisition' className="btn btn-xs mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2 />
@@ -235,7 +245,7 @@ const RequisitionCreate = () => {
                 {/* --------------------Right side>>> BudgetCode && Product Field ------------- */}
                 <div className="w-4/12">
                     <div>
-                        <label className='text-xl text-green-700 font-bold '>Add Your Product </label>    
+                        <label className='text-xl text-green-700 font-bold '>Add Your Product </label>
                         {/* <label className='text-start'>Budget Code</label> */}
                         <select
                             onChange={e => setSelectedBudgetCode(e.target.value)}
@@ -249,10 +259,10 @@ const RequisitionCreate = () => {
                     </div>
 
                     <div className="flex items-center">
-                        <input 
-                            onChange={(event) => { setSearchVal(event.target.value) }} 
-                            type="text" 
-                            placeholder="Search…" 
+                        <input
+                            onChange={(event) => { setSearchVal(event.target.value) }}
+                            type="text"
+                            placeholder="Search…"
                             className="input input-sm rounded-sm w-full border-green-700 ">
                         </input>
                         <button className="btn h-9  w-10 btn-sm  rounded-md bg-green-700">
@@ -265,9 +275,9 @@ const RequisitionCreate = () => {
                             selectedProducts.length === 0 && <>
                                 {
                                     products.filter((val) => {
-                                        if(searchVal === ""){
+                                        if (searchVal === "") {
                                             return val;
-                                        }else if (val.productName.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())) {
+                                        } else if (val.productName.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())) {
                                             return val
                                         }
                                     }).map((val) => <ul key={val._id}>
@@ -300,7 +310,7 @@ const RequisitionCreate = () => {
                                 </ul>)
                         }
                     </div>
-                        
+
                 </div>
 
             </div>
