@@ -7,29 +7,29 @@ import { useRef } from 'react';
 
 const EmployeeReport = () => {
     const ref = useRef()
-      //------ Departments Fetch method -----------------  
-      const [departments, setDepartments] = useState([]);
-      useEffect(() => {
-          fetch('http://localhost:5000/department')
-              .then(res => res.json())
-              .then(data => setDepartments(data))
-      }, [])
-        //------ Designation Fetch method -----------------  
-      const [designations, setDesignations] = useState([]);
-      useEffect(() => {
-          fetch('http://localhost:5000/designation')
-              .then(res => res.json())
-              .then(data => setDesignations(data))
-      }, []);
+    //------ Departments Fetch method -----------------  
+    const [departments, setDepartments] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/department')
+            .then(res => res.json())
+            .then(data => setDepartments(data))
+    }, [])
+    //------ Designation Fetch method -----------------  
+    const [designations, setDesignations] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/designation')
+            .then(res => res.json())
+            .then(data => setDesignations(data))
+    }, []);
 
-      // all employee data show method-------------
-      const [employees, setEmployees]= useState([])
+    // all employee data show method-------------
+    const [employees, setEmployees] = useState([])
 
-      useEffect(()=>{
-          fetch("http://localhost:5000/employee")
-          .then(res=>res.json())
-          .then(data=> setEmployees(data))
-      },[])
+    useEffect(() => {
+        fetch("http://localhost:5000/employee")
+            .then(res => res.json())
+            .then(data => setEmployees(data))
+    }, [])
 
     return (
         <div className='m-5'>
@@ -43,8 +43,8 @@ const EmployeeReport = () => {
                              focus:border-blue-500 login-container-input `}>
                         <option value='' className='text-gray-500'>All Department</option>
                         {
-                        departments.map((department) => <option key={department._id}>{department.name}</option>)
-                        }                     
+                            departments.map((department) => <option key={department._id}>{department.name}</option>)
+                        }
                     </select>
 
                 </div>
@@ -55,15 +55,15 @@ const EmployeeReport = () => {
                         className={`input input-sm   border border-green-700 mt-1 lg:w-96 focus:outline-0 rounded-sm  
                              focus:border-blue-500 login-container-input `}>
                         <option value='' className='text-gray-400'>All Designation</option>
-                       {
-                        designations.map((designation)=> <option key={designation._id}>{designation.name}</option>)
-                       }
+                        {
+                            designations.map((designation) => <option key={designation._id}>{designation.name}</option>)
+                        }
 
                     </select>
 
                 </div>
             </div>
-            <div className='lg:flex lg:justify-start lg:gap-8 mb-3'>
+            {/* <div className='lg:flex lg:justify-start lg:gap-8 mb-3'>
                 <div className="form-control">
                     <label className='text-start'>Religion</label>
                     <select
@@ -111,14 +111,14 @@ const EmployeeReport = () => {
                     </select>
 
                 </div>
-            </div>
+            </div> */}
 
             <div className='lg:flex lg:justify-start lg:gap-14 lg:items-center mb-3'>
                 {/* -----------------------Designation Name Field ------------------------------ */}
                 <div className="form-control">
                     <label className='text-start'>Report Type</label>
                     <select
-                        className={`input input-sm   border border-green-700 mt-1 lg:w-80 focus:outline-0 rounded-sm  
+                        className={`input input-sm   border border-green-700 mt-1 lg:w-96 focus:outline-0 rounded-sm  
                              focus:border-blue-500 login-container-input `}>
                         <option value=''>Short</option>
                         <option value=''>This Week </option>
@@ -134,52 +134,52 @@ const EmployeeReport = () => {
 
                 {/* //---------------- Pdf and print ---------- */}
                 <div >
-            <p className='text-center mr-14 mb-2'>print</p>
-            <div className='flex justify-center gap-2 items-center '>
-               
-                <ReactToPrint trigger={()=> <button  className='h-10 w-12  bg-pink-600 rounded-l-md hover:bg-black  group-hover:opacity-100 transition-all duration-300 '><AiFillFilePdf className=' text-xl text-white ml-4' />
-                </button> }  content = {()=> ref.current} />
-                <button className='border absolute  bg-white border-gray-600 rounded-full h-7 flex items-center p-1  w-7'>or</button>
-                <button className='h-10 w-12  bg-blue-600 rounded-r-md'><AiFillFileExcel className=' text-xl text-white ml-4' /></button>
-            </div>
-        </div>
+                    <p className='text-center mr-14 mb-2'>print</p>
+                    <div className='flex justify-center gap-2 items-center '>
+
+                        <ReactToPrint trigger={() => <button className='h-10 w-12  bg-pink-600 rounded-l-md hover:bg-black  group-hover:opacity-100 transition-all duration-300 '><AiFillFilePdf className=' text-xl text-white ml-4' />
+                        </button>} content={() => ref.current} />
+                        <button className='border absolute  bg-white border-gray-600 rounded-full h-7 flex items-center p-1  w-7'>or</button>
+                        <button className='h-10 w-12  bg-blue-600 rounded-r-md'><AiFillFileExcel className=' text-xl text-white ml-4' /></button>
+                    </div>
+                </div>
                 {/* <Print /> */}
             </div>
             <div ref={ref}>
                 {/*------------------ table ------------------- */}
-            <div className="overflow-x-auto w-full">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th>Employee_ID </th>
-                            <th>Name </th>
-                            <th>Mobile  </th>
-                            <th>Email  </th>
-                            {/* <th>Order </th> */}
-                            <th>Designation  </th>
-                            <th> Department</th>
-                            <th> Active </th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        {
-                            employees.map((employee)=>
-                            <tr key={employee._id}>
-                                <td>{employee.employeeId} </td>
-                                <td>{employee.employeeName} </td>
-                                <td>{employee.mobileNo} </td>
-                                <td>{employee.email} </td>
-                                {/* <th>{employee.order} </th> */}
-                                <td>{employee.designation} </td>
-                                <td>{employee.department} </td>
-                                <td>{employee.createUser} </td>
+                <div className="overflow-x-auto w-full">
+                    <table className="table w-full">
+                        <thead>
+                            <tr>
+                                <th>Employee_ID </th>
+                                <th>Name </th>
+                                <th>Mobile  </th>
+                                <th>Email  </th>
+                                {/* <th>Order </th> */}
+                                <th>Designation  </th>
+                                <th> Department</th>
+                                <th> Active </th>
                             </tr>
-                            ) 
-                        }
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+
+                        <tbody>
+                            {
+                                employees.map((employee) =>
+                                    <tr key={employee._id}>
+                                        <td>{employee.employeeId} </td>
+                                        <td>{employee.employeeName} </td>
+                                        <td>{employee.mobileNo} </td>
+                                        <td>{employee.email} </td>
+                                        {/* <th>{employee.order} </th> */}
+                                        <td>{employee.designation} </td>
+                                        <td>{employee.department} </td>
+                                        <td>{employee.createUser} </td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

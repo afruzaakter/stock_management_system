@@ -4,16 +4,25 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
-import Setting from '../../Settings/Setting';
 
 const Requisition = () => {
     const [user] = useAuthState(auth);
-    const [createRequisitions, setCreateRequisitions] = useState([]);
+
+
+    const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
         fetch("http://localhost:5000/createRequisition")
             .then(res => res.json())
-            .then(data => setCreateRequisitions(data))
+            .then(data => setAllRequisitions(data))
     }, [])
+
+    // filter My requisition
+    const [myRequisitions, setMyRequisitions] = useState([]);
+    useEffect(() => {
+        const myReq = allRequisitions.filter(requisition => requisition.email === user.email)
+        setMyRequisitions(myReq);
+    }, [allRequisitions, user])
+
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -46,16 +55,15 @@ const Requisition = () => {
                             <th> Requested By </th>
                             <th> Request Status </th>
                             <th> Note </th>
-                            <th className='text-center'> Action </th>
-
+                            <th> Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            createRequisitions.map((createRequisition, index) => <tr key={createRequisition._id}>
+                            myRequisitions.map((createRequisition, index) => <tr key={createRequisition._id}>
                                 <td>{createRequisition.date}</td>
-                                <td></td>
+                                <td> {createRequisition.autoCode}</td>
                                 <td>{user.displayName}</td>
                                 <td>pending</td>
                                 <td>{createRequisition.requisitionNotes}</td>
@@ -65,12 +73,10 @@ const Requisition = () => {
                                 </td>
                             </tr>)
                         }
-
                     </tbody>
                 </table>
-            </div>
 
-            <Setting />
+            </div>
         </div>
     );
 };
