@@ -3,18 +3,32 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { FiEdit } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+
 const PreviewRequisition = () => {
+    const {id}=useParams();
     const [requisitions, setRequisitions] = useState([]);
     console.log(requisitions)
+
     useEffect(() => {
-        fetch('http://localhost:5000/createRequisition')
+        fetch(`http://localhost:5000/createRequisition/${id}`)
             .then(res => res.json())
             .then(data => setRequisitions(data))
     }, [])
+
+
+    const TableRow = ({productName, productQuantity}) => {
+        return (
+          <tr>
+            <td>{productName}</td>
+            <td>{productQuantity}</td>
+          </tr>
+        );
+      };
+    
     return (
         <div className='m-4 '>
-            <h2 className='text-2xl font-bold ml-4'>R00071 || Requisition {requisitions.length} Date:{requisitions.date}</h2>
+            <h2 className='text-xl font-bold ml-4'> {requisitions?.autoCode} || Requisition  Date:{requisitions?.date}</h2>
             <div className='flex justify-between items-center border-b-2 rounded-l-md p-5'>
                 <div className='flex justify-start items-center gap-5 mt-4'>
                     <AiOutlineCheck className='font-bold text-2xl text-green-900' />
@@ -29,6 +43,7 @@ const PreviewRequisition = () => {
                     <button className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600">❌ Delete</button>
                 </div>
             </div>
+
             <div>
                 <div className='flex justify-between mt-5'>
                     <h2 className='text-md ml-4  '>Requisition No. R00071 </h2>
@@ -39,31 +54,26 @@ const PreviewRequisition = () => {
                         <table className="table w-full">
                             <thead>
                                 <tr>
-                                    <th> No </th>
-                                    <th> items</th>
-                                    <th> </th>
-                                    <th> </th>
-                                    <th> </th>
-                                    <th> Quantity </th>
+                                    <td> Product Name</td>
+                                    <td> Quantity </td>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {
-                                    requisitions.map((requisition, index) => <tr key={requisition._id}>
-                                        <td>{index + 1}</td>
-                                        <td>{requisitions.date}</td>
+                            {
+                                Object.entries(requisitions).map(([key, value]) => (
+                                   
+                                    <TableRow  key={key}
+                                        productName={requisitions[key]} 
+                                        productQuantity={requisitions[value]} />
+                                   
+                                ))
+                            }
 
-                                        <td>{requisition.ল্যাপটপ}</td>
-                                        <td>
-                                            {/* {requisition.requisitionNotes} */}
-                                        </td>
-                                        {/* <td className='text-center'>
-                                    <Link to={`/dashboard/previewRequisition/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
-                                        <AiOutlineEye /> Preview </Link>
-                                </td> */}
-                                    </tr>)
-                                }
+                    {/* <TableRow productName={requisitions["productName 1"]} productQuantity={requisitions["productQuantity 1"]} />
+                    <TableRow productName={requisitions["productName 2"]} productQuantity={requisitions["productQuantity 2"]} /> */}
+                        
+
                             </tbody>
                         </table>
 

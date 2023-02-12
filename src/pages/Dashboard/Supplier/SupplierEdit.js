@@ -7,18 +7,16 @@ const SupplierEdit = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const {id} = useParams()
     const navigate = useNavigate();
-      //---------- update data show method----------
-      const [suppliers, setSuppliers] = useState([]);
-      useEffect(() => {
-         const url = `http://localhost:5000/supplier/${id}`
-           console.log("product id",url);
-         fetch(url)
-             .then(res => res.json())
-             .then(data => setSuppliers(data))
-     }, []);
+    //---------- update data show method----------
+    const [suppliers, setSuppliers] = useState([]);
+    useEffect(() => {
+        const url = `http://localhost:5000/supplier/${id}`
 
-   
-     
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setSuppliers(data))
+    }, []);
+
     const onSubmit = (data) =>{
         const supplierCompany = data.supplierCompany ==="" ? suppliers.supplierCompany : data.supplierCompany;
         const autoCode = data.autoCode ==="" ? suppliers.autoCode : data.autoCode;
