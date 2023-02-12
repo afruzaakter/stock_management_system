@@ -52,9 +52,8 @@ const PreviewRequisition = () => {
                                 {
                                     requisitions.map((requisition, index) => <tr key={requisition._id}>
                                         <td>{index + 1}</td>
-                                        <td>{requisitions.date}</td>
-
                                         <td>{requisition.ল্যাপটপ}</td>
+                                        <td>{requisition.date}</td>
                                         <td>
                                             {/* {requisition.requisitionNotes} */}
                                         </td>
