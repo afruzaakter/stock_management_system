@@ -61,9 +61,9 @@ const RequisitionCreate = () => {
         const remaining = selectedProduct.filter(product => product._id !== deleteId);
         setSelectedProduct(remaining);
     }
-    //===========for auto generate code ========
+    //===========for auto generate requisition serial code ========
     const [allRequisitions, setAllRequisitions] = useState([]);
-    const [autoCode, setAutoCode] = useState();
+    const [requisitionSerialCode, setRequisitionSerialCode] = useState();
 
     useEffect(() => {
         fetch("http://localhost:5000/createRequisition")
@@ -73,21 +73,24 @@ const RequisitionCreate = () => {
 
 
     useEffect(() => {
-        const codeList = allRequisitions?.map(requisition => requisition.autoCode);
+        const codeList = allRequisitions?.map(requisition => (requisition.requisitionSerialCode));
         // console.log("124", codeList)
         const length = codeList.length;
         console.log("code list", codeList)
 
         if (length === 0) {
-            setAutoCode(10001)
+            setRequisitionSerialCode(10001)
         } else {
             const lastValue = codeList[length - 1];
             const lastCode = parseInt(+lastValue);
-            setAutoCode(lastCode + 1)
+            setRequisitionSerialCode(lastCode + 1)
         }
     }, [allRequisitions]);
 
-    console.log('auto code', autoCode)
+    const autoGenerate= String(requisitionSerialCode)
+
+    console.log('auto code', requisitionSerialCode)
+    console.log('auto code autoGenerate', autoGenerate)
 
 
     //==============================================
@@ -171,9 +174,9 @@ const RequisitionCreate = () => {
                         {/* ------- autocode field ---------- */}
                         <div className='form-control'>
                             <input
-                                type="text"
+                                // type="text"
                                 className='hidden'
-                                defaultValue={autoCode}
+                                defaultValue={autoGenerate}
                                 {...register("autoCode")}>
                             </input>
                         </div>
@@ -204,7 +207,7 @@ const RequisitionCreate = () => {
                                                     <input
                                                         defaultValue={product.productName}
                                                         className="hidden"
-                                                        {...(register(`${index + 1} ${product.productName}`))}>
+                                                        {...(register(`productName ${index + 1}`))}>
                                                     </input>
                                                 </td>
 
@@ -214,7 +217,7 @@ const RequisitionCreate = () => {
                                                         min="1"
                                                         Value={minValue}
                                                         onChange={handleChange}
-                                                        {...register(`${product.productName}`, {
+                                                        {...register(`productQuantity ${index + 1}`, {
                                                             required: {
                                                                 minLength: 1,
                                                                 value: true,
