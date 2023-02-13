@@ -58,6 +58,7 @@ function App() {
     <>
       <Navbar> </Navbar>
       <Routes>
+        <Route path="/" element={<RequireAuth> <Dashboard /> </RequireAuth>} />
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
