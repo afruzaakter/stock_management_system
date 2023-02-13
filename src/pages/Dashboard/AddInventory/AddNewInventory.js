@@ -7,49 +7,49 @@ import { RxCross2 } from 'react-icons/rx';
 const AddNewInventory = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate()
-      // ---------- Drop down Product get method ----------
-      const [products, setProducts] = useState([]);
-      useEffect(()=>{
-         fetch('http://localhost:5000/product')
-         .then(res => res.json())
-         .then(data => setProducts(data))
-      },[])
-      // ---------- Drop down Product get method ----------
-      const [suppliers, setSuppliers] = useState([]);
-      useEffect(()=>{
-         fetch('http://localhost:5000/supplier')
-         .then(res => res.json())
-         .then(data => setSuppliers(data))
-      },[])
+    // ---------- Drop down Product get method ----------
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/product')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, [])
+    // ---------- Drop down Product get method ----------
+    const [suppliers, setSuppliers] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/supplier')
+            .then(res => res.json())
+            .then(data => setSuppliers(data))
+    }, [])
 
-          //------- for auto generate code 
+    //------- for auto generate code 
     const [addInventories, setAddInventories] = useState([]);
-    const [autoCode, setAutoCode] = useState(); 
-    console.log("auto inventory",addInventories)
+    const [autoCode, setAutoCode] = useState();
+    console.log("auto inventory", addInventories)
     useEffect(() => {
         fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
     }, [])
-   useEffect(() => {
+    useEffect(() => {
         const codeList = addInventories?.map(addInventorie => addInventorie.autoCode);
-        const length =codeList.length;
-        if(length === 0){
+        const length = codeList.length;
+        if (length === 0) {
             setAutoCode(1000)
-        }else{
-            const lastValue =codeList[length-1]; 
+        } else {
+            const lastValue = codeList[length - 1];
             const lastCode = +lastValue;
-            setAutoCode(lastCode+1)
+            setAutoCode(lastCode + 1)
         }
-   }, [addInventories]);
+    }, [addInventories]);
 
-  
+
 
     // ------------- AddInventory Data post method -----------
     const onSubmit = (data) => {
         const updateData = {
-            productName : data.productName,
+            productName: data.productName,
             supplierCompany: data.supplierCompany,
             purchase: data.purchase,
             unitMeasurement: data.unitMeasurement,
@@ -58,21 +58,21 @@ const AddNewInventory = () => {
             totalQuantity: data.totalQuantity,
             autoCode: autoCode,
         }
-       const url = "http://localhost:5000/addInventory"
-       fetch(url, {
-        method: "POST",
-        body: JSON.stringify(updateData),
-        headers: {
-           'Content-type' : 'application/json; charset=UTF-8', 
-        },
-       })
-       .then(res => res.json())
-       .then(data =>{
-        toast.success('Data added Successfully!!!');
-        // setUpdated(true)
-        reset();
-       })
-       navigate('/dashboard/addInventory')
+        const url = "http://localhost:5000/addInventory"
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify(updateData),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast.success('Data added Successfully!!!');
+                // setUpdated(true)
+                reset();
+            })
+        navigate('/dashboard/addInventory')
     }
 
     return (
@@ -95,8 +95,8 @@ const AddNewInventory = () => {
                                 }
                             })}
                                 className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.productName && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option  value=''>--Select Product Name--</option>
-                                
+                                <option value=''>--Select Product Name--</option>
+
                                 {
                                     products.map((product) => <option key={product._id}>{product.productName}</option>)
                                 }
@@ -118,8 +118,8 @@ const AddNewInventory = () => {
                                 }
                             })}
                                 className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.supplierCompany && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option  value=''>--Select Supplier Name--</option>
-                                
+                                <option value=''>--Select Supplier Name--</option>
+
                                 {
                                     suppliers.map((supplier) => <option key={supplier._id}>{supplier.supplierCompany}</option>)
                                 }
@@ -148,9 +148,9 @@ const AddNewInventory = () => {
                                 {errors.purchase?.type === 'required' && <span className="label-text-alt text-red-700">
                                     {errors.purchase.message} </span>}
                             </label>
-                        </div> 
-                            {/* --------------------Product code field ----------------------- */}
-                            {/* <div className="form-control">
+                        </div>
+                        {/* --------------------Product code field ----------------------- */}
+                        <div className="form-control">
                             <label className='text-start'>Product Code</label>
                             <input
                                 type="text"
@@ -166,10 +166,10 @@ const AddNewInventory = () => {
                                 {errors.productCode?.type === 'required' && <span className="label-text-alt text-red-700">
                                     {errors.productCode.message} </span>}
                             </label>
-                        </div> */}
+                        </div>
 
-                          {/* --------------------Unit of Measurement  field ----------------------- */}
-                          <div className="form-control">
+                        {/* --------------------Unit of Measurement  field ----------------------- */}
+                        <div className="form-control">
                             <label >Unit of Measurement</label>
                             <select   {...register("unitMeasurement", {
                                 required: {
@@ -203,7 +203,7 @@ const AddNewInventory = () => {
                                 <option value=''>--Select Pack Size--</option>
                                 <option >Box</option>
                                 <option >Bosta</option>
-                                <option >Ream</option>                              
+                                <option >Ream</option>
                             </select>
                             <label className="label">
                                 {errors.packSize?.type === 'required' && <span className="label-text-alt text-red-700">{errors.packSize.message}</span>}
@@ -250,10 +250,10 @@ const AddNewInventory = () => {
 
 
 
-                    </div>  
+                    </div>
 
-                    <input className='input  btn btn-sm mx-1 px-6 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' /> 
-                    <Link to='/dashboard/AddInventory' className="btn btn-sm mx-1 px-6  bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2/> Cancel 
+                    <input className='input  btn btn-sm mx-1 px-6 bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Submit' />
+                    <Link to='/dashboard/AddInventory' className="btn btn-sm mx-1 px-6  bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2 /> Cancel
                     </Link>
                 </form>
             </div>

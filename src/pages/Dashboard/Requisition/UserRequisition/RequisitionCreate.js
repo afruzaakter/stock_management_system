@@ -87,7 +87,7 @@ const RequisitionCreate = () => {
         }
     }, [allRequisitions]);
 
-    const autoGenerate= String(requisitionSerialCode)
+    const autoGenerate = String(requisitionSerialCode)
 
     console.log('auto code', requisitionSerialCode)
     console.log('auto code autoGenerate', autoGenerate)
@@ -95,16 +95,8 @@ const RequisitionCreate = () => {
 
     //==============================================
     const onSubmit = (data) => {
-        // const updateData = {
-        //     requisitionNotes: data.requisitionNotes,
-        //     date: data.date,
-        //     email: data.email,
-        //     autoCode: autoCode,
-        //     product: data.productName,
-        //     quantity: data.productName,
-        // }
-        // console.log("table data", updateData)
-        console.log("table data", data)
+
+        //    console.log("table data", data)
         const url = 'http://localhost:5000/createRequisition'
         fetch(url, {
             method: 'POST',

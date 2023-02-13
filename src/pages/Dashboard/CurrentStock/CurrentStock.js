@@ -4,30 +4,30 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import { TbMessageReport } from 'react-icons/tb';
 const CurrentStock = () => {
     const [products, setProducts] = useState([]);
-     useEffect(() => {
-         fetch('http://localhost:5000/product')
-             .then(res => res.json())
-             .then(data => setProducts(data))
-     }, []);
+    useEffect(() => {
+        fetch('http://localhost:5000/product')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, []);
 
-     const [addInventories, setAddInventories] = useState([]);
-     useEffect(() => {
-         fetch('http://localhost:5000/addInventory')
-             .then(res => res.json())
-             .then(data => setAddInventories(data))
- 
-     }, [])
+    const [addInventories, setAddInventories] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/addInventory')
+            .then(res => res.json())
+            .then(data => setAddInventories(data))
+
+    }, [])
     //  console.log(addInventories)
 
-      //---------------- Calculation for stock-------------
-    //   const stock = addInventories.map(addInventorie => addInventorie.quantity);
-    //   console.log(stock)
-    //   let sum = 0;
-    //   for (let i = 0; i < stock.length; i++) {
-    //       sum += parseInt(stock[i]);  
-    //       console.log(sum)  
-    //   }
-   
+    //---------------- Calculation for stock-------------
+    const stock = addInventories.map(addInventorie => addInventorie.quantity);
+    console.log(stock)
+    let sum = 0;
+    for (let i = 0; i < stock.length; i++) {
+        sum += parseInt(stock[i]);
+        console.log(sum)
+    }
+
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -60,10 +60,10 @@ const CurrentStock = () => {
                     <button className="btn btn-sm mx-1 bg-warning   text-white">
                         <TbMessageReport /> Reports</button>
                 </div>
-               
+
             </div>
 
-          
+
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     <thead>
@@ -71,24 +71,24 @@ const CurrentStock = () => {
                             <th> SL</th>
                             <th>Product Name </th>
                             <th>Budget Code </th>
-                            <th>UoM </th>                        
+                            <th>UoM </th>
                             <th>Alert Qty </th>
-                            <th>Stock </th> 
-                            
+                            <th>Stock </th>
+
                         </tr>
                     </thead>
-                    
+
                     <tbody>
-                    {
+                        {
                             products.slice(0).reverse().map((product, index) => <tr key={product._id}>
-                                <th>{index+1}</th>
+                                <th>{index + 1}</th>
                                 <td>{product.productName}</td>
                                 <td>{product.budgetCode}</td>
-                                <td>{product.measureUnit}</td>                            
+                                <td>{product.measureUnit}</td>
                                 <td>{product.alertQty}</td>
-                                {/* <td>{sum}</td> */}
-                              
-                               
+                                <td>{sum}</td>
+
+
                             </tr>)
                         }
                     </tbody>

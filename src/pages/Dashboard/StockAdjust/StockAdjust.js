@@ -10,31 +10,49 @@ import { MdDeleteForever } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 const StockAdjust = () => {
-    const [ deleteID, setDeleteID] = useState('')
-     // ---------- Drop down budgetCodes get method ----------
-     const [products, setProducts] = useState([]);
-     useEffect(() => {
-         fetch('http://localhost:5000/product')
-             .then(res => res.json())
-             .then(data => setProducts(data))
-     }, [])
+    const [deleteID, setDeleteID] = useState('')
 
-     const handleDelete = (id) =>{
+    // ---------- Drop down budgetCodes get method ----------
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/product')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, [])
+
+
+    const handleDelete = (id) => {
         const url = `http://localhost:5000/product/${id}`
-            fetch(url, {
-                method: 'DELETE'
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                const remaining = products.filter(product => product._id !== id)
+                setProducts(remaining);
+                setDeleteID(' ');
+                toast.success('Data was Deleted Successfully!');
             })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    const remaining = products.filter(product => product._id !== id)
-                    setProducts(remaining);
-                    setDeleteID(' ');
-                    toast.success('Data was Deleted Successfully!');
-                })
-      
-     }
-    
+
+    }
+    //------------ Inventory data fetch---------
+    const [addInventories, setAddInventories] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/addInventory')
+            .then(res => res.json())
+            .then(data => setAddInventories(data))
+
+    }, [])
+    //---------------- Calculation for stock-------------
+    const stock = addInventories.map(addInventorie => addInventorie.quantity);
+    console.log(stock)
+    let sum = 0;
+    for (let i = 0; i < stock.length; i++) {
+        sum += parseInt(stock[i]);
+        console.log(sum)
+    }
+
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -56,61 +74,61 @@ const StockAdjust = () => {
                 <div>
                     <Link to="/dashboard/stockAdjustAdd" className="btn btn-sm mx-1 bg-primary text-white">
                         <AiOutlineShoppingCart /> Adjust Stock</Link>
-                   
+
                     <button className="btn btn-sm mx-1 bg-warning   text-white">
                         <TbMessageReport /> Reports</button>
                 </div>
-               
+
             </div>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
-                     <tr>
+                        <tr>
                             <th> SL</th>
                             <th>Product Name </th>
                             <th>Budget Code </th>
                             <th>UoM </th>
-                            <th>Stock </th>                         
-                            <th>Sort Order </th>                         
+                            <th>Stock </th>
+                            <th>Sort Order </th>
                             <th>Alert Qty </th>
                             <th>Action</th>
-                            
+
                         </tr>
                     </thead>
 
                     <tbody>
-                    {
+                        {
                             products.slice(0).reverse().map((product, index) => <tr key={product._id}>
-                                <th>{index+1}</th>
+                                <th>{index + 1}</th>
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
                                 <td>{product.measureUnit}</td>
-                                <td>{product.stockOrder} </td>
+                                <td>{sum} </td>
                                 <td>{product.sortOrder}</td>
                                 <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
-                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
-                                        <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
-                                            onClick={() =>setDeleteID(product._id) } >
-                                            <MdDeleteForever />
-                                        </label>
+                                    <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
+                                    <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
+                                        onClick={() => setDeleteID(product._id)} >
+                                        <MdDeleteForever />
+                                    </label>
 
-                                     {/* -------- delete modal ----------------- */}
-                                        <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-                                        <div className="modal modal-bottom justify-around sm:modal-middle ">
-                                            <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
-                                                <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
+                                    {/* -------- delete modal ----------------- */}
+                                    <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+                                    <div className="modal modal-bottom justify-around sm:modal-middle ">
+                                        <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
+                                            <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
 
-                                                <div className="mr-14 modal-action">
-                                                    <label htmlFor="my-modal-6" onClick={() =>handleDelete(deleteID)}
-                                                        className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
-                                                    <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
-                                                </div>
+                                            <div className="mr-14 modal-action">
+                                                <label htmlFor="my-modal-6" onClick={() => handleDelete(deleteID)}
+                                                    className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
+                                                <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
                                             </div>
                                         </div>
-                                        {/* -------- delete modal ----------------- */}  
-                                    </td>
+                                    </div>
+                                    {/* -------- delete modal ----------------- */}
+                                </td>
                             </tr>)
                         }
                     </tbody>
