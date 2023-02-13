@@ -7,9 +7,10 @@ import { FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 const Department = ({ department }) => {
-    const [departments, setDepartments] = useState([]);
     const [deleteID, setDeleteID] = useState('')
     const [updated, setUpdated] = useState(false);
+
+    const [departments, setDepartments] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/department')
             .then(res => res.json())

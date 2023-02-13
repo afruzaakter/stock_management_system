@@ -10,7 +10,7 @@ import { FaEdit } from 'react-icons/fa';
 const KeyType = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
-    const [ deleteID, setDeleteID] = useState('');
+    const [deleteID, setDeleteID] = useState('');
 
     // -------------get method ----------------
     const [keys, setKeys] = useState([]);
@@ -47,20 +47,22 @@ const KeyType = () => {
                 }
             });
     }
+
+
     // ------------ data post method  start --------------
     const handleDelete = (id) => {
-            const url = `http://localhost:5000/key/${id}`
-            fetch(url, {
-                method: 'DELETE'
+        const url = `http://localhost:5000/key/${id}`
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                const remaining = keys.filter(key => key._id !== id)
+                setKeys(remaining);
+                setDeleteID('');
+                toast.success('Data was Deleted Successfully!');
             })
-                .then(res => res.json())
-                .then(data => {
-                    const remaining = keys.filter(key => key._id !== id)
-                    setKeys(remaining);
-                    setDeleteID('');
-                    toast.success('Data was Deleted Successfully!');
-                })
-        
+
 
     }
 
@@ -94,7 +96,7 @@ const KeyType = () => {
 
                 </div>
 
-              
+
             </div>
 
 
@@ -147,11 +149,11 @@ const KeyType = () => {
 
                     </tbody>
                 </table>
-              
+
             </div>
-          
+
         </div>
-         
+
     );
 };
 

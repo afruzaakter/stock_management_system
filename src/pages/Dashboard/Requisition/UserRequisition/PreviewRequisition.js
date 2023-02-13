@@ -6,7 +6,7 @@ import { FiEdit } from 'react-icons/fi';
 import { Link, useParams } from 'react-router-dom';
 
 const PreviewRequisition = () => {
-    const {id}=useParams();
+    const { id } = useParams();
     const [requisitions, setRequisitions] = useState([]);
     console.log(requisitions)
 
@@ -17,15 +17,15 @@ const PreviewRequisition = () => {
     }, [])
 
 
-    const TableRow = ({productName, productQuantity}) => {
+    const TableRow = ({ productName, productQuantity }) => {
         return (
-          <tr>
-            <td>{productName}</td>
-            <td>{productQuantity}</td>
-          </tr>
+            <tr>
+                <td>{productName}</td>
+                <td>{productQuantity}</td>
+            </tr>
         );
-      };
-    
+    };
+
     return (
         <div className='m-4 '>
             <h2 className='text-xl font-bold ml-4'> {requisitions?.autoCode} || Requisition  Date:{requisitions?.date}</h2>
@@ -60,19 +60,19 @@ const PreviewRequisition = () => {
                             </thead>
 
                             <tbody>
-                            {
-                                Object.entries(requisitions).map(([key, value]) => (
-                                   
-                                    <TableRow  key={key}
-                                        productName={requisitions[key]} 
-                                        productQuantity={requisitions[value]} />
-                                   
-                                ))
-                            }
+                                {
+                                    Object.entries(requisitions).map(([key, value]) => (
 
-                    {/* <TableRow productName={requisitions["productName 1"]} productQuantity={requisitions["productQuantity 1"]} />
+                                        <TableRow key={key}
+                                            productName={requisitions[key]}
+                                            productQuantity={requisitions[value]} />
+
+                                    ))
+                                }
+
+                                {/* <TableRow productName={requisitions["productName 1"]} productQuantity={requisitions["productQuantity 1"]} />
                     <TableRow productName={requisitions["productName 2"]} productQuantity={requisitions["productQuantity 2"]} /> */}
-                        
+
 
                             </tbody>
                         </table>
