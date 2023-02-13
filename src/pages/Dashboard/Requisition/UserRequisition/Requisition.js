@@ -77,6 +77,7 @@ const Requisition = () => {
                 </table>
 
             </div>
+
         </div>
     );
 };
