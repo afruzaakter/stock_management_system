@@ -2,17 +2,32 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Package Install
 
-In the project directory, you can run:
+1. Tailwind CSS ( npm install -D tailwindcss ).
+2. DaisyUi ( npm i daisyui ).
+3. React Router Dom ( npm install react-router-dom@6 ).
+4. React Firebase hook ( npm install --save react-firebase-hooks ).
+5. React Hook Form ( npm install react-hook-form ) .
+6. React Icons ( npm install react-icons --save ) .
+7. Firebase ( npm install firebase ) .
+8. Spinner ( npm i react-spinners )
+9. React Toastify (npm i react-toastify)
+10. React to print and pdf file (npm i react-to-print)
 
-### `npm start`
+### `Package Install Website`
+1. Tailwind CSS (https://tailwindcss.com/docs/guides/create-react-app).
+2. DaisyUi (https://daisyui.com/docs/install/).
+3. React Router Dom (https://reactrouter.com/en/v6.3.0/getting-started/installation).
+4. React Firebase hook (https://github.com/CSFrequency/react-firebase-hooks).
+5. React Hook Form (https://react-hook-form.com/) .
+6. React Icons (https://react-icons.github.io/react-icons/) .
+7. Firebase (https://console.firebase.google.com/) .
+8. Spinner (https://www.npmjs.com/package/react-spinners).
+9. React Toastify (https://www.npmjs.com/package/react-toastify).
+10. React to print and pdf file (https://www.npmjs.com/package/react-to-print).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 ### `npm test`
 
