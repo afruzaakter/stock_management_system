@@ -10,7 +10,7 @@ const SupplierEdit = () => {
     //---------- update data show method----------
     const [suppliers, setSuppliers] = useState([]);
     useEffect(() => {
-        const url = `http://localhost:5000/supplier/${id}`
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/supplier/${id}`
 
         fetch(url)
             .then(res => res.json())
@@ -35,7 +35,7 @@ const SupplierEdit = () => {
 
         // console.log("update data", updateData);
 
-        const url = `http://localhost:5000/supplier/${id}`;
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/supplier/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

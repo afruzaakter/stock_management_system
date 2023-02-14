@@ -5,14 +5,14 @@ import { TbMessageReport } from 'react-icons/tb';
 const CurrentStock = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
 
     const [addInventories, setAddInventories] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/addInventory')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
@@ -80,7 +80,7 @@ const CurrentStock = () => {
 
                     <tbody>
                         {
-                            products.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                            products?.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <th>{index + 1}</th>
                                 <td>{product.productName}</td>
                                 <td>{product.budgetCode}</td>
