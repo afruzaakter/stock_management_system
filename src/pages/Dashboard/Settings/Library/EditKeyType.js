@@ -12,7 +12,7 @@ const EditKeyType = () => {
        const [keyTypes, setKeyTypes] = useState([])
     //    console.log(keyTypes)
        useEffect(()=>{
-        const url = `http://localhost:5000/key/${id}`
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/key/${id}`
         fetch(url)
         .then(res=>res.json())
         .then(data=>setKeyTypes(data))
@@ -25,7 +25,7 @@ const EditKeyType = () => {
            key
         }
     
-     const url = `http://localhost:5000/key/${id}`
+     const url = `https://stockmanagementsystemserver-production.up.railway.app/key/${id}`
      fetch(url, {
         method: 'PUT',
         headers:{

@@ -11,13 +11,13 @@ const Product = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
     // ---------- Delete method-----
     const handleDelete = (id) =>{
-            const url = `http://localhost:5000/product/${id}`
+            const url = `https://stockmanagementsystemserver-production.up.railway.app/product/${id}`
             fetch(url, {
                 method: 'DELETE'
             })

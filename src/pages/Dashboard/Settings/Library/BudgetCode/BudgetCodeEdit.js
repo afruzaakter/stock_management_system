@@ -11,7 +11,7 @@ const BudgetCodeEdit = () => {
 //   ------------ update  show data  method---------
 const [budgetCodes, setBudgetCodes] = useState([])
    useEffect(() =>{
-    const url = `http://localhost:5000/budgetcode/${id}`
+    const url = `https://stockmanagementsystemserver-production.up.railway.app/budgetcode/${id}`
    fetch(url)
    .then(res=>res.json())
    .then(data => setBudgetCodes(data))
@@ -23,7 +23,7 @@ const [budgetCodes, setBudgetCodes] = useState([])
         const updateData ={
             budgetCode,
         };
-       const url = `http://localhost:5000/budgetcode/${id}`
+       const url = `https://stockmanagementsystemserver-production.up.railway.app/budgetcode/${id}`
        fetch(url,{
         method: 'PUT',
         headers: {

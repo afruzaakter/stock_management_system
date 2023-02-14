@@ -11,7 +11,7 @@ const PreviewRequisition = () => {
     console.log(requisitions)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/createRequisition/${id}`)
+        fetch(`https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`)
             .then(res => res.json())
             .then(data => setRequisitions(data))
     }, [])

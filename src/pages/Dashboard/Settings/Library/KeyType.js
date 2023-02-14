@@ -16,7 +16,7 @@ const KeyType = () => {
     const [keys, setKeys] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/key')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/key')
             .then(res => res.json())
             .then(data => setKeys(data))
     }, [updated]);
@@ -24,7 +24,7 @@ const KeyType = () => {
 
     // ------------ data post method  start --------------
     const onSubmit = async (data) => {
-        const url = 'http://localhost:5000/key'
+        const url = 'https://stockmanagementsystemserver-production.up.railway.app/key'
         console.log(url)
         fetch(url, {
             method: 'POST',
@@ -51,7 +51,7 @@ const KeyType = () => {
 
     // ------------ data post method  start --------------
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/key/${id}`
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/key/${id}`
         fetch(url, {
             method: 'DELETE'
         })
