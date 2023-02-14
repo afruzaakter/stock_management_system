@@ -14,14 +14,14 @@ const AddNewUser = () => {
     const [user, loading] = useAuthState(auth)
 
     useEffect(() => {
-        fetch("http://localhost:5000/employee")
+        fetch("https://stockmanagementsystemserver-production.up.railway.app/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])
 
     const onSubmit = (data) => {
         console.log("role--", data)
-        const url = 'http://localhost:5000/user'
+        const url = 'https://stockmanagementsystemserver-production.up.railway.app/user'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
