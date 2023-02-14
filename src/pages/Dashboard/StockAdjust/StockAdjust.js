@@ -45,7 +45,7 @@ const StockAdjust = () => {
 
     }, [])
     //---------------- Calculation for stock-------------
-    const stock = addInventories.map(addInventorie => addInventorie.quantity);
+    const stock = addInventories?.map(inventory => inventory.quantity);
     console.log(stock)
     let sum = 0;
     for (let i = 0; i < stock.length; i++) {
@@ -99,7 +99,7 @@ const StockAdjust = () => {
 
                     <tbody>
                         {
-                            products.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                            products?.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <th>{index + 1}</th>
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>

@@ -20,7 +20,7 @@ const CurrentStock = () => {
     //  console.log(addInventories)
 
     //---------------- Calculation for stock-------------
-    const stock = addInventories.map(addInventorie => addInventorie.quantity);
+    const stock = addInventories?.map(inventory => inventory.quantity);
     console.log(stock)
     let sum = 0;
     for (let i = 0; i < stock.length; i++) {
