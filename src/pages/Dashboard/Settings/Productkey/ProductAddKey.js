@@ -11,13 +11,13 @@ const ProductAddKey = () => {
  
     const [keys, setKeys] = useState([]);
     useEffect(() =>{
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/key')
+        fetch('http://localhost:5000/key')
         .then(res=>res.json())
         .then(data =>setKeys(data))
     },[])
 
     const onSubmit = (data) =>{
-      const url = 'https://stockmanagementsystemserver-production.up.railway.app/productkey'
+      const url = 'http://localhost:5000/productkey'
       fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),

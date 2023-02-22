@@ -14,18 +14,18 @@ const AddNewEmployee = () => {
     const [departments, setDepartments] = useState([]);
 
     useEffect(() =>{
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/designation')
+        fetch('http://localhost:5000/designation')
         .then(res=>res.json())
         .then(data =>setDesignations(data))
     },[])
     useEffect(() =>{
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/designation')
+        fetch('http://localhost:5000/designation')
         .then(res=>res.json())
         .then(data =>setDepartments(data))
     },[])
 
     const onSubmit = (data) =>{
-      const url = 'https://stockmanagementsystemserver-production.up.railway.app/employee'
+      const url = 'http://localhost:5000/employee'
       fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),

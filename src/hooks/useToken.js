@@ -6,7 +6,7 @@ const useToken = user => {
         const email = user?.user?.email;
         const currentUser = { email: email }
         if (email) {
-            fetch(`https://stockmanagementsystemserver-production.up.railway.app/allUsers/${email}`, {
+            fetch(`http://localhost:5000/allUsers/${email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

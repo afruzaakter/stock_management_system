@@ -12,7 +12,7 @@ const DesignationEdit = () => {
         const [designations, setDesignations] = useState([])
          
         useEffect(()=>{
-            const url = `https://stockmanagementsystemserver-production.up.railway.app/designation/${id}`
+            const url = `http://localhost:5000/designation/${id}`
             fetch(url)
             .then(res=>res.json())
             .then(data=>setDesignations(data))
@@ -28,7 +28,7 @@ const DesignationEdit = () => {
                 description,
                 order
             }
-            const url = `https://stockmanagementsystemserver-production.up.railway.app/designation/${id}`;
+            const url = `http://localhost:5000/designation/${id}`;
             fetch(url, {
                 method: 'PUT',
                 headers:{

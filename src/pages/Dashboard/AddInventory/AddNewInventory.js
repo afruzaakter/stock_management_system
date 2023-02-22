@@ -10,14 +10,14 @@ const AddNewInventory = () => {
     // ---------- Drop down Product get method ----------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
+        fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
     // ---------- Drop down Product get method ----------
     const [suppliers, setSuppliers] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/supplier')
+        fetch('http://localhost:5000/supplier')
             .then(res => res.json())
             .then(data => setSuppliers(data))
     }, [])
@@ -27,7 +27,7 @@ const AddNewInventory = () => {
     const [autoCode, setAutoCode] = useState();
     console.log("auto inventory", addInventories)
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory')
+        fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
@@ -58,7 +58,7 @@ const AddNewInventory = () => {
             totalQuantity: data.totalQuantity,
             autoCode: autoCode,
         }
-        const url = "https://stockmanagementsystemserver-production.up.railway.app/addInventory"
+        const url = "http://localhost:5000/addInventory"
         fetch(url, {
             method: "POST",
             body: JSON.stringify(updateData),

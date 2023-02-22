@@ -15,7 +15,7 @@ const RequisitionCreate = () => {
     // -------- budgetCode get method--------------
     const [budgetCodes, setBudgetCodes] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/budgetcode')
+        fetch('http://localhost:5000/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, []);
@@ -23,7 +23,7 @@ const RequisitionCreate = () => {
     // -------------- budgetCode get method--------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
+        fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
@@ -36,13 +36,22 @@ const RequisitionCreate = () => {
     const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
     const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
 
-    // --Multiple productName selected and show the table------
+    // ===Multiple productName selected and show the table =====
     const [selectedProduct, setSelectedProduct] = useState([]);
     const handleRowClick = (selectedItem) => {
         setSelectedProduct([...selectedProduct, selectedItem]);
     };
 
-    //-------------- Auto Date -------------
+    
+
+    // --delete one product------
+    const deleteProduct = (deleteId) => {
+        console.log(deleteId);
+        const remaining = selectedProduct.filter(product => product._id !== deleteId);
+        setSelectedProduct(remaining);
+    }
+
+    //========== Auto Date ==============
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth();
@@ -55,52 +64,53 @@ const RequisitionCreate = () => {
         const newValue = Number(event.target.value);
         setMinValue(newValue >= 1 ? newValue : 1);
     };
-    //    
-    const deleteProduct = (deleteId) => {
-        console.log(deleteId);
-        const remaining = selectedProduct.filter(product => product._id !== deleteId);
-        setSelectedProduct(remaining);
-    }
+   
     //===========for auto generate requisition serial code ========
     const [allRequisitions, setAllRequisitions] = useState([]);
-    const [requisitionSerialCode, setRequisitionSerialCode] = useState();
-
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/createRequisition")
+        fetch("http://localhost:5000/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
 
-
+    const [autoCode ,setAutoCode]=useState(0)
     useEffect(() => {
-        const codeList = allRequisitions?.map(requisition => (requisition.requisitionSerialCode));
-        // console.log("124", codeList)
-        const length = codeList.length;
-        console.log("code list", codeList)
-
-        if (length === 0) {
-            setRequisitionSerialCode(10001)
-        } else {
-            const lastValue = codeList[length - 1];
-            const lastCode = parseInt(+lastValue);
-            setRequisitionSerialCode(lastCode + 1)
-        }
+        const requisitionList = parseInt(allRequisitions.length);
+        setAutoCode(requisitionList+1)
     }, [allRequisitions]);
 
-    const autoGenerate = String(requisitionSerialCode)
-
-    console.log('auto code', requisitionSerialCode)
-    console.log('auto code autoGenerate', autoGenerate)
-
+ 
 
     //==============================================
     const onSubmit = (data) => {
+       
+        const arrayOfTotalProduct = [];
+        Object.entries(data)
+            .filter(([key, value]) => key !== 'requisitionNotes')
+            .filter(([key, value]) => key.split(' ')[0] === 'productName')
+            .forEach(([key, value], index) => {
+                const obj = {
+                  productName: data[`productName ${index + 1}`],
+                  productQuantity: data[`productQuantity ${index + 1}`],
+                };
+                arrayOfTotalProduct.push(obj);
+        });
+                
+        const currentData= {
+            autoCode: autoCode,
+            email: user.email,
+            date: currentDate,
+            products: arrayOfTotalProduct,
+            requisitionNotes: data.requisitionNotes
+        }
 
-        //    console.log("table data", data)
-        const url = 'https://stockmanagementsystemserver-production.up.railway.app/createRequisition'
+        console.log("table data", data)
+        console.log('currentData', currentData)
+
+        const url = 'http://localhost:5000/createRequisition'
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(currentData),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
@@ -141,36 +151,6 @@ const RequisitionCreate = () => {
                                 {errors.requisitionNotes?.type === 'required' && <span className="label-text-alt text-red-700">{errors.requisitionNotes.message}</span>}
 
                             </label>
-                        </div>
-
-                        {/* //--------------Date -Month -and- year-------------- */}
-                        <div className='form-control'>
-                            <input
-                                type="text"
-                                className='hidden'
-                                defaultValue={currentDate}
-                                {...register("date")}>
-                            </input>
-                        </div>
-
-                        {/* ------- email field ---------- */}
-                        <div className='form-control'>
-                            <input
-                                type="email"
-                                className='hidden'
-                                defaultValue={user.email}
-                                {...register("email")}>
-                            </input>
-                        </div>
-
-                        {/* ------- autocode field ---------- */}
-                        <div className='form-control'>
-                            <input
-                                // type="text"
-                                className='hidden'
-                                defaultValue={autoGenerate}
-                                {...register("autoCode")}>
-                            </input>
                         </div>
 
                         {/* ------------------------------------------------- */}
