@@ -11,7 +11,7 @@ const ProductKeyEdit = () => {
     // -------- key type get method------------
     const [keys, setKeys] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/key')
+        fetch('http://localhost:5000/key')
             .then(res => res.json())
             .then(data => setKeys(data))
     }, [])
@@ -20,7 +20,7 @@ const ProductKeyEdit = () => {
     
 
     useEffect(() => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/productkey/${id}`
+        const url = `http://localhost:5000/productkey/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setProductkeys(data))
@@ -36,7 +36,7 @@ const ProductKeyEdit = () => {
             keytype
         }
         console.log(updateData)
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/productkey/${id}`
+        const url = `http://localhost:5000/productkey/${id}`
         fetch(url, {
             method: 'PUT',
             headers: {

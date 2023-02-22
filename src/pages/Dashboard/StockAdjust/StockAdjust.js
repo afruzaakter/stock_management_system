@@ -15,14 +15,14 @@ const StockAdjust = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
+        fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
 
 
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/product/${id}`
+        const url = `http://localhost:5000/product/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -39,7 +39,7 @@ const StockAdjust = () => {
     //------------ Inventory data fetch---------
     const [addInventories, setAddInventories] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory')
+        fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 

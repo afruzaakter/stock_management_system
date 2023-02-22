@@ -11,13 +11,13 @@ const ProductAdd = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [budgetCodes, setBudgetCodes] = useState([]);
      useEffect(()=>{
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/budgetcode')
+        fetch('http://localhost:5000/budgetcode')
         .then(res => res.json())
         .then(data => setBudgetCodes(data))
      },[])
     // ---------------- post method product -----------
     const onSubmit = (data) => {
-        const url = "https://stockmanagementsystemserver-production.up.railway.app/product"
+        const url = "http://localhost:5000/product"
         fetch(url, {
          method: "POST",
          body: JSON.stringify(data),
