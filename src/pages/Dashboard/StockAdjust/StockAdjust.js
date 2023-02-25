@@ -28,7 +28,6 @@ const StockAdjust = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 const remaining = products.filter(product => product._id !== id)
                 setProducts(remaining);
                 setDeleteID(' ');
@@ -109,6 +108,7 @@ const StockAdjust = () => {
                                 <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
                                     <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
+                                    
                                     <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
                                         onClick={() => setDeleteID(product._id)} >
                                         <MdDeleteForever />
@@ -127,7 +127,7 @@ const StockAdjust = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* -------- delete modal ----------------- */}
+                                    {/* -------- delete modal end----------------- */}
                                 </td>
                             </tr>)
                         }
