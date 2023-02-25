@@ -8,6 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 const PreviewRequisition = () => {
     const { id } = useParams();
     const [requisitions, setRequisitions] = useState([]);
+    console.log('req',requisitions.products);
 
     useEffect(() => {
         fetch(`http://localhost:5000/createRequisition/${id}`)
@@ -16,21 +17,19 @@ const PreviewRequisition = () => {
     }, [])
 
     
-    const TableRow = ({ productName, productQuantity }) => {
-        return (
-            <tr>
-                <td>{productName}</td>
-                <td>{productQuantity}</td>
-            </tr>
-        );
-    };
+    // const TableRow = ({ productName, productQuantity }) => {
+    //     return (
+    //         <tr>
+    //             <td>{productName}</td>
+    //             <td>{productQuantity}</td>
+    //         </tr>
+    //     );
+    // };
 
 
-    
-    
     return (
         <div className='m-4 '>
-            <h2 className='text-xl font-bold ml-4'> {requisitions?.autoCode} || Requisition  Date:{requisitions?.date}</h2>
+            <h2 className='text-xl font-bold ml-4'> Requisition Serial: {requisitions?.autoCode}</h2>
             <div className='flex justify-between items-center border-b-2 rounded-l-md p-5'>
                 <div className='flex justify-start items-center gap-5 mt-4'>
                     <AiOutlineCheck className='font-bold text-2xl text-green-900' />
@@ -53,7 +52,7 @@ const PreviewRequisition = () => {
 
             <div>
                 <div className='flex justify-between mt-5'>
-                    <h2 className='text-md ml-4  '>Requisition No. R00071 </h2>
+                    <h2 className='text-md ml-4  '>Requisition No.  </h2>
                     <h2 className='text-md ml-4 '>Requisition Date: {requisitions.date}</h2>
                 </div>
                 <div>
@@ -67,9 +66,8 @@ const PreviewRequisition = () => {
                             </thead>
 
                             <tbody>
-                               
-                                
-                                {
+                                {/* Map operation using object */}
+                                {/* {
                                     Object.entries(requisitions)
                                     .filter(([key, value]) => key.split(' ')[0] === 'productName')
                                     .map(([key, value], index) => (
@@ -77,44 +75,18 @@ const PreviewRequisition = () => {
                                         <TableRow productName={requisitions[`productName ${index+1}`]} productQuantity={requisitions[`productQuantity ${index+1}`]} />
                                        
                                     ))
-                                }
+                                } */}
 
-                                {/* {
-                                    ('autoCode' ||'email' ||'date' ||'requisitionNotes' || '_id') 
-                                    .filter(([key, value]) => key !== 'email')
-
-
-                                    totalProduct.map((product,index) => (
-                                        <tr key={index}>
-                                            <td>{product.props.productName}</td>
-                                            <td>{product.props.productQuantity}</td>
+                                {
+                                    (requisitions.products)?.map((product) => (
+                                        <tr>
+                                            <td>{product.productName}</td>
+                                            <td>{product.productQuantity}</td>
                                         </tr>
-
                                         
                                     ))
-                                } */}
+                                } 
 
-
-                                {/* {
-                                    Object.entries(requisitions).map(([key, value], index) => (
-
-                                        // <TableRow key={key}
-                                        //     productName={requisitions[key]}
-                                        //     productQuantity={requisitions[value]} />
-                                        
-                                    ))
-                                } */}
-
-
-                                {/* {
-                                    totalProduct.map((product , index) => ( 
-                                        <>
-                                        
-                                        <TableRow productName={requisitions[`productName ${index+1}`]} productQuantity={requisitions[`productQuantity ${index+1}`]} />
-                                        </>
-
-                                    ))
-                                } */}
 
 
 

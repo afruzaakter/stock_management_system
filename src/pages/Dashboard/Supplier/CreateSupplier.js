@@ -20,7 +20,8 @@ const CreateSupplier = () => {
            .then(res => res.json())
            .then(data => setSuppliers(data))
    }, []);
-   useEffect(() => {
+
+    useEffect(() => {
         const codeList = suppliers?.map(supplier => supplier.autoCode);
         const length =codeList.length; 
         if(length === 0){
@@ -30,9 +31,9 @@ const CreateSupplier = () => {
             const lastCode = +lastValue;
             setAutoCode(lastCode+1)
         }
-   }, [suppliers]);
+    }, [suppliers]);
 
-    //-------- Suppler Post method -----------
+    //========= Suppler Post method ============
     const onSubmit =(data)=>{
 
         const updateData={
@@ -70,7 +71,7 @@ const CreateSupplier = () => {
         <h1 className='text-2xl  mb-5'>Create Supplier</h1>
         <form onSubmit={handleSubmit(onSubmit)} >
                   <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                      {/* -----------------------Supplier Company Name Field ------------------------------ */}
+                      {/* -----------------------Supplier Company Name Field ------------------------- */}
 
                       <div className="form-control">
                         <label className='text-start '>Name (Company,Distributor,Dealer)</label>
@@ -137,7 +138,7 @@ const CreateSupplier = () => {
                     </div> 
                  
                   
-                      {/* -----------------------Supplier Contact Person Field ------------------------------ */}
+                      {/* -----------------------Supplier Contact Person Field -------------------- */}
 
                       <div className="form-control">
                         <label className='text-start '>Contact Person</label>
@@ -157,7 +158,7 @@ const CreateSupplier = () => {
 
                         </label>
                     </div> 
-                      {/* -----------------------Supplier Contact Number Field ------------------------------ */}
+                      {/* -----------------------Supplier Contact Number Field ------------------------ */}
 
                       <div className="form-control">
                         <label className='text-start '>Contact Number</label>

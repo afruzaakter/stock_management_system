@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
 
 const RequisitionAuthorize = () => {
+    const [allRequisitions, setAllRequisitions] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:5000/createRequisition")
+            .then(res => res.json())
+            .then(data => setAllRequisitions(data))
+    }, [])
+
+
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -38,13 +46,19 @@ const RequisitionAuthorize = () => {
                     </thead>
 
                     <tbody>
-                        <tr >
-                            <td> 03-01-2023 </td>
-                            <td>P0002 </td>
-                            <td>Sonia Akter </td>
-                            <td>Pending </td>
-                            <td> Yes  </td>
-                        </tr>
+                    {
+                            allRequisitions.map((createRequisition, index) => <tr key={createRequisition._id}>
+                                <td>{createRequisition.date}</td>
+                                <td> {createRequisition.autoCode}</td>
+                                {/* <td>{user.displayName}</td> */}
+                                <td>pending</td>
+                                <td>{createRequisition.requisitionNotes}</td>
+                                {/* <td className='text-center'>
+                                    <Link to={`/dashboard/previewRequisition/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                        <AiOutlineEye /> Preview </Link>
+                                </td> */}
+                            </tr>)
+                        }
                     </tbody>
                 </table>
             </div>

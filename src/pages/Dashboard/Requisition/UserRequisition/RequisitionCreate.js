@@ -30,7 +30,7 @@ const RequisitionCreate = () => {
 
     // ============================================
     // --For searching product---
-    const [searchVal, setSearchVal] = useState("");
+    const [searchValue, setSearchVal] = useState("");
 
     // --selectedBudgetCode and filter data form under BudgetCode ---------
     const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
@@ -58,7 +58,7 @@ const RequisitionCreate = () => {
     const year = date.getFullYear();
     const currentDate = day + '-' + month + '-' + year;
 
-    // ---- For initial quantity filed value 1 ----
+    // ========== For initial quantity filed value 1 =======
     const [minValue, setMinValue] = useState(1);
     const handleChange = (event) => {
         const newValue = Number(event.target.value);
@@ -67,23 +67,29 @@ const RequisitionCreate = () => {
    
     //===========for auto generate requisition serial code ========
     const [allRequisitions, setAllRequisitions] = useState([]);
+    const [autoCode, setAutoCode] = useState(); 
+   
     useEffect(() => {
         fetch("http://localhost:5000/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
 
-    const [autoCode ,setAutoCode]=useState(0)
     useEffect(() => {
-        const requisitionList = parseInt(allRequisitions.length);
-        setAutoCode(requisitionList+1)
+        const codeList = allRequisitions?.map(requisition => requisition.autoCode);
+        const length =codeList.length; 
+        if(length === 0){
+            setAutoCode(101)
+        }else{
+            const lastValue =codeList[length-1]; 
+            const lastCode = +lastValue;
+            setAutoCode(lastCode+1)
+        }
     }, [allRequisitions]);
-
- 
 
     //==============================================
     const onSubmit = (data) => {
-       
+
         const arrayOfTotalProduct = [];
         Object.entries(data)
             .filter(([key, value]) => key !== 'requisitionNotes')
@@ -103,9 +109,6 @@ const RequisitionCreate = () => {
             products: arrayOfTotalProduct,
             requisitionNotes: data.requisitionNotes
         }
-
-        console.log("table data", data)
-        console.log('currentData', currentData)
 
         const url = 'http://localhost:5000/createRequisition'
         fetch(url, {
@@ -221,7 +224,6 @@ const RequisitionCreate = () => {
                 <div className="w-4/12">
                     <div>
                         <label className='text-xl text-green-700 font-bold '>Add Your Product </label>
-                        {/* <label className='text-start'>Budget Code</label> */}
                         <select
                             onChange={e => setSelectedBudgetCode(e.target.value)}
                             className={`input input-sm w-full  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input `}>
@@ -249,17 +251,17 @@ const RequisitionCreate = () => {
                         {
                             selectedProducts.length === 0 && <>
                                 {
-                                    products.filter((val) => {
-                                        if (searchVal === "") {
-                                            return val;
-                                        } else if (val.productName.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())) {
-                                            return val
+                                    products.filter((value) => {
+                                        if (searchValue === "") {
+                                            return value;
+                                        } else if (value.productName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+                                            return value;
                                         }
-                                    }).map((val) => <ul key={val._id}>
+                                    }).map((value) => <ul key={value._id}>
                                         <li className=" flex justify-between">
-                                            <h2>  {val.productName}</h2>
+                                            <h2>  {value.productName}</h2>
                                             <button
-                                                onClick={() => handleRowClick(val)}
+                                                onClick={() => handleRowClick(value)}
                                                 className='btn btn-sm bg-green-600 text-white rounded-md px-4 hover:bg-primary hover:text-white'>
                                                 Add
                                             </button>
