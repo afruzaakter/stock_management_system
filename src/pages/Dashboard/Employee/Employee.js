@@ -3,13 +3,13 @@ import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Employee = () => {
-    const [employees, setEmployees]= useState([])
+    const [employees, setEmployees] = useState([])
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch("http://localhost:5000/employee")
-        .then(res=>res.json())
-        .then(data=> setEmployees(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setEmployees(data))
+    }, [])
 
 
     return (
@@ -28,18 +28,18 @@ const Employee = () => {
                     </div>
                 </div>
             </div>
-            
+
             {/* ----------------- Add/Manage Btn ---------------- */}
             <div className='mb-2'>
                 <Link to='/dashboard/addNewEmployee' className="btn btn-sm mx-1 bg-green-700
                     text-white hover:bg-primary hover:text-white">
-                    <FaPlus/> Add New Employee
+                    <FaPlus /> Add New Employee
                 </Link>
                 <button className="btn btn-sm mx-1 bg-success text-white hover:bg-primary">
-                    Manage 
+                    Manage
                 </button>
             </div>
-                
+
             {/*------------------ table ------------------- */}
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
@@ -55,21 +55,21 @@ const Employee = () => {
                             <th> Active </th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
                         {
-                            employees.map((employee)=>
-                            <tr key={employee._id}>
-                                <th>{employee.employeeId} </th>
-                                <th>{employee.employeeName} </th>
-                                <th>{employee.mobileNo} </th>
-                                <th>{employee.email} </th>
-                                <th>{employee.order} </th>
-                                <th>{employee.designation} </th>
-                                <th>{employee.department} </th>
-                                <th>{employee.createUser} </th>
-                            </tr>
-                            ) 
+                            employees.map((employee) =>
+                                <tr key={employee._id}>
+                                    <th>{employee.employeeId} </th>
+                                    <th>{employee.employeeName} </th>
+                                    <th>{employee.mobileNo} </th>
+                                    <th>{employee.email} </th>
+                                    <th>{employee.order} </th>
+                                    <th>{employee.designation} </th>
+                                    <th>{employee.department} </th>
+                                    <th>{employee.createUser} </th>
+                                </tr>
+                            )
                         }
                     </tbody>
                 </table>

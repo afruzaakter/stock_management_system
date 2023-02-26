@@ -15,32 +15,31 @@ import auth from '../../../firebase.init';
 
 const UserManagement = () => {
     const [user, loading] = useAuthState(auth)
-    console.log(user)
-    const [users, setUsers]= useState([])
+    const [users, setUsers] = useState([])
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch("http://localhost:5000/user")
-        .then(res=>res.json())
-        .then(data=> setUsers(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setUsers(data))
+    }, [])
 
-    const handleDelete = (id) =>{
+    const handleDelete = (id) => {
         const url = `http://localhost:5000/user/${id}`
         fetch(url, {
             method: 'DELETE'
-            })
+        })
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
                 toast.success('Data Deleted Successfully!');
                 const remaining = users.filter(user => user._id !== id)
                 setUsers(remaining);
-        })
+            })
     }
 
     return (
         <div className='border m-2 pl-2 rounded-lg'>
-            
+
             {/*------------ navbar-------- */}
             <div className="navbar bg-base-100">
                 <div className="flex-1">
@@ -74,7 +73,7 @@ const UserManagement = () => {
                 </div>
                 <Link to='/dashboard/addNewUser' className="btn btn-sm mx-1 bg-green-700  
                     text-white hover:bg-primary hover:text-white">
-                    <FaPlus/> Add</Link>
+                    <FaPlus /> Add</Link>
                 <button className="btn btn-sm mx-1 bg-primary text-white">
                     <MdDone /> Active </button>
                 <button className="btn btn-sm mx-1 bg-error text-white">
@@ -92,37 +91,40 @@ const UserManagement = () => {
                             <th> Full Name </th>
                             <th> Email </th>
                             <th>User Name  </th>
-                            <th> Organization </th>
+                            {/* <th> Organization </th> */}
                             <th> Assign Role </th>
-                            <th> Active </th>
+                            {/* <th> Active </th>
                             <th> Locked </th>
-                            <th> Topic Sub </th>
+                            <th> Topic Sub </th> */}
                             <th> Action </th>
-                           
+
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            users.map((user)=>
-                            <tr key={user._id}>
-                                <td>{user.fullName } </td>
-                                <td>{user.email} </td>
-                                <td>{user.userName } </td>
-                                <td>{user.organization} </td>
-                                <td>{user.userRole } </td>
-                                <td> Yes </td>
-                                <td> No </td>
-                                <td> No </td>
-                                <td className='flex gap-3'>
-                                    <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/userEdit/${user._id}`}> <FiEdit /> </Link>
-                                    <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(user._id)}> <AiOutlineDelete /></button>
-                                </td> 
-                             </tr>
+                            users.map((user) =>
+                                <tr key={user._id}>
+                                    <td>{user.fullName} </td>
+                                    <td>{user.email} </td>
+                                    <td>{user.userName} </td>
+                                    {/* <td>{user.organization} </td> */}
+                                    <td>{user.userRole} </td>
+                                    {/* <td> Yes </td>
+                                    <td> No </td>
+                                    <td> No </td> */}
+                                    <td className='flex gap-3'>
+                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/userEdit/${user._id}`}>
+                                            {/* <FiEdit /> */}
+                                            Assign_Role
+                                        </Link>
+                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(user._id)}> <AiOutlineDelete /></button>
+                                    </td>
+                                </tr>
                             )
                         }
-                   
-                        
+
+
                     </tbody>
                 </table>
             </div>

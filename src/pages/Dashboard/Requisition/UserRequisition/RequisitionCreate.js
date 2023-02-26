@@ -42,7 +42,7 @@ const RequisitionCreate = () => {
         setSelectedProduct([...selectedProduct, selectedItem]);
     };
 
-    
+
 
     // --delete one product------
     const deleteProduct = (deleteId) => {
@@ -64,7 +64,7 @@ const RequisitionCreate = () => {
         const newValue = Number(event.target.value);
         setMinValue(newValue >= 1 ? newValue : 1);
     };
-   
+
     //===========for auto generate requisition serial code ========
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
@@ -73,30 +73,30 @@ const RequisitionCreate = () => {
             .then(data => setAllRequisitions(data))
     }, [])
 
-    const [autoCode ,setAutoCode]=useState(0)
+    const [autoCode, setAutoCode] = useState(0)
     useEffect(() => {
         const requisitionList = parseInt(allRequisitions.length);
-        setAutoCode(requisitionList+1)
+        setAutoCode(requisitionList + 1)
     }, [allRequisitions]);
 
- 
+
 
     //==============================================
     const onSubmit = (data) => {
-       
+
         const arrayOfTotalProduct = [];
         Object.entries(data)
             .filter(([key, value]) => key !== 'requisitionNotes')
             .filter(([key, value]) => key.split(' ')[0] === 'productName')
             .forEach(([key, value], index) => {
                 const obj = {
-                  productName: data[`productName ${index + 1}`],
-                  productQuantity: data[`productQuantity ${index + 1}`],
+                    productName: data[`productName ${index + 1}`],
+                    productQuantity: data[`productQuantity ${index + 1}`],
                 };
                 arrayOfTotalProduct.push(obj);
-        });
-                
-        const currentData= {
+            });
+
+        const currentData = {
             autoCode: autoCode,
             email: user.email,
             date: currentDate,
@@ -104,9 +104,7 @@ const RequisitionCreate = () => {
             requisitionNotes: data.requisitionNotes
         }
 
-        console.log("table data", data)
-        console.log('currentData', currentData)
-
+        //    console.log("table data", data)
         const url = 'http://localhost:5000/createRequisition'
         fetch(url, {
             method: 'POST',
