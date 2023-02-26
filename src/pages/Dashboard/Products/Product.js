@@ -15,9 +15,6 @@ const Product = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
-
-    // const productFilter = products?.filter(product => product.productName === productName)
-
     // ---------- Delete method-----
     const handleDelete = (id) => {
         const url = `http://localhost:5000/product/${id}`
@@ -32,9 +29,12 @@ const Product = () => {
                 setDeleteID(' ');
                 toast.success('Data was Deleted Successfully!');
             })
-
-
     }
+
+    // const productFilter = products?.filter(product => product.productName === productName)
+
+
+
     return (
         <div className='border m-2 p-1 rounded-lg'>
 

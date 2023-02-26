@@ -26,7 +26,11 @@ const AllUsers = () => {
             .then(data => setAllUsers(data))
     }, [])
 
-    console.log(allUsers)
+    useEffect(() => {
+        fetch("http://localhost:5000/user")
+            .then(res => res.json())
+            .then(data => setAllUsers(data))
+    }, [])
 
     const { email, role } = allUsers;
     const makeAdmin = () => {
@@ -42,7 +46,20 @@ const AllUsers = () => {
     }
     const handleDelete = () => {
 
+        const { email, role } = allUsers;
+        const makeAdmin = () => {
+            const url = `http://localhost:5000/user/admin/${email}`
+            fetch(url, {
+                method: 'PUT'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    toast.success('Successfully made an admin');
+                    console.log(data)
+                })
+        }
     }
+
 
     return (
         <div className='border m-2 pl-2 rounded-lg'>
