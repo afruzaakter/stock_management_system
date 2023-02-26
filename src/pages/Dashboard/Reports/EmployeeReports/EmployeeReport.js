@@ -10,14 +10,14 @@ const EmployeeReport = () => {
     //------ Departments Fetch method -----------------  
     const [departments, setDepartments] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/department')
+        fetch('http://localhost:5000/department')
             .then(res => res.json())
             .then(data => setDepartments(data))
     }, [])
     //------ Designation Fetch method -----------------  
     const [designations, setDesignations] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/designation')
+        fetch('http://localhost:5000/designation')
             .then(res => res.json())
             .then(data => setDesignations(data))
     }, []);
@@ -26,7 +26,7 @@ const EmployeeReport = () => {
     const [employees, setEmployees] = useState([])
 
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/employee")
+        fetch("http://localhost:5000/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])

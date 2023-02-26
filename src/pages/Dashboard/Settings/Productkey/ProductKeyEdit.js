@@ -11,16 +11,16 @@ const ProductKeyEdit = () => {
     // -------- key type get method------------
     const [keys, setKeys] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/key')
+        fetch('http://localhost:5000/key')
             .then(res => res.json())
             .then(data => setKeys(data))
     }, [])
 
     const [productkeys, setProductkeys] = useState([]);
-    
+
 
     useEffect(() => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/productkey/${id}`
+        const url = `http://localhost:5000/productkey/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setProductkeys(data))
@@ -36,7 +36,7 @@ const ProductKeyEdit = () => {
             keytype
         }
         console.log(updateData)
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/productkey/${id}`
+        const url = `http://localhost:5000/productkey/${id}`
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -78,17 +78,17 @@ const ProductKeyEdit = () => {
 
                         <div className="form-control">
                             <label className='text-start '>Description</label>
-                        <textarea
-                            type="text"
-                            Value={productkeys.description}
-                            className={`input input-sm  max-w-xs  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
-                            {...register("description")}
-                        />
+                            <textarea
+                                type="text"
+                                Value={productkeys.description}
+                                className={`input input-sm  max-w-xs  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                                {...register("description")}
+                            />
 
-                        <label className="label">
-                            {errors.description?.type === 'required' && <span className="label-text-alt text-red-700">{errors.description.message}</span>}
+                            <label className="label">
+                                {errors.description?.type === 'required' && <span className="label-text-alt text-red-700">{errors.description.message}</span>}
 
-                        </label>
+                            </label>
                         </div>
 
 

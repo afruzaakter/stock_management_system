@@ -10,18 +10,27 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 const AddNewUser = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
-    const [employees, setEmployees] = useState([]);
-    const [user, loading] = useAuthState(auth)
+    const [user, loading] = useAuthState(auth);
 
+
+    const [employees, setEmployees] = useState([]);
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/employee")
+        fetch("http://localhost:5000/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])
 
+    //======= all user get data===========
+    const [allUsers, setAllUser] = useState([])
+    useEffect(() => {
+        fetch('http://localhost:5000/user')
+            .then(res => res.json())
+            .then(data => setAllUser(data))
+    }, [])
+
     const onSubmit = (data) => {
         console.log("role--", data)
-        const url = 'https://stockmanagementsystemserver-production.up.railway.app/user'
+        const url = 'http://localhost:5000/user'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -80,7 +89,7 @@ const AddNewUser = () => {
                             <input
                                 type="text"
 
-                                value={user.displayName}
+                                // value={user.displayName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.fullName && 'border-red-600 focus:border-red-600'}`}
                                 {...register("fullName")}
                             />
@@ -92,15 +101,22 @@ const AddNewUser = () => {
                         {/* ----------------------- Email Field ------------------------------ */}
                         <div className="form-control">
                             <label className='text-start '> Email </label>
-                            <input
-                                type="text"
-
-                                value={user.email}
-                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
-                                {...register("email")}
-                            />
+                            <select
+                                {...register("email", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please fill out this field"
+                                    }
+                                })}
+                                className={`input input-sm   border border-green-700 mt-1 w-80 focus:outline-0 rounded-sm  
+                                 focus:border-blue-500 login-container-input ${errors.allUser && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''>Select Email </option>
+                                {
+                                    allUsers.map((allUser) => <option key={allUser._id}>{allUser.email}</option>)
+                                }
+                            </select>
                             <label className="label">
-                                {errors.email?.type === 'required' && <span className="label-text-alt text-red-700">{errors.email.message}</span>}
+                                {errors.allUser?.type === 'required' && <span className="label-text-alt text-red-700">{errors.allUser.message}</span>}
                             </label>
                         </div>
 
@@ -169,6 +185,7 @@ const AddNewUser = () => {
 
                             </label>
                         </div>
+
 
                     </div>
 
