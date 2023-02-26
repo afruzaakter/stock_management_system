@@ -17,7 +17,7 @@ const ProductKeyEdit = () => {
     }, [])
 
     const [productkeys, setProductkeys] = useState([]);
-    
+
 
     useEffect(() => {
         const url = `http://localhost:5000/productkey/${id}`
@@ -78,17 +78,17 @@ const ProductKeyEdit = () => {
 
                         <div className="form-control">
                             <label className='text-start '>Description</label>
-                        <textarea
-                            type="text"
-                            Value={productkeys.description}
-                            className={`input input-sm  max-w-xs  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
-                            {...register("description")}
-                        />
+                            <textarea
+                                type="text"
+                                Value={productkeys.description}
+                                className={`input input-sm  max-w-xs  border-green-700  focus:outline-0 rounded-sm  mt-1  lg:w-96 focus:border-blue-500  login-container-input ${errors.description && 'border-red-600 focus:border-red-600'}`}
+                                {...register("description")}
+                            />
 
-                        <label className="label">
-                            {errors.description?.type === 'required' && <span className="label-text-alt text-red-700">{errors.description.message}</span>}
+                            <label className="label">
+                                {errors.description?.type === 'required' && <span className="label-text-alt text-red-700">{errors.description.message}</span>}
 
-                        </label>
+                            </label>
                         </div>
 
 

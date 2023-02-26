@@ -42,7 +42,7 @@ const RequisitionCreate = () => {
         setSelectedProduct([...selectedProduct, selectedItem]);
     };
 
-    
+
 
     // --delete one product------
     const deleteProduct = (deleteId) => {
@@ -64,7 +64,7 @@ const RequisitionCreate = () => {
         const newValue = Number(event.target.value);
         setMinValue(newValue >= 1 ? newValue : 1);
     };
-   
+
     //===========for auto generate requisition serial code ========
     const [allRequisitions, setAllRequisitions] = useState([]);
     const [autoCode, setAutoCode] = useState(); 
@@ -96,13 +96,13 @@ const RequisitionCreate = () => {
             .filter(([key, value]) => key.split(' ')[0] === 'productName')
             .forEach(([key, value], index) => {
                 const obj = {
-                  productName: data[`productName ${index + 1}`],
-                  productQuantity: data[`productQuantity ${index + 1}`],
+                    productName: data[`productName ${index + 1}`],
+                    productQuantity: data[`productQuantity ${index + 1}`],
                 };
                 arrayOfTotalProduct.push(obj);
-        });
-                
-        const currentData= {
+            });
+
+        const currentData = {
             autoCode: autoCode,
             email: user.email,
             date: currentDate,

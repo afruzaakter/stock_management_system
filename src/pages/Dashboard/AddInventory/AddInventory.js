@@ -11,29 +11,29 @@ import auth from '../../../firebase.init';
 const AddInventory = () => {
     const [addInventories, setAddInventories] = useState([]);
     const [deleteID, setDeleteID] = useState('');
-    const navigate=useNavigate();
-    
+    const navigate = useNavigate();
+
     useEffect(() => {
-        fetch('http://localhost:5000/addInventory',{
-            method:'GET',
-            headers:{
-                'authorization':`Bearer ${localStorage.getItem('accessToken')}`
+        fetch('http://localhost:5000/addInventory', {
+            method: 'GET',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(res => {
-               console.log('res', res);
-               if(res.status===401 || res.status===403){
+                console.log('res', res);
+                if (res.status === 401 || res.status === 403) {
                     signOut(auth)
                     localStorage.removeItem('accessToken')
                     navigate('/')
-               }
+                }
                 return res.json()
             })
             .then(data => setAddInventories(data))
 
     }, [])
 
-    const handleDelete = (id) => {        
+    const handleDelete = (id) => {
         const url = `http://localhost:5000/addInventory/${id}`
         fetch(url, {
             method: 'DELETE'
@@ -110,7 +110,7 @@ const AddInventory = () => {
                                         <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/EditAddInventory/${addInventory._id}`}> <FiEdit /> </Link>
 
                                         <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
-                                            onClick={() =>setDeleteID(addInventory._id) } >
+                                            onClick={() => setDeleteID(addInventory._id)} >
                                             <AiOutlineDelete />
                                         </label>
                                         {/* -------- delete modal ----------------- */}
@@ -120,7 +120,7 @@ const AddInventory = () => {
                                                 <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
 
                                                 <div className="mr-14 modal-action">
-                                                    <label htmlFor="my-modal-6" onClick={() =>handleDelete(deleteID)}
+                                                    <label htmlFor="my-modal-6" onClick={() => handleDelete(deleteID)}
                                                         className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
                                                     <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
                                                 </div>

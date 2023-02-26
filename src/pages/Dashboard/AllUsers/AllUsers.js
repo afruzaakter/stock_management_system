@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
-import {useQuery , QueryClientProvider, QueryClient } from 'react-query'
+import { useQuery, QueryClientProvider, QueryClient } from 'react-query'
 import { Link } from 'react-router-dom';
 import Loading from '../../Shared/Loading';
 import { toast } from 'react-toastify';
@@ -18,39 +18,56 @@ const AllUsers = () => {
     //     }
     // }).then(res => res.json()))
 
-    const [allUsers, setAllUsers]= useState([])
-  
-    useEffect(()=>{
+    const [allUsers, setAllUsers] = useState([])
+
+    useEffect(() => {
         fetch("http://localhost:5000/user")
-        .then(res=>res.json())
-        .then(data=> setAllUsers(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setAllUsers(data))
+    }, [])
 
-console.log(allUsers)
+    useEffect(() => {
+        fetch("http://localhost:5000/user")
+            .then(res => res.json())
+            .then(data => setAllUsers(data))
+    }, [])
 
-const {email, role} = allUsers;
-const makeAdmin = () =>{
- const url = `http://localhost:5000/user/admin/${email}`
- fetch(url,{
-    method: 'PUT'
- })
- .then(res => res.json())
- .then(data =>{
-    toast.success('Successfully made an admin');
-    console.log(data)
- })
-}
-const handleDelete = () =>{
+    const { email, role } = allUsers;
+    const makeAdmin = () => {
+        const url = `http://localhost:5000/user/admin/${email}`
+        fetch(url, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast.success('Successfully made an admin');
+                console.log(data)
+            })
+    }
+    const handleDelete = () => {
 
-}
+        const { email, role } = allUsers;
+        const makeAdmin = () => {
+            const url = `http://localhost:5000/user/admin/${email}`
+            fetch(url, {
+                method: 'PUT'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    toast.success('Successfully made an admin');
+                    console.log(data)
+                })
+        }
+    }
+
 
     return (
         <div className='border m-2 pl-2 rounded-lg'>
-            
+
             {/*------------AllUsers navbar-------- */}
             <div className="navbar bg-base-100">
                 <div className="flex-1">
-                    <h1 className='text-3xl'>All Users Account: {allUsers.length} </h1> 
+                    <h1 className='text-3xl'>All Users Account: {allUsers.length} </h1>
                 </div>
                 <div className="form-control">
                     <div className="input-group">
@@ -72,30 +89,30 @@ const handleDelete = () =>{
                             <th> Email </th>
                             <th> Role Manage</th>
                             <th> Action </th>
-                           
+
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            allUsers.map((user,index)=>
-                            <tr key={user._id}>
-                                <td>{index+1 } </td>
-                                <td>{user.fullName} </td>
-                                <td>{user.email } </td>
-                                {/* <td>{user.userRole } </td>
+                            allUsers.map((user, index) =>
+                                <tr key={user._id}>
+                                    <td>{index + 1} </td>
+                                    <td>{user.fullName} </td>
+                                    <td>{user.email} </td>
+                                    {/* <td>{user.userRole } </td>
                                 <td> Yes </td>
                                 <td> No </td> */}
-                                <td> {role !== 'admin' && <button className='btn btn-sm bg-red-500 text-white' onClick={makeAdmin}> Make Admin</button>} </td>
-                                <td className='flex gap-3'>
-                                    <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/userEdit/${user._id}`}> <FiEdit /> </Link>
-                                    <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(user._id)}> <AiOutlineDelete /></button>
-                                </td> 
-                             </tr>
+                                    <td> {role !== 'admin' && <button className='btn btn-sm bg-red-500 text-white' onClick={makeAdmin}> Make Admin</button>} </td>
+                                    <td className='flex gap-3'>
+                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/userEdit/${user._id}`}> <FiEdit /> </Link>
+                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(user._id)}> <AiOutlineDelete /></button>
+                                    </td>
+                                </tr>
                             )
                         }
-                   
-                        
+
+
                     </tbody>
                 </table>
             </div>

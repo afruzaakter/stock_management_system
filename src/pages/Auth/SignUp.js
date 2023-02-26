@@ -13,28 +13,28 @@ import useToken from '../../hooks/useToken';
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-    const [ createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth); // for send UserName
     const navigate = useNavigate();
-    const [token]=useToken(user || gUser) //Hook: for send allUsers information
-    
-    if (gLoading || loading||updating) {
+    const [token] = useToken(user || gUser) //Hook: for send allUsers information
+
+    if (gLoading || loading || updating) {
         return <Loading />
     }
 
-    if(token){
-        navigate("/dashboard");
+    if (token) {
+        navigate("/");
     }
 
     let signUpError;
-    if(error || gError ||updateError){
-        signUpError= <p className='text-red-500'><small>
-             {error?.message || gError?.message || updateError?.message } </small>
+    if (error || gError || updateError) {
+        signUpError = <p className='text-red-500'><small>
+            {error?.message || gError?.message || updateError?.message} </small>
         </p>
     }
 
-    const onSubmit =async(data)=> {
-        await createUserWithEmailAndPassword( data.email, data.password)
+    const onSubmit = async (data) => {
+        await createUserWithEmailAndPassword(data.email, data.password)
         await updateProfile({ displayName: data.name })
     }
 
@@ -43,14 +43,14 @@ const SignUp = () => {
             <div className="card w-96 bg-base-100 shadow-xl ">
                 <div className="card-body">
                     <h2 className="text-2xl  text-center uppercase font-bold ">Sign-Up </h2>
-        
+
                     {/* <Social/> */}
                     {/* ------------- Login Form start ----------------------- */}
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        
+
                         {/* ------------Your Name input field ---------- */}
                         <div className="form-control w-full max-w-xs">
-                            <label className='flex items-center gap-1 font-bold'> 
+                            <label className='flex items-center gap-1 font-bold'>
                                 <FaRegUser className='font-bold' /> Name
                             </label>
                             <input
@@ -66,7 +66,7 @@ const SignUp = () => {
                             />
                             <label className="label">
                                 {errors.name?.type === 'required' && <span className="label-text-alt text-red-700">{errors.name.message}</span>}
-                               
+
                             </label>
                         </div>
 
@@ -97,10 +97,10 @@ const SignUp = () => {
                             </label>
                         </div>
 
-                       
+
                         {/* ------------- Password input field ----------------------- */}
                         <div className="form-control w-full max-w-xs">
-                            <label className='flex items-center font-bold gap-1'> 
+                            <label className='flex items-center font-bold gap-1'>
                                 <RiLockPasswordLine className='font-bold' /> Password
                             </label>
                             <input
@@ -125,17 +125,17 @@ const SignUp = () => {
                         </div>
 
                         {signUpError}
-                        
+
                         <input className='btn btn-sm w-full rounded-md  text-white bg-primary hover:bg-green-700 max-w-xs' type="submit" value='Sign-Up' />
                     </form>
                     {/* ------------- Login Form end ----------------------- */}
-                    
+
                     <p> Already have an Account? <Link className='text-green-800' to="/login">Please Login</Link> </p>
                     <div className="divider">OR</div>
 
-                    <button 
-                        onClick={() => signInWithGoogle()} 
-                        className="btn btn-sm btn-outline hover:bg-primary"> 
+                    <button
+                        onClick={() => signInWithGoogle()}
+                        className="btn btn-sm btn-outline hover:bg-primary">
                         <FcGoogle className='pr-2 text-2xl' /> Login with Google
                     </button>
 

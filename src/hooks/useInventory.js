@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 
-const useAdmin = user => {
-    const [admin, setAdmin] = useState(false)
+const useInventory = user => {
+    const [inventory, setInventory] = useState(false)
     useEffect(() => {
         const email = user?.email;
         // console.log(email)
         if (email) {
-            fetch(`http://localhost:5000/admin/${email}`, {
+            fetch(`http://localhost:5000/inventory/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'
@@ -14,10 +14,10 @@ const useAdmin = user => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    setAdmin(data.admin);
+                    setInventory(data.inventory);
                 })
         }
     }, [user])
-    return [admin]
+    return [inventory]
 }
-export default useAdmin 
+export default useInventory 

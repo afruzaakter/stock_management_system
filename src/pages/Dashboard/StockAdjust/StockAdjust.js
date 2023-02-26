@@ -37,20 +37,29 @@ const StockAdjust = () => {
     }
     //------------ Inventory data fetch---------
     const [addInventories, setAddInventories] = useState([]);
+    console.log(addInventories)
     useEffect(() => {
         fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
     }, [])
+
     //---------------- Calculation for stock-------------
-    const stock = addInventories?.map(inventory => inventory.quantity);
-    console.log(stock)
-    let sum = 0;
-    for (let i = 0; i < stock.length; i++) {
-        sum += parseInt(stock[i]);
-        console.log(sum)
-    }
+
+    const [stock, setStock] = useState('')
+    // console.log(stock)
+    useEffect(() => {
+        const stock = addInventories?.map(inventory => inventory.quantity);
+        // console.log(stock)
+        let sum = 0;
+        for (let i = 0; i < stock.length; i++) {
+            sum += parseInt(stock[i]);
+            setStock(sum)
+        }
+
+    }, [addInventories])
+
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
@@ -103,7 +112,7 @@ const StockAdjust = () => {
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
                                 <td>{product.measureUnit}</td>
-                                <td>{sum} </td>
+                                <td>{stock} </td>
                                 <td>{product.sortOrder}</td>
                                 <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
