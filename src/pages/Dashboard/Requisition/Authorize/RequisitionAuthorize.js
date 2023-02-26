@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const RequisitionAuthorize = () => {
     const [allRequisitions, setAllRequisitions] = useState([]);
@@ -38,25 +39,23 @@ const RequisitionAuthorize = () => {
                     <thead>
                         <tr>
                             <th> Date </th>
-                            <th> #Requisition </th>
-                            <th> Requested By </th>
-                            <th> Request Status </th>
-                            <th> Note </th>
+                            <th> Req_SL_NO </th>
+                            <th>Req_Note </th>
+                            <th>  </th>
                         </tr>
                     </thead>
 
                     <tbody>
                     {
-                            allRequisitions.map((createRequisition, index) => <tr key={createRequisition._id}>
+                            allRequisitions.map((createRequisition, index) => 
+                            <tr key={createRequisition._id}>
                                 <td>{createRequisition.date}</td>
                                 <td> {createRequisition.autoCode}</td>
-                                {/* <td>{user.displayName}</td> */}
-                                <td>pending</td>
                                 <td>{createRequisition.requisitionNotes}</td>
-                                {/* <td className='text-center'>
-                                    <Link to={`/dashboard/previewRequisition/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                <td className='text-center'>
+                                    <Link to={`/dashboard/previewAuthorize/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
                                         <AiOutlineEye /> Preview </Link>
-                                </td> */}
+                                </td>
                             </tr>)
                         }
                     </tbody>

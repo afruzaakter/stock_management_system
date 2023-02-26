@@ -7,7 +7,7 @@ import Home from "./pages/Home/Home";
 import SignUp from "./pages/Auth/SignUp";
 import Requisition from "./pages/Dashboard/Requisition/UserRequisition/Requisition";
 import DashboardHome from "./pages/Dashboard/DashboardHome";
-import RequisitionAuthorize from "./pages/Dashboard/Requisition/RequisitionAuthorize";
+import RequisitionAuthorize from "./pages/Dashboard/Requisition/Authorize/RequisitionAuthorize";
 import RequisitionApproval from "./pages/Dashboard/Requisition/RequisitionApproval";
 import RequisitionIssue from "./pages/Dashboard/Requisition/RequisitionIssue";
 import AddInventory from "./pages/Dashboard/AddInventory/AddInventory";
@@ -51,6 +51,7 @@ import NotFoundPage from "./pages/Shared/NotFoundPage";
 import EmployeeReport from "./pages/Dashboard/Reports/EmployeeReports/EmployeeReport";
 import DepartmentDesignationReport from "./pages/Dashboard/Reports/EmployeeReports/DepartmentDesignationReport";
 import PreviewRequisition from "./pages/Dashboard/Requisition/UserRequisition/PreviewRequisition";
+import PreviewAuthorize from "./pages/Dashboard/Requisition/Authorize/PreviewAuthorize";
 
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
           <Route path="requisitionCreate" element={<RequisitionCreate />} />
           <Route path="previewRequisition/:id" element={<PreviewRequisition />} />
           <Route path="requisitionAuthorize" element={<RequisitionAuthorize />} />
+          <Route path="previewAuthorize/:id" element={<PreviewAuthorize/>} />
           <Route path="requisitionApproval" element={<RequisitionApproval />} />
           <Route path="requisitionIssue" element={<RequisitionIssue />} />
 
