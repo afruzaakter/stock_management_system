@@ -8,7 +8,6 @@ import SignUp from "./pages/Auth/SignUp";
 import Requisition from "./pages/Dashboard/Requisition/UserRequisition/Requisition";
 import DashboardHome from "./pages/Dashboard/DashboardHome";
 import RequisitionAuthorize from "./pages/Dashboard/Requisition/Authorize/RequisitionAuthorize";
-import RequisitionApproval from "./pages/Dashboard/Requisition/RequisitionApproval";
 import RequisitionIssue from "./pages/Dashboard/Requisition/RequisitionIssue";
 import AddInventory from "./pages/Dashboard/AddInventory/AddInventory";
 import CurrentStock from "./pages/Dashboard/CurrentStock/CurrentStock";
@@ -52,6 +51,7 @@ import EmployeeReport from "./pages/Dashboard/Reports/EmployeeReports/EmployeeRe
 import DepartmentDesignationReport from "./pages/Dashboard/Reports/EmployeeReports/DepartmentDesignationReport";
 import PreviewRequisition from "./pages/Dashboard/Requisition/UserRequisition/PreviewRequisition";
 import PreviewAuthorize from "./pages/Dashboard/Requisition/Authorize/PreviewAuthorize";
+import RequisitionApproval from "./pages/Dashboard/Requisition/Approval/RequisitionApproval";
 
 
 function App() {
