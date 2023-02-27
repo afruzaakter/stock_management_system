@@ -3,13 +3,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import Navbar from "./pages/Shared/Navbar";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Home from "./pages/Home/Home";
 import SignUp from "./pages/Auth/SignUp";
 import Requisition from "./pages/Dashboard/Requisition/UserRequisition/Requisition";
 import DashboardHome from "./pages/Dashboard/DashboardHome";
-import RequisitionAuthorize from "./pages/Dashboard/Requisition/RequisitionAuthorize";
-import RequisitionApproval from "./pages/Dashboard/Requisition/RequisitionApproval";
-import RequisitionIssue from "./pages/Dashboard/Requisition/RequisitionIssue";
+import RequisitionAuthorize from "./pages/Dashboard/Requisition/Authorize/RequisitionAuthorize";
+import RequisitionIssue from "./pages/Dashboard/Requisition/Issue/RequisitionIssue";
 import AddInventory from "./pages/Dashboard/AddInventory/AddInventory";
 import CurrentStock from "./pages/Dashboard/CurrentStock/CurrentStock";
 import StockAdjust from "./pages/Dashboard/StockAdjust/StockAdjust";
@@ -51,6 +49,10 @@ import NotFoundPage from "./pages/Shared/NotFoundPage";
 import EmployeeReport from "./pages/Dashboard/Reports/EmployeeReports/EmployeeReport";
 import DepartmentDesignationReport from "./pages/Dashboard/Reports/EmployeeReports/DepartmentDesignationReport";
 import PreviewRequisition from "./pages/Dashboard/Requisition/UserRequisition/PreviewRequisition";
+import PreviewAuthorize from "./pages/Dashboard/Requisition/Authorize/PreviewAuthorize";
+import RequisitionApproval from "./pages/Dashboard/Requisition/Approval/RequisitionApproval";
+import PreviewApproval from "./pages/Dashboard/Requisition/Approval/PreviewApproval";
+import PreviewIssue from "./pages/Dashboard/Requisition/Issue/PreviewIssue";
 
 
 function App() {
@@ -70,8 +72,11 @@ function App() {
           <Route path="requisitionCreate" element={<RequisitionCreate />} />
           <Route path="previewRequisition/:id" element={<PreviewRequisition />} />
           <Route path="requisitionAuthorize" element={<RequisitionAuthorize />} />
+          <Route path="previewAuthorize/:id" element={<PreviewAuthorize/>} />
           <Route path="requisitionApproval" element={<RequisitionApproval />} />
+          <Route path="previewApproval/:id" element={<PreviewApproval/>} />
           <Route path="requisitionIssue" element={<RequisitionIssue />} />
+          <Route path="previewIssue/:id" element={<PreviewIssue/>} />
 
           <Route path="addInventory" element={<AddInventory />} />
           <Route path="addNewInventory" element={<AddNewInventory />} />

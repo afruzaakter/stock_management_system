@@ -1,11 +1,13 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { FiEdit } from 'react-icons/fi';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-const PreviewRequisition = () => {
+const PreviewAuthorize = () => {
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const { id } = useParams();
     const navigate = useNavigate();
     const [requisitions, setRequisitions] = useState([]);
@@ -16,8 +18,8 @@ const PreviewRequisition = () => {
             .then(data => setRequisitions(data))
     }, [])
 
+    // for requisition delete
     const handleReqDelete = (id) => {
-        console.log(id)
         const url = `http://localhost:5000/createRequisition/${id}`
         fetch(url,{
             method: 'DELETE'
@@ -28,20 +30,38 @@ const PreviewRequisition = () => {
         })
     }
 
-    
-    // const TableRow = ({ productName, productQuantity }) => {
-    //     return (
-    //         <tr>
-    //             <td>{productName}</td>
-    //             <td>{productQuantity}</td>
-    //         </tr>
-    //     );
-    // };
+    // --------------For Authorized------------------
+    const onSubmit = (data) => {
+        const newData = {
+          autoCode:requisitions.autoCode,
+          email:requisitions.email,
+          date:requisitions.date,
+          products:requisitions.products,
+          requisitionNotes:requisitions.requisitionNotes,
 
+          authorizeNotes: data.authorizeNotes,
+          isAuthorized: data.isAuthorized,
+        };
+      
+        const url = `http://localhost:5000/createRequisition/${id}`;
+        fetch(url, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            reset(); // assuming this function resets the form data
+            navigate('/dashboard/requisitionAuthorize');
+          })
+      };
 
     return (
         <div className='m-4 '>
             <h2 className='text-xl font-bold ml-4'> Requisition Serial: {requisitions?.autoCode}</h2>
+            
             <div className='flex justify-between items-center border-b-2 rounded-l-md p-5'>
                 <div className='flex justify-start items-center gap-5 mt-4'>
                     <AiOutlineCheck className='font-bold text-2xl text-green-900' />
@@ -58,6 +78,7 @@ const PreviewRequisition = () => {
                     <label htmlFor="my-modal-6" className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600">
                         ❌ Delete
                     </label>
+                   
                     
                     <Link to={`/dashboard/requisition`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
                          Back 
@@ -82,6 +103,59 @@ const PreviewRequisition = () => {
             </div>
 
             <div>
+                <form onSubmit={handleSubmit(onSubmit)} >
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
+
+                        
+                        {/* ----------------------- Authorized Notes Field ------------------ */}
+                         <div className="form-control">
+                            <label className='text-start'> Authorized Notes </label>
+                            <input
+                                type="text"
+                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.authorizeNotes && 'border-red-600 focus:border-red-600'}`}
+                                {...register("authorizeNotes", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please fill out this field"
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.authorizeNotes?.type === 'required' && <span className="label-text-alt text-red-700">{errors.authorizeNotes.message}</span>}
+                            </label>
+                        </div>
+
+                       {/* ----------------------- Authorization (yes/no) Field -------------- */}
+                       <div className="form-control">
+                            <label className='text-start'>Authorization </label>
+                            <select
+                                {...register("isAuthorized", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please fill out this field"
+                                    }
+                                })}
+                                className={`input input-sm w-80  focus:outline-0 rounded-sm border border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.isAuthorized && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''> Yes </option>
+                                <option > Yes </option>
+                                <option > No </option>
+                            </select>
+
+                            <label className="label">
+                                {errors.isAuthorized?.type === 'required' && <span className="label-text-alt text-red-700">{errors.isAuthorized.message}</span>}
+
+                            </label>
+                        </div>
+
+                        {/* ----------------------    All field end     ------- */}
+                    </div>
+
+                    <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Authorize' />
+                    
+                </form>
+            </div>
+
+            <div>
                 <div className='flex justify-between mt-5'>
                     <h2 className='text-md ml-4  '>Requisition No.  </h2>
                     <h2 className='text-md ml-4 '>Requisition Date: {requisitions.date}</h2>
@@ -97,17 +171,6 @@ const PreviewRequisition = () => {
                             </thead>
 
                             <tbody>
-                                {/* Map operation using object */}
-                                {/* {
-                                    Object.entries(requisitions)
-                                    .filter(([key, value]) => key.split(' ')[0] === 'productName')
-                                    .map(([key, value], index) => (
-                                        
-                                        <TableRow productName={requisitions[`productName ${index+1}`]} productQuantity={requisitions[`productQuantity ${index+1}`]} />
-                                       
-                                    ))
-                                } */}
-
                                 {
                                     (requisitions.products)?.map((product) => (
                                         <tr>
@@ -127,4 +190,4 @@ const PreviewRequisition = () => {
     );
 };
 
-export default PreviewRequisition;
+export default PreviewAuthorize;
