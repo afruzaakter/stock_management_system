@@ -1,8 +1,27 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
-import Setting from '../Settings/Setting';
+import { Link } from 'react-router-dom';
 
 const RequisitionIssue = () => {
+    const [allRequisitions, setAllRequisitions] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:5000/createRequisition")
+            .then(res => res.json())
+            .then(data => setAllRequisitions(data))
+    }, [])
+    
+    const [allAuthorizedReq, setAllAuthorizedReq] = useState([]);
+    useEffect(() => {
+        const authorizedReq = allRequisitions
+            .filter(requisition => requisition.isApproved === "Yes")
+            // .filter(requisition => requisition.isIssue !== "Yes");
+        setAllAuthorizedReq(authorizedReq)
+        
+    }, [allRequisitions])
+
+
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
@@ -39,14 +58,19 @@ const RequisitionIssue = () => {
                 </thead>
 
                 <tbody>
-                    <tr >
-                        <td> 03-01-2023 </td>
-                        <td>R0088 </td>
-                        <td>Md Razu Molla</td>
-                        <td>done </td>
-                        <td> Urgently needed </td>
-                    </tr>
-                </tbody>
+                        {
+                            allAuthorizedReq?.map((createRequisition, index) => 
+                            <tr key={createRequisition._id}>
+                                <td>{createRequisition.date}</td>
+                                <td> {createRequisition.autoCode}</td>
+                                <td>{createRequisition.requisitionNotes}</td>
+                                <td className='text-center'>
+                                    <Link to={`/dashboard/previewApproval/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                        <AiOutlineEye /> Preview </Link>
+                                </td>
+                            </tr>)
+                        }
+                    </tbody>
             </table>
         </div>
 

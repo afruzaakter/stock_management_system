@@ -3,12 +3,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import Navbar from "./pages/Shared/Navbar";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Home from "./pages/Home/Home";
 import SignUp from "./pages/Auth/SignUp";
 import Requisition from "./pages/Dashboard/Requisition/UserRequisition/Requisition";
 import DashboardHome from "./pages/Dashboard/DashboardHome";
 import RequisitionAuthorize from "./pages/Dashboard/Requisition/Authorize/RequisitionAuthorize";
-import RequisitionIssue from "./pages/Dashboard/Requisition/RequisitionIssue";
+import RequisitionIssue from "./pages/Dashboard/Requisition/Issue/RequisitionIssue";
 import AddInventory from "./pages/Dashboard/AddInventory/AddInventory";
 import CurrentStock from "./pages/Dashboard/CurrentStock/CurrentStock";
 import StockAdjust from "./pages/Dashboard/StockAdjust/StockAdjust";
@@ -52,6 +51,7 @@ import DepartmentDesignationReport from "./pages/Dashboard/Reports/EmployeeRepor
 import PreviewRequisition from "./pages/Dashboard/Requisition/UserRequisition/PreviewRequisition";
 import PreviewAuthorize from "./pages/Dashboard/Requisition/Authorize/PreviewAuthorize";
 import RequisitionApproval from "./pages/Dashboard/Requisition/Approval/RequisitionApproval";
+import PreviewApproval from "./pages/Dashboard/Requisition/Approval/PreviewApproval";
 
 
 function App() {
@@ -73,6 +73,7 @@ function App() {
           <Route path="requisitionAuthorize" element={<RequisitionAuthorize />} />
           <Route path="previewAuthorize/:id" element={<PreviewAuthorize/>} />
           <Route path="requisitionApproval" element={<RequisitionApproval />} />
+          <Route path="previewApproval/:id" element={<PreviewApproval/>} />
           <Route path="requisitionIssue" element={<RequisitionIssue />} />
 
           <Route path="addInventory" element={<AddInventory />} />

@@ -10,6 +10,13 @@ const RequisitionAuthorize = () => {
             .then(data => setAllRequisitions(data))
     }, [])
 
+    const [allCreatedReq, setAllCreatedReq] = useState([]);
+    useEffect(() => {
+        const notAuthorized = allRequisitions.filter(requisition => requisition.isAuthorized !== "Yes");
+        setAllCreatedReq(notAuthorized)
+        
+    }, [allRequisitions])
+
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
@@ -28,12 +35,6 @@ const RequisitionAuthorize = () => {
                 </div>
             </div>
 
-            <div className='mb-2 '>
-                <button className="btn btn-sm mx-1 bg-success text-white">
-                    <AiOutlineEye /> Preview </button>
-            </div>
-
-
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -47,7 +48,7 @@ const RequisitionAuthorize = () => {
 
                     <tbody>
                     {
-                            allRequisitions.map((createRequisition, index) => 
+                            allCreatedReq?.map((createRequisition, index) => 
                             <tr key={createRequisition._id}>
                                 <td>{createRequisition.date}</td>
                                 <td> {createRequisition.autoCode}</td>

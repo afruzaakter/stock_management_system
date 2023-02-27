@@ -12,7 +12,9 @@ const RequisitionApproval = () => {
     
     const [allAuthorizedReq, setAllAuthorizedReq] = useState([]);
     useEffect(() => {
-        const authorizedReq = allRequisitions.filter(requisition => requisition.isAuthorized === "Yes");
+        const authorizedReq = allRequisitions
+            .filter(requisition => requisition.isAuthorized === "Yes")
+            .filter(requisition => requisition.isApproved !== "Yes");
         setAllAuthorizedReq(authorizedReq)
         
     }, [allRequisitions])
@@ -36,19 +38,12 @@ const RequisitionApproval = () => {
                 </div>
             </div>
 
-            <div className='mb-2 '>
-                <button className="btn btn-sm mx-1 bg-success text-white">
-                    <AiOutlineEye /> Preview </button>
-            </div>
-
-
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>
                             <th> Date </th>
                             <th> #Requisition </th>
-                            <th> Requested By </th>
                             <th> Request Status </th>
                             <th> Note </th>
                         </tr>
@@ -62,7 +57,7 @@ const RequisitionApproval = () => {
                                 <td> {createRequisition.autoCode}</td>
                                 <td>{createRequisition.requisitionNotes}</td>
                                 <td className='text-center'>
-                                    <Link to={`/dashboard/previewAuthorize/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                    <Link to={`/dashboard/previewApproval/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
                                         <AiOutlineEye /> Preview </Link>
                                 </td>
                             </tr>)
