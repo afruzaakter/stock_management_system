@@ -52,6 +52,7 @@ import PreviewRequisition from "./pages/Dashboard/Requisition/UserRequisition/Pr
 import PreviewAuthorize from "./pages/Dashboard/Requisition/Authorize/PreviewAuthorize";
 import RequisitionApproval from "./pages/Dashboard/Requisition/Approval/RequisitionApproval";
 import PreviewApproval from "./pages/Dashboard/Requisition/Approval/PreviewApproval";
+import PreviewIssue from "./pages/Dashboard/Requisition/Issue/PreviewIssue";
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
           <Route path="requisitionApproval" element={<RequisitionApproval />} />
           <Route path="previewApproval/:id" element={<PreviewApproval/>} />
           <Route path="requisitionIssue" element={<RequisitionIssue />} />
+          <Route path="previewIssue/:id" element={<PreviewIssue/>} />
 
           <Route path="addInventory" element={<AddInventory />} />
           <Route path="addNewInventory" element={<AddNewInventory />} />

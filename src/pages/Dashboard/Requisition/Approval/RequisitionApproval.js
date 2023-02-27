@@ -44,8 +44,8 @@ const RequisitionApproval = () => {
                         <tr>
                             <th> Date </th>
                             <th> #Requisition </th>
-                            <th> Request Status </th>
                             <th> Note </th>
+                            <th> </th>
                         </tr>
                     </thead>
 

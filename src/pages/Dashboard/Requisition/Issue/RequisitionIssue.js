@@ -16,7 +16,7 @@ const RequisitionIssue = () => {
     useEffect(() => {
         const authorizedReq = allRequisitions
             .filter(requisition => requisition.isApproved === "Yes")
-            // .filter(requisition => requisition.isIssue !== "Yes");
+            .filter(requisition => requisition.isIssued !== "Yes");
         setAllAuthorizedReq(authorizedReq)
         
     }, [allRequisitions])
@@ -38,13 +38,7 @@ const RequisitionIssue = () => {
                 </div>
             </div>
         </div>
-
-        <div className='mb-2 '>
-            <button className="btn btn-sm mx-1 bg-success text-white">
-                <AiOutlineEye /> Preview </button>
-        </div>
-
-
+        
         <div className="overflow-x-auto">
             <table className="table w-full">
                 <thead>
@@ -65,7 +59,7 @@ const RequisitionIssue = () => {
                                 <td> {createRequisition.autoCode}</td>
                                 <td>{createRequisition.requisitionNotes}</td>
                                 <td className='text-center'>
-                                    <Link to={`/dashboard/previewApproval/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                    <Link to={`/dashboard/previewIssue/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
                                         <AiOutlineEye /> Preview </Link>
                                 </td>
                             </tr>)
