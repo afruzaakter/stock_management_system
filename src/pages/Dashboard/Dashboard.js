@@ -81,7 +81,8 @@ const Dashboard = () => {
                 {
                   (admin || authorization) && <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md `}><Link to='/dashboard/requisitionAuthorize' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={`text-md text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <TbFileDatabase /></span>
-                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition(Authorize) </span></Link></li>
+                    <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition(Authorize) </span></Link>
+                  </li>
                 }
                 {/* -----------------------------Requisition Authorize dashboard menu End ---------------------------- */}
 

@@ -14,26 +14,26 @@ const AddNewEmployee = () => {
     const [departments, setDepartments] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/designation')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/designation')
             .then(res => res.json())
             .then(data => setDesignations(data))
     }, [])
     useEffect(() => {
-        fetch('http://localhost:5000/department')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/department')
             .then(res => res.json())
             .then(data => setDepartments(data))
     }, [])
     //======= all user get data===========
     const [allUsers, setAllUser] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/user')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/user')
             .then(res => res.json())
             .then(data => setAllUser(data))
     }, [])
 
     const onSubmit = (data) => {
         console.log("employee", data)
-        const url = 'http://localhost:5000/employee'
+        const url = 'https://stockmanagementsystemserver-production.up.railway.app/employee'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -67,7 +67,7 @@ const AddNewEmployee = () => {
                             <input
                                 type="text"
 
-                                value={user.displayName}
+                                // value={user.displayName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.employeeName && 'border-red-600 focus:border-red-600'}`}
                                 {...register("employeeName")}
                             />

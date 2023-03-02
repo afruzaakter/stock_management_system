@@ -15,7 +15,7 @@ const AddNewUser = () => {
 
     const [employees, setEmployees] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/employee")
+        fetch("https://stockmanagementsystemserver-production.up.railway.app/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])
@@ -23,14 +23,14 @@ const AddNewUser = () => {
     //======= all user get data===========
     const [allUsers, setAllUser] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/user')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/user')
             .then(res => res.json())
             .then(data => setAllUser(data))
     }, [])
 
     const onSubmit = (data) => {
         console.log("role--", data)
-        const url = 'http://localhost:5000/user'
+        const url = 'https://stockmanagementsystemserver-production.up.railway.app/user'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),

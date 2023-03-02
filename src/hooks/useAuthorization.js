@@ -6,7 +6,7 @@ const useAuthorization = user => {
         const email = user?.email;
         // console.log(email)
         if (email) {
-            fetch(`http://localhost:5000/authorization/${email}`, {
+            fetch(`https://stockmanagementsystemserver-production.up.railway.app/authorization/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'

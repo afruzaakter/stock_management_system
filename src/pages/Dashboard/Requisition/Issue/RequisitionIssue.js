@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../../../firebase.init';
 
-const Requisition = () => {
-    const [user] = useAuthState(auth);
-
-
+const RequisitionIssue = () => {
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
         fetch("https://stockmanagementsystemserver-production.up.railway.app/createRequisition")
@@ -16,19 +12,22 @@ const Requisition = () => {
             .then(data => setAllRequisitions(data))
     }, [])
 
-    // filter My requisition
-    const [myRequisitions, setMyRequisitions] = useState([]);
+    const [allAuthorizedReq, setAllAuthorizedReq] = useState([]);
     useEffect(() => {
-        const myReq = allRequisitions.filter(requisition => requisition.email === user.email)
-        setMyRequisitions(myReq);
-    }, [allRequisitions, user])
+        const authorizedReq = allRequisitions
+            .filter(requisition => requisition.isApproved === "Yes")
+            .filter(requisition => requisition.isIssued !== "Yes");
+        setAllAuthorizedReq(authorizedReq)
+
+    }, [allRequisitions])
+
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
 
             <div className="navbar bg-base-100">
                 <div className="flex-1">
-                    <h1 className='text-3xl'> Requisition Request List</h1>
+                    <h1 className='text-3xl'> Requisition Issue List</h1>
                 </div>
                 <div className="form-control">
                     <div className="input-group">
@@ -40,12 +39,6 @@ const Requisition = () => {
                 </div>
             </div>
 
-            <div className='mb-2 '>
-                <Link to="/dashboard/requisitionCreate" className="btn btn-sm mx-1 bg-primary text-white">
-                    <FaPlus /> New Requisition Request</Link>
-
-            </div>
-
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -55,31 +48,29 @@ const Requisition = () => {
                             <th> Requested By </th>
                             <th> Request Status </th>
                             <th> Note </th>
-                            <th> Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            myRequisitions.map((createRequisition, index) => <tr key={createRequisition._id}>
-                                <td>{createRequisition.date}</td>
-                                <td> {createRequisition.autoCode}</td>
-                                <td>{user.displayName}</td>
-                                <td>pending</td>
-                                <td>{createRequisition.requisitionNotes}</td>
-                                <td className='text-center'>
-                                    <Link to={`/dashboard/previewRequisition/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
-                                        <AiOutlineEye /> Preview </Link>
-                                </td>
-                            </tr>)
+                            allAuthorizedReq?.map((createRequisition, index) =>
+                                <tr key={createRequisition._id}>
+                                    <td>{createRequisition.date}</td>
+                                    <td> {createRequisition.autoCode}</td>
+                                    <td>{createRequisition.requisitionNotes}</td>
+                                    <td className='text-center'>
+                                        <Link to={`/dashboard/previewIssue/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                            <AiOutlineEye /> Preview </Link>
+                                    </td>
+                                </tr>)
                         }
                     </tbody>
                 </table>
-
             </div>
+
 
         </div>
     );
 };
 
-export default Requisition;
+export default RequisitionIssue;
