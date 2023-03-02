@@ -5,18 +5,18 @@ import { Link } from 'react-router-dom';
 const RequisitionApproval = () => {
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/createRequisition")
+        fetch("https://stockmanagementsystemserver-production.up.railway.app/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
-    
+
     const [allAuthorizedReq, setAllAuthorizedReq] = useState([]);
     useEffect(() => {
         const authorizedReq = allRequisitions
             .filter(requisition => requisition.isAuthorized === "Yes")
             .filter(requisition => requisition.isApproved !== "Yes");
         setAllAuthorizedReq(authorizedReq)
-        
+
     }, [allRequisitions])
 
 
@@ -51,16 +51,16 @@ const RequisitionApproval = () => {
 
                     <tbody>
                         {
-                            allAuthorizedReq?.map((createRequisition, index) => 
-                            <tr key={createRequisition._id}>
-                                <td>{createRequisition.date}</td>
-                                <td> {createRequisition.autoCode}</td>
-                                <td>{createRequisition.requisitionNotes}</td>
-                                <td className='text-center'>
-                                    <Link to={`/dashboard/previewApproval/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
-                                        <AiOutlineEye /> Preview </Link>
-                                </td>
-                            </tr>)
+                            allAuthorizedReq?.map((createRequisition, index) =>
+                                <tr key={createRequisition._id}>
+                                    <td>{createRequisition.date}</td>
+                                    <td> {createRequisition.autoCode}</td>
+                                    <td>{createRequisition.requisitionNotes}</td>
+                                    <td className='text-center'>
+                                        <Link to={`/dashboard/previewApproval/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                            <AiOutlineEye /> Preview </Link>
+                                    </td>
+                                </tr>)
                         }
                     </tbody>
                 </table>

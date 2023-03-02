@@ -11,24 +11,24 @@ const PreviewRequisition = () => {
     const [requisitions, setRequisitions] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/createRequisition/${id}`)
+        fetch(`https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`)
             .then(res => res.json())
             .then(data => setRequisitions(data))
     }, [])
 
     const handleReqDelete = (id) => {
         console.log(id)
-        const url = `http://localhost:5000/createRequisition/${id}`
-        fetch(url,{
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`
+        fetch(url, {
             method: 'DELETE'
         })
-          .then(res => res.json())
-          .then(data => {
-            navigate('/dashboard/requisition')
-        })
+            .then(res => res.json())
+            .then(data => {
+                navigate('/dashboard/requisition')
+            })
     }
 
-    
+
     // const TableRow = ({ productName, productQuantity }) => {
     //     return (
     //         <tr>
@@ -54,13 +54,13 @@ const PreviewRequisition = () => {
                     <Link to={`/dashboard`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
                         <FiEdit /> Edit
                     </Link>
-                    
+
                     <label htmlFor="my-modal-6" className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600">
                         ❌ Delete
                     </label>
-                    
+
                     <Link to={`/dashboard/requisition`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
-                         Back 
+                        Back
                     </Link>
 
                     {/* -------- delete modal ----------------- */}
@@ -114,9 +114,9 @@ const PreviewRequisition = () => {
                                             <td>{product.productName}</td>
                                             <td>{product.productQuantity}</td>
                                         </tr>
-                                        
+
                                     ))
-                                } 
+                                }
                             </tbody>
                         </table>
 

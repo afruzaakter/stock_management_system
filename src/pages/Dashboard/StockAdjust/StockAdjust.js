@@ -15,14 +15,14 @@ const StockAdjust = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
 
 
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/product/${id}`
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/product/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -39,7 +39,7 @@ const StockAdjust = () => {
     const [addInventories, setAddInventories] = useState([]);
     console.log(addInventories)
     useEffect(() => {
-        fetch('http://localhost:5000/addInventory')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
@@ -117,7 +117,7 @@ const StockAdjust = () => {
                                 <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
                                     <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
-                                    
+
                                     <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
                                         onClick={() => setDeleteID(product._id)} >
                                         <MdDeleteForever />

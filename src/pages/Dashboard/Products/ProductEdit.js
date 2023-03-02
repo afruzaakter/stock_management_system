@@ -12,7 +12,7 @@ const ProductEdit = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [budgetCodes, setBudgetCodes] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/budgetcode')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, [])
@@ -20,7 +20,7 @@ const ProductEdit = () => {
     const [products, setProducts] = useState([]);
     console.log("product", products);
     useEffect(() => {
-        const url = `http://localhost:5000/product/${id}`
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/product/${id}`
         console.log("product id", url);
         fetch(url)
             .then(res => res.json())
@@ -46,7 +46,7 @@ const ProductEdit = () => {
             invoice
         }
 
-        const url = `http://localhost:5000/product/${id}`;
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/product/${id}`;
 
         console.log(url)
 

@@ -15,7 +15,7 @@ const RequisitionCreate = () => {
     // -------- budgetCode get method--------------
     const [budgetCodes, setBudgetCodes] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/budgetcode')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, []);
@@ -23,7 +23,7 @@ const RequisitionCreate = () => {
     // -------------- budgetCode get method--------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
@@ -67,23 +67,23 @@ const RequisitionCreate = () => {
 
     //===========for auto generate requisition serial code ========
     const [allRequisitions, setAllRequisitions] = useState([]);
-    const [autoCode, setAutoCode] = useState(); 
-   
+    const [autoCode, setAutoCode] = useState();
+
     useEffect(() => {
-        fetch("http://localhost:5000/createRequisition")
+        fetch("https://stockmanagementsystemserver-production.up.railway.app/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
 
     useEffect(() => {
         const codeList = allRequisitions?.map(requisition => requisition.autoCode);
-        const length =codeList.length; 
-        if(length === 0){
+        const length = codeList.length;
+        if (length === 0) {
             setAutoCode(101)
-        }else{
-            const lastValue =codeList[length-1]; 
+        } else {
+            const lastValue = codeList[length - 1];
             const lastCode = +lastValue;
-            setAutoCode(lastCode+1)
+            setAutoCode(lastCode + 1)
         }
     }, [allRequisitions]);
 
@@ -110,7 +110,7 @@ const RequisitionCreate = () => {
             requisitionNotes: data.requisitionNotes
         }
 
-        const url = 'http://localhost:5000/createRequisition'
+        const url = 'https://stockmanagementsystemserver-production.up.railway.app/createRequisition'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(currentData),

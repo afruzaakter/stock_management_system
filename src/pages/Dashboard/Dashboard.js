@@ -79,8 +79,7 @@ const Dashboard = () => {
                 {/* -----------------------------Requisition dashboard menu End ---------------------------- */}
                 {/* -----------------------------Requisition dashboard Authorize menu Start ---------------------------- */}
                 {
-                  (approve || admin || authorization) && 
-                  <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md `}><Link to='/dashboard/requisitionAuthorize' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  (admin || authorization) && <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md `}><Link to='/dashboard/requisitionAuthorize' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={`text-md text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <TbFileDatabase /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition(Authorize) </span></Link>
                   </li>
@@ -89,7 +88,7 @@ const Dashboard = () => {
 
                 {/* -----------------------------Requisition Approval dashboard menu Start ---------------------------- */}
                 {
-                  (approve || admin || authorization) && <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md`}><Link to='/dashboard/requisitionApproval' className='w-full font-medium border-b border-gray-400  rounded-md    '>
+                  (approve || admin) && <li className={`text-gray-300 text-md  flex items-start mt-2 rounded-md`}><Link to='/dashboard/requisitionApproval' className='w-full font-medium border-b border-gray-400  rounded-md    '>
                     <span className={` text-gray-800  block ml-1  ${!open ? "text-xl" : "ml-0"} `} >  <AiOutlineFieldTime /></span>
                     <span className={` text-gray-800 ${!open && 'hidden'}`}>Requisition(Approval)</span></Link></li>
                 }

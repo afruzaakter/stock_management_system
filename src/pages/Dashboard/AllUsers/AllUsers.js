@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 const queryClient = new QueryClient()
 const AllUsers = () => {
     // API call using use Query
-    // const { data: AllUsers, isLoading, refetch } = useQuery('AllUsers', () => fetch('http://localhost:5000/allUsers', {
+    // const { data: AllUsers, isLoading, refetch } = useQuery('AllUsers', () => fetch('https://stockmanagementsystemserver-production.up.railway.app/allUsers', {
     //     method: 'GET',
     //     headers: {
     //         authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -21,20 +21,20 @@ const AllUsers = () => {
     const [allUsers, setAllUsers] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:5000/user")
+        fetch("https://stockmanagementsystemserver-production.up.railway.app/user")
             .then(res => res.json())
             .then(data => setAllUsers(data))
     }, [])
 
     useEffect(() => {
-        fetch("http://localhost:5000/user")
+        fetch("https://stockmanagementsystemserver-production.up.railway.app/user")
             .then(res => res.json())
             .then(data => setAllUsers(data))
     }, [])
 
     const { email, role } = allUsers;
     const makeAdmin = () => {
-        const url = `http://localhost:5000/user/admin/${email}`
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/user/admin/${email}`
         fetch(url, {
             method: 'PUT'
         })
@@ -48,7 +48,7 @@ const AllUsers = () => {
 
         const { email, role } = allUsers;
         const makeAdmin = () => {
-            const url = `http://localhost:5000/user/admin/${email}`
+            const url = `https://stockmanagementsystemserver-production.up.railway.app/user/admin/${email}`
             fetch(url, {
                 method: 'PUT'
             })

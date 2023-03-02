@@ -6,7 +6,7 @@ const Employee = () => {
     const [employees, setEmployees] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:5000/employee")
+        fetch("https://stockmanagementsystemserver-production.up.railway.app/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])
@@ -60,14 +60,14 @@ const Employee = () => {
                         {
                             employees.map((employee) =>
                                 <tr key={employee._id}>
-                                    <th>{employee.employeeId} </th>
-                                    <th>{employee.employeeName} </th>
-                                    <th>{employee.mobileNo} </th>
-                                    <th>{employee.email} </th>
-                                    <th>{employee.order} </th>
-                                    <th>{employee.designation} </th>
-                                    <th>{employee.department} </th>
-                                    <th>{employee.createUser} </th>
+                                    <td>{employee.employeeId} </td>
+                                    <td>{employee.employeeName} </td>
+                                    <td>{employee.mobileNo} </td>
+                                    <td>{employee.email} </td>
+                                    <td>{employee.order} </td>
+                                    <td>{employee.designation} </td>
+                                    <td>{employee.department} </td>
+                                    <td>{employee.createUser} </td>
                                 </tr>
                             )
                         }

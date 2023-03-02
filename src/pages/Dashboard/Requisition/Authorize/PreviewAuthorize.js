@@ -13,55 +13,55 @@ const PreviewAuthorize = () => {
     const [requisitions, setRequisitions] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/createRequisition/${id}`)
+        fetch(`https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`)
             .then(res => res.json())
             .then(data => setRequisitions(data))
     }, [])
 
     // for requisition delete
     const handleReqDelete = (id) => {
-        const url = `http://localhost:5000/createRequisition/${id}`
-        fetch(url,{
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`
+        fetch(url, {
             method: 'DELETE'
         })
-          .then(res => res.json())
-          .then(data => {
-            navigate('/dashboard/requisition')
-        })
+            .then(res => res.json())
+            .then(data => {
+                navigate('/dashboard/requisition')
+            })
     }
 
     // --------------For Authorized------------------
     const onSubmit = (data) => {
         const newData = {
-          autoCode:requisitions.autoCode,
-          email:requisitions.email,
-          date:requisitions.date,
-          products:requisitions.products,
-          requisitionNotes:requisitions.requisitionNotes,
+            autoCode: requisitions.autoCode,
+            email: requisitions.email,
+            date: requisitions.date,
+            products: requisitions.products,
+            requisitionNotes: requisitions.requisitionNotes,
 
-          authorizeNotes: data.authorizeNotes,
-          isAuthorized: data.isAuthorized,
+            authorizeNotes: data.authorizeNotes,
+            isAuthorized: data.isAuthorized,
         };
-      
-        const url = `http://localhost:5000/createRequisition/${id}`;
+
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`;
         fetch(url, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newData),
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newData),
         })
-          .then((res) => res.json())
-          .then((data) => {
-            reset(); // assuming this function resets the form data
-            navigate('/dashboard/requisitionAuthorize');
-          })
-      };
+            .then((res) => res.json())
+            .then((data) => {
+                reset(); // assuming this function resets the form data
+                navigate('/dashboard/requisitionAuthorize');
+            })
+    };
 
     return (
         <div className='m-4 '>
             <h2 className='text-xl font-bold ml-4'> Requisition Serial: {requisitions?.autoCode}</h2>
-            
+
             <div className='flex justify-between items-center border-b-2 rounded-l-md p-5'>
                 <div className='flex justify-start items-center gap-5 mt-4'>
                     <AiOutlineCheck className='font-bold text-2xl text-green-900' />
@@ -74,14 +74,14 @@ const PreviewAuthorize = () => {
                     <Link to={`/dashboard`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
                         <FiEdit /> Edit
                     </Link>
-                    
+
                     <label htmlFor="my-modal-6" className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600">
                         ❌ Delete
                     </label>
-                   
-                    
+
+
                     <Link to={`/dashboard/requisition`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
-                         Back 
+                        Back
                     </Link>
 
                     {/* -------- delete modal ----------------- */}
@@ -106,9 +106,9 @@ const PreviewAuthorize = () => {
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
 
-                        
+
                         {/* ----------------------- Authorized Notes Field ------------------ */}
-                         <div className="form-control">
+                        <div className="form-control">
                             <label className='text-start'> Authorized Notes </label>
                             <input
                                 type="text"
@@ -125,8 +125,8 @@ const PreviewAuthorize = () => {
                             </label>
                         </div>
 
-                       {/* ----------------------- Authorization (yes/no) Field -------------- */}
-                       <div className="form-control">
+                        {/* ----------------------- Authorization (yes/no) Field -------------- */}
+                        <div className="form-control">
                             <label className='text-start'>Authorization </label>
                             <select
                                 {...register("isAuthorized", {
@@ -151,7 +151,7 @@ const PreviewAuthorize = () => {
                     </div>
 
                     <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Authorize' />
-                    
+
                 </form>
             </div>
 
@@ -177,9 +177,9 @@ const PreviewAuthorize = () => {
                                             <td>{product.productName}</td>
                                             <td>{product.productQuantity}</td>
                                         </tr>
-                                        
+
                                     ))
-                                } 
+                                }
                             </tbody>
                         </table>
 
