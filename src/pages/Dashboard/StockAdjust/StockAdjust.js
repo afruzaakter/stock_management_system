@@ -28,7 +28,6 @@ const StockAdjust = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 const remaining = products.filter(product => product._id !== id)
                 setProducts(remaining);
                 setDeleteID(' ');
@@ -38,20 +37,29 @@ const StockAdjust = () => {
     }
     //------------ Inventory data fetch---------
     const [addInventories, setAddInventories] = useState([]);
+    console.log(addInventories)
     useEffect(() => {
         fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
     }, [])
+
     //---------------- Calculation for stock-------------
-    const stock = addInventories?.map(inventory => inventory.quantity);
-    console.log(stock)
-    let sum = 0;
-    for (let i = 0; i < stock.length; i++) {
-        sum += parseInt(stock[i]);
-        console.log(sum)
-    }
+
+    const [stock, setStock] = useState('')
+    // console.log(stock)
+    useEffect(() => {
+        const stock = addInventories?.map(inventory => inventory.quantity);
+        // console.log(stock)
+        let sum = 0;
+        for (let i = 0; i < stock.length; i++) {
+            sum += parseInt(stock[i]);
+            setStock(sum)
+        }
+
+    }, [addInventories])
+
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
@@ -104,11 +112,12 @@ const StockAdjust = () => {
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
                                 <td>{product.measureUnit}</td>
-                                <td>{sum} </td>
+                                <td>{stock} </td>
                                 <td>{product.sortOrder}</td>
                                 <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
                                     <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
+
                                     <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
                                         onClick={() => setDeleteID(product._id)} >
                                         <MdDeleteForever />
@@ -127,7 +136,7 @@ const StockAdjust = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* -------- delete modal ----------------- */}
+                                    {/* -------- delete modal end----------------- */}
                                 </td>
                             </tr>)
                         }

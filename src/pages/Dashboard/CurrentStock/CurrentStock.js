@@ -11,6 +11,7 @@ const CurrentStock = () => {
     }, []);
 
     const [addInventories, setAddInventories] = useState([]);
+    console.log()
     useEffect(() => {
         fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory')
             .then(res => res.json())
@@ -19,14 +20,22 @@ const CurrentStock = () => {
     }, [])
     //  console.log(addInventories)
 
-    //---------------- Calculation for stock-------------
-    const stock = addInventories?.map(inventory => inventory.quantity);
+
+    const [stock, setStock] = useState('')
     console.log(stock)
-    let sum = 0;
-    for (let i = 0; i < stock.length; i++) {
-        sum += parseInt(stock[i]);
-        console.log(sum)
-    }
+    useEffect(() => {
+        const stock = addInventories?.map(inventory => inventory.quantity);
+        console.log(stock)
+        let sum = 0;
+        for (let i = 0; i < stock.length; i++) {
+            sum += parseInt(stock[i]);
+            setStock(sum)
+        }
+
+    }, [addInventories])
+
+    //---------------- Calculation for stock-------------
+
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
@@ -86,7 +95,7 @@ const CurrentStock = () => {
                                 <td>{product.budgetCode}</td>
                                 <td>{product.measureUnit}</td>
                                 <td>{product.alertQty}</td>
-                                <td>{sum}</td>
+                                <td>{stock}</td>
 
 
                             </tr>)

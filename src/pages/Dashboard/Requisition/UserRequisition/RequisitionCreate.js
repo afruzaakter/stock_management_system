@@ -30,40 +30,44 @@ const RequisitionCreate = () => {
 
     // ============================================
     // --For searching product---
-    const [searchVal, setSearchVal] = useState("");
+    const [searchValue, setSearchVal] = useState("");
 
     // --selectedBudgetCode and filter data form under BudgetCode ---------
     const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
     const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
 
-    // --Multiple productName selected and show the table------
+    // ===Multiple productName selected and show the table =====
     const [selectedProduct, setSelectedProduct] = useState([]);
     const handleRowClick = (selectedItem) => {
         setSelectedProduct([...selectedProduct, selectedItem]);
     };
 
-    //-------------- Auto Date -------------
+
+
+    // --delete one product------
+    const deleteProduct = (deleteId) => {
+        console.log(deleteId);
+        const remaining = selectedProduct.filter(product => product._id !== deleteId);
+        setSelectedProduct(remaining);
+    }
+
+    //========== Auto Date ==============
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
     const currentDate = day + '-' + month + '-' + year;
 
-    // ---- For initial quantity filed value 1 ----
+    // ========== For initial quantity filed value 1 =======
     const [minValue, setMinValue] = useState(1);
     const handleChange = (event) => {
         const newValue = Number(event.target.value);
         setMinValue(newValue >= 1 ? newValue : 1);
     };
-    //    
-    const deleteProduct = (deleteId) => {
-        console.log(deleteId);
-        const remaining = selectedProduct.filter(product => product._id !== deleteId);
-        setSelectedProduct(remaining);
-    }
+
     //===========for auto generate requisition serial code ========
     const [allRequisitions, setAllRequisitions] = useState([]);
-    const [requisitionSerialCode, setRequisitionSerialCode] = useState();
+    const [autoCode, setAutoCode] = useState();
 
     useEffect(() => {
         fetch("https://stockmanagementsystemserver-production.up.railway.app/createRequisition")
@@ -71,36 +75,45 @@ const RequisitionCreate = () => {
             .then(data => setAllRequisitions(data))
     }, [])
 
-
     useEffect(() => {
-        const codeList = allRequisitions?.map(requisition => (requisition.requisitionSerialCode));
-        // console.log("124", codeList)
+        const codeList = allRequisitions?.map(requisition => requisition.autoCode);
         const length = codeList.length;
-        console.log("code list", codeList)
-
         if (length === 0) {
-            setRequisitionSerialCode(10001)
+            setAutoCode(101)
         } else {
             const lastValue = codeList[length - 1];
-            const lastCode = parseInt(+lastValue);
-            setRequisitionSerialCode(lastCode + 1)
+            const lastCode = +lastValue;
+            setAutoCode(lastCode + 1)
         }
     }, [allRequisitions]);
-
-    const autoGenerate = String(requisitionSerialCode)
-
-    console.log('auto code', requisitionSerialCode)
-    console.log('auto code autoGenerate', autoGenerate)
-
 
     //==============================================
     const onSubmit = (data) => {
 
-        //    console.log("table data", data)
+        const arrayOfTotalProduct = [];
+        Object.entries(data)
+            .filter(([key, value]) => key !== 'requisitionNotes')
+            .filter(([key, value]) => key.split(' ')[0] === 'productName')
+            .forEach(([key, value], index) => {
+                const obj = {
+                    productName: data[`productName ${index + 1}`],
+                    productQuantity: data[`productQuantity ${index + 1}`],
+                };
+                arrayOfTotalProduct.push(obj);
+            });
+
+        const currentData = {
+            autoCode: autoCode,
+            email: user.email,
+            date: currentDate,
+            products: arrayOfTotalProduct,
+            requisitionNotes: data.requisitionNotes
+        }
+
         const url = 'https://stockmanagementsystemserver-production.up.railway.app/createRequisition'
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(currentData),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
@@ -141,36 +154,6 @@ const RequisitionCreate = () => {
                                 {errors.requisitionNotes?.type === 'required' && <span className="label-text-alt text-red-700">{errors.requisitionNotes.message}</span>}
 
                             </label>
-                        </div>
-
-                        {/* //--------------Date -Month -and- year-------------- */}
-                        <div className='form-control'>
-                            <input
-                                type="text"
-                                className='hidden'
-                                defaultValue={currentDate}
-                                {...register("date")}>
-                            </input>
-                        </div>
-
-                        {/* ------- email field ---------- */}
-                        <div className='form-control'>
-                            <input
-                                type="email"
-                                className='hidden'
-                                defaultValue={user.email}
-                                {...register("email")}>
-                            </input>
-                        </div>
-
-                        {/* ------- autocode field ---------- */}
-                        <div className='form-control'>
-                            <input
-                                // type="text"
-                                className='hidden'
-                                defaultValue={autoGenerate}
-                                {...register("autoCode")}>
-                            </input>
                         </div>
 
                         {/* ------------------------------------------------- */}
@@ -241,7 +224,6 @@ const RequisitionCreate = () => {
                 <div className="w-4/12">
                     <div>
                         <label className='text-xl text-green-700 font-bold '>Add Your Product </label>
-                        {/* <label className='text-start'>Budget Code</label> */}
                         <select
                             onChange={e => setSelectedBudgetCode(e.target.value)}
                             className={`input input-sm w-full  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input `}>
@@ -269,17 +251,17 @@ const RequisitionCreate = () => {
                         {
                             selectedProducts.length === 0 && <>
                                 {
-                                    products.filter((val) => {
-                                        if (searchVal === "") {
-                                            return val;
-                                        } else if (val.productName.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())) {
-                                            return val
+                                    products.filter((value) => {
+                                        if (searchValue === "") {
+                                            return value;
+                                        } else if (value.productName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+                                            return value;
                                         }
-                                    }).map((val) => <ul key={val._id}>
+                                    }).map((value) => <ul key={value._id}>
                                         <li className=" flex justify-between">
-                                            <h2>  {val.productName}</h2>
+                                            <h2>  {value.productName}</h2>
                                             <button
-                                                onClick={() => handleRowClick(val)}
+                                                onClick={() => handleRowClick(value)}
                                                 className='btn btn-sm bg-green-600 text-white rounded-md px-4 hover:bg-primary hover:text-white'>
                                                 Add
                                             </button>

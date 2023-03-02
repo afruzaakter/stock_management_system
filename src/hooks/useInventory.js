@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 
-const useApprove = user => {
-    const [approve, setApprove] = useState(false)
+const useInventory = user => {
+    const [inventory, setInventory] = useState(false)
     useEffect(() => {
         const email = user?.email;
         // console.log(email)
         if (email) {
-            fetch(`https://stockmanagementsystemserver-production.up.railway.app/approve/${email}`, {
+            fetch(`https://stockmanagementsystemserver-production.up.railway.app/inventory/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'
@@ -14,10 +14,10 @@ const useApprove = user => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    setApprove(data.approve);
+                    setInventory(data.inventory);
                 })
         }
     }, [user])
-    return [approve]
+    return [inventory]
 }
-export default useApprove 
+export default useInventory 

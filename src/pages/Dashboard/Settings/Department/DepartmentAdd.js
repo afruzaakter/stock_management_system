@@ -11,32 +11,32 @@ const DepartmentAdd = () => {
 
     // ------------- data post method -----------
     const onSubmit = (data) => {
-       const url = "https://stockmanagementsystemserver-production.up.railway.app/department"
-       fetch(url, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-           'Content-type' : 'application/json; charset=UTF-8', 
-        },
-       })
-       .then(res => res.json())
-       .then(data =>{
-        console.log(data)
-        toast.success('Data added Successfully!!!');
-        // setUpdated(!updated)
-        reset();
-       })
-       navigate('/dashboard/department')
+        const url = "https://stockmanagementsystemserver-production.up.railway.app/department"
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toast.success('Data added Successfully!!!');
+                // setUpdated(!updated)
+                reset();
+            })
+        navigate('/dashboard/department')
     }
     return (
         <div className='m-10'>
-          <h1 className='text-2xl font-bold'>Create Department</h1>
-         <div className=''>
-         <form onSubmit={handleSubmit(onSubmit)} >
-                      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                          {/* -----------------------Department Name Field ------------------------------ */}
+            <h1 className='text-2xl font-bold'>Create Department</h1>
+            <div className=''>
+                <form onSubmit={handleSubmit(onSubmit)} >
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+                        {/* -----------------------Department Name Field ------------------------------ */}
 
-                          <div className="form-control">
+                        <div className="form-control">
                             <label className='text-start '>Department Name</label>
                             <input
                                 type="text"
@@ -52,7 +52,7 @@ const DepartmentAdd = () => {
                                 {errors.name?.type === 'required' && <span className="label-text-alt text-red-700">{errors.name.message}</span>}
 
                             </label>
-                        </div>   
+                        </div>
                         {/* -----------------------Department Description Field ------------------------------ */}
 
                         <div className="form-control">
@@ -71,7 +71,7 @@ const DepartmentAdd = () => {
                                 {errors.description?.type === 'required' && <span className="label-text-alt text-red-700">{errors.description.message}</span>}
 
                             </label>
-                        </div> 
+                        </div>
                         {/* -----------------------Department Show Order Field ------------------------------ */}
 
                         <div className="form-control">
@@ -90,18 +90,18 @@ const DepartmentAdd = () => {
                                 {errors.order?.type === 'required' && <span className="label-text-alt text-red-700">{errors.order.message}</span>}
 
                             </label>
-                        </div> 
-                      </div>  
+                        </div>
+                    </div>
 
-                      <input className='input rounded-md px-6  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Submit' />
-                     
-                       <Link to='/dashboard/department' className="btn btn-sm rounded-md px-6 mx-1 bg-red-600 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white"><RxCross2/>
-                     cancel</Link>
-                       
-                       
-                    </form>
-         </div>
-           
+                    <input className='input rounded-md px-6  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Submit' />
+
+                    <Link to='/dashboard/department' className="btn btn-sm rounded-md px-6 mx-1 bg-red-600 text-white  max-w-xs cursor-pointer uppercase hover:bg-primary hover:text-white"><RxCross2 />
+                        cancel</Link>
+
+
+                </form>
+            </div>
+
         </div >
     );
 };

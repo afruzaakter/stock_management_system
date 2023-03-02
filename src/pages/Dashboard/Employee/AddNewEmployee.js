@@ -13,33 +13,41 @@ const AddNewEmployee = () => {
     const [designations, setDesignations] = useState([]);
     const [departments, setDepartments] = useState([]);
 
-    useEffect(() =>{
+    useEffect(() => {
         fetch('https://stockmanagementsystemserver-production.up.railway.app/designation')
-        .then(res=>res.json())
-        .then(data =>setDesignations(data))
-    },[])
-    useEffect(() =>{
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/designation')
-        .then(res=>res.json())
-        .then(data =>setDepartments(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setDesignations(data))
+    }, [])
+    useEffect(() => {
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/department')
+            .then(res => res.json())
+            .then(data => setDepartments(data))
+    }, [])
+    //======= all user get data===========
+    const [allUsers, setAllUser] = useState([])
+    useEffect(() => {
+        fetch('https://stockmanagementsystemserver-production.up.railway.app/user')
+            .then(res => res.json())
+            .then(data => setAllUser(data))
+    }, [])
 
-    const onSubmit = (data) =>{
-      const url = 'https://stockmanagementsystemserver-production.up.railway.app/employee'
-      fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-      })
-      .then(res => res.json())
-      .then(data =>{
-        // console.log(data)
-        toast.success("Data Added Successfully!!!");
-        reset();
-      })
-      navigate('/dashboard/employee');
+    const onSubmit = (data) => {
+        console.log("employee", data)
+        const url = 'https://stockmanagementsystemserver-production.up.railway.app/employee'
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                toast.success("Data Added Successfully!!!");
+                reset();
+            })
+        navigate('/dashboard/employee');
     }
 
 
@@ -48,7 +56,7 @@ const AddNewEmployee = () => {
             <div className='p-1 mb-2'>
                 <h1 className='text-xl font-medium'>Add New Employee </h1>
             </div>
-        
+
             <div>
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1'>
@@ -58,21 +66,21 @@ const AddNewEmployee = () => {
                             <label className='text-start'>Name </label>
                             <input
                                 type="text"
-                                
-                                value={user.displayName}
+
+                                // value={user.displayName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.employeeName && 'border-red-600 focus:border-red-600'}`}
                                 {...register("employeeName")}
                             />
                             <label className="label">
                                 {errors.employeeName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.employeeName.message}</span>}
                             </label>
-                        </div> 
+                        </div>
 
                         {/* ----------------------- Mobile No. Field ------------------------------ */}
                         <div className="form-control">
                             <label className='text-start'> Mobile No </label>
                             <input
-                                type="number"
+                                type="text"
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.mobileNo && 'border-red-600 focus:border-red-600'}`}
                                 {...register("mobileNo", {
                                     required: {
@@ -102,27 +110,34 @@ const AddNewEmployee = () => {
                             <label className="label">
                                 {errors.employeeId?.type === 'required' && <span className="label-text-alt text-red-700">{errors.employeeId.message}</span>}
                             </label>
-                        </div>   
-                        
+                        </div>
+
                         {/* ----------------------- Email Field ------------------------------ */}
                         <div className="form-control">
                             <label className='text-start '> Email </label>
-                            <input
-                                type="text"
-                              
-                                value={user.email}
-                                className={`input input-sm max-w-xs border border-green-700 focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500 login-container-input ${errors.email && 'border-red-600 focus:border-red-600'}`}
-                                {...register("email")}
-                            />
+                            <select
+                                {...register("email", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please fill out this field"
+                                    }
+                                })}
+                                className={`input input-sm   border border-green-700 mt-1 w-80 focus:outline-0 rounded-sm  
+                                 focus:border-blue-500 login-container-input ${errors.allUser && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''>Select Email </option>
+                                {
+                                    allUsers.map((allUser) => <option key={allUser._id}>{allUser.email}</option>)
+                                }
+                            </select>
                             <label className="label">
-                                {errors.email?.type === 'required' && <span className="label-text-alt text-red-700">{errors.email.message}</span>}
+                                {errors.allUser?.type === 'required' && <span className="label-text-alt text-red-700">{errors.allUser.message}</span>}
                             </label>
-                        </div>  
+                        </div>
 
                         {/* -----------------------Designation Name Field ------------------------------ */}
                         <div className="form-control">
                             <label className='text-start'>Designation </label>
-                            <select   
+                            <select
                                 {...register("designation", {
                                     required: {
                                         value: true,
@@ -130,13 +145,13 @@ const AddNewEmployee = () => {
                                     }
                                 })}
                                 className={`input input-sm   border border-green-700 mt-1 w-80 focus:outline-0 rounded-sm  
-                                 focus:border-blue-500 login-container-input ${errors.designation  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                 focus:border-blue-500 login-container-input ${errors.designation && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''>Select designation </option>
                                 {
-                                    designations.map((designation)=><option>{designation.name}</option>)
+                                    designations.map((designation) => <option>{designation.name}</option>)
                                 }
                             </select>
-                            
+
                             <label className="label">
                                 {errors.designation?.type === 'required' && <span className="label-text-alt text-red-700">{errors.designation.message}</span>}
 
@@ -147,18 +162,18 @@ const AddNewEmployee = () => {
                         <div className="form-control">
                             <label className='text-start'>Department </label>
                             <select   {...register("department", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
-                                className={`input input-sm  w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.department  && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                    <option value=''> Select Department</option>
+                                required: {
+                                    value: true,
+                                    message: "❌  Please fill out this field"
+                                }
+                            })}
+                                className={`input input-sm  w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.department && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''> Select Department</option>
                                 {
-                                    departments.map((department)=><option>{department.name}</option>)
+                                    departments.map((department) => <option>{department.name}</option>)
                                 }
                             </select>
-                            
+
                             <label className="label">
                                 {errors.department?.type === 'required' && <span className="label-text-alt text-red-700">{errors.department.message}</span>}
 
@@ -183,13 +198,13 @@ const AddNewEmployee = () => {
                             </label>
                         </div>
 
-                  
 
 
-                    </div>  
 
-                    <input className='input  btn btn-sm px-8  mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit"  value='◲ Save' />
-                    <Link to='/dashboard/employee' className="btn btn-sm px-6 font-bold mx-1 bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2/> Cancel 
+                    </div>
+
+                    <input className='input  btn btn-sm px-8  mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Save' />
+                    <Link to='/dashboard/employee' className="btn btn-sm px-6 font-bold mx-1 bg-red-600 text-white hover:bg-red-500 hover:text-white"> <RxCross2 /> Cancel
                     </Link>
                 </form>
             </div>

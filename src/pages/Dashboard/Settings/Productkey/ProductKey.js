@@ -16,18 +16,18 @@ const ProductKey = () => {
             .then(data => setProductkeys(data))
     }, [])
     const handleDelete = (id) => {
-            const url = `https://stockmanagementsystemserver-production.up.railway.app/productkey/${id}`
-            fetch(url, {
-                method: "DELETE"
+        const url = `https://stockmanagementsystemserver-production.up.railway.app/productkey/${id}`
+        fetch(url, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                const remaining = productkeys.filter(productkey => productkey._id !== id);
+                setProductkeys(remaining);
+                setDeleteID('');
+                toast.success('Data was Deleted Successfully!');
             })
-                .then(res => res.json())
-                .then(data => {
-                    const remaining = productkeys.filter(productkey => productkey._id !== id);
-                    setProductkeys(remaining);
-                    setDeleteID('');
-                    toast.success('Data was Deleted Successfully!');
-                })
-        
+
 
     }
     return (
