@@ -39,8 +39,9 @@ const RequisitionAuthorize = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
+                            <th> Req_Serial </th>
                             <th> Date </th>
-                            <th> Req_SL_NO </th>
+                            <th> Requested By </th>
                             <th>Req_Note </th>
                             <th>  </th>
                         </tr>
@@ -50,8 +51,9 @@ const RequisitionAuthorize = () => {
                     {
                             allCreatedReq?.map((createRequisition, index) => 
                             <tr key={createRequisition._id}>
-                                <td>{createRequisition.date}</td>
                                 <td> {createRequisition.autoCode}</td>
+                                <td>{ (createRequisition.date).split(" ")[0] }</td>
+                                <td>{createRequisition.userName}</td>
                                 <td>{createRequisition.requisitionNotes}</td>
                                 <td className='text-center'>
                                     <Link to={`/dashboard/previewAuthorize/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">

@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
-import { FiEdit } from 'react-icons/fi';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const PreviewRequisition = () => {
