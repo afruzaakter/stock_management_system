@@ -12,13 +12,13 @@ const BudgetCode = () => {
     const [budgetCodes, setBudgetCodes] = useState([]);
     // ----------- Budget code get method ------------
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/budgetcode')
+        fetch('http://localhost:5000/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, [updated])
     // ----------- Budget code post/create method ------------
     const onSubmit = (data) => {
-        const url = 'https://stockmanagementsystemserver-production.up.railway.app/budgetcode'
+        const url = 'http://localhost:5000/budgetcode'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -39,7 +39,7 @@ const BudgetCode = () => {
             })
     }
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/budgetcode/${id}`
+        const url = `http://localhost:5000/budgetcode/${id}`
         fetch(url, {
             method: 'DELETE'
         })

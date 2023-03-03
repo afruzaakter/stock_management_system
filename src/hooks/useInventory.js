@@ -6,7 +6,7 @@ const useInventory = user => {
         const email = user?.email;
         // console.log(email)
         if (email) {
-            fetch(`https://stockmanagementsystemserver-production.up.railway.app/inventory/${email}`, {
+            fetch(`http://localhost:5000/inventory/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'

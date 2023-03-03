@@ -18,13 +18,13 @@ const UserManagement = () => {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/user")
+        fetch("http://localhost:5000/user")
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])
 
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/user/${id}`
+        const url = `http://localhost:5000/user/${id}`
         fetch(url, {
             method: 'DELETE'
         })

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const RequisitionApproval = () => {
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/createRequisition")
+        fetch("http://localhost:5000/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])

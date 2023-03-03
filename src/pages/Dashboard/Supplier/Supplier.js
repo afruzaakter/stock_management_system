@@ -10,14 +10,14 @@ const Supplier = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [suppliers, setSuppliers] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/supplier')
+        fetch('http://localhost:5000/supplier')
             .then(res => res.json())
             .then(data => setSuppliers(data))
     }, []);
     console.log(suppliers)
     //-------- supplier delete method -----------
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/supplier/${id}`
+        const url = `http://localhost:5000/supplier/${id}`
         console.log(url)
         fetch(url, {
             method: 'DELETE'

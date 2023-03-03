@@ -13,14 +13,14 @@ const PreviewApproval = () => {
     const [requisitions, setRequisitions] = useState([]);
 
     useEffect(() => {
-        fetch(`https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`)
+        fetch(`http://localhost:5000/createRequisition/${id}`)
             .then(res => res.json())
             .then(data => setRequisitions(data))
     }, [])
 
     // for requisition delete
     const handleReqDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`
+        const url = `http://localhost:5000/createRequisition/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -46,7 +46,7 @@ const PreviewApproval = () => {
             isApproved: data.isApproved,
         };
 
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`;
+        const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
             method: 'PATCH',
             headers: {

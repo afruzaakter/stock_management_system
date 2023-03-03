@@ -12,7 +12,7 @@ const Designation = () => {
     //------ Designation Fetch method -----------------  
     const [designations, setDesignations] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/designation')
+        fetch('http://localhost:5000/designation')
             .then(res => res.json())
             .then(data => setDesignations(data))
 
@@ -20,7 +20,7 @@ const Designation = () => {
 
     //--------- Designation Delete method------------
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/designation/${id}`
+        const url = `http://localhost:5000/designation/${id}`
         fetch(url, {
             method: "DELETE"
         })

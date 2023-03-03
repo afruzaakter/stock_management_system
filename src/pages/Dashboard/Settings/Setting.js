@@ -12,7 +12,7 @@ const Setting = () => {
   const [data, setData] = useState(options);
 
   // useEffect(() => {
-  //   fetch('https://stockmanagementsystemserver-production.up.railway.app/department')
+  //   fetch('http://localhost:5000/department')
   //     .then(res => res.json())
   //     .then(data => setData(data))
 

@@ -6,7 +6,7 @@ const Employee = () => {
     const [employees, setEmployees] = useState([])
 
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/employee")
+        fetch("http://localhost:5000/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])
