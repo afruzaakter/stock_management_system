@@ -42,12 +42,12 @@ const PreviewRequisition = () => {
     return (
         <div className='m-4 '>
             <h2 className='text-xl font-bold ml-4'> Requisition Serial: {requisitions?.autoCode}</h2>
-            <div className='flex justify-between items-center border-b-2 rounded-l-md p-5'>
+            <div className='flex justify-between items-center  rounded-l-md '>
                 <div className='flex justify-start items-center gap-5 mt-4'>
                     <AiOutlineCheck className='font-bold text-2xl text-green-900' />
                     <div>
-                        <p className='text-blue-600'>Requisition Created</p>
-                        <p>{requisitions.date}</p>
+                        <p> <span className='text-primary font-semibold '> User_Note: </span>  {requisitions.requisitionNotes} </p>
+                        <p> <span className='text-primary font-semibold '> Date:</span>   {requisitions.date}</p>
                     </div>
                 </div>
                 <div >

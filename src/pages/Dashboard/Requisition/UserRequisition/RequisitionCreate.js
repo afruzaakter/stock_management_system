@@ -56,7 +56,15 @@ const RequisitionCreate = () => {
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
-    const currentDate = day + '-' + month + '-' + year;
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    // format the time
+    const amOrPm = hours >= 12 ? 'pm' : 'am';
+    const twelveHourClock = hours % 12 || 12;
+    const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
+    // format the date
+    const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
+    console.log(currentDate);
 
     // ========== For initial quantity filed value 1 =======
     const [minValue, setMinValue] = useState(1);
@@ -104,6 +112,7 @@ const RequisitionCreate = () => {
 
         const currentData = {
             autoCode: autoCode,
+            userName:user.displayName,
             email: user.email,
             date: currentDate,
             products: arrayOfTotalProduct,
