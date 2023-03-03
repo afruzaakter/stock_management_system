@@ -42,8 +42,9 @@ const RequisitionApproval = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
+                            <th> Req_Serial </th>
                             <th> Date </th>
-                            <th> #Requisition </th>
+                            <th> Requested By </th>
                             <th> Note </th>
                             <th> </th>
                         </tr>
@@ -53,8 +54,9 @@ const RequisitionApproval = () => {
                         {
                             allAuthorizedReq?.map((createRequisition, index) => 
                             <tr key={createRequisition._id}>
-                                <td>{createRequisition.date}</td>
                                 <td> {createRequisition.autoCode}</td>
+                                <td>{ (createRequisition.date).split(" ")[0] }</td>
+                                <td>{createRequisition.userName}</td>
                                 <td>{createRequisition.requisitionNotes}</td>
                                 <td className='text-center'>
                                     <Link to={`/dashboard/previewApproval/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">

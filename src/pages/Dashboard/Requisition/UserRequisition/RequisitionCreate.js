@@ -46,12 +46,11 @@ const RequisitionCreate = () => {
 
     // --delete one product------
     const deleteProduct = (deleteId) => {
-        console.log(deleteId);
         const remaining = selectedProduct.filter(product => product._id !== deleteId);
         setSelectedProduct(remaining);
     }
 
-    //========== Auto Date ==============
+    //==========Requisition Created Date ==============
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth();
@@ -64,7 +63,6 @@ const RequisitionCreate = () => {
     const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
     // format the date
     const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
-    console.log(currentDate);
 
     // ========== For initial quantity filed value 1 =======
     const [minValue, setMinValue] = useState(1);
@@ -129,7 +127,6 @@ const RequisitionCreate = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 toast.success("Requisition Created Successfully");
                 reset();
             })

@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineCheck } from 'react-icons/ai';
-import { FiEdit } from 'react-icons/fi';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const PreviewApproval = () => {
@@ -16,19 +15,22 @@ const PreviewApproval = () => {
         fetch(`http://localhost:5000/createRequisition/${id}`)
             .then(res => res.json())
             .then(data => setRequisitions(data))
-    }, [])
+    }, []);
 
-    // for requisition delete
-    const handleReqDelete = (id) => {
-        const url = `http://localhost:5000/createRequisition/${id}`
-        fetch(url,{
-            method: 'DELETE'
-        })
-          .then(res => res.json())
-          .then(data => {
-            navigate('/dashboard/requisition')
-        })
-    }
+     //==========Approved Date ==============
+     const date = new Date();
+     const day = date.getDate();
+     const month = date.getMonth();
+     const year = date.getFullYear();
+     const hours = date.getHours();
+     const minutes = date.getMinutes();
+     // format the time
+     const amOrPm = hours >= 12 ? 'pm' : 'am';
+     const twelveHourClock = hours % 12 || 12;
+     const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
+     // format the date
+     const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
+ 
 
     // --------------For Authorized------------------
     const onSubmit = (data) => {
@@ -44,6 +46,7 @@ const PreviewApproval = () => {
 
           approvedNotes:data.approvedNotes,
           isApproved:data.isApproved,
+          approvedDate: currentDate
         };
       
         const url = `http://localhost:5000/createRequisition/${id}`;
@@ -65,52 +68,29 @@ const PreviewApproval = () => {
         <div className='m-4 '>
             <h2 className='text-xl font-bold ml-4'> Requisition Serial: {requisitions?.autoCode}</h2>
             
-            <div className='flex justify-between items-center border-b-2 rounded-l-md p-5'>
+            <div className='flex justify-between items-center border-b-2 rounded-l-md pb-2'>
                 <div>
-                    <div className='flex justify-start items-center gap-5 mt-4'>
+                    <div className='flex justify-start items-center gap-5 mt-2'>
                         <AiOutlineCheck className='font-bold text-2xl text-green-900' />
                         <div>
-                            <p className='text-blue-600'>Requisition Created:{requisitions.requisitionNotes } </p>
-                            <p> {requisitions?.date} </p>
+                            <p> <span className='text-green-900 font-semibold '> User_Note: </span>  {requisitions.requisitionNotes} </p>
+                            <p> <span className='text-green-900 font-semibold '> Date:</span>   {requisitions.date}</p>
                         </div>
                     </div>
-                    <div className='flex justify-start items-center gap-5 mt-4'>
+                    
+                    <div className='flex justify-start items-center gap-5 mt-2'>
                         <AiOutlineCheck className='font-bold text-2xl text-green-900' />
                         <div>
-                            <p className='text-blue-600'>Requisition Authorized: {requisitions.authorizeNotes} </p>
-                            <p> {requisitions?.date} </p>
+                            <p> <span className='text-green-900 font-semibold '> Auth_Note: </span>  {requisitions.authorizeNotes } </p>
+                            <p> <span className='text-green-900 font-semibold '> Date:</span>   {requisitions.AuthorizedDate}</p>
                         </div>
                     </div>
                 </div>
+                
                 <div >
-                    <Link to={`/dashboard`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
-                        <FiEdit /> Edit
-                    </Link>
-                    
-                    <label htmlFor="my-modal-6" className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600">
-                        ❌ Delete
-                    </label>
-                   
-                    
                     <Link to={`/dashboard/requisition`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
                          Back 
                     </Link>
-
-                    {/* -------- delete modal ----------------- */}
-                    <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-                    <div className="modal modal-bottom justify-around sm:modal-middle ">
-                        <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
-                            <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
-
-                            <div className="mr-14 modal-action">
-                                <label htmlFor="my-modal-6" onClick={() => handleReqDelete(id)}
-                                    className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
-                                <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
-                            </div>
-                        </div>
-                    </div>
-                    {/* -------- delete modal end----------------- */}
-
                 </div>
             </div>
 
@@ -118,7 +98,6 @@ const PreviewApproval = () => {
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
 
-                        
                         {/* ----------------------- Authorized Notes Field ------------------ */}
                          <div className="form-control">
                             <label className='text-start'> Approved Notes </label>
@@ -167,37 +146,29 @@ const PreviewApproval = () => {
                 </form>
             </div>
 
-            <div>
-                <div className='flex justify-between mt-5'>
-                    <h2 className='text-md ml-4  '>Requisition No.  </h2>
-                    <h2 className='text-md ml-4 '>Requisition Date: {requisitions.date}</h2>
-                </div>
-                <div>
-                    <div className="overflow-x-auto">
-                        <table className="table w-full">
-                            <thead>
+            <div className="overflow-x-auto mt-3">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            <td> Product Name</td>
+                            <td> Quantity </td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {
+                            (requisitions.products)?.map((product) => (
                                 <tr>
-                                    <td> Product Name</td>
-                                    <td> Quantity </td>
+                                    <td>{product.productName}</td>
+                                    <td>{product.productQuantity}</td>
                                 </tr>
-                            </thead>
-
-                            <tbody>
-                                {
-                                    (requisitions.products)?.map((product) => (
-                                        <tr>
-                                            <td>{product.productName}</td>
-                                            <td>{product.productQuantity}</td>
-                                        </tr>
-                                        
-                                    ))
-                                } 
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
+                                
+                            ))
+                        } 
+                    </tbody>
+                </table>
             </div>
+                
         </div>
     );
 };
