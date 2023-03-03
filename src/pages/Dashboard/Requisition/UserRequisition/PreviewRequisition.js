@@ -47,14 +47,10 @@ const PreviewRequisition = () => {
                     <AiOutlineCheck className='font-bold text-2xl text-green-900' />
                     <div>
                         <p className='text-blue-600'>Requisition Created</p>
-                        <p>29/01/2023</p>
+                        <p>{requisitions.date}</p>
                     </div>
                 </div>
                 <div >
-                    <Link to={`/dashboard`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
-                        <FiEdit /> Edit
-                    </Link>
-                    
                     <label htmlFor="my-modal-6" className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600">
                         ❌ Delete
                     </label>
@@ -77,15 +73,10 @@ const PreviewRequisition = () => {
                         </div>
                     </div>
                     {/* -------- delete modal end----------------- */}
-
                 </div>
             </div>
 
             <div>
-                <div className='flex justify-between mt-5'>
-                    <h2 className='text-md ml-4  '>Requisition No.  </h2>
-                    <h2 className='text-md ml-4 '>Requisition Date: {requisitions.date}</h2>
-                </div>
                 <div>
                     <div className="overflow-x-auto">
                         <table className="table w-full">
