@@ -28,17 +28,6 @@ const PreviewRequisition = () => {
         })
     }
 
-    
-    // const TableRow = ({ productName, productQuantity }) => {
-    //     return (
-    //         <tr>
-    //             <td>{productName}</td>
-    //             <td>{productQuantity}</td>
-    //         </tr>
-    //     );
-    // };
-
-
     return (
         <div className='m-4 '>
             <h2 className='text-xl font-bold ml-4'> Requisition Serial: {requisitions?.autoCode}</h2>
@@ -88,17 +77,6 @@ const PreviewRequisition = () => {
                             </thead>
 
                             <tbody>
-                                {/* Map operation using object */}
-                                {/* {
-                                    Object.entries(requisitions)
-                                    .filter(([key, value]) => key.split(' ')[0] === 'productName')
-                                    .map(([key, value], index) => (
-                                        
-                                        <TableRow productName={requisitions[`productName ${index+1}`]} productQuantity={requisitions[`productQuantity ${index+1}`]} />
-                                       
-                                    ))
-                                } */}
-
                                 {
                                     (requisitions.products)?.map((product) => (
                                         <tr>
