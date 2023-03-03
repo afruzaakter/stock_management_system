@@ -11,7 +11,7 @@ const DepartmentAdd = () => {
 
     // ------------- data post method -----------
     const onSubmit = (data) => {
-        const url = "https://stockmanagementsystemserver-production.up.railway.app/department"
+        const url = "http://localhost:5000/department"
         fetch(url, {
             method: "POST",
             body: JSON.stringify(data),

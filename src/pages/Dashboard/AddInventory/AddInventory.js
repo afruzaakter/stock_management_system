@@ -14,7 +14,7 @@ const AddInventory = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory', {
+        fetch('http://localhost:5000/addInventory', {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -34,7 +34,7 @@ const AddInventory = () => {
     }, [])
 
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/addInventory/${id}`
+        const url = `http://localhost:5000/addInventory/${id}`
         fetch(url, {
             method: 'DELETE'
         })

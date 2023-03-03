@@ -6,7 +6,7 @@ const useApprove = user => {
         const email = user?.email;
         // console.log(email)
         if (email) {
-            fetch(`https://stockmanagementsystemserver-production.up.railway.app/approve/${email}`, {
+            fetch(`http://localhost:5000/approve/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'

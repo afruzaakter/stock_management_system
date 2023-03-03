@@ -15,7 +15,7 @@ const RequisitionCreate = () => {
     // -------- budgetCode get method--------------
     const [budgetCodes, setBudgetCodes] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/budgetcode')
+        fetch('http://localhost:5000/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, []);
@@ -23,7 +23,7 @@ const RequisitionCreate = () => {
     // -------------- budgetCode get method--------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
+        fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
@@ -70,7 +70,7 @@ const RequisitionCreate = () => {
     const [autoCode, setAutoCode] = useState();
 
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/createRequisition")
+        fetch("http://localhost:5000/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
@@ -110,7 +110,7 @@ const RequisitionCreate = () => {
             requisitionNotes: data.requisitionNotes
         }
 
-        const url = 'https://stockmanagementsystemserver-production.up.railway.app/createRequisition'
+        const url = 'http://localhost:5000/createRequisition'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(currentData),

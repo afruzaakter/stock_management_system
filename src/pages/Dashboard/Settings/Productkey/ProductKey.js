@@ -11,12 +11,12 @@ const ProductKey = () => {
     const [productkeys, setProductkeys] = useState([]);
     const [deleteID, setDeleteID] = useState('')
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/productkey')
+        fetch('http://localhost:5000/productkey')
             .then(res => res.json())
             .then(data => setProductkeys(data))
     }, [])
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/productkey/${id}`
+        const url = `http://localhost:5000/productkey/${id}`
         fetch(url, {
             method: "DELETE"
         })

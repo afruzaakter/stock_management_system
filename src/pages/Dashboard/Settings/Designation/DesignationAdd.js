@@ -9,7 +9,7 @@ const DesignationAdd = () => {
     const [updated, setUpdated] = useState(false);
     const navigate = useNavigate()
     const onSubmit = (data) => {
-        const url = "https://stockmanagementsystemserver-production.up.railway.app/designation"
+        const url = "http://localhost:5000/designation"
         fetch(url, {
             method: "POST",
             body: JSON.stringify(data),
