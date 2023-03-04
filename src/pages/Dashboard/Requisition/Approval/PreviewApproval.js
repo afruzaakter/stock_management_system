@@ -17,35 +17,62 @@ const PreviewApproval = () => {
             .then(data => setRequisitions(data))
     }, []);
 
-     //==========Approved Date ==============
-     const date = new Date();
-     const day = date.getDate();
-     const month = date.getMonth();
-     const year = date.getFullYear();
-     const hours = date.getHours();
-     const minutes = date.getMinutes();
-     // format the time
-     const amOrPm = hours >= 12 ? 'pm' : 'am';
-     const twelveHourClock = hours % 12 || 12;
-     const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
-     // format the date
-     const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
- 
+    //==========Approved Date ==============
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    // format the time
+    const amOrPm = hours >= 12 ? 'pm' : 'am';
+    const twelveHourClock = hours % 12 || 12;
+    const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
+    // format the date
+    const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
+
+    // ----handle If approved Requisition ------------------- 
+    const handleIsApproved =(id)=>{
+        const newData = {
+            isApproved: "Yes",
+        };
+        const url = `http://localhost:5000/createRequisition/${id}`;
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            navigate('/dashboard/requisitionAuthorize');
+        })
+    };
+
+    // ----handle If Rejected Requisition ------------------- 
+    const handleIsRejected =(id)=>{
+        const newData = {
+            isApproved: "No",
+        };
+        const url = `http://localhost:5000/createRequisition/${id}`;
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            navigate('/dashboard/requisitionAuthorize');
+        })
+    };
 
     // --------------For Authorized------------------
     const onSubmit = (data) => {
         const newData = {
-          autoCode:requisitions.autoCode,
-          email:requisitions.email,
-          date:requisitions.date,
-          products:requisitions.products,
-          requisitionNotes:requisitions.requisitionNotes,
-
-          authorizeNotes: requisitions.authorizeNotes,
-          isAuthorized: requisitions.isAuthorized,
-
           approvedNotes:data.approvedNotes,
-          isApproved:data.isApproved,
           approvedDate: currentDate
         };
       
@@ -96,52 +123,33 @@ const PreviewApproval = () => {
 
             <div>
                 <form onSubmit={handleSubmit(onSubmit)} >
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
 
-                        {/* ----------------------- Authorized Notes Field ------------------ */}
-                         <div className="form-control">
-                            <label className='text-start'> Approved Notes </label>
-                            <input
-                                type="text"
-                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.approvedNotes && 'border-red-600 focus:border-red-600'}`}
-                                {...register("approvedNotes", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
-                            />
-                            <label className="label">
-                                {errors.approvedNotes?.type === 'required' && <span className="label-text-alt text-red-700">{errors.approvedNotes.message}</span>}
-                            </label>
-                        </div>
-
-                       {/* ----------------------- Authorization (yes/no) Field -------------- */}
-                       <div className="form-control">
-                            <label className='text-start'>Approved </label>
-                            <select
-                                {...register("isApproved", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
-                                className={`input input-sm w-80  focus:outline-0 rounded-sm border border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.isApproved && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''> Yes </option>
-                                <option > Yes </option>
-                                <option > No </option>
-                            </select>
-
-                            <label className="label">
-                                {errors.isApproved?.type === 'required' && <span className="label-text-alt text-red-700">{errors.isApproved.message}</span>}
-
-                            </label>
-                        </div>
-
-                        {/* ----------------------    All field end     ------- */}
+                    {/* ----------------------- Authorized Notes Field ------------------ */}
+                        <div className="form-control">
+                        <label className='text-start'> Approved Notes </label>
+                        <input
+                            type="text"
+                            className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.approvedNotes && 'border-red-600 focus:border-red-600'}`}
+                            {...register("approvedNotes", {
+                                required: {
+                                    value: true,
+                                    message: "❌  Please fill out this field"
+                                }
+                            })}
+                        />
+                        <label className="label">
+                            {errors.approvedNotes?.type === 'required' && <span className="label-text-alt text-red-700">{errors.approvedNotes.message}</span>}
+                        </label>
                     </div>
-
-                    <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Approved' />
+                       
+                    <input 
+                        onClick={()=>handleIsApproved(id)}
+                        className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-green-500 hover:text-white' 
+                        type="submit" value='Approved' />
+                    <input 
+                        onClick={()=>handleIsRejected(id)}
+                        className='input  btn btn-sm mx-1 bg-red-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-red-500 hover:text-white' 
+                        type="submit" value='Rejected' />
                     
                 </form>
             </div>

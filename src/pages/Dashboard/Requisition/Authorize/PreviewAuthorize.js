@@ -33,11 +33,9 @@ const PreviewAuthorize = () => {
 
     // 
     const handleIsAuthorized =(id)=>{
-        console.log('accept',id);
         const newData = {
             isAuthorized: "Yes",
         };
-      
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
           method: 'PATCH',
@@ -54,11 +52,9 @@ const PreviewAuthorize = () => {
     }
     // 
     const handleIsRejected =(id)=>{
-        console.log('Reject',id);
         const newData = {
             isAuthorized: "No",
         };
-      
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
           method: 'PATCH',
