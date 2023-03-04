@@ -14,12 +14,10 @@ const RequisitionApproval = () => {
     useEffect(() => {
         const authorizedReq = allRequisitions
             .filter(requisition => requisition.isAuthorized === "Yes")
-            .filter(requisition => requisition.isApproved !== "Yes");
-        setAllAuthorizedReq(authorizedReq)
-        
-    }, [allRequisitions])
-
-
+            .filter(requisition => requisition.isApproved !== "Yes")
+            .filter(requisition => requisition.isApproved !== "No");
+        setAllAuthorizedReq(authorizedReq);
+    }, [allRequisitions]);
 
     return (
         <div className='border m-1 p-1 rounded-lg'>

@@ -16,7 +16,8 @@ const RequisitionIssue = () => {
     useEffect(() => {
         const authorizedReq = allRequisitions
             .filter(requisition => requisition.isApproved === "Yes")
-            .filter(requisition => requisition.isIssued !== "Yes");
+            .filter(requisition => requisition.isIssued !== "Yes")
+            .filter(requisition => requisition.isIssued !== "No");
         setAllAuthorizedReq(authorizedReq)
         
     }, [allRequisitions])
@@ -43,11 +44,12 @@ const RequisitionIssue = () => {
             <table className="table w-full">
                 <thead>
                     <tr>
+                        <th> Req_Serial </th>
                         <th> Date </th>
-                        <th> #Requisition </th>
                         <th> Requested By </th>
                         <th> Request Status </th>
                         <th> Note </th>
+                        <th className='text-center'> Action </th>
                     </tr>
                 </thead>
 
@@ -55,8 +57,10 @@ const RequisitionIssue = () => {
                         {
                             allAuthorizedReq?.map((createRequisition, index) => 
                             <tr key={createRequisition._id}>
-                                <td>{createRequisition.date}</td>
                                 <td> {createRequisition.autoCode}</td>
+                                <td>{(createRequisition.date).split(" ")[0]}</td>
+                                <td>{createRequisition.userName}</td>
+                                <td> Pending... </td>
                                 <td>{createRequisition.requisitionNotes}</td>
                                 <td className='text-center'>
                                     <Link to={`/dashboard/previewIssue/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
