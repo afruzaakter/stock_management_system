@@ -12,13 +12,13 @@ const RequisitionIssue = () => {
             .then(data => setAllRequisitions(data))
     }, [])
     
-    const [allAuthorizedReq, setAllAuthorizedReq] = useState([]);
+    const [allApprovedReq, setAllApprovedReq] = useState([]);
     useEffect(() => {
         const authorizedReq = allRequisitions
             .filter(requisition => requisition.isApproved === "Yes")
             .filter(requisition => requisition.isIssued !== "Yes")
             .filter(requisition => requisition.isIssued !== "No");
-        setAllAuthorizedReq(authorizedReq)
+            setAllApprovedReq(authorizedReq)
         
     }, [allRequisitions])
 
@@ -55,7 +55,7 @@ const RequisitionIssue = () => {
 
                 <tbody>
                         {
-                            allAuthorizedReq?.map((createRequisition, index) => 
+                            allApprovedReq?.map((createRequisition, index) => 
                             <tr key={createRequisition._id}>
                                 <td> {createRequisition.autoCode}</td>
                                 <td>{(createRequisition.date).split(" ")[0]}</td>
