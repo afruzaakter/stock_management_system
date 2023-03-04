@@ -14,11 +14,11 @@ const RequisitionIssue = () => {
     
     const [allApprovedReq, setAllApprovedReq] = useState([]);
     useEffect(() => {
-        const authorizedReq = allRequisitions
+        const approvedReq = allRequisitions
             .filter(requisition => requisition.isApproved === "Yes")
             .filter(requisition => requisition.isIssued !== "Yes")
             .filter(requisition => requisition.isIssued !== "No");
-            setAllApprovedReq(authorizedReq)
+            setAllApprovedReq(approvedReq)
         
     }, [allRequisitions])
 
