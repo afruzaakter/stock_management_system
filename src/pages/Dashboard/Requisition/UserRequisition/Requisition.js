@@ -21,7 +21,10 @@ const Requisition = () => {
     useEffect(() => {
         const myReq = allRequisitions.filter(requisition => requisition.email === user.email)
         setMyRequisitions(myReq);
-    }, [allRequisitions, user])
+    }, [allRequisitions, user]);
+
+    // check if the user is already authenticated 
+    
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
@@ -50,21 +53,19 @@ const Requisition = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th> Date </th>
-                            <th> #Requisition </th>
+                            <th> #Req_Serial </th>
                             <th> Requested By </th>
                             <th> Request Status </th>
                             <th> Note </th>
-                            <th> Action </th>
+                            <th className='text-center'> Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            myRequisitions.map((createRequisition, index) => <tr key={createRequisition._id}>
-                                <td>{createRequisition.date}</td>
+                            myRequisitions?.map((createRequisition, index) => <tr key={createRequisition._id}>
                                 <td> {createRequisition.autoCode}</td>
-                                <td>{user.displayName}</td>
+                                <td>{createRequisition.userName}</td>
                                 <td>pending</td>
                                 <td>{createRequisition.requisitionNotes}</td>
                                 <td className='text-center'>

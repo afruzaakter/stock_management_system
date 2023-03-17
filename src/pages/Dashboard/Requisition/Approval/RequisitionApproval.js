@@ -14,12 +14,10 @@ const RequisitionApproval = () => {
     useEffect(() => {
         const authorizedReq = allRequisitions
             .filter(requisition => requisition.isAuthorized === "Yes")
-            .filter(requisition => requisition.isApproved !== "Yes");
-        setAllAuthorizedReq(authorizedReq)
-
-    }, [allRequisitions])
-
-
+            .filter(requisition => requisition.isApproved !== "Yes")
+            .filter(requisition => requisition.isApproved !== "No");
+        setAllAuthorizedReq(authorizedReq);
+    }, [allRequisitions]);
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
@@ -42,8 +40,9 @@ const RequisitionApproval = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
+                            <th> Req_Serial </th>
                             <th> Date </th>
-                            <th> #Requisition </th>
+                            <th> Requested By </th>
                             <th> Note </th>
                             <th> </th>
                         </tr>
@@ -51,16 +50,17 @@ const RequisitionApproval = () => {
 
                     <tbody>
                         {
-                            allAuthorizedReq?.map((createRequisition, index) =>
-                                <tr key={createRequisition._id}>
-                                    <td>{createRequisition.date}</td>
-                                    <td> {createRequisition.autoCode}</td>
-                                    <td>{createRequisition.requisitionNotes}</td>
-                                    <td className='text-center'>
-                                        <Link to={`/dashboard/previewApproval/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
-                                            <AiOutlineEye /> Preview </Link>
-                                    </td>
-                                </tr>)
+                            allAuthorizedReq?.map((createRequisition, index) => 
+                            <tr key={createRequisition._id}>
+                                <td> {createRequisition.autoCode}</td>
+                                <td>{ (createRequisition.date).split(" ")[0] }</td>
+                                <td>{createRequisition.userName}</td>
+                                <td>{createRequisition.requisitionNotes}</td>
+                                <td className='text-center'>
+                                    <Link to={`/dashboard/previewApproval/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                        <AiOutlineEye /> Preview </Link>
+                                </td>
+                            </tr>)
                         }
                     </tbody>
                 </table>
