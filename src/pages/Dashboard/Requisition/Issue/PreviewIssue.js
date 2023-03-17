@@ -74,21 +74,21 @@ const PreviewIssue = () => {
           issuedNotes: data.issuedNotes,
           issuedDate: currentDate,
         };
-      
+
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newData),
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newData),
         })
-          .then((res) => res.json())
-          .then((data) => {
-            reset(); // assuming this function resets the form data
-            navigate('/dashboard/requisitionIssue');
-          })
-      };
+            .then((res) => res.json())
+            .then((data) => {
+                reset(); // assuming this function resets the form data
+                navigate('/dashboard/requisitionIssue');
+            })
+    };
 
     return (
         <div className='m-4 '>
@@ -123,7 +123,7 @@ const PreviewIssue = () => {
 
                 <div >
                     <Link to={`/dashboard/requisition`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
-                         Back 
+                        Back
                     </Link>
                 </div>
             </div>

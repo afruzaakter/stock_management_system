@@ -16,7 +16,7 @@ const RequisitionAuthorize = () => {
             .filter(requisition => requisition.isAuthorized !== "Yes")
             .filter(requisition => requisition.isAuthorized !== "No");
         setAllCreatedReq(notAuthorized)
-        
+
     }, [allRequisitions])
 
 

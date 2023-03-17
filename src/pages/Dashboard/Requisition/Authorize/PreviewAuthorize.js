@@ -38,11 +38,11 @@ const PreviewAuthorize = () => {
         };
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newData),
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newData),
         })
           .then((res) => res.json())
           .then((data) => {

@@ -117,7 +117,7 @@ const StockAdjust = () => {
                                 <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
                                     <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/${product._id}`}><FaEdit /></Link>
-                                    
+
                                     <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
                                         onClick={() => setDeleteID(product._id)} >
                                         <MdDeleteForever />

@@ -67,7 +67,7 @@ const AddNewEmployee = () => {
                             <input
                                 type="text"
 
-                                value={user.displayName}
+                                // value={user.displayName}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.employeeName && 'border-red-600 focus:border-red-600'}`}
                                 {...register("employeeName")}
                             />

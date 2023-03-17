@@ -73,8 +73,8 @@ const RequisitionCreate = () => {
 
     //===========for auto generate requisition serial code ========
     const [allRequisitions, setAllRequisitions] = useState([]);
-    const [autoCode, setAutoCode] = useState(); 
-   
+    const [autoCode, setAutoCode] = useState();
+
     useEffect(() => {
         fetch("http://localhost:5000/createRequisition")
             .then(res => res.json())
@@ -83,13 +83,13 @@ const RequisitionCreate = () => {
 
     useEffect(() => {
         const codeList = allRequisitions?.map(requisition => requisition.autoCode);
-        const length =codeList.length; 
-        if(length === 0){
+        const length = codeList.length;
+        if (length === 0) {
             setAutoCode(101)
-        }else{
-            const lastValue =codeList[length-1]; 
+        } else {
+            const lastValue = codeList[length - 1];
             const lastCode = +lastValue;
-            setAutoCode(lastCode+1)
+            setAutoCode(lastCode + 1)
         }
     }, [allRequisitions]);
 

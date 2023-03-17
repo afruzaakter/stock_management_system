@@ -9,7 +9,7 @@ const RequisitionApproval = () => {
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
-    
+
     const [allAuthorizedReq, setAllAuthorizedReq] = useState([]);
     useEffect(() => {
         const authorizedReq = allRequisitions

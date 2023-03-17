@@ -75,21 +75,21 @@ const PreviewApproval = () => {
           approvedNotes:data.approvedNotes,
           approvedDate: currentDate
         };
-      
+
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newData),
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newData),
         })
-          .then((res) => res.json())
-          .then((data) => {
-            reset(); // assuming this function resets the form data
-            navigate('/dashboard/requisitionApproval');
-          })
-      };
+            .then((res) => res.json())
+            .then((data) => {
+                reset(); // assuming this function resets the form data
+                navigate('/dashboard/requisitionApproval');
+            })
+    };
 
     return (
         <div className='m-4 '>
@@ -116,7 +116,7 @@ const PreviewApproval = () => {
                 
                 <div >
                     <Link to={`/dashboard/requisition`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
-                         Back 
+                        Back
                     </Link>
                 </div>
             </div>
