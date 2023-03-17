@@ -50,7 +50,7 @@ const PreviewIssue = () => {
         })
     };
     // ------For Rejected issue Requisition------------------
-    const handleIsRejected =(id)=>{
+    const handleNotify =(id)=>{
         const newData = {
             isIssued: "No",
         };
@@ -154,9 +154,9 @@ const PreviewIssue = () => {
                         className='input btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-green-500 hover:text-white ' 
                         type="submit" value=' Issued' />
                     <input 
-                        onClick={()=> handleIsRejected(id)}
+                        onClick={()=> handleNotify(id)}
                         className='input btn btn-sm mx-1 bg-red-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-red-500 hover:text-white ' 
-                        type="submit" value='Reject ' />
+                        type="submit" value='Notify ' />
                     
                 </form>
             </div>
