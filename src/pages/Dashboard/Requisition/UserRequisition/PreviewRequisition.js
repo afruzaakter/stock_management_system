@@ -76,6 +76,22 @@ const PreviewRequisition = () => {
               </div>
             </>
           )}
+          
+          {requisitions?.issuedNotes && (
+            <>
+              <div className="flex justify-start items-center gap-5 mt-2">
+                <AiOutlineCheck className="font-bold text-2xl text-green-900" />
+                <div>
+                  <p> <span className="text-green-900 font-semibold "> App_Note: </span> 
+                    {requisitions?.issuedNotes} 
+                  </p>
+                  <p> <span className="text-green-900 font-semibold "> Date: </span> 
+                    {requisitions?.issuedDate}
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <div>

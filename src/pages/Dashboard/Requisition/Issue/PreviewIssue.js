@@ -52,7 +52,7 @@ const PreviewIssue = () => {
     // ------For Rejected issue Requisition------------------
     const handleNotify =(id)=>{
         const newData = {
-            isIssued: "No",
+            status: "Rejected",
         };
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
