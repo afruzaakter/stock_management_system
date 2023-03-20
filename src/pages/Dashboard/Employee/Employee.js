@@ -11,6 +11,10 @@ const Employee = () => {
             .then(data => setEmployees(data))
     }, [])
 
+    // ------------ sort numbers show order --------------
+    const employeeSort = [...employees].sort((a, b) => a.order - b.order);
+
+
 
     return (
         <div className='border m-2 pl-2 rounded-lg'>
@@ -58,7 +62,7 @@ const Employee = () => {
 
                     <tbody>
                         {
-                            employees.map((employee) =>
+                            employeeSort.map((employee) =>
                                 <tr key={employee._id}>
                                     <td>{employee.employeeId} </td>
                                     <td>{employee.employeeName} </td>

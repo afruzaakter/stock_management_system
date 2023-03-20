@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { RxCross2 } from 'react-icons/rx';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -10,19 +10,54 @@ const AddNewEmployee = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
     const [user, loading] = useAuthState(auth)
-    const [designations, setDesignations] = useState([]);
-    const [departments, setDepartments] = useState([]);
 
+
+
+    //----------Designation Fetch Data------------
+    const [designations, setDesignations] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/designation')
             .then(res => res.json())
             .then(data => setDesignations(data))
     }, [])
+    //----------Department Fetch Data------------
+    const [departments, setDepartments] = useState([]);
+
     useEffect(() => {
         fetch('http://localhost:5000/department')
             .then(res => res.json())
             .then(data => setDepartments(data))
     }, [])
+
+
+
+    // const [showOrders, setShowOrders] = useState([])
+    // const selectShowOrders = departments.filter((department) => department.order);
+    // setShowOrders(selectShowOrders);
+    // console.log(showOrders)
+    // const selectShowOrders = departments.find().projection({ order: 1 });
+
+
+    // setShowOrders(selectShowOrders)
+    // console.log("selectShowOrders", selectShowOrders);
+
+
+    const [selectDepartment, setSelectDepartment] = useState([]);
+    // console.log(selectDepartment)
+    const selectedDepartment = departments.filter(department => department.name === selectDepartment);
+    console.log("Department filter", selectedDepartment)
+
+
+
+
+    // const result = selectedDepartment.map((obj) => object.values(obj))
+
+    const arr = selectedDepartment.map(obj => Object.values(obj));
+    // console.log("array", arr.indexOf(3))
+
+
+
+
     //======= all user get data===========
     const [allUsers, setAllUser] = useState([])
     useEffect(() => {
@@ -161,12 +196,15 @@ const AddNewEmployee = () => {
                         {/* ----------------------Department Name Field --------------------------- */}
                         <div className="form-control">
                             <label className='text-start'>Department </label>
-                            <select   {...register("department", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please fill out this field"
-                                }
-                            })}
+                            <select
+                                onClick={e => setSelectDepartment(e.target.value)}
+
+                                {...register("name", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please fill out this field"
+                                    }
+                                })}
                                 className={`input input-sm  w-80  focus:outline-0 rounded-sm  border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.department && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''> Select Department</option>
                                 {
@@ -183,15 +221,22 @@ const AddNewEmployee = () => {
                         {/* ----------------------- Show Order Field ------------------------------ */}
                         <div className="form-control">
                             <label className='text-start'> Show Order </label>
+
                             <input
-                                type="number"
+
+
+                                type="text"
+                                Value={selectedDepartment.order}
                                 className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
-                                {...register("order", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
+                                {...register("order",
+                                    // {
+                                    //     required: {
+                                    //         value: true,
+                                    //         message: "❌  Please fill out this field"
+                                    //     }
+                                    // }
+
+                                )}
                             />
                             <label className="label">
                                 {errors.order?.type === 'required' && <span className="label-text-alt text-red-700">{errors.order.message}</span>}

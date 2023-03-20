@@ -15,6 +15,12 @@ const Product = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
+
+    // const productFilter = products?.filter((val, index) => products.productName.indexOf(val) === index);
+
+
+    // console.log("Duplicate", productFilter)
+
     // ---------- Delete method-----
     const handleDelete = (id) => {
         const url = `http://localhost:5000/product/${id}`
@@ -31,7 +37,7 @@ const Product = () => {
             })
     }
 
-    // const productFilter = products?.filter(product => product.productName === productName)
+
 
 
 
