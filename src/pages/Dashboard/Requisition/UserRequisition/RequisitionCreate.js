@@ -48,17 +48,23 @@ const RequisitionCreate = () => {
 
     // --delete one product------
     const deleteProduct = (deleteId) => {
-        console.log(deleteId);
         const remaining = selectedProduct.filter(product => product._id !== deleteId);
         setSelectedProduct(remaining);
     }
 
-    //========== Auto Date ==============
+    //==========Requisition Created Date ==============
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
-    const currentDate = day + '-' + month + '-' + year;
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    // format the time
+    const amOrPm = hours >= 12 ? 'pm' : 'am';
+    const twelveHourClock = hours % 12 || 12;
+    const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
+    // format the date
+    const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
 
     // ========== For initial quantity filed value 1 =======
     const [minValue, setMinValue] = useState(1);
@@ -106,10 +112,12 @@ const RequisitionCreate = () => {
 
         const currentData = {
             autoCode: autoCode,
+            userName:user.displayName,
             email: user.email,
             date: currentDate,
             products: arrayOfTotalProduct,
-            requisitionNotes: data.requisitionNotes
+            requisitionNotes: data.requisitionNotes,
+            status: "Pending"
         }
 
         const url = 'http://localhost:5000/createRequisition'
@@ -122,7 +130,6 @@ const RequisitionCreate = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 toast.success("Requisition Created Successfully");
                 reset();
             })
@@ -229,7 +236,7 @@ const RequisitionCreate = () => {
                         <select
                             onChange={e => setSelectedBudgetCode(e.target.value)}
                             className={`input input-sm w-full  focus:outline-0 rounded-sm  border-green-700 mt-1   focus:border-blue-500  login-container-input `}>
-                            <option value=''>--Select Budget Code-- </option>
+                            <option value=''> Select Budget Code </option>
                             {
                                 budgetCodes.map((budgetCode) => <option key={budgetCode._id}> {budgetCode.budgetCode} </option>)
                             }
@@ -244,7 +251,7 @@ const RequisitionCreate = () => {
                             placeholder="Search…"
                             className="input input-sm rounded-sm w-full border-green-700 ">
                         </input>
-                        <button className="btn h-9  w-10 btn-sm  rounded-md bg-green-700">
+                        <button className="btn h-9  w-16 btn-sm  rounded-md bg-green-600">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         </button>
                     </div>

@@ -10,16 +10,14 @@ const RequisitionIssue = () => {
         fetch("http://localhost:5000/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
-    }, [])
-
-    const [allAuthorizedReq, setAllAuthorizedReq] = useState([]);
+    }, []);
+    
+    const [allApprovedReq, setAllApprovedReq] = useState([]);
     useEffect(() => {
-        const authorizedReq = allRequisitions
-            .filter(requisition => requisition.isApproved === "Yes")
-            .filter(requisition => requisition.isIssued !== "Yes");
-        setAllAuthorizedReq(authorizedReq)
-
-    }, [allRequisitions])
+        const approvedReq = allRequisitions
+            .filter(requisition => requisition.status === "Approved");
+        setAllApprovedReq(approvedReq);
+    }, [allRequisitions]);
 
 
     return (
@@ -38,37 +36,36 @@ const RequisitionIssue = () => {
                     </div>
                 </div>
             </div>
-
+            
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>
+                            <th> Req_Serial </th>
                             <th> Date </th>
-                            <th> #Requisition </th>
                             <th> Requested By </th>
-                            <th> Request Status </th>
                             <th> Note </th>
+                            <th className='text-center'> Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {
-                            allAuthorizedReq?.map((createRequisition, index) =>
+                            {
+                                allApprovedReq?.map((createRequisition, index) => 
                                 <tr key={createRequisition._id}>
-                                    <td>{createRequisition.date}</td>
                                     <td> {createRequisition.autoCode}</td>
+                                    <td>{(createRequisition.date).split(" ")[0]}</td>
+                                    <td>{createRequisition.userName}</td>
                                     <td>{createRequisition.requisitionNotes}</td>
                                     <td className='text-center'>
                                         <Link to={`/dashboard/previewIssue/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
                                             <AiOutlineEye /> Preview </Link>
                                     </td>
                                 </tr>)
-                        }
-                    </tbody>
+                            }
+                        </tbody>
                 </table>
             </div>
-
-
         </div>
     );
 };
