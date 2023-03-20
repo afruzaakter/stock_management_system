@@ -95,13 +95,16 @@ const PreviewRequisition = () => {
         </div>
 
         <div>
-          <label htmlFor="my-modal-6" className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600" >
-            ❌ Delete
-          </label>
-
           <Link to={`/dashboard/requisition`}
             className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600" >  Back
           </Link>
+          <Link to={`/dashboard/requisition`}
+            className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600" >  Edit
+          </Link>
+
+          <label htmlFor="my-modal-6" className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600" >
+            ❌ Delete
+          </label>
 
           {/* -------- delete modal ----------------- */}
           <input type="checkbox" id="my-modal-6" className="modal-toggle" />
