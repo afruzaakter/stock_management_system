@@ -34,7 +34,7 @@ const PreviewAuthorize = () => {
     // 
     const handleIsAuthorized =(id)=>{
         const newData = {
-            isAuthorized: "Yes",
+            status: "Authorized",
         };
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
@@ -46,14 +46,13 @@ const PreviewAuthorize = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            navigate('/dashboard/requisitionAuthorize');
+              navigate('/dashboard/requisitionAuthorize');
           })
-
     }
     // 
     const handleIsRejected =(id)=>{
         const newData = {
-            isAuthorized: "No",
+            status: "Rejected",
         };
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {

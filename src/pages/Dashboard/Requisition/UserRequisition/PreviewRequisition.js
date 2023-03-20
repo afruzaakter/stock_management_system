@@ -29,75 +29,64 @@ const PreviewRequisition = () => {
 
   return (
     <div className="m-4 ">
-      <h2 className="text-xl font-bold ml-4">
-        {" "}
-        Requisition Serial: {requisitions?.autoCode}
-      </h2>
+      <h2 className="text-xl font-bold ml-4"> Requisition Serial: {requisitions?.autoCode} </h2>
+      
       <div className="flex justify-between items-center  rounded-l-md ">
         <div>
           <div className="flex justify-start items-center gap-5 mt-4">
             <AiOutlineCheck className="font-bold text-2xl text-green-900" />
             <div>
-              <p>
-                {" "}
-                <span className="text-primary font-semibold ">
-                  {" "}
-                  User_Note:{" "}
-                </span>{" "}
-                {requisitions.requisitionNotes}{" "}
+              <p> <span className="text-primary font-semibold "> User_Note:  </span> 
+                {requisitions.requisitionNotes} 
               </p>
-              <p>
-                {" "}
-                <span className="text-primary font-semibold "> Date:</span>{" "}
+              <p> <span className="text-primary font-semibold "> Date:</span> 
                 {requisitions.date}
               </p>
             </div>
           </div>
+          
           {requisitions?.authorizeNotes && (
             <>
               <div className="flex justify-start items-center gap-5 mt-2">
                 <AiOutlineCheck className="font-bold text-2xl text-green-900" />
                 <div>
-                  <p>
-                    {" "}
-                    <span className="text-green-900 font-semibold ">
-                      {" "}
-                      Auth_Note:{" "}
-                    </span>{" "}
-                    {requisitions?.authorizeNotes}{" "}
+                  <p> <span className="text-green-900 font-semibold "> Auth_Note: </span> 
+                    {requisitions?.authorizeNotes} 
                   </p>
-                  <p>
-                    {" "}
-                    <span className="text-green-900 font-semibold ">
-                      {" "}
-                      Date:
-                    </span>{" "}
+                  <p> <span className="text-green-900 font-semibold ">Date: </span> 
                     {requisitions?.AuthorizedDate}
                   </p>
                 </div>
               </div>
             </>
           )}
+
           {requisitions?.approvedNotes && (
             <>
               <div className="flex justify-start items-center gap-5 mt-2">
                 <AiOutlineCheck className="font-bold text-2xl text-green-900" />
                 <div>
-                  <p>
-                    {" "}
-                    <span className="text-green-900 font-semibold ">
-                      {" "}
-                      App_Note:{" "}
-                    </span>{" "}
-                    {requisitions?.approvedNotes}{" "}
+                  <p> <span className="text-green-900 font-semibold "> App_Note: </span> 
+                    {requisitions?.approvedNotes} 
                   </p>
-                  <p>
-                    {" "}
-                    <span className="text-green-900 font-semibold ">
-                      {" "}
-                      Date:
-                    </span>{" "}
+                  <p> <span className="text-green-900 font-semibold "> Date: </span> 
                     {requisitions?.approvedDate}
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
+          
+          {requisitions?.issuedNotes && (
+            <>
+              <div className="flex justify-start items-center gap-5 mt-2">
+                <AiOutlineCheck className="font-bold text-2xl text-green-900" />
+                <div>
+                  <p> <span className="text-green-900 font-semibold "> App_Note: </span> 
+                    {requisitions?.issuedNotes} 
+                  </p>
+                  <p> <span className="text-green-900 font-semibold "> Date: </span> 
+                    {requisitions?.issuedDate}
                   </p>
                 </div>
               </div>
@@ -106,19 +95,16 @@ const PreviewRequisition = () => {
         </div>
 
         <div>
-          <label
-            htmlFor="my-modal-6"
-            className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600"
-          >
+          <Link to={`/dashboard/requisition`}
+            className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600" >  Back
+          </Link>
+          <Link to={`/dashboard/requisition`}
+            className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600" >  Edit
+          </Link>
+
+          <label htmlFor="my-modal-6" className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600" >
             ❌ Delete
           </label>
-
-          <Link
-            to={`/dashboard/requisition`}
-            className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600"
-          >
-            Back
-          </Link>
 
           {/* -------- delete modal ----------------- */}
           <input type="checkbox" id="my-modal-6" className="modal-toggle" />
@@ -129,19 +115,8 @@ const PreviewRequisition = () => {
               </h3>
 
               <div className="mr-14 modal-action">
-                <label
-                  htmlFor="my-modal-6"
-                  onClick={() => handleReqDelete(id)}
-                  className="btn  btn-sm bg-green-600 text-white rounded-md"
-                >
-                  ok
-                </label>
-                <label
-                  htmlFor="my-modal-6"
-                  className="btn btn-sm bg-red-600 rounded-md justify-start text-white"
-                >
-                  Cancel
-                </label>
+                <label htmlFor="my-modal-6"  onClick={() => handleReqDelete(id)}  className="btn  btn-sm bg-green-600 text-white rounded-md">  ok </label>
+                <label htmlFor="my-modal-6"  className="btn btn-sm bg-red-600 rounded-md justify-start text-white" >  Cancel </label>
               </div>
             </div>
           </div>

@@ -66,7 +66,7 @@ const Requisition = () => {
                             myRequisitions?.map((createRequisition, index) => <tr key={createRequisition._id}>
                                 <td> {createRequisition.autoCode}</td>
                                 <td>{createRequisition.userName}</td>
-                                <td>pending</td>
+                                <td>{createRequisition.status} </td>
                                 <td>{createRequisition.requisitionNotes}</td>
                                 <td className='text-center'>
                                     <Link to={`/dashboard/previewRequisition/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
