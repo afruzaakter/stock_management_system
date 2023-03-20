@@ -34,7 +34,7 @@ const PreviewIssue = () => {
     // ---- For Issued Requisition ------------------- 
     const handleIsIssued =(id)=>{
         const newData = {
-            isIssued: "Yes",
+            status: "Issued",
         };
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {

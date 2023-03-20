@@ -13,11 +13,9 @@ const RequisitionAuthorize = () => {
     const [allCreatedReq, setAllCreatedReq] = useState([]);
     useEffect(() => {
         const notAuthorized = allRequisitions
-            .filter(requisition => requisition.isAuthorized !== "Yes")
-            .filter(requisition => requisition.isAuthorized !== "No");
+            .filter(requisition => requisition.status === "Pending")
         setAllCreatedReq(notAuthorized)
-
-    }, [allRequisitions])
+    }, [allRequisitions]);
 
 
     return (

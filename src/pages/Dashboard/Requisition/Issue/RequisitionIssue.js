@@ -10,17 +10,14 @@ const RequisitionIssue = () => {
         fetch("http://localhost:5000/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
-    }, [])
+    }, []);
     
     const [allApprovedReq, setAllApprovedReq] = useState([]);
     useEffect(() => {
         const approvedReq = allRequisitions
-            .filter(requisition => requisition.isApproved === "Yes")
-            .filter(requisition => requisition.isIssued !== "Yes")
-            .filter(requisition => requisition.isIssued !== "No");
-            setAllApprovedReq(approvedReq)
-        
-    }, [allRequisitions])
+            .filter(requisition => requisition.status === "Approved");
+        setAllApprovedReq(approvedReq);
+    }, [allRequisitions]);
 
 
     return (
@@ -47,7 +44,6 @@ const RequisitionIssue = () => {
                             <th> Req_Serial </th>
                             <th> Date </th>
                             <th> Requested By </th>
-                            <th> Request Status </th>
                             <th> Note </th>
                             <th className='text-center'> Action </th>
                         </tr>
@@ -60,7 +56,6 @@ const RequisitionIssue = () => {
                                     <td> {createRequisition.autoCode}</td>
                                     <td>{(createRequisition.date).split(" ")[0]}</td>
                                     <td>{createRequisition.userName}</td>
-                                    <td> Pending... </td>
                                     <td>{createRequisition.requisitionNotes}</td>
                                     <td className='text-center'>
                                         <Link to={`/dashboard/previewIssue/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">

@@ -114,7 +114,8 @@ const RequisitionCreate = () => {
             email: user.email,
             date: currentDate,
             products: arrayOfTotalProduct,
-            requisitionNotes: data.requisitionNotes
+            requisitionNotes: data.requisitionNotes,
+            status: "Pending"
         }
 
         const url = 'http://localhost:5000/createRequisition'

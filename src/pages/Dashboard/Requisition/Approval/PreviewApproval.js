@@ -34,7 +34,7 @@ const PreviewApproval = () => {
     // ----handle If approved Requisition ------------------- 
     const handleIsApproved =(id)=>{
         const newData = {
-            isApproved: "Yes",
+            status: "Approved",
         };
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {

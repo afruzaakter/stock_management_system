@@ -34,7 +34,7 @@ const PreviewAuthorize = () => {
     // 
     const handleIsAuthorized =(id)=>{
         const newData = {
-            isAuthorized: "Yes",
+            status: "Authorized",
         };
         const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
