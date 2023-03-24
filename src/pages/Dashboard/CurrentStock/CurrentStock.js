@@ -10,6 +10,14 @@ const CurrentStock = () => {
             .then(data => setProducts(data))
     }, []);
 
+    //product unique
+
+    const uniqueProductName = products.filter((newProduct, index, self) =>
+        index === self.findIndex((product) => (
+            product.productName === newProduct.productName))
+    );
+
+
     const [addInventories, setAddInventories] = useState([]);
     console.log()
     useEffect(() => {
@@ -89,7 +97,7 @@ const CurrentStock = () => {
 
                     <tbody>
                         {
-                            products?.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                            uniqueProductName?.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <th>{index + 1}</th>
                                 <td>{product.productName}</td>
                                 <td>{product.budgetCode}</td>

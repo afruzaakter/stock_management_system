@@ -11,9 +11,16 @@ const Employee = () => {
             .then(data => setEmployees(data))
     }, [])
 
-    // ------------ sort numbers show order --------------
-    const employeeSort = [...employees].sort((a, b) => a.order - b.order);
+     //Unique All User Name
+     const uniqueAllUser = employees.filter((newUser, index, self) =>
+     index === self.findIndex((userEmail) => (
+         userEmail.email === newUser.email))
+      );
+      console.log(uniqueAllUser)
 
+    // ------------ sort numbers show order --------------
+    const employeeSort = [...uniqueAllUser].sort((a, b) => a.order - b.order);
+     console.log(employeeSort)
 
 
     return (

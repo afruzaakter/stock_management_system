@@ -16,7 +16,13 @@ const Product = () => {
             .then(data => setProducts(data))
     }, [])
 
-    // const productFilter = products?.filter((val, index) => products.productName.indexOf(val) === index);
+   
+//Unique Product Name
+const uniqueProductName = products.filter((newProduct, index, self) => 
+index === self.findIndex((product) => (
+product.productName === newProduct.productName))
+);
+console.log(uniqueProductName);
 
 
     // console.log("Duplicate", productFilter)
@@ -79,7 +85,7 @@ const Product = () => {
 
                     <tbody>
                         {
-                            products.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                            uniqueProductName.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <td>{index + 1}</td>
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>

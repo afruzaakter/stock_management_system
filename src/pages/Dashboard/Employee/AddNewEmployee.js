@@ -30,30 +30,19 @@ const AddNewEmployee = () => {
     }, [])
 
 
-
-    // const [showOrders, setShowOrders] = useState([])
-    // const selectShowOrders = departments.filter((department) => department.order);
-    // setShowOrders(selectShowOrders);
-    // console.log(showOrders)
-    // const selectShowOrders = departments.find().projection({ order: 1 });
-
-
-    // setShowOrders(selectShowOrders)
-    // console.log("selectShowOrders", selectShowOrders);
-
-
     const [selectDepartment, setSelectDepartment] = useState([]);
     // console.log(selectDepartment)
     const selectedDepartment = departments.filter(department => department.name === selectDepartment);
-    console.log("Department filter", selectedDepartment)
+    // console.log("Department filter", selectedDepartment)
 
 
 
 
-    // const result = selectedDepartment.map((obj) => object.values(obj))
+    const showOrders = selectedDepartment.map((showOrder) => showOrder.order)
+    // console.log(showOrders)
 
-    const arr = selectedDepartment.map(obj => Object.values(obj));
-    // console.log("array", arr.indexOf(3))
+    // const arr = selectedDepartment.map(obj => obj[3].order);
+    // console.log("array", arr)
 
 
 
@@ -65,6 +54,14 @@ const AddNewEmployee = () => {
             .then(res => res.json())
             .then(data => setAllUser(data))
     }, [])
+
+    //Unique All User Name
+    const uniqueAllUser = allUsers.filter((newUser, index, self) =>
+        index === self.findIndex((userEmail) => (
+            userEmail.email === newUser.email))
+    );
+  
+
 
     const onSubmit = (data) => {
         console.log("employee", data)
@@ -161,7 +158,7 @@ const AddNewEmployee = () => {
                                  focus:border-blue-500 login-container-input ${errors.allUser && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''>Select Email </option>
                                 {
-                                    allUsers.map((allUser) => <option key={allUser._id}>{allUser.email}</option>)
+                                    uniqueAllUser.map((allUser) => <option key={allUser._id}>{allUser.email}</option>)
                                 }
                             </select>
                             <label className="label">
@@ -223,19 +220,14 @@ const AddNewEmployee = () => {
                             <label className='text-start'> Show Order </label>
 
                             <input
-
-
+                                // disabled
+                                placeholder='auto generate'
                                 type="text"
-                                Value={selectedDepartment.order}
-                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
+                                Value={showOrders}
+                                className={`input input-sm max-w-xs 
+                                 font-bold py-2 px-4   border-green-700 hover:border-green-700  focus:outline-0 rounded-sm mt-1 
+                                  w-96 focus:border-blue-500  login-container-input ${errors.order && 'border-red-600 focus:border-red-600'}`}
                                 {...register("order",
-                                    // {
-                                    //     required: {
-                                    //         value: true,
-                                    //         message: "❌  Please fill out this field"
-                                    //     }
-                                    // }
-
                                 )}
                             />
                             <label className="label">

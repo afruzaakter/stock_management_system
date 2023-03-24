@@ -88,7 +88,7 @@ const ProductAdd = () => {
                                 </label>
                             </div>
                             {/* -------------------- Size / Varient Input Field -----------------------   */}
-                            <div className="form-control">
+                            {/* <div className="form-control">
                                 <label >Size/Varient</label>
                                 <input
                                     type="text"
@@ -105,7 +105,7 @@ const ProductAdd = () => {
                                     {errors.size?.type === 'required' && <span className="label-text-alt text-red-700">{errors.size.message}</span>}
 
                                 </label>
-                            </div>
+                            </div> */}
 
                             {/* -------------------- Measure Unit Input Field --------------------   */}
                             <div className="form-control">
@@ -153,7 +153,7 @@ const ProductAdd = () => {
                                 </label>
                             </div>
                             {/* -------------------- Pack Size/Qnty Input Field -----------------------   */}
-                            <div className="form-control">
+                            {/* <div className="form-control">
                                 <label >Total Quantity</label>
                                 <input
                                     type="text"
@@ -170,7 +170,7 @@ const ProductAdd = () => {
                                     {errors.totalQnty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.totalQnty.message}</span>}
 
                                 </label>
-                            </div>
+                            </div> */}
 
 
 
