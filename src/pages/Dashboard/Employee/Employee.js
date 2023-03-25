@@ -11,6 +11,17 @@ const Employee = () => {
             .then(data => setEmployees(data))
     }, [])
 
+     //Unique All User Name
+     const uniqueAllUser = employees.filter((newUser, index, self) =>
+     index === self.findIndex((userEmail) => (
+         userEmail.email === newUser.email))
+      );
+      console.log(uniqueAllUser)
+
+    // ------------ sort numbers show order --------------
+    const employeeSort = [...uniqueAllUser].sort((a, b) => a.order - b.order);
+     console.log(employeeSort)
+
 
     return (
         <div className='border m-2 pl-2 rounded-lg'>
@@ -58,7 +69,7 @@ const Employee = () => {
 
                     <tbody>
                         {
-                            employees.map((employee) =>
+                            employeeSort.map((employee) =>
                                 <tr key={employee._id}>
                                     <td>{employee.employeeId} </td>
                                     <td>{employee.employeeName} </td>

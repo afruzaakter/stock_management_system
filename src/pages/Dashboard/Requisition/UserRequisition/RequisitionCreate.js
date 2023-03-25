@@ -36,6 +36,8 @@ const RequisitionCreate = () => {
     const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
     const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
 
+    console.log("budgetcode filter", selectedProducts)
+
     // ===Multiple productName selected and show the table =====
     const [selectedProduct, setSelectedProduct] = useState([]);
     const handleRowClick = (selectedItem) => {

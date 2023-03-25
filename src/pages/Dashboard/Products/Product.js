@@ -15,6 +15,18 @@ const Product = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
+
+   
+//Unique Product Name
+const uniqueProductName = products.filter((newProduct, index, self) => 
+index === self.findIndex((product) => (
+product.productName === newProduct.productName))
+);
+
+
+
+    // console.log("Duplicate", productFilter)
+
     // ---------- Delete method-----
     const handleDelete = (id) => {
         const url = `http://localhost:5000/product/${id}`
@@ -31,7 +43,7 @@ const Product = () => {
             })
     }
 
-    // const productFilter = products?.filter(product => product.productName === productName)
+
 
 
 
@@ -73,7 +85,7 @@ const Product = () => {
 
                     <tbody>
                         {
-                            products.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                            uniqueProductName.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <td>{index + 1}</td>
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
