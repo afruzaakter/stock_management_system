@@ -53,6 +53,7 @@ import PreviewAuthorize from "./pages/Dashboard/Requisition/Authorize/PreviewAut
 import RequisitionApproval from "./pages/Dashboard/Requisition/Approval/RequisitionApproval";
 import PreviewApproval from "./pages/Dashboard/Requisition/Approval/PreviewApproval";
 import PreviewIssue from "./pages/Dashboard/Requisition/Issue/PreviewIssue";
+import RequisitionEdit from "./pages/Dashboard/Requisition/UserRequisition/RequisitionEdit";
 
 
 function App() {
@@ -70,7 +71,8 @@ function App() {
           <Route index element={<DashboardHome />} />
           <Route path="requisition" element={<Requisition />} />
           <Route path="requisitionCreate" element={<RequisitionCreate />} />
-          <Route path="previewRequisition/:id" element={<PreviewRequisition />} />
+          <Route path="requisition/preview/:id" element={<PreviewRequisition />} />
+          <Route path="requisition/preview/edit/:id" element={<RequisitionEdit />} />
           <Route path="requisitionAuthorize" element={<RequisitionAuthorize />} />
           <Route path="previewAuthorize/:id" element={<PreviewAuthorize/>} />
           <Route path="requisitionApproval" element={<RequisitionApproval />} />

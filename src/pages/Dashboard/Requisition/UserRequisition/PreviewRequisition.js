@@ -98,7 +98,7 @@ const PreviewRequisition = () => {
           <Link to={`/dashboard/requisition`}
             className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600" >  Back
           </Link>
-          <Link to={`/dashboard/requisition`}
+          <Link to={`/dashboard/requisition/preview/edit/${id}`}
             className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600" >  Edit
           </Link>
 
