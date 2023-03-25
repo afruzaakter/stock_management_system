@@ -16,11 +16,15 @@ const AddNewInventory = () => {
     }, [])
 
     //Unique Product name 
-
     const uniqueProductName = products.filter((newProduct, index, self) =>
         index === self.findIndex((product) => (
             product.productName === newProduct.productName))
     );
+
+    const [selectProduct, setSelectProduct] = useState([]);
+    console.log(selectProduct)
+    const selectedProductName = products.filter(product => product.productName === selectProduct);
+    console.log("Product Name filter", selectedProductName)
 
     // ---------- Drop down budgetCodes get method ----------
     const [budgetCodes, setBudgetCodes] = useState([]);
@@ -39,25 +43,28 @@ const AddNewInventory = () => {
 
     //------- for auto generate code 
     const [addInventories, setAddInventories] = useState([]);
-    const [autoCode, setAutoCode] = useState();
-    console.log("auto inventory", addInventories)
+    
+    
     useEffect(() => {
         fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
     }, [])
-    useEffect(() => {
-        const codeList = addInventories?.map(addInventorie => addInventorie.autoCode);
-        const length = codeList.length;
-        if (length === 0) {
-            setAutoCode(1000)
-        } else {
-            const lastValue = codeList[length - 1];
-            const lastCode = +lastValue;
-            setAutoCode(lastCode + 1)
-        }
-    }, [addInventories]);
+    //===========Product code====================
+
+    // const [autoCode, setAutoCode] = useState();
+    // useEffect(() => {
+    //     const codeList = addInventories?.map(addInventorie => addInventorie.autoCode);
+    //     const length = codeList.length;
+    //     if (length === 0) {
+    //         setAutoCode(1000)
+    //     } else {
+    //         const lastValue = codeList[length - 1];
+    //         const lastCode = +lastValue;
+    //         setAutoCode(lastCode + 1)
+    //     }
+    // }, [addInventories]);
 
 
 
@@ -72,7 +79,7 @@ const AddNewInventory = () => {
             packSize: data.packSize,
             quantity: data.quantity,
             totalQuantity: data.totalQuantity,
-            autoCode: autoCode,
+            // autoCode: autoCode,
         }
         const url = "http://localhost:5000/addInventory"
         fetch(url, {
@@ -104,7 +111,9 @@ const AddNewInventory = () => {
                         {/* ----------Product Name Field ------------- */}
                         <div className="form-control">
                             <label className='text-start '>Product Name</label>
-                            <select   {...register("productName", {
+                            <select
+                             onClick={e => setSelectProduct(e.target.value)}
+                            {...register("productName", {
                                 required: {
                                     value: true,
                                     message: "❌  Please Fillup  Input Field"

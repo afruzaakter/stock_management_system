@@ -31,7 +31,7 @@ const AddNewEmployee = () => {
 
 
     const [selectDepartment, setSelectDepartment] = useState([]);
-    // console.log(selectDepartment)
+    console.log(selectDepartment)
     const selectedDepartment = departments.filter(department => department.name === selectDepartment);
     // console.log("Department filter", selectedDepartment)
 

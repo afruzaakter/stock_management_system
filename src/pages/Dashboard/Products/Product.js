@@ -22,7 +22,7 @@ const uniqueProductName = products.filter((newProduct, index, self) =>
 index === self.findIndex((product) => (
 product.productName === newProduct.productName))
 );
-console.log(uniqueProductName);
+
 
 
     // console.log("Duplicate", productFilter)
