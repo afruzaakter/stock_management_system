@@ -9,6 +9,9 @@ const DepartmentEdit = () => {
     const { id } = useParams();
     // --------------update show method-----
     const [departments, setDepartments] = useState([])
+
+    console.log(departments)
+
     useEffect(() => {
         const url = `http://localhost:5000/department/${id}`
         console.log("department id", url);

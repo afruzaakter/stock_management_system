@@ -21,6 +21,12 @@ const KeyType = () => {
             .then(data => setKeys(data))
     }, [updated]);
 
+    // const uniqueData = keys.filter((value, id) => {
+    //     return keys.indexOf(value) === id;
+    // })
+
+    // console.log("uniquedata", uniqueData)
+
 
     // ------------ data post method  start --------------
     const onSubmit = async (data) => {

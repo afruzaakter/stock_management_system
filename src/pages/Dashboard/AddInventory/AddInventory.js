@@ -33,6 +33,13 @@ const AddInventory = () => {
 
     }, [])
 
+     //Unique Product name 
+
+//      const uniqueProductName = products.filter((newProduct, index, self) =>
+//      index === self.findIndex((product) => (
+//          product.productName === newProduct.productName))
+//  );
+
     const handleDelete = (id) => {
         const url = `http://localhost:5000/addInventory/${id}`
         fetch(url, {
@@ -82,6 +89,7 @@ const AddInventory = () => {
                         <tr>
                             <th>Sl</th>
                             <th>Product Name</th>
+                            <th>Budget Code</th>
                             <th>Supplier Name</th>
                             <th>Purchase Notes </th>
                             <th>Product Code </th>
@@ -99,6 +107,7 @@ const AddInventory = () => {
                                 <tr className='bg-blue-900' key={addInventory._id} >
                                     <th> {index + 1} </th>
                                     <td> {addInventory.productName} </td>
+                                    <td> {addInventory.budgetCode} </td>
                                     <td> {addInventory.supplierCompany} </td>
                                     <td> {addInventory.purchase} </td>
                                     <td> {addInventory.autoCode} </td>

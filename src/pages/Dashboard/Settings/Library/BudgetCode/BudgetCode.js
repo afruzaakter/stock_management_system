@@ -16,6 +16,13 @@ const BudgetCode = () => {
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, [updated])
+
+    const uniqueArray = budgetCodes.filter((item, index) => {
+        return index === budgetCodes.findIndex(obj => {
+            return JSON.stringify(obj) === JSON.stringify(item);
+        });
+    });
+    console.log("uniqueArray", uniqueArray)
     // ----------- Budget code post/create method ------------
     const onSubmit = (data) => {
         const url = 'http://localhost:5000/budgetcode'

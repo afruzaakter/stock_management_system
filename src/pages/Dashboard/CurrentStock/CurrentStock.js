@@ -10,6 +10,8 @@ const CurrentStock = () => {
             .then(data => setProducts(data))
     }, []);
 
+   
+
     const [addInventories, setAddInventories] = useState([]);
     console.log()
     useEffect(() => {
@@ -19,23 +21,34 @@ const CurrentStock = () => {
 
     }, [])
     //  console.log(addInventories)
+ //product unique
 
+  const uniqueInventories = addInventories.filter((newInventories, index, self) =>
+  index === self.findIndex((inventories) => (
+    inventories.productName === newInventories.productName))
+   
+  );
+
+ 
 
     const [stock, setStock] = useState('')
-    console.log(stock)
+    console.log("stocks11111",stock)
     useEffect(() => {
-        const stock = addInventories?.map(inventory => inventory.quantity);
-        console.log(stock)
-        let sum = 0;
-        for (let i = 0; i < stock.length; i++) {
+        const stock = uniqueInventories?.map(inventory => inventory.quantity);
+        console.log("stock",stock)
+
+       
+              let sum = 0;
+        for (let i = 0; i< stock.length; i++) {
             sum += parseInt(stock[i]);
             setStock(sum)
         }
+        
 
-    }, [addInventories])
+    }, [uniqueInventories])
 
     //---------------- Calculation for stock-------------
-
+ 
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
@@ -81,20 +94,22 @@ const CurrentStock = () => {
                             <th>Product Name </th>
                             <th>Budget Code </th>
                             <th>UoM </th>
-                            <th>Alert Qty </th>
+                            {/* <th>Alert Qty </th> */}
                             <th>Stock </th>
+                           
 
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            products?.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                            uniqueInventories?.slice(0).reverse().map((inventories, index) => <tr key={inventories._id}>
                                 <th>{index + 1}</th>
-                                <td>{product.productName}</td>
-                                <td>{product.budgetCode}</td>
-                                <td>{product.measureUnit}</td>
-                                <td>{product.alertQty}</td>
+                                <td>{inventories.productName}</td>
+                                <td>{inventories.budgetCode}</td>
+                                <td>{inventories.unitMeasurement}</td>
+                                {/* <td>{product.alertQty}</td> */}
+                                <td>{inventories.quantity}</td>
                                 <td>{stock}</td>
 
 
