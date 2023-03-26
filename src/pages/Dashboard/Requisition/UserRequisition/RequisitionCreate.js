@@ -20,7 +20,7 @@ const RequisitionCreate = () => {
             .then(data => setBudgetCodes(data))
     }, []);
 
-    // -------------- budgetCode get method--------
+    // -------------- products get method--------
     const [products, setProducts] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/product')
@@ -36,7 +36,7 @@ const RequisitionCreate = () => {
     const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
     const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
 
-    console.log("budgetcode filter", selectedProducts)
+    // console.log("budgetcode filter", selectedProducts)
 
     // ===Multiple productName selected and show the table =====
     const [selectedProduct, setSelectedProduct] = useState([]);
@@ -66,7 +66,7 @@ const RequisitionCreate = () => {
     // format the date
     const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
 
-    // ========== For initial quantity filed value 1 =======
+    // ========== For initial quantity input filed value 1 =======
     const [minValue, setMinValue] = useState(1);
     const handleChange = (event) => {
         const newValue = Number(event.target.value);
@@ -100,7 +100,6 @@ const RequisitionCreate = () => {
 
         const arrayOfTotalProduct = [];
         Object.entries(data)
-            .filter(([key, value]) => key !== 'requisitionNotes')
             .filter(([key, value]) => key.split(' ')[0] === 'productName')
             .forEach(([key, value], index) => {
                 const obj = {
@@ -146,6 +145,8 @@ const RequisitionCreate = () => {
                 {/* ----------Left side >>>- Requisition Notes Input Field ----------------- */}
                 <div className='w-8/12'>
                     <form onSubmit={handleSubmit(onSubmit)} >
+
+                        {/* ----- requisition Note-------- */}
                         <div className="form-control w-full">
                             <label className='text-start '>Requisition Notes</label>
                             <input
@@ -165,7 +166,7 @@ const RequisitionCreate = () => {
                             </label>
                         </div>
 
-                        {/* ------------------------------------------------- */}
+                        {/* ----------- product request form ----------------- */}
                         <div className="overflow-x-auto">
                             <table className="table w-full">
                                 <thead>
