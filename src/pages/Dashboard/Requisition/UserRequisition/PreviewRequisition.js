@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
+import { BsArrowRightCircle, BsArrowRightCircleFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const PreviewRequisition = () => {
@@ -29,7 +30,13 @@ const PreviewRequisition = () => {
 
   return (
     <div className="m-4 ">
-      <h2 className="text-xl font-bold ml-4"> Requisition Serial: {requisitions?.autoCode} </h2>
+      <div className='p-1 mb-2'>
+          <h1 className='text-2xl font-bold'>Preview Requisition </h1>
+      </div>
+      <div className="flex items-center">
+        <BsArrowRightCircle className="text-green-800 text-xl"/>
+        <h2 className="text-xl ml-2"> Requisition Serial: {requisitions?.autoCode} </h2>
+      </div>
       
       <div className="flex justify-between items-center  rounded-l-md ">
         <div>
@@ -136,8 +143,8 @@ const PreviewRequisition = () => {
               </thead>
 
               <tbody>
-                {requisitions.products?.map((product) => (
-                  <tr>
+                {requisitions.products?.map((product,index) => (
+                  <tr key={index}>
                     <td>{product.productName}</td>
                     <td>{product.productQuantity}</td>
                   </tr>

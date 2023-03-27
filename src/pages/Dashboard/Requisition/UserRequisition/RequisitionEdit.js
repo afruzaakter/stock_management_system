@@ -18,11 +18,8 @@ const RequisitionEdit = () => {
         .then((res) => res.json())
         .then((data) => setRequisitions(data));
     }, []);
-
+    // ----this pre product length for -dynamic index value for 2nd {} -----
     const previousReqProductLenth = requisitions?.products?.length+1 ;
-    console.log('reqProductLenth',previousReqProductLenth);
-
-    // console.log('seleted requisitions', requisitions);
 
      // -------- budgetCode get method--------------
      const [budgetCodes, setBudgetCodes] = useState([]);
@@ -48,28 +45,42 @@ const RequisitionEdit = () => {
      const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
      const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
     
-    
+     // ========== For initial quantity input filed value 1 =======
+     const [minValue, setMinValue] = useState(1);
+     const handleChange = (event) => {
+         const newValue = Number(event.target.value);
+         setMinValue(newValue >= 1 ? newValue : 1);
+     };
 
     // ===Multiple productName selected and show the table =====
+    // ----------
     const [selectedProduct, setSelectedProduct] = useState([]);
     const handleRowClick = (selectedItem) => {
         setSelectedProduct([ ...selectedProduct, selectedItem]);
     };
+    // ----------
+    const [selectedPreviousProduct, setSelectedPreviousProduct] = useState([]);
+    useEffect(() => {
+        const products = requisitions?.products;
+        setSelectedPreviousProduct(products);
+    },[requisitions])
+    console.log('selectedPreviousProduct ', selectedPreviousProduct );
    
-    // console.log("selectedProduct filter", selectedProduct)
     
-    // ========== For initial quantity input filed value 1 =======
-    const [minValue, setMinValue] = useState(1);
-    const handleChange = (event) => {
-        const newValue = Number(event.target.value);
-        setMinValue(newValue >= 1 ? newValue : 1);
-    };
+    // ------- delete previous ordered product ----------
+    const deletePreviousProduct = (index) => {
+        console.log('iundex',index);
+        let productsArray = [...requisitions?.products];
+        productsArray.splice(index, 1);
+        setSelectedPreviousProduct(productsArray)
+    }
 
-    // --delete one product------
+    // ---- delete one new seleted product ------
     const deleteProduct = (deleteId) => {
         const remaining = selectedProduct.filter(product => product._id !== deleteId);
         setSelectedProduct(remaining);
-    } 
+    }
+   
     //==============================================
     const onSubmit = (data) => {
         console.log("edit req", data);
@@ -87,7 +98,15 @@ const RequisitionEdit = () => {
         console.log('arrayOfTotalProduct',arrayOfTotalProduct);
         const currentData = {
             products: arrayOfTotalProduct,
-            status: "Pending"
+            status: "Pending",
+            requisitionNotes: data.requisitionNotes,
+            AuthorizedDate: " ",
+            authorizeNotes: " ",
+            approvedDate: " ",
+            approvedNotes: " ",
+            issuedDate: " ",
+            issuedNotes: " ",
+
         }
 
         const url = `http://localhost:5000/createRequisition/${id}`
@@ -117,12 +136,32 @@ const RequisitionEdit = () => {
                 <div className='w-8/12'>
                     <form onSubmit={handleSubmit(onSubmit)} >
 
+                        {/* ----- requisition Note-------- */}
+                        <div className="form-control w-full">
+                            <label className='text-start '>Requisition Notes</label>
+                            <input
+                                type="text"
+                                placeholder='Requisition Notes'
+                                className={`input input-sm w-full  border border-green-700 focus:outline-0 rounded-sm  mt-1    focus:border-blue-500  login-container-input ${errors.requisitionNotes && 'border-red-600 focus:border-red-600'}`}
+                                {...register("requisitionNotes", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please Fillup  Input Field"
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.requisitionNotes?.type === 'required' && <span className="label-text-alt text-red-700">{errors.requisitionNotes.message}</span>}
+
+                            </label>
+                        </div>
+
                         {/* ----------- product request form ----------------- */}
                         <div className="overflow-x-auto">
                             <table className="table w-full">
                                 <thead>
                                     <tr>
-                                        {/* <th className='w-1/12'>Sl</th> */}
+                                        <th className='w-1/12'>Sl</th>
                                         <th className='w-7/12'>Product</th>
                                         <th className='w-3/12'>Total Qnty</th>
                                         <th className='w-2/12'></th>
@@ -131,47 +170,48 @@ const RequisitionEdit = () => {
 
                                 <tbody>
                                     {
-                                        requisitions.products?.map((product, index) => (
-                                            <>
-                                                <tr>
-                                                    <td>
-                                                        <span>
-                                                            {product.productName}
-                                                        </span>
+                                        selectedPreviousProduct?.map((product, index) => (
+                                            <tr key={index}>
+                                                <th> {index + 1}</th>
+                                                <td>
+                                                    <span>
+                                                        {product.productName}
+                                                    </span>
 
-                                                        <input
-                                                            defaultValue={product.productName}
-                                                            className="hidden"
-                                                            {...(register(`productName ${index + 1}`))}>
-                                                        </input>
-                                                    </td>
-                                                    <td>
-                                                        <input
-                                                            type="number"
-                                                            min="1"
-                                                            Value={product.productQuantity}
-                                                            onChange={handleChange}
-                                                            {...register(`productQuantity ${index + 1}`, {
-                                                                required: {
-                                                                    minLength: 1,
-                                                                    value: true,
-                                                                    message: "❌  Please Fillup  Input Field"
-                                                                }
-                                                            })}
-                                                            className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
-                                                        </input>
-                                                    </td>
-                                                </tr>
-                                                
-                                            
-                                            </>
-                                            
+                                                    <input
+                                                        defaultValue={product.productName}
+                                                        className="hidden"
+                                                        {...(register(`productName ${index + 1}`))}>
+                                                    </input>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        type="number"
+                                                        min="1"
+                                                        Value={product.productQuantity}
+                                                        onChange={handleChange}
+                                                        {...register(`productQuantity ${index + 1}`, {
+                                                            required: {
+                                                                minLength: 1,
+                                                                value: true,
+                                                                message: "❌  Please Fillup  Input Field"
+                                                            }
+                                                        })}
+                                                        className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
+                                                    </input>
+                                                </td>
+                                                <td onClick={() => deletePreviousProduct(index)}>
+                                                    <RiDeleteBin2Fill className='text-xl text-red-600 hover:cursor-pointer' />
+                                                </td>
+                                            </tr>
                                         ))
                                     }
+
+                                    {/*---------- for new product add ------*/}
                                     {
                                         selectedProduct?.map((product, index) =>
                                             <tr key={product._id}>
-                                                {/* <th>{index + 1} </th> */}
+                                                <th>{index + previousReqProductLenth} </th>
 
                                                 <td>
                                                     <span>
