@@ -33,12 +33,11 @@ const AddInventory = () => {
 
     }, [])
 
-     //Unique Product name 
-
-//      const uniqueProductName = products.filter((newProduct, index, self) =>
-//      index === self.findIndex((product) => (
-//          product.productName === newProduct.productName))
-//  );
+ //product unique
+ const uniqueInventories = addInventories.filter((newInventories, index, self) =>
+ index === self.findIndex((inventories) => (
+   inventories.productName === newInventories.productName))  
+ );
 
     const handleDelete = (id) => {
         const url = `http://localhost:5000/addInventory/${id}`
@@ -103,7 +102,7 @@ const AddInventory = () => {
 
                     <tbody>
                         {
-                            addInventories.map((addInventory, index) =>
+                            uniqueInventories.map((addInventory, index) =>
                                 <tr className='bg-blue-900' key={addInventory._id} >
                                     <th> {index + 1} </th>
                                     <td> {addInventory.productName} </td>

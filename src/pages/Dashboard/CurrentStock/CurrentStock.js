@@ -15,20 +15,21 @@ const CurrentStock = () => {
 
 
     const [addInventories, setAddInventories] = useState([]);
-    // console.log()
+    // console.log( addInventories)
     useEffect(() => {
         fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
     }, [])
+
+    
     //  console.log(addInventories)
     
   //product unique
   const uniqueInventories = addInventories.filter((newInventories, index, self) =>
   index === self.findIndex((inventories) => (
-    inventories.productName === newInventories.productName))
-   
+    inventories.productName === newInventories.productName))  
   );
 
   const [selectProduct, setSelectProduct] = useState([]);
@@ -103,7 +104,7 @@ const CurrentStock = () => {
                             <th>Product Name </th>
                             <th>Budget Code </th>
                             <th>UoM </th>
-                            {/* <th>Alert Qty </th> */}
+                            <th>Alert Qty </th>
                             <th>Stock </th>
                            
 
@@ -117,8 +118,8 @@ const CurrentStock = () => {
                                 <td>{inventories.productName}</td>
                                 <td>{inventories.budgetCode}</td>
                                 <td>{inventories.unitMeasurement}</td>
-                                {/* <td>{product.alertQty}</td> */}
-                                <td>{inventories.quantity}</td>
+                                <td>{inventories.alertQty}</td>
+                                {/* <td>{inventories.quantity}</td> */}
                                 <td>{stock}</td>
 
 

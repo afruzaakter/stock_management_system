@@ -65,6 +65,7 @@ const EditInventory = () => {
         const purchase = data.purchase === "" ? inventories.purchase : data.purchase;
         const unitMeasurement = data.unitMeasurement === "" ? inventories.unitMeasurement : data.unitMeasurement;
         const packSize = data.packSize === "" ? inventories.packSize : data.packSize;
+        const alertQty = data.alertQty === "" ? inventories.alertQty : data.alertQty;
         const quantity = data.quantity === "" ? inventories.quantity : data.quantity;
         const totalQuantity = data.totalQuantity === "" ? inventories.totalQuantity : data.totalQuantity;
         const updateData = {
@@ -74,6 +75,7 @@ const EditInventory = () => {
             purchase,
             unitMeasurement,
             packSize,
+            alertQty,
             quantity,
             totalQuantity
         }
@@ -228,6 +230,20 @@ const EditInventory = () => {
 
                         </label>
                     </div>
+                       {/* ----------------------alert Qty input field ------------ */}
+                       <div className="form-control">
+                                <label >Alert Qty</label>
+                                <input
+                                    type="text"
+                                    Value={inventories.alertQty}
+                                    className={`input input-sm  max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.alertQty && 'border-red-600 focus:border-red-600'}`}
+                                    {...register("alertQty")}
+                                />
+                                <label className="label">
+                                    {errors.alertQty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.alertQty.message}</span>}
+
+                                </label>
+                            </div>
                     {/* --------------------Quantity  field ----------------------- */}
                     <div className="form-control">
                         <label className='text-start'>Quantity</label>

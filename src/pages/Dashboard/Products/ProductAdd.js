@@ -174,25 +174,7 @@ const ProductAdd = () => {
 
 
 
-                            {/* ----------------------alert Qty input field ------------ */}
-                            <div className="form-control">
-                                <label >Alert Qty</label>
-                                <input
-                                    type="text"
-                                    placeholder='Alert Quantity'
-                                    className={`input input-sm  max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.alertQty && 'border-red-600 focus:border-red-600'}`}
-                                    {...register("alertQty", {
-                                        required: {
-                                            value: true,
-                                            message: "❌  Please Fillup  Input Field"
-                                        }
-                                    })}
-                                />
-                                <label className="label">
-                                    {errors.alertQty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.alertQty.message}</span>}
-
-                                </label>
-                            </div>
+                       
                             {/* -------------------- Invoice Notes Input Field -----------------------   */}
                             <div className="form-control">
                                 <label >Invoice Notes</label>
