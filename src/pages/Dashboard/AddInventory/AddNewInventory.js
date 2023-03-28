@@ -15,16 +15,11 @@ const AddNewInventory = () => {
             .then(data => setProducts(data))
     }, [])
 
-    //Unique Product name 
-    const uniqueProductName = products.filter((newProduct, index, self) =>
-        index === self.findIndex((product) => (
-            product.productName === newProduct.productName))
-    );
 
     const [selectProduct, setSelectProduct] = useState([]);
-    console.log(selectProduct)
+    // console.log(selectProduct)
     const selectedProductName = products.filter(product => product.productName === selectProduct);
-    console.log("Product Name filter", selectedProductName)
+    // console.log("Product Name filter", selectedProductName)
 
     // ---------- Drop down budgetCodes get method ----------
     const [budgetCodes, setBudgetCodes] = useState([]);
@@ -41,16 +36,25 @@ const AddNewInventory = () => {
             .then(data => setSuppliers(data))
     }, [])
 
-    //------- for auto generate code 
-    const [addInventories, setAddInventories] = useState([]);
     
-    
-    useEffect(() => {
-        fetch('http://localhost:5000/addInventory')
-            .then(res => res.json())
-            .then(data => setAddInventories(data))
+      // --selectedBudgetCode and filter data form under BudgetCode ---------
+      const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
+      const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
+      
+    //Unique Product name 
+    const uniqueProductName = selectedProducts.filter((newProduct, index, self) =>
+    index === self.findIndex((product) => (
+        product.productName === newProduct.productName))
+);
 
-    }, [])
+    //------- for auto generate code 
+    // const [addInventories, setAddInventories] = useState([]);
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/addInventory')
+    //         .then(res => res.json())
+    //         .then(data => setAddInventories(data))
+
+    // }, [])
     //===========Product code====================
 
     // const [autoCode, setAutoCode] = useState();
@@ -108,35 +112,14 @@ const AddNewInventory = () => {
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 '>
 
-                        {/* ----------Product Name Field ------------- */}
-                        <div className="form-control">
-                            <label className='text-start '>Product Name</label>
-                            <select
-                             onClick={e => setSelectProduct(e.target.value)}
-                            {...register("productName", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
-                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.productName && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''>--Select Product Name--</option>
-
-                                {
-                                    uniqueProductName.map((product) => <option key={product._id}>{product.productName}</option>)
-                                }
-                            </select>
-
-                            <label className="label">
-                                {errors.productName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.productName.message}</span>}
-
-                            </label>
-                        </div>
+                      
 
                         {/* -------------------- Budget Code Input Field -----------------------   */}
                         <div className="form-control">
                             <label className='text-start '>Budget Code</label>
-                            <select   {...register("budgetCode", {
+                            <select 
+                            onClick={e=>setSelectedBudgetCode(e.target.value)}
+                            {...register("budgetCode", {
                                 required: {
                                     value: true,
                                     message: "❌  Please Fillup  Input Field"
@@ -155,7 +138,33 @@ const AddNewInventory = () => {
 
                             </label>
                         </div>
+                         {/* ----------Product Name Field ------------- */}
+                         <div className="form-control">
+                            <label className='text-start '>Product Name</label>
+                            <select
+                             onClick={e => setSelectProduct(e.target.value)}
+                            {...register("productName", {
+                                required: {
+                                    value: true,
+                                    message: "❌  Please Fillup  Input Field"
+                                }
+                            })}
+                                className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.productName && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
+                                <option value=''>--Select Product Name--</option>
 
+                               
+                                     {
+                                        uniqueProductName.map((product) => <option key={product._id}>{product.productName}</option>)
+                                     }
+                                   
+                                
+                            </select>
+
+                            <label className="label">
+                                {errors.productName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.productName.message}</span>}
+
+                            </label>
+                        </div>
                         {/* ----------------Supplier Company Name ------------------ */}
                         <div className="form-control">
                             <label className='text-start '>Supplier Name</label>

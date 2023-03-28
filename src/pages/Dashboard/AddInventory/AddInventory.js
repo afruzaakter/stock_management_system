@@ -116,7 +116,7 @@ const AddInventory = () => {
                                     <td> {addInventory.quantity} </td>
                                     <td> {addInventory.totalQuantity} </td>
                                     <td className='flex gap-3'>
-                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/EditAddInventory/${addInventory._id}`}> <FiEdit /> </Link>
+                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/editInventory/${addInventory._id}`}> <FiEdit /> </Link>
 
                                         <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
                                             onClick={() => setDeleteID(addInventory._id)} >

@@ -16,6 +16,7 @@ import auth from '../../../firebase.init';
 const UserManagement = () => {
     const [user, loading] = useAuthState(auth)
     const [users, setUsers] = useState([])
+    const [deleteID, setDeleteID] = useState('')
 
     useEffect(() => {
         fetch("http://localhost:5000/user")
@@ -34,6 +35,8 @@ const UserManagement = () => {
                 toast.success('Data Deleted Successfully!');
                 const remaining = users.filter(user => user._id !== id)
                 setUsers(remaining);
+                setDeleteID(' ');
+                toast.success('Data was Deleted Successfully!');
             })
     }
 
@@ -96,7 +99,7 @@ const UserManagement = () => {
                             {/* <th> Active </th>
                             <th> Locked </th>
                             <th> Topic Sub </th> */}
-                            <th> Action </th>
+                            <th className='text-center'> Action </th>
 
                         </tr>
                     </thead>
@@ -118,8 +121,30 @@ const UserManagement = () => {
                                             {/* <FiEdit /> */}
                                             Assign_Role
                                         </Link>
-                                        <button className='btn btn-sm bg-red-500 text-white' onClick={() => handleDelete(user._id)}> <AiOutlineDelete /></button>
+                                      
+                                        <label htmlFor="my-modal-6" className="btn btn-sm bg-red-500 text-white"
+                                        onClick={() => setDeleteID(user._id)} >
+                                        <AiOutlineDelete />
+                                    </label>
+
                                     </td>
+
+                                  
+
+                                    {/* -------- delete modal ----------------- */}
+                                    <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+                                    <div className="modal modal-bottom justify-around sm:modal-middle ">
+                                        <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
+                                            <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
+
+                                            <div className="mr-14 modal-action">
+                                                <label htmlFor="my-modal-6" onClick={() => handleDelete(deleteID)}
+                                                    className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
+                                                <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* -------- delete modal ----------------- */}
                                 </tr>
                             )
                         }
