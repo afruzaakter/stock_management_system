@@ -3,39 +3,78 @@ import { BsSearch } from 'react-icons/bs';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { TbMessageReport } from 'react-icons/tb';
 const CurrentStock = () => {
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, []);
+
+    // const [products, setProducts] = useState([]);
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/product')
+    //         .then(res => res.json())
+    //         .then(data => setProducts(data))
+    // }, []);
+
 
     const [addInventories, setAddInventories] = useState([]);
-    console.log()
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory')
+        fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
     }, [])
-    //  console.log(addInventories)
 
+  
 
-    const [stock, setStock] = useState('')
-    console.log(stock)
-    useEffect(() => {
-        const stock = addInventories?.map(inventory => inventory.quantity);
-        console.log(stock)
-        let sum = 0;
-        for (let i = 0; i < stock.length; i++) {
-            sum += parseInt(stock[i]);
-            setStock(sum)
-        }
+  
+    
+  //product unique
 
-    }, [addInventories])
+  const uniqueInventories = addInventories.filter((newInventories, index, self) =>
+  index === self.findIndex((inventories) => (
+    inventories.productName === newInventories.productName))  
+  );
+
+console.log(uniqueInventories)
+
+// const productQuantities = {};
+
+// addInventories.forEach((product) => {
+//   const productName = product.productName;
+//   const quantity = parseInt(product.quantity);
+
+//   if (!productQuantities[productName]) {
+//     productQuantities[productName] = quantity;
+//   } else {
+//     productQuantities[productName] += quantity;
+//   }
+// });
+
+// console.log(productQuantities);
+
+//   console.log(uniqueInventories)
+  // stock management
+    // const [stock, setStock] = useState('')
+
+   
+ 
+  
+      
+
+// =========================================================================
+    // useEffect(() => {
+    //     const stock = uniqueInventories?.map(inventory => inventory.quantity);
+    //     const stocks = uniqueInventories?.map(inventory => inventory);
+
+    //           let sum = 0;
+    //     for (let i = 0; i< stock.length; i++) {
+    //         sum += parseInt(stock[i]);
+    //         sum = parseInt(stock[i])
+    //         console.log(sum)
+    //         sum = parseInt(stock[i])+ 10
+    //         setStock(sum)
+    //     }
+        
+    // }, [uniqueInventories])
 
     //---------------- Calculation for stock-------------
-
+ 
 
     return (
         <div className='border m-1 p-1 rounded-lg'>
@@ -54,7 +93,7 @@ const CurrentStock = () => {
                 </div>
             </div>
 
-            <div className='mb-2 flex justify-between'>
+            {/* <div className='mb-2 flex justify-between'>
                 <div>
                     <div className="dropdown dropdown-hover">
                         <label tabIndex={0} className="btn m-1 btn-sm bg-primary
@@ -70,7 +109,7 @@ const CurrentStock = () => {
                         <TbMessageReport /> Reports</button>
                 </div>
 
-            </div>
+            </div> */}
 
 
             <div className="overflow-x-auto w-full">
@@ -83,19 +122,21 @@ const CurrentStock = () => {
                             <th>UoM </th>
                             <th>Alert Qty </th>
                             <th>Stock </th>
+                           
 
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            products?.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                            addInventories?.slice(0).reverse().map((inventories, index) => <tr key={inventories._id}>
                                 <th>{index + 1}</th>
-                                <td>{product.productName}</td>
-                                <td>{product.budgetCode}</td>
-                                <td>{product.measureUnit}</td>
-                                <td>{product.alertQty}</td>
-                                <td>{stock}</td>
+                                <td>{inventories.productName}</td>
+                                <td>{inventories.budgetCode}</td>
+                                <td>{inventories.unitMeasurement}</td>
+                                <td>{inventories.alertQty}</td>
+                                {/* <td>{inventories.quantity}</td> */}
+                                <td>{inventories.stock}</td>
 
 
                             </tr>)

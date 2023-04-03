@@ -12,7 +12,7 @@ const Department = ({ department }) => {
 
     const [departments, setDepartments] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/department')
+        fetch('http://localhost:5000/department')
             .then(res => res.json())
             .then(data => setDepartments(data))
 
@@ -20,7 +20,7 @@ const Department = ({ department }) => {
     // console.log(department)
 
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/department/${id}`
+        const url = `http://localhost:5000/department/${id}`
         console.log(url)
         fetch(url, {
             method: 'DELETE'

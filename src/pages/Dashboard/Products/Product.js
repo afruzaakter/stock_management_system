@@ -11,13 +11,25 @@ const Product = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
+        fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
+
+   
+//Unique Product Name
+const uniqueProductName = products.filter((newProduct, index, self) => 
+index === self.findIndex((product) => (
+product.productName === newProduct.productName))
+);
+
+
+
+    // console.log("Duplicate", productFilter)
+
     // ---------- Delete method-----
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/product/${id}`
+        const url = `http://localhost:5000/product/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -31,7 +43,7 @@ const Product = () => {
             })
     }
 
-    // const productFilter = products?.filter(product => product.productName === productName)
+
 
 
 
@@ -67,6 +79,7 @@ const Product = () => {
                             <th>Budget Code </th>
                             <th>UoM</th>
                             <th>Alert Qty </th>
+                            <th>Sort Order</th>
                             <th>Action </th>
                         </tr>
                     </thead>
@@ -78,6 +91,7 @@ const Product = () => {
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
                                 <td>{product.measureUnit}</td>
+                                <td>{product.sortOrder}</td>
                                 <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
                                     <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>

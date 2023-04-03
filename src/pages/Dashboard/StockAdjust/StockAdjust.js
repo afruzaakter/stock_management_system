@@ -15,14 +15,21 @@ const StockAdjust = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
+        fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
 
+    //product unique
+
+    const uniqueProductName = products.filter((newProduct, index, self) =>
+        index === self.findIndex((product) => (
+            product.productName === newProduct.productName))
+    );
+
 
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/product/${id}`
+        const url = `http://localhost:5000/product/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -39,7 +46,7 @@ const StockAdjust = () => {
     const [addInventories, setAddInventories] = useState([]);
     console.log(addInventories)
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory')
+        fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
@@ -107,7 +114,7 @@ const StockAdjust = () => {
 
                     <tbody>
                         {
-                            products?.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                            uniqueProductName?.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <th>{index + 1}</th>
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>

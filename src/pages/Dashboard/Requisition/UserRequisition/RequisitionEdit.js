@@ -1,102 +1,89 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { RxCross2 } from 'react-icons/rx';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../../../firebase.init';
+import { RxCross2 } from 'react-icons/rx';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-const RequisitionCreate = () => {
+const RequisitionEdit = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const { id } = useParams();
     const navigate = useNavigate();
-    const [user] = useAuthState(auth)
 
-    // -------- budgetCode get method--------------
-    const [budgetCodes, setBudgetCodes] = useState([]);
+    // ========== edit requisition====================
+    const [requisitions, setRequisitions] = useState([]);
+
     useEffect(() => {
-        fetch('http://localhost:5000/budgetcode')
-            .then(res => res.json())
-            .then(data => setBudgetCodes(data))
+    fetch(`http://localhost:5000/createRequisition/${id}`)
+        .then((res) => res.json())
+        .then((data) => setRequisitions(data));
     }, []);
+    // ----this pre product length for -dynamic index value for 2nd {} -----
+    const previousReqProductLenth = requisitions?.products?.length+1 ;
 
-    // -------------- products get method--------
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/product')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, []);
-
-    // ============================================
-    // --For searching product---
-    const [searchValue, setSearchVal] = useState("");
-
-    // --selectedBudgetCode and filter data form under BudgetCode ---------
-    const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
-    const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
-
-    // console.log("budgetcode filter", selectedProducts)
+     // -------- budgetCode get method--------------
+     const [budgetCodes, setBudgetCodes] = useState([]);
+     useEffect(() => {
+         fetch('http://localhost:5000/budgetcode')
+             .then(res => res.json())
+             .then(data => setBudgetCodes(data))
+     }, []);
+ 
+     // -------------- products get method--------
+     const [products, setProducts] = useState([]);
+     useEffect(() => {
+         fetch('http://localhost:5000/product')
+             .then(res => res.json())
+             .then(data => setProducts(data))
+     }, []);
+ 
+     // ============================================
+     // --For searching product---
+     const [searchValue, setSearchVal] = useState("");
+ 
+     // --selectedBudgetCode and filter data form under BudgetCode ---------
+     const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
+     const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
+    
+     // ========== For initial quantity input filed value 1 =======
+     const [minValue, setMinValue] = useState(1);
+     const handleChange = (event) => {
+         const newValue = Number(event.target.value);
+         setMinValue(newValue >= 1 ? newValue : 1);
+     };
 
     // ===Multiple productName selected and show the table =====
+    // ----------
     const [selectedProduct, setSelectedProduct] = useState([]);
     const handleRowClick = (selectedItem) => {
-        setSelectedProduct([...selectedProduct, selectedItem]);
+        setSelectedProduct([ ...selectedProduct, selectedItem]);
     };
+    // ----------
+    const [selectedPreviousProduct, setSelectedPreviousProduct] = useState([]);
+    useEffect(() => {
+        const products = requisitions?.products;
+        setSelectedPreviousProduct(products);
+    },[requisitions])
+    console.log('selectedPreviousProduct ', selectedPreviousProduct );
+   
+    
+    // ------- delete previous ordered product ----------
+    const deletePreviousProduct = (index) => {
+        console.log('iundex',index);
+        let productsArray = [...requisitions?.products];
+        productsArray.splice(index, 1);
+        setSelectedPreviousProduct(productsArray)
+    }
 
-
-
-    // --delete one product------
+    // ---- delete one new seleted product ------
     const deleteProduct = (deleteId) => {
         const remaining = selectedProduct.filter(product => product._id !== deleteId);
         setSelectedProduct(remaining);
     }
-
-    //==========Requisition Created Date ==============
-    const date = new Date();
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    // format the time
-    const amOrPm = hours >= 12 ? 'pm' : 'am';
-    const twelveHourClock = hours % 12 || 12;
-    const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
-    // format the date
-    const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
-
-    // ========== For initial quantity input filed value 1 =======
-    const [minValue, setMinValue] = useState(1);
-    const handleChange = (event) => {
-        const newValue = Number(event.target.value);
-        setMinValue(newValue >= 1 ? newValue : 1);
-    };
-
-    //===========for auto generate requisition serial code ========
-    const [allRequisitions, setAllRequisitions] = useState([]);
-    const [autoCode, setAutoCode] = useState();
-
-    useEffect(() => {
-        fetch("http://localhost:5000/createRequisition")
-            .then(res => res.json())
-            .then(data => setAllRequisitions(data))
-    }, [])
-
-    useEffect(() => {
-        const codeList = allRequisitions?.map(requisition => requisition.autoCode);
-        const length = codeList.length;
-        if (length === 0) {
-            setAutoCode(101)
-        } else {
-            const lastValue = codeList[length - 1];
-            const lastCode = +lastValue;
-            setAutoCode(lastCode + 1)
-        }
-    }, [allRequisitions]);
-
+   
     //==============================================
     const onSubmit = (data) => {
+        console.log("edit req", data);
 
         const arrayOfTotalProduct = [];
         Object.entries(data)
@@ -108,20 +95,23 @@ const RequisitionCreate = () => {
                 };
                 arrayOfTotalProduct.push(obj);
             });
-
+        console.log('arrayOfTotalProduct',arrayOfTotalProduct);
         const currentData = {
-            autoCode: autoCode,
-            userName:user.displayName,
-            email: user.email,
-            date: currentDate,
             products: arrayOfTotalProduct,
+            status: "Pending",
             requisitionNotes: data.requisitionNotes,
-            status: "Pending"
+            AuthorizedDate: " ",
+            authorizeNotes: " ",
+            approvedDate: " ",
+            approvedNotes: " ",
+            issuedDate: " ",
+            issuedNotes: " ",
+
         }
 
-        const url = 'http://localhost:5000/createRequisition'
+        const url = `http://localhost:5000/createRequisition/${id}`
         fetch(url, {
-            method: 'POST',
+            method: 'PATCH',
             body: JSON.stringify(currentData),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -129,20 +119,20 @@ const RequisitionCreate = () => {
         })
             .then(res => res.json())
             .then(data => {
-                toast.success("Requisition Created Successfully");
+                toast.success("Requisition Update Successfully");
                 reset();
             })
         navigate('/dashboard/requisition');
     }
-
+    
     return (
         <div className='border m-2 p-2 rounded-lg'>
             <div className='p-1 mb-2'>
-                <h1 className='text-2xl font-bold'>Create Requisition </h1>
+                <h1 className='text-xl font-bold'>Edit Requisition </h1>
             </div>
 
             <div className='lg:flex lg:gap-4'>
-                {/* ----------Left side >>>- Requisition Notes Input Field ----------------- */}
+                 {/* ----------Left side >>>- Requisition Product Input Field ----------------- */}
                 <div className='w-8/12'>
                     <form onSubmit={handleSubmit(onSubmit)} >
 
@@ -174,16 +164,15 @@ const RequisitionCreate = () => {
                                         <th className='w-1/12'>Sl</th>
                                         <th className='w-7/12'>Product</th>
                                         <th className='w-3/12'>Total Qnty</th>
-                                        <th className='w-1/12'></th>
+                                        <th className='w-2/12'></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     {
-                                        selectedProduct?.map((product, index) =>
-                                            <tr key={product._id}>
-                                                <th>{index + 1} </th>
-
+                                        selectedPreviousProduct?.map((product, index) => (
+                                            <tr key={index}>
+                                                <th> {index + 1}</th>
                                                 <td>
                                                     <span>
                                                         {product.productName}
@@ -195,6 +184,46 @@ const RequisitionCreate = () => {
                                                         {...(register(`productName ${index + 1}`))}>
                                                     </input>
                                                 </td>
+                                                <td>
+                                                    <input
+                                                        type="number"
+                                                        min="1"
+                                                        Value={product.productQuantity}
+                                                        onChange={handleChange}
+                                                        {...register(`productQuantity ${index + 1}`, {
+                                                            required: {
+                                                                minLength: 1,
+                                                                value: true,
+                                                                message: "❌  Please Fillup  Input Field"
+                                                            }
+                                                        })}
+                                                        className='input input-sm  max-w-xs border border-green-700 focus:outline-0 rounded-sm  mt-1  lg:w-36  focus:border-blue-500 ' >
+                                                    </input>
+                                                </td>
+                                                <td onClick={() => deletePreviousProduct(index)}>
+                                                    <RiDeleteBin2Fill className='text-xl text-red-600 hover:cursor-pointer' />
+                                                </td>
+                                            </tr>
+                                        ))
+                                    }
+
+                                    {/*---------- for new product add ------*/}
+                                    {
+                                        selectedProduct?.map((product, index) =>
+                                            <tr key={product._id}>
+                                                <th>{index + previousReqProductLenth} </th>
+
+                                                <td>
+                                                    <span>
+                                                        {product.productName}
+                                                    </span>
+
+                                                    <input
+                                                        defaultValue={product.productName}
+                                                        className="hidden"
+                                                        {...(register(`productName ${index + previousReqProductLenth}`))}>
+                                                    </input>
+                                                </td>
 
                                                 <td>
                                                     <input
@@ -202,7 +231,7 @@ const RequisitionCreate = () => {
                                                         min="1"
                                                         Value={minValue}
                                                         onChange={handleChange}
-                                                        {...register(`productQuantity ${index + 1}`, {
+                                                        {...register(`productQuantity ${index + previousReqProductLenth}`, {
                                                             required: {
                                                                 minLength: 1,
                                                                 value: true,
@@ -222,10 +251,10 @@ const RequisitionCreate = () => {
                             </table>
                         </div>
 
-                        <input className='input  btn btn-xs  bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Request' />
+                        <input className='input  btn btn-xs  bg-green-700 text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Update' />
 
-                        <Link to='/dashboard/requisition' className="btn btn-xs mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2 />
-                            cancel</Link>
+                        {/* <Link to={`/dashboard/requisition`} className="btn btn-xs mx-1 bg-warning text-white  max-w-xs cursor-pointer  uppercase hover:bg-primary hover:text-white"><RxCross2 />
+                            cancel</Link> */}
 
                     </form>
                 </div>
@@ -301,8 +330,10 @@ const RequisitionCreate = () => {
                 </div>
 
             </div>
+
+
         </div>
     );
 };
 
-export default RequisitionCreate;
+export default RequisitionEdit;

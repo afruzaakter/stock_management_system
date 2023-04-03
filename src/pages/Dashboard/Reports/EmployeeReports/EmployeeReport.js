@@ -10,26 +10,34 @@ const EmployeeReport = () => {
     //------ Departments Fetch method -----------------  
     const [departments, setDepartments] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/department')
+        fetch('http://localhost:5000/department')
             .then(res => res.json())
             .then(data => setDepartments(data))
     }, [])
     //------ Designation Fetch method -----------------  
     const [designations, setDesignations] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/designation')
+        fetch('http://localhost:5000/designation')
             .then(res => res.json())
             .then(data => setDesignations(data))
     }, []);
 
     // all employee data show method-------------
     const [employees, setEmployees] = useState([])
-
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/employee")
+        fetch("http://localhost:5000/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])
+
+
+    // ------------ sort numbers show order --------------
+    const employeeSort = [...employees].sort((a, b) => a.order - b.order);
+
+    // setEmployees(employeeSorte);
+
+
+
 
     return (
         <div className='m-5'>
@@ -152,10 +160,10 @@ const EmployeeReport = () => {
                         <thead>
                             <tr>
                                 <th>Employee_ID </th>
+                                <th>Order</th>
                                 <th>Name </th>
                                 <th>Mobile  </th>
                                 <th>Email  </th>
-                                {/* <th>Order </th> */}
                                 <th>Designation  </th>
                                 <th> Department</th>
                                 <th> Active </th>
@@ -164,13 +172,13 @@ const EmployeeReport = () => {
 
                         <tbody>
                             {
-                                employees.map((employee) =>
+                                employeeSort.map((employee) =>
                                     <tr key={employee._id}>
                                         <td>{employee.employeeId} </td>
+                                        <td>{employee.order} </td>
                                         <td>{employee.employeeName} </td>
                                         <td>{employee.mobileNo} </td>
                                         <td>{employee.email} </td>
-                                        {/* <th>{employee.order} </th> */}
                                         <td>{employee.designation} </td>
                                         <td>{employee.department} </td>
                                         <td>{employee.createUser} </td>

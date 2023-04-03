@@ -11,7 +11,7 @@ const UserEdit = () => {
     // ------fetch 
     const [employees, setEmployees] = useState([])
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/employee")
+        fetch("http://localhost:5000/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])
@@ -19,7 +19,7 @@ const UserEdit = () => {
     // --------------update method-----
     const [users, setUsers] = useState({})
     useEffect(() => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/user/${id}`
+        const url = `http://localhost:5000/user/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setUsers(data))
@@ -45,7 +45,7 @@ const UserEdit = () => {
         }
         console.log("updateData User Management", updateData);
 
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/user/${id}`;
+        const url = `http://localhost:5000/user/${id}`;
         fetch(url, {
             method: 'PATCH',
             headers: {

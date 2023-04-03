@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineCheck } from 'react-icons/ai';
-import { FiEdit } from 'react-icons/fi';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const PreviewIssue = () => {
@@ -13,43 +12,70 @@ const PreviewIssue = () => {
     const [requisitions, setRequisitions] = useState([]);
 
     useEffect(() => {
-        fetch(`https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`)
+        fetch(`http://localhost:5000/createRequisition/${id}`)
             .then(res => res.json())
             .then(data => setRequisitions(data))
-    }, [])
+    }, []);
 
-    // for requisition delete
-    const handleReqDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`
+    //==========Issued Date ==============
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    // format the time
+    const amOrPm = hours >= 12 ? 'pm' : 'am';
+    const twelveHourClock = hours % 12 || 12;
+    const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
+    // format the date
+    const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
+
+    // ---- For Issued Requisition ------------------- 
+    const handleIsIssued =(id)=>{
+        const newData = {
+            status: "Issued",
+        };
+        const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
-            method: 'DELETE'
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData),
         })
-            .then(res => res.json())
-            .then(data => {
-                navigate('/dashboard/requisition')
-            })
-    }
-
+        .then((res) => res.json())
+        .then((data) => {
+            navigate('/dashboard/requisitionAuthorize');
+        })
+    };
+    // ------For Rejected issue Requisition------------------
+    const handleNotify =(id)=>{
+        const newData = {
+            status: "Rejected",
+        };
+        const url = `http://localhost:5000/createRequisition/${id}`;
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            navigate('/dashboard/requisitionAuthorize');
+        })
+    };
+   
     // --------------For Authorized------------------
     const onSubmit = (data) => {
         const newData = {
-            autoCode: requisitions.autoCode,
-            email: requisitions.email,
-            date: requisitions.date,
-            products: requisitions.products,
-            requisitionNotes: requisitions.requisitionNotes,
-
-            authorizeNotes: requisitions.authorizeNotes,
-            isAuthorized: requisitions.isAuthorized,
-
-            approvedNotes: requisitions.approvedNotes,
-            isApproved: requisitions.isApproved,
-
-            issuedNotes: data.issuedNotes,
-            isIssued: data.isIssued
+          issuedNotes: data.issuedNotes,
+          issuedDate: currentDate,
         };
 
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/createRequisition/${id}`;
+        const url = `http://localhost:5000/createRequisition/${id}`;
         fetch(url, {
             method: 'PATCH',
             headers: {
@@ -67,147 +93,97 @@ const PreviewIssue = () => {
     return (
         <div className='m-4 '>
             <h2 className='text-xl font-bold ml-4'> Requisition Serial: {requisitions?.autoCode}</h2>
-
-            <div className='flex justify-between items-center border-b-2 rounded-l-md p-5'>
+            
+            <div className='flex justify-between items-center border-b-2 rounded-l-md pb-2'>
                 <div>
-                    <div className='flex justify-start items-center gap-5 mt-4'>
+                    <div className='flex justify-start items-center gap-5 mt-2'>
                         <AiOutlineCheck className='font-bold text-2xl text-green-900' />
                         <div>
-                            <p className='text-blue-600'>Requisition Created:{requisitions.requisitionNotes} </p>
-                            <p> {requisitions?.date} </p>
+                            <p> <span className='text-green-900 font-semibold '> User_Note: </span>  {requisitions.requisitionNotes} </p>
+                            <p> <span className='text-green-900 font-semibold '> Date:</span>   {requisitions.date}</p>
                         </div>
                     </div>
-                    <div className='flex justify-start items-center gap-5 mt-4'>
+                    
+                    <div className='flex justify-start items-center gap-5 mt-2'>
                         <AiOutlineCheck className='font-bold text-2xl text-green-900' />
                         <div>
-                            <p className='text-blue-600'>Requisition Authorized: {requisitions.authorizeNotes} </p>
-                            <p> {requisitions?.date} </p>
+                            <p> <span className='text-green-900 font-semibold '> Auth_Note: </span>  {requisitions.authorizeNotes } </p>
+                            <p> <span className='text-green-900 font-semibold '> Date:</span>   {requisitions.AuthorizedDate}</p>
                         </div>
                     </div>
-                    <div className='flex justify-start items-center gap-5 mt-4'>
+
+                    <div className='flex justify-start items-center gap-5 mt-2'>
                         <AiOutlineCheck className='font-bold text-2xl text-green-900' />
                         <div>
-                            <p className='text-blue-600'>Requisition Approved : {requisitions.approvedNotes} </p>
-                            <p> {requisitions?.date} </p>
+                            <p> <span className='text-green-900 font-semibold '> App_Note: </span>  {requisitions.approvedNotes } </p>
+                            <p> <span className='text-green-900 font-semibold '> Date:</span>   {requisitions.approvedDate}</p>
                         </div>
                     </div>
                 </div>
+
                 <div >
-                    <Link to={`/dashboard`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
-                        <FiEdit /> Edit
-                    </Link>
-
-                    <label htmlFor="my-modal-6" className="btn btn-xs rounded-md  text-red-600 mx-1 border-red-600">
-                        ❌ Delete
-                    </label>
-
-
                     <Link to={`/dashboard/requisition`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
                         Back
                     </Link>
-
-                    {/* -------- delete modal ----------------- */}
-                    <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-                    <div className="modal modal-bottom justify-around sm:modal-middle ">
-                        <div className="bg-gray-300 p-5 rounded-md shadow-lg lg:max-w-52">
-                            <h3 className="font-bold text-lg text-center">Are you sure you want to delete it?</h3>
-
-                            <div className="mr-14 modal-action">
-                                <label htmlFor="my-modal-6" onClick={() => handleReqDelete(id)}
-                                    className="btn  btn-sm bg-green-600 text-white rounded-md">ok</label>
-                                <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white">Cancel</label>
-                            </div>
-                        </div>
-                    </div>
-                    {/* -------- delete modal end----------------- */}
-
                 </div>
             </div>
 
             <div>
                 <form onSubmit={handleSubmit(onSubmit)} >
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
-
-
-                        {/* ----------------------- Authorized Notes Field ------------------ */}
-                        <div className="form-control">
-                            <label className='text-start'> Issued Notes </label>
-                            <input
-                                type="text"
-                                className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.issuedNotes && 'border-red-600 focus:border-red-600'}`}
-                                {...register("issuedNotes", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
-                            />
-                            <label className="label">
-                                {errors.issuedNotes?.type === 'required' && <span className="label-text-alt text-red-700">{errors.issuedNotes.message}</span>}
-                            </label>
-                        </div>
-
-                        {/* ----------------------- Authorization (yes/no) Field -------------- */}
-                        <div className="form-control">
-                            <label className='text-start'>Issued </label>
-                            <select
-                                {...register("isIssued", {
-                                    required: {
-                                        value: true,
-                                        message: "❌  Please fill out this field"
-                                    }
-                                })}
-                                className={`input input-sm w-80  focus:outline-0 rounded-sm border border-green-700 mt-1 focus:border-blue-500  login-container-input ${errors.isIssued && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
-                                <option value=''> Yes </option>
-                                <option > Yes </option>
-                                <option > No </option>
-                            </select>
-
-                            <label className="label">
-                                {errors.isIssued?.type === 'required' && <span className="label-text-alt text-red-700">{errors.isIssued.message}</span>}
-
-                            </label>
-                        </div>
-
-                        {/* ----------------------    All field end     ------- */}
+  
+                    {/* ----------------------- Authorized Notes Field ------------------ */}
+                    <div className="form-control">
+                        <label className='text-start'> Issued Notes </label>
+                        <input
+                            type="text"
+                            className={`input input-sm max-w-xs  border-green-700  focus:outline-0 rounded-sm mt-1  w-96 focus:border-blue-500  login-container-input ${errors.issuedNotes && 'border-red-600 focus:border-red-600'}`}
+                            {...register("issuedNotes", {
+                                required: {
+                                    value: true,
+                                    message: "❌  Please fill out this field"
+                                }
+                            })}
+                        />
+                        <label className="label">
+                            {errors.issuedNotes?.type === 'required' && <span className="label-text-alt text-red-700">{errors.issuedNotes.message}</span>}
+                        </label>
                     </div>
 
-                    <input className='input  btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-primary hover:text-white ' type="submit" value='◲ Issued' />
-
+                    <input 
+                        onClick={() =>handleIsIssued(id)}
+                        className='input btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-green-500 hover:text-white ' 
+                        type="submit" value=' Issued' />
+                    <input 
+                        onClick={()=> handleNotify(id)}
+                        className='input btn btn-sm mx-1 bg-red-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-red-500 hover:text-white ' 
+                        type="submit" value='Notify ' />
+                    
                 </form>
             </div>
+ 
+            <div className="overflow-x-auto mt-3">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            <td> Product Name</td>
+                            <td> Quantity </td>
+                        </tr>
+                    </thead>
 
-            <div>
-                <div className='flex justify-between mt-5'>
-                    <h2 className='text-md ml-4  '>Requisition No.  </h2>
-                    <h2 className='text-md ml-4 '>Requisition Date: {requisitions.date}</h2>
-                </div>
-                <div>
-                    <div className="overflow-x-auto">
-                        <table className="table w-full">
-                            <thead>
+                    <tbody>
+                        {
+                            (requisitions.products)?.map((product) => (
                                 <tr>
-                                    <td> Product Name</td>
-                                    <td> Quantity </td>
+                                    <td>{product.productName}</td>
+                                    <td>{product.productQuantity}</td>
                                 </tr>
-                            </thead>
+                                
+                            ))
+                        } 
+                    </tbody>
+                </table>
+            </div> 
 
-                            <tbody>
-                                {
-                                    (requisitions.products)?.map((product) => (
-                                        <tr>
-                                            <td>{product.productName}</td>
-                                            <td>{product.productQuantity}</td>
-                                        </tr>
-
-                                    ))
-                                }
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };

@@ -15,7 +15,7 @@ const CreateSupplier = () => {
     const [autoCode, setAutoCode] = useState();
 
     useEffect(() => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/supplier`
+        const url = `http://localhost:5000/supplier`
         fetch(url)
             .then(res => res.json())
             .then(data => setSuppliers(data))
@@ -45,7 +45,7 @@ const CreateSupplier = () => {
         }
 
         console.log(data);
-        const url = "https://stockmanagementsystemserver-production.up.railway.app/supplier"
+        const url = "http://localhost:5000/supplier"
         fetch(url, {
             method: "POST",
             body: JSON.stringify(updateData),

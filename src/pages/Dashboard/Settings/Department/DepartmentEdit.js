@@ -9,8 +9,11 @@ const DepartmentEdit = () => {
     const { id } = useParams();
     // --------------update show method-----
     const [departments, setDepartments] = useState([])
+
+    console.log(departments)
+
     useEffect(() => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/department/${id}`
+        const url = `http://localhost:5000/department/${id}`
         console.log("department id", url);
         fetch(url)
             .then(res => res.json())
@@ -25,7 +28,7 @@ const DepartmentEdit = () => {
             description,
             order
         }
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/department/${id}`;
+        const url = `http://localhost:5000/department/${id}`;
 
         console.log(url)
 

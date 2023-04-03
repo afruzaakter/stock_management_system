@@ -12,7 +12,7 @@ const ProductEdit = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [budgetCodes, setBudgetCodes] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/budgetcode')
+        fetch('http://localhost:5000/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, [])
@@ -20,7 +20,7 @@ const ProductEdit = () => {
     const [products, setProducts] = useState([]);
     console.log("product", products);
     useEffect(() => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/product/${id}`
+        const url = `http://localhost:5000/product/${id}`
         console.log("product id", url);
         fetch(url)
             .then(res => res.json())
@@ -46,7 +46,7 @@ const ProductEdit = () => {
             invoice
         }
 
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/product/${id}`;
+        const url = `http://localhost:5000/product/${id}`;
 
         console.log(url)
 
@@ -83,9 +83,8 @@ const ProductEdit = () => {
                             <div className="form-control">
                                 <label >Product Name</label>
                                 <input
+                                  Value={products.productName}
                                     type="text"
-                                    Value={products.productName}
-
                                     className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.productName && 'border-red-600 focus:border-red-600'}`}
                                     {...register("productName")}
                                 />
@@ -99,9 +98,6 @@ const ProductEdit = () => {
                             <div className="form-control">
                                 <label className='text-start '>Budget Code</label>
                                 <select   {...register("budgetCode")}
-
-                                    Value={products.budgetCode}
-
                                     className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.budgetCode && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                     <option value=''>{products.budgetCode}</option>
 
@@ -121,10 +117,8 @@ const ProductEdit = () => {
                                 <label >Size/Varient</label>
                                 <input
                                     type="text"
-
                                     Value={products.size}
-
-                                    className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.size && 'border-red-600 focus:border-red-600'}`}
+                                  className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.size && 'border-red-600 focus:border-red-600'}`}
                                     {...register("size")}
                                 />
                                 <label className="label">
@@ -137,8 +131,6 @@ const ProductEdit = () => {
                             <div className="form-control">
                                 <label >Measures Unit</label>
                                 <select   {...register("measureUnit")}
-                                    Value={products.measureUnit}
-
                                     className={`input input-sm  focus:outline-0 rounded-sm  border-green-700   lg:w-80 md:w-64 focus:border-blue-500  login-container-input ${errors.measureUnit && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                     <option value=''>{products.measureUnit}</option>
                                     <option >Qnty</option>
@@ -156,8 +148,6 @@ const ProductEdit = () => {
                             <div className="form-control">
                                 <label >Pack Unit</label>
                                 <select   {...register("packUnit")}
-                                    Value={products.packUnit}
-
                                     className={`input input-sm   focus:outline-0 rounded-sm  border-green-700   lg:w-80 md:w-64 focus:border-blue-500  login-container-input ${errors.packUnit && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                     <option value=''>{products.packUnit}</option>
                                     <option >Bosta</option>
@@ -175,7 +165,6 @@ const ProductEdit = () => {
                                 <label >Pack Size/Qnty</label>
                                 <input
                                     type="text"
-
                                     Value={products.qnty}
                                     className={`input  max-w-xs input-sm  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.qnty && 'border-red-600 focus:border-red-600'}`}
                                     {...register("qnty")}

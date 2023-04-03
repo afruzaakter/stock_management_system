@@ -5,17 +5,17 @@ import { Link } from 'react-router-dom';
 const RequisitionAuthorize = () => {
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
-        fetch("https://stockmanagementsystemserver-production.up.railway.app/createRequisition")
+        fetch("http://localhost:5000/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
 
     const [allCreatedReq, setAllCreatedReq] = useState([]);
     useEffect(() => {
-        const notAuthorized = allRequisitions.filter(requisition => requisition.isAuthorized !== "Yes");
+        const notAuthorized = allRequisitions
+            .filter(requisition => requisition.status === "Pending")
         setAllCreatedReq(notAuthorized)
-
-    }, [allRequisitions])
+    }, [allRequisitions]);
 
 
     return (
@@ -39,25 +39,27 @@ const RequisitionAuthorize = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
+                            <th> Req_Serial </th>
                             <th> Date </th>
-                            <th> Req_SL_NO </th>
+                            <th> Requested By </th>
                             <th>Req_Note </th>
                             <th>  </th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {
-                            allCreatedReq?.map((createRequisition, index) =>
-                                <tr key={createRequisition._id}>
-                                    <td>{createRequisition.date}</td>
-                                    <td> {createRequisition.autoCode}</td>
-                                    <td>{createRequisition.requisitionNotes}</td>
-                                    <td className='text-center'>
-                                        <Link to={`/dashboard/previewAuthorize/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
-                                            <AiOutlineEye /> Preview </Link>
-                                    </td>
-                                </tr>)
+                    {
+                            allCreatedReq?.map((createRequisition, index) => 
+                            <tr key={createRequisition._id}>
+                                <td> {createRequisition.autoCode}</td>
+                                <td>{ (createRequisition.date).split(" ")[0] }</td>
+                                <td>{createRequisition.userName}</td>
+                                <td>{createRequisition.requisitionNotes}</td>
+                                <td className='text-center'>
+                                    <Link to={`/dashboard/previewAuthorize/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                        <AiOutlineEye /> Preview </Link>
+                                </td>
+                            </tr>)
                         }
                     </tbody>
                 </table>

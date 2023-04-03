@@ -14,14 +14,13 @@ const AddInventory = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/addInventory', {
+        fetch('http://localhost:5000/addInventory', {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(res => {
-                console.log('res', res);
                 if (res.status === 401 || res.status === 403) {
                     signOut(auth)
                     localStorage.removeItem('accessToken')
@@ -33,8 +32,14 @@ const AddInventory = () => {
 
     }, [])
 
+ //product unique
+ const uniqueInventories = addInventories.filter((newInventories, index, self) =>
+ index === self.findIndex((inventories) => (
+   inventories.productName === newInventories.productName))  
+ );
+
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/addInventory/${id}`
+        const url = `http://localhost:5000/addInventory/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -82,11 +87,12 @@ const AddInventory = () => {
                         <tr>
                             <th>Sl</th>
                             <th>Product Name</th>
+                            <th>Budget Code</th>
                             <th>Supplier Name</th>
-                            <th>Purchase Notes </th>
+                            {/* <th>Purchase Notes </th>
                             <th>Product Code </th>
                             <th>UoM </th>
-                            <th>Pack Size</th>
+                            <th>Pack Size</th> */}
                             <th>Qnty</th>
                             <th>Total Qnty</th>
                             <th className='text-center '>Action </th>
@@ -95,19 +101,20 @@ const AddInventory = () => {
 
                     <tbody>
                         {
-                            addInventories.map((addInventory, index) =>
+                            addInventories?.slice(0).reverse().map((addInventory, index) =>
                                 <tr className='bg-blue-900' key={addInventory._id} >
                                     <th> {index + 1} </th>
                                     <td> {addInventory.productName} </td>
+                                    <td> {addInventory.budgetCode} </td>
                                     <td> {addInventory.supplierCompany} </td>
-                                    <td> {addInventory.purchase} </td>
+                                    {/* <td> {addInventory.purchase} </td>
                                     <td> {addInventory.autoCode} </td>
                                     <td> {addInventory.unitMeasurement} </td>
-                                    <td> {addInventory.packSize} </td>
+                                    <td> {addInventory.packSize} </td> */}
                                     <td> {addInventory.quantity} </td>
                                     <td> {addInventory.totalQuantity} </td>
                                     <td className='flex gap-3'>
-                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/EditAddInventory/${addInventory._id}`}> <FiEdit /> </Link>
+                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/editInventory/${addInventory._id}`}> <FiEdit /> </Link>
 
                                         <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
                                             onClick={() => setDeleteID(addInventory._id)} >

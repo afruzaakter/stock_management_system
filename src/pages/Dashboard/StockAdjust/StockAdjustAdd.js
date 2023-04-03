@@ -14,7 +14,7 @@ const StockAdjustAdd = () => {
     //------------- product brand name dropdown show data ---------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/product')
+        fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setProducts(data));
     }, [])
@@ -22,7 +22,7 @@ const StockAdjustAdd = () => {
     //------------- stock adjust data get method ---------
     const [stockAdjusts, setStockAdjusts] = useState([]);
     useEffect(() => {
-        fetch('https://stockmanagementsystemserver-production.up.railway.app/stockadjust')
+        fetch('http://localhost:5000/stockadjust')
             .then(res => res.json())
             .then(data => setStockAdjusts(data));
     }, [updated])
@@ -45,7 +45,7 @@ const StockAdjustAdd = () => {
         }
         console.log("total", total)
         // console.log(quantity)
-        const url = 'https://stockmanagementsystemserver-production.up.railway.app/stockadjust'
+        const url = 'http://localhost:5000/stockadjust'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(updateData),
@@ -64,7 +64,7 @@ const StockAdjustAdd = () => {
     }
 
     const handleDelete = (id) => {
-        const url = `https://stockmanagementsystemserver-production.up.railway.app/stockadjust/${id}`
+        const url = `http://localhost:5000/stockadjust/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -82,7 +82,6 @@ const StockAdjustAdd = () => {
 
     //---------------- Calculation for totalAmount-------------
     const singleAmount = stockAdjusts.map(stockAdjust => stockAdjust.total);
-    // console.log(singleAmount)
     let sum = 0;
     for (let i = 0; i < singleAmount.length; i++) {
         sum += singleAmount[i];
@@ -230,26 +229,7 @@ const StockAdjustAdd = () => {
 
                                     </label>
                                 </div>
-                                {/* -----------------------Price input Field ------------------------------ */}
-                                {/* <div className="form-control">
-                                <label className='text-start'>Total <span className='text-red-900 font-bold text-xl'>*</span></label>
-                                <input
-                                    type="text"
-                                    placeholder='0'
-                                    value = {total}
-                                    className={`input input-sm  max-w-xs border-green-700 focus:outline-0 rounded-sm  mt-1 lg:w-36  focus:border-blue-500  login-container-input ${errors.price && 'border-red-600 focus:border-red-600'}`}
-                                    {...register("total", {
-                                        required: {
-                                            value: true,
-                                            message: "❌  Please Fill-Up  Input Field"
-                                        }
-                                    })}
-                                />
-                                <label className="label">
-                                    {errors.price?.type === 'required' && <span className="label-text-alt text-red-700">{errors.price.message}</span>}
-
-                                </label>
-                            </div> */}
+                               
                                 {/* -----------------------Item short notes input Field ------------------------------ */}
                                 <div className="form-control">
                                     <label className='text-start'>Items Short Notes <span className='text-red-900 font-bold text-xl'>*</span> </label>
