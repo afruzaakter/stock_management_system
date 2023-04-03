@@ -4,23 +4,56 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { RxCross2 } from 'react-icons/rx';
 const ProductAdd = () => {
-    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset} = useForm();
     const [updated, setUpdated] = useState(false);
     const navigate = useNavigate()
 
     // ---------- Drop down budgetCodes get method ----------
     const [budgetCodes, setBudgetCodes] = useState([]);
+    console.log(budgetCodes)
     useEffect(() => {
         fetch('http://localhost:5000/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, [])
+
+    //---------------------autocode--------------
+     // ---------- Drop down budgetCodes get method ----------
+     const [products, setProduct] = useState([]);
+     useEffect(() => {
+         fetch('http://localhost:5000/product')
+             .then(res => res.json())
+             .then(data => setBudgetCodes(data))
+     }, [])
+    
+    const [autoCode, setAutoCode] = useState();
+    useEffect(() => {
+        const codeList = products?.map(product => product.autoCode);
+        const length = codeList.length;
+        if (length === 0) {
+            setAutoCode(1000)
+        } else {
+            const lastValue = codeList[length - 1];
+            const lastCode = +lastValue;
+            setAutoCode(lastCode + 1)
+        }
+    }, [products]);
+
+
     // ---------------- post method product -----------
     const onSubmit = (data) => {
+       const updateData= {
+        autoCode: autoCode,
+        productName: data.productName,
+        budgetCode: data.budgetCode,
+        measureUnit: data.measureUnit, 
+        packUnit: data.packUnit,
+        invoice: data.invoice
+       }
         const url = "http://localhost:5000/product"
         fetch(url, {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify(updateData),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
@@ -51,7 +84,7 @@ const ProductAdd = () => {
                                 <label >Product Name</label>
                                 <input
                                     type="text"
-                                    placeholder='e.g:CocaCola, Pepsi, Lux .. '
+                                    placeholder='e.g:CocaCola, Pepsi, Lux .. '                              
                                     className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.productName && 'border-red-600 focus:border-red-600'}`}
                                     {...register("productName", {
                                         required: {
@@ -65,6 +98,9 @@ const ProductAdd = () => {
 
                                 </label>
                             </div>
+
+
+
                             {/* -------------------- Budget Code Input Field -----------------------   */}
                             <div className="form-control">
                                 <label className='text-start '>Budget Code</label>
@@ -152,14 +188,14 @@ const ProductAdd = () => {
 
                                 </label>
                             </div>
-                            {/* -------------------- Pack Size/Qnty Input Field -----------------------   */}
-                            {/* <div className="form-control">
-                                <label >Total Quantity</label>
+                            {/* -------------------- Alert Quantity Input Field -----------------------   */}
+                            <div className="form-control">
+                                <label >Alert Quantity</label>
                                 <input
                                     type="text"
-                                    placeholder='Total Quantity'
+                                    placeholder='Alert Quantity'
                                     className={`input  max-w-xs input-sm  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.totalQnty && 'border-red-600 focus:border-red-600'}`}
-                                    {...register("totalQnty", {
+                                    {...register("alertQnty", {
                                         required: {
                                             value: true,
                                             message: "❌  Please Fillup  Input Field"
@@ -167,10 +203,10 @@ const ProductAdd = () => {
                                     })}
                                 />
                                 <label className="label">
-                                    {errors.totalQnty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.totalQnty.message}</span>}
+                                    {errors.alertQnty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.alertQnty.message}</span>}
 
                                 </label>
-                            </div> */}
+                            </div>
 
 
 

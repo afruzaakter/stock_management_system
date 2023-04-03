@@ -12,10 +12,7 @@ const CurrentStock = () => {
     // }, []);
 
 
-
-
     const [addInventories, setAddInventories] = useState([]);
-    // console.log( addInventories)
     useEffect(() => {
         fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
@@ -23,39 +20,58 @@ const CurrentStock = () => {
 
     }, [])
 
-    
-    //  console.log(addInventories)
+  
+
+  
     
   //product unique
+
   const uniqueInventories = addInventories.filter((newInventories, index, self) =>
   index === self.findIndex((inventories) => (
     inventories.productName === newInventories.productName))  
   );
 
-  const [selectProduct, setSelectProduct] = useState([]);
-  // console.log(selectProduct)
-  const selectedProductName = uniqueInventories.map(product => product.productName === selectProduct);
-  console.log("Product Name filter", selectedProductName)
+console.log(uniqueInventories)
 
+// const productQuantities = {};
+
+// addInventories.forEach((product) => {
+//   const productName = product.productName;
+//   const quantity = parseInt(product.quantity);
+
+//   if (!productQuantities[productName]) {
+//     productQuantities[productName] = quantity;
+//   } else {
+//     productQuantities[productName] += quantity;
+//   }
+// });
+
+// console.log(productQuantities);
+
+//   console.log(uniqueInventories)
+  // stock management
+    // const [stock, setStock] = useState('')
+
+   
  
+  
+      
 
-    const [stock, setStock] = useState('')
-    console.log("stocks11111",stock)
-    useEffect(() => {
-        const stock = uniqueInventories?.map(inventory => inventory.quantity);
-        const stocks = uniqueInventories?.map(inventory => inventory);
-        console.log("stock",stock)
-        console.log("stocks",stocks)
+// =========================================================================
+    // useEffect(() => {
+    //     const stock = uniqueInventories?.map(inventory => inventory.quantity);
+    //     const stocks = uniqueInventories?.map(inventory => inventory);
 
-       
-              let sum = 0;
-        for (let i = 0; i< stock.length; i++) {
-            sum += parseInt(stock[i]);
-            setStock(sum)
-        }
+    //           let sum = 0;
+    //     for (let i = 0; i< stock.length; i++) {
+    //         sum += parseInt(stock[i]);
+    //         sum = parseInt(stock[i])
+    //         console.log(sum)
+    //         sum = parseInt(stock[i])+ 10
+    //         setStock(sum)
+    //     }
         
-
-    }, [uniqueInventories])
+    // }, [uniqueInventories])
 
     //---------------- Calculation for stock-------------
  
@@ -113,14 +129,14 @@ const CurrentStock = () => {
 
                     <tbody>
                         {
-                            uniqueInventories?.slice(0).reverse().map((inventories, index) => <tr key={inventories._id}>
+                            addInventories?.slice(0).reverse().map((inventories, index) => <tr key={inventories._id}>
                                 <th>{index + 1}</th>
                                 <td>{inventories.productName}</td>
                                 <td>{inventories.budgetCode}</td>
                                 <td>{inventories.unitMeasurement}</td>
                                 <td>{inventories.alertQty}</td>
                                 {/* <td>{inventories.quantity}</td> */}
-                                <td>{stock}</td>
+                                <td>{inventories.stock}</td>
 
 
                             </tr>)

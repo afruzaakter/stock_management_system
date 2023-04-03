@@ -36,16 +36,21 @@ const AddNewInventory = () => {
             .then(data => setSuppliers(data))
     }, [])
 
-    
-      // --selectedBudgetCode and filter data form under BudgetCode ---------
-      const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
-      const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
-      
+
+    // --selectedBudgetCode and filter data form under BudgetCode ---------
+    const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
+    const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
+
+ 
+
+
+
     //Unique Product name 
     const uniqueProductName = selectedProducts.filter((newProduct, index, self) =>
-    index === self.findIndex((product) => (
-        product.productName === newProduct.productName))
-);
+        index === self.findIndex((product) => (
+            product.productName === newProduct.productName))
+    );
+
 
     //------- for auto generate code 
     // const [addInventories, setAddInventories] = useState([]);
@@ -70,6 +75,50 @@ const AddNewInventory = () => {
     //     }
     // }, [addInventories]);
 
+    // ==========================================================================
+    const [addInventories, setAddInventories] = useState([]);
+    // console.log( addInventories)
+    useEffect(() => {
+        fetch('http://localhost:5000/addInventory')
+            .then(res => res.json())
+            .then(data => setAddInventories(data))
+
+    }, [])
+
+
+    //  console.log(addInventories)
+
+    // Show Orders 
+    const [selectInventorys, setSelectInventorys] = useState([]);
+    const selectedInventory = addInventories.filter(inventory => inventory.productName === selectInventorys);
+    console.log("selectedInventory",selectedInventory)
+
+
+   //====== alert quantity ==========
+   const  alertQuantity = selectedInventory.map(product => product.alertQty);
+   console.log("alertQnty", alertQuantity)
+
+
+
+    //  const [stocks, setStocks] = useState('')
+    //  console.log("total stock",stocks) 
+
+    const stock = selectedInventory.map((inventory) => inventory.quantity)
+    console.log("stock", (stock))
+
+    // const array = ['60', '40', '50'];
+    const totalQuantity = stock.reduce((total, num) => total + parseInt(num), 0);
+    console.log("totalQuantity",totalQuantity);
+
+    //product unique
+    //   const uniqueInventories = addInventories.filter((newInventories, index, self) =>
+    //   index === self.findIndex((inventories) => (
+    //     inventories.productName === newInventories.productName))  
+    //   );
+    //   console.log(uniqueInventories)
+
+
+
 
 
     // ------------- AddInventory Data post method -----------
@@ -80,10 +129,12 @@ const AddNewInventory = () => {
             supplierCompany: data.supplierCompany,
             purchase: data.purchase,
             unitMeasurement: data.unitMeasurement,
-            packSize: data.packSize,
+            packSize: data.packSize,       
+            // alertQty: data.alertQty,
             quantity: data.quantity,
-            totalQuantity: data.totalQuantity,
-            alertQty: data.alertQty,
+            totalQuantity: totalQuantity,
+            alertQuantity:alertQuantity,
+            stock: parseInt(data.quantity )+ parseInt(totalQuantity),
             // autoCode: autoCode,
         }
         const url = "http://localhost:5000/addInventory"
@@ -113,19 +164,19 @@ const AddNewInventory = () => {
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 '>
 
-                      
+
 
                         {/* -------------------- Budget Code Input Field -----------------------   */}
                         <div className="form-control">
                             <label className='text-start '>Budget Code</label>
-                            <select 
-                            onClick={e=>setSelectedBudgetCode(e.target.value)}
-                            {...register("budgetCode", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
+                            <select
+                                onClick={e => setSelectedBudgetCode(e.target.value)}
+                                {...register("budgetCode", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please Fillup  Input Field"
+                                    }
+                                })}
                                 className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.budgetCode && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''>--Select Budget Code--</option>
 
@@ -139,26 +190,28 @@ const AddNewInventory = () => {
 
                             </label>
                         </div>
-                         {/* ----------Product Name Field ------------- */}
-                         <div className="form-control">
+                        {/* ----------Product Name Field ------------- */}
+                        <div className="form-control">
                             <label className='text-start '>Product Name</label>
                             <select
-                             onClick={e => setSelectProduct(e.target.value)}
-                            {...register("productName", {
-                                required: {
-                                    value: true,
-                                    message: "❌  Please Fillup  Input Field"
-                                }
-                            })}
+                                //  onClick={e => setSelectProduct(e.target.value)}
+                                onClick={e => setSelectInventorys(e.target.value)}
+
+                                {...register("productName", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please Fillup  Input Field"
+                                    }
+                                })}
                                 className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.productName && 'focus:border-red-600 border-red-600 focus:ring-red-600'} `}>
                                 <option value=''>--Select Product Name--</option>
 
-                               
-                                     {
-                                        uniqueProductName.map((product) => <option key={product._id}>{product.productName}</option>)
-                                     }
-                                   
-                                
+
+                                {
+                                    uniqueProductName.map((product) => <option key={product._id}>{product.productName}</option>)
+                                }
+
+
                             </select>
 
                             <label className="label">
@@ -253,25 +306,25 @@ const AddNewInventory = () => {
                             </label>
                         </div>
 
-                             {/* ----------------------alert Qty input field ------------ */}
-                             <div className="form-control">
-                                <label >Alert Qty</label>
-                                <input
-                                    type="text"
-                                    placeholder='Alert Quantity'
-                                    className={`input input-sm  max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.alertQty && 'border-red-600 focus:border-red-600'}`}
-                                    {...register("alertQty", {
-                                        required: {
-                                            value: true,
-                                            message: "❌  Please Fillup  Input Field"
-                                        }
-                                    })}
-                                />
-                                <label className="label">
-                                    {errors.alertQty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.alertQty.message}</span>}
+                        {/* ----------------------alert Qty input field ------------ */}
+                        {/* <div className="form-control">
+                            <label >Alert Qty</label>
+                            <input
+                                type="text"
+                                placeholder='Alert Quantity'
+                                className={`input input-sm  max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.alertQty && 'border-red-600 focus:border-red-600'}`}
+                                {...register("alertQty", {
+                                    required: {
+                                        value: true,
+                                        message: "❌  Please Fillup  Input Field"
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.alertQty?.type === 'required' && <span className="label-text-alt text-red-700">{errors.alertQty.message}</span>}
 
-                                </label>
-                            </div>
+                            </label>
+                        </div> */}
                         {/* --------------------Quantity  field ----------------------- */}
                         <div className="form-control">
                             <label className='text-start'>Quantity</label>
@@ -294,6 +347,8 @@ const AddNewInventory = () => {
                         <div className="form-control">
                             <label className='text-start'>Total Quantity</label>
                             <input
+                             
+                             Value={totalQuantity}
                                 type="text"
                                 className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.totalQuantity && 'focus:border-red-600 border-red-600 focus:ring-red-600'}`}
                                 {...register("totalQuantity", {

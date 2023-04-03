@@ -113,7 +113,7 @@ const BudgetCode = () => {
                                     <th>{index + 1}</th>
                                     <td>{budgetCode.budgetCode}</td>
                                     <td className='flex gap-1'>
-                                        <Link className='btn btn-sm bg-green-500 text-white' to={`/dashboard/budgetCodeEdit/${budgetCode._id}`}><FaEdit /></Link>
+                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/budgetCodeEdit/${budgetCode._id}`}><FaEdit /></Link>
                                         <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
                                             onClick={() => setDeleteID(budgetCode._id)} >
                                             <AiOutlineDelete />

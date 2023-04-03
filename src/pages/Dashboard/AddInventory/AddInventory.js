@@ -21,7 +21,6 @@ const AddInventory = () => {
             }
         })
             .then(res => {
-                console.log('res', res);
                 if (res.status === 401 || res.status === 403) {
                     signOut(auth)
                     localStorage.removeItem('accessToken')
@@ -90,10 +89,10 @@ const AddInventory = () => {
                             <th>Product Name</th>
                             <th>Budget Code</th>
                             <th>Supplier Name</th>
-                            <th>Purchase Notes </th>
+                            {/* <th>Purchase Notes </th>
                             <th>Product Code </th>
                             <th>UoM </th>
-                            <th>Pack Size</th>
+                            <th>Pack Size</th> */}
                             <th>Qnty</th>
                             <th>Total Qnty</th>
                             <th className='text-center '>Action </th>
@@ -102,16 +101,16 @@ const AddInventory = () => {
 
                     <tbody>
                         {
-                            uniqueInventories.map((addInventory, index) =>
+                            addInventories?.slice(0).reverse().map((addInventory, index) =>
                                 <tr className='bg-blue-900' key={addInventory._id} >
                                     <th> {index + 1} </th>
                                     <td> {addInventory.productName} </td>
                                     <td> {addInventory.budgetCode} </td>
                                     <td> {addInventory.supplierCompany} </td>
-                                    <td> {addInventory.purchase} </td>
+                                    {/* <td> {addInventory.purchase} </td>
                                     <td> {addInventory.autoCode} </td>
                                     <td> {addInventory.unitMeasurement} </td>
-                                    <td> {addInventory.packSize} </td>
+                                    <td> {addInventory.packSize} </td> */}
                                     <td> {addInventory.quantity} </td>
                                     <td> {addInventory.totalQuantity} </td>
                                     <td className='flex gap-3'>

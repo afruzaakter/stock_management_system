@@ -79,17 +79,19 @@ product.productName === newProduct.productName))
                             <th>Budget Code </th>
                             <th>UoM</th>
                             <th>Alert Qty </th>
+                            <th>Sort Order</th>
                             <th>Action </th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            uniqueProductName.slice(0).reverse().map((product, index) => <tr key={product._id}>
+                            products.slice(0).reverse().map((product, index) => <tr key={product._id}>
                                 <td>{index + 1}</td>
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
                                 <td>{product.measureUnit}</td>
+                                <td>{product.sortOrder}</td>
                                 <td>{product.alertQty}</td>
                                 <td className='flex gap-1'>
                                     <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
