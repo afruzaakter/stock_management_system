@@ -29,21 +29,11 @@ const AddNewEmployee = () => {
             .then(data => setDepartments(data))
     }, [])
 
-
+    // Show Orders 
     const [selectDepartment, setSelectDepartment] = useState([]);
-    console.log(selectDepartment)
     const selectedDepartment = departments.filter(department => department.name === selectDepartment);
-    // console.log("Department filter", selectedDepartment)
-
-
-
-
     const showOrders = selectedDepartment.map((showOrder) => showOrder.order)
-    // console.log(showOrders)
-
-    // const arr = selectedDepartment.map(obj => obj[3].order);
-    // console.log("array", arr)
-
+    console.log(showOrders)
 
 
     //======= all user get data===========
@@ -64,10 +54,19 @@ const AddNewEmployee = () => {
 
     const onSubmit = (data) => {
         console.log("employee", data)
+        const updateData = {
+            employeeName: data.employeeName,
+            mobileNo: data.mobileNo,
+            employeeId: data.employeeId,
+            designation: data.designation,
+            department: data.department,
+            showOrders
+
+        }
         const url = 'http://localhost:5000/employee'
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(updateData),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
@@ -195,7 +194,7 @@ const AddNewEmployee = () => {
                             <select
                                 onClick={e => setSelectDepartment(e.target.value)}
 
-                                {...register("name", {
+                                {...register("department", {
                                     required: {
                                         value: true,
                                         message: "❌  Please fill out this field"
