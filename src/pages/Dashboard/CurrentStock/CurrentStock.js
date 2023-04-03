@@ -3,31 +3,39 @@ import { BsSearch } from 'react-icons/bs';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { TbMessageReport } from 'react-icons/tb';
 const CurrentStock = () => {
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/product')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, []);
 
-   
+    // const [products, setProducts] = useState([]);
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/product')
+    //         .then(res => res.json())
+    //         .then(data => setProducts(data))
+    // }, []);
+
+
+
 
     const [addInventories, setAddInventories] = useState([]);
-    console.log()
+    // console.log( addInventories)
     useEffect(() => {
         fetch('http://localhost:5000/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
     }, [])
-    //  console.log(addInventories)
- //product unique
 
+    
+    //  console.log(addInventories)
+    
+  //product unique
   const uniqueInventories = addInventories.filter((newInventories, index, self) =>
   index === self.findIndex((inventories) => (
-    inventories.productName === newInventories.productName))
-   
+    inventories.productName === newInventories.productName))  
   );
+
+  const [selectProduct, setSelectProduct] = useState([]);
+  // console.log(selectProduct)
+  const selectedProductName = uniqueInventories.map(product => product.productName === selectProduct);
+  console.log("Product Name filter", selectedProductName)
 
  
 
@@ -35,7 +43,9 @@ const CurrentStock = () => {
     console.log("stocks11111",stock)
     useEffect(() => {
         const stock = uniqueInventories?.map(inventory => inventory.quantity);
+        const stocks = uniqueInventories?.map(inventory => inventory);
         console.log("stock",stock)
+        console.log("stocks",stocks)
 
        
               let sum = 0;
@@ -94,7 +104,7 @@ const CurrentStock = () => {
                             <th>Product Name </th>
                             <th>Budget Code </th>
                             <th>UoM </th>
-                            {/* <th>Alert Qty </th> */}
+                            <th>Alert Qty </th>
                             <th>Stock </th>
                            
 
@@ -108,8 +118,8 @@ const CurrentStock = () => {
                                 <td>{inventories.productName}</td>
                                 <td>{inventories.budgetCode}</td>
                                 <td>{inventories.unitMeasurement}</td>
-                                {/* <td>{product.alertQty}</td> */}
-                                <td>{inventories.quantity}</td>
+                                <td>{inventories.alertQty}</td>
+                                {/* <td>{inventories.quantity}</td> */}
                                 <td>{stock}</td>
 
 

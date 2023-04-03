@@ -54,6 +54,7 @@ import RequisitionApproval from "./pages/Dashboard/Requisition/Approval/Requisit
 import PreviewApproval from "./pages/Dashboard/Requisition/Approval/PreviewApproval";
 import PreviewIssue from "./pages/Dashboard/Requisition/Issue/PreviewIssue";
 import RequisitionEdit from "./pages/Dashboard/Requisition/UserRequisition/RequisitionEdit";
+import EditInventory from "./pages/Dashboard/AddInventory/EditInventory";
 
 
 function App() {
@@ -82,6 +83,8 @@ function App() {
 
           <Route path="addInventory" element={<AddInventory />} />
           <Route path="addNewInventory" element={<AddNewInventory />} />
+          <Route path="editInventory/:id" element={<EditInventory />} />
+
 
           <Route path="currentStock" element={<CurrentStock />} />
           <Route path="stockAdjust" element={<StockAdjust />} />

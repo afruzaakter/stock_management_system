@@ -33,12 +33,11 @@ const AddInventory = () => {
 
     }, [])
 
-     //Unique Product name 
-
-//      const uniqueProductName = products.filter((newProduct, index, self) =>
-//      index === self.findIndex((product) => (
-//          product.productName === newProduct.productName))
-//  );
+ //product unique
+ const uniqueInventories = addInventories.filter((newInventories, index, self) =>
+ index === self.findIndex((inventories) => (
+   inventories.productName === newInventories.productName))  
+ );
 
     const handleDelete = (id) => {
         const url = `http://localhost:5000/addInventory/${id}`
@@ -103,7 +102,7 @@ const AddInventory = () => {
 
                     <tbody>
                         {
-                            addInventories.map((addInventory, index) =>
+                            uniqueInventories.map((addInventory, index) =>
                                 <tr className='bg-blue-900' key={addInventory._id} >
                                     <th> {index + 1} </th>
                                     <td> {addInventory.productName} </td>
@@ -116,7 +115,7 @@ const AddInventory = () => {
                                     <td> {addInventory.quantity} </td>
                                     <td> {addInventory.totalQuantity} </td>
                                     <td className='flex gap-3'>
-                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/EditAddInventory/${addInventory._id}`}> <FiEdit /> </Link>
+                                        <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/editInventory/${addInventory._id}`}> <FiEdit /> </Link>
 
                                         <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"
                                             onClick={() => setDeleteID(addInventory._id)} >
