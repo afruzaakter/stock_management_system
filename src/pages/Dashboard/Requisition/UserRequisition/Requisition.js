@@ -69,7 +69,7 @@ const Requisition = () => {
                                 <td>{createRequisition.status} </td>
                                 <td>{createRequisition.requisitionNotes}</td>
                                 <td className='text-center'>
-                                    <Link to={`/dashboard/previewRequisition/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                    <Link to={`/dashboard/requisition/preview/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
                                         <AiOutlineEye /> Preview </Link>
                                 </td>
                             </tr>)

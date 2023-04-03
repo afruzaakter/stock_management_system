@@ -93,7 +93,7 @@ console.log(uniqueInventories)
                 </div>
             </div>
 
-            <div className='mb-2 flex justify-between'>
+            {/* <div className='mb-2 flex justify-between'>
                 <div>
                     <div className="dropdown dropdown-hover">
                         <label tabIndex={0} className="btn m-1 btn-sm bg-primary
@@ -109,7 +109,7 @@ console.log(uniqueInventories)
                         <TbMessageReport /> Reports</button>
                 </div>
 
-            </div>
+            </div> */}
 
 
             <div className="overflow-x-auto w-full">
