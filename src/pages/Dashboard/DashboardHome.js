@@ -19,7 +19,7 @@ const DashboardHome = () => {
     // ---------------Authorized requests ------------------------- 
     const [allAuthorizedReq, setAllAuthorizedReq] = useState([]);
     useEffect(() => {
-        const authorizedReq = allRequisitions.filter(requisition => requisition.isAuthorized === "Yes");
+        const authorizedReq = allRequisitions.filter(requisition => requisition.status === "Authorized");
         setAllAuthorizedReq(authorizedReq);
     }, [allRequisitions]);
     const allAuthorizedRequisitions = +allAuthorizedReq.length;
@@ -27,7 +27,7 @@ const DashboardHome = () => {
     // -------------- All Approved Requests ------------------------------
     const [allApprovedReq, setAllApprovedReq] = useState([]);
     useEffect(() => {
-        const authorizedReq = allRequisitions.filter(requisition => requisition.isApproved === "Yes")
+        const authorizedReq = allRequisitions.filter(requisition => requisition.status === "Approved")
             setAllApprovedReq(authorizedReq)
     }, [allRequisitions])
     const allApprovedRequisitions = +allApprovedReq.length;
@@ -35,7 +35,7 @@ const DashboardHome = () => {
     // -------------- All Issued Requests ------------------------------
     const [allIssuedReq, setAllIssuedReq] = useState([]);
     useEffect(() => {
-        const authorizedReq = allRequisitions.filter(requisition => requisition.isIssued === "Yes");
+        const authorizedReq = allRequisitions.filter(requisition => requisition.status === "Issued");
         setAllIssuedReq(authorizedReq);
     }, [allRequisitions])
     const allIssuedRequisitions = +allIssuedReq.length;
@@ -46,8 +46,7 @@ const DashboardHome = () => {
     const [allCreatedReq, setAllCreatedReq] = useState([]);
     useEffect(() => {
         const notAuthorized = allRequisitions
-            .filter(requisition => requisition.isAuthorized !== "Yes")
-            .filter(requisition => requisition.isAuthorized !== "No");
+            .filter(requisition => requisition.status === "Pending");
         setAllCreatedReq(notAuthorized);
     }, [allRequisitions])
     const pendingRequisitions = +allCreatedReq.length;
@@ -55,9 +54,7 @@ const DashboardHome = () => {
     const [allAuthorized, setAllAuthorized] = useState([]);
     useEffect(() => {
         const authorizedReq = allRequisitions
-            .filter(requisition => requisition.isAuthorized === "Yes")
-            .filter(requisition => requisition.isApproved !== "Yes")
-            .filter(requisition => requisition.isApproved !== "No");
+            .filter(requisition => requisition.status === "Authorized");
         setAllAuthorized(authorizedReq);
     }, [allRequisitions]);
     const pendingApproved = +allAuthorized.length;
@@ -65,11 +62,8 @@ const DashboardHome = () => {
     const [allApproved, setAllApproved] = useState([]);
     useEffect(() => {
         const approvedReq = allRequisitions
-            .filter(requisition => requisition.isApproved === "Yes")
-            .filter(requisition => requisition.isIssued !== "Yes")
-            .filter(requisition => requisition.isIssued !== "No");
+            .filter(requisition => requisition.status === "Approved");
             setAllApproved(approvedReq)
-        
     }, [allRequisitions])
     const pendingIssued = +allApproved.length;
   
