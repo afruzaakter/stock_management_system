@@ -8,7 +8,7 @@ import RequisitionReportsDDU from './RequisitionReportsDDU';
 const ProductIssue = () => {
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/createRequisition")
+        fetch("https://stock-management-system-server.vercel.app/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
@@ -17,20 +17,20 @@ const ProductIssue = () => {
     useEffect(() => {
         const IssuedRequisions = allRequisitions
             .filter(requisition => requisition.status === "Issued")
-            setIssuedRequisions(IssuedRequisions)
+        setIssuedRequisions(IssuedRequisions)
     }, [allRequisitions]);
     return (
         <div>
-           <div className='border-pink-400 rounded-lg border-b '>
-           <IssueReportsPBC/>
-           </div>
-           <div className='border-pink-400 rounded-lg border-b '>
-            <IssueReportsDDU/>
-           </div>
-           <div className='border-pink-400 rounded-lg border-b '>
-            <RequisitionReportsDDU/>
+            <div className='border-pink-400 rounded-lg border-b '>
+                <IssueReportsPBC />
             </div>
-            
+            <div className='border-pink-400 rounded-lg border-b '>
+                <IssueReportsDDU />
+            </div>
+            <div className='border-pink-400 rounded-lg border-b '>
+                <RequisitionReportsDDU />
+            </div>
+
 
             <div>
                 <h2> All requisitions:{issuedRequisions.length} </h2>

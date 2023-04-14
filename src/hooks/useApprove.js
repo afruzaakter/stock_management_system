@@ -6,7 +6,7 @@ const useApprove = user => {
         const email = user?.email;
         // console.log(email)
         if (email) {
-            fetch(`http://localhost:5000/approve/${email}`, {
+            fetch(`https://stock-management-system-server.vercel.app/approve/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'

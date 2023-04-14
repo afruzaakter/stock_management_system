@@ -6,7 +6,7 @@ const useStore = user => {
         const email = user?.email;
         // console.log(email)
         if (email) {
-            fetch(`http://localhost:5000/store/${email}`, {
+            fetch(`https://stock-management-system-server.vercel.app/store/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'

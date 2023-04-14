@@ -11,7 +11,7 @@ const DepartmentAdd = () => {
 
     // ------------- data post method -----------
     const onSubmit = (data) => {
-        const url = "http://localhost:5000/department"
+        const url = "https://stock-management-system-server.vercel.app/department"
         fetch(url, {
             method: "POST",
             body: JSON.stringify(data),

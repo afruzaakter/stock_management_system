@@ -6,7 +6,7 @@ const CurrentStock = () => {
 
     // const [products, setProducts] = useState([]);
     // useEffect(() => {
-    //     fetch('http://localhost:5000/product')
+    //     fetch('https://stock-management-system-server.vercel.app/product')
     //         .then(res => res.json())
     //         .then(data => setProducts(data))
     // }, []);
@@ -14,15 +14,12 @@ const CurrentStock = () => {
 
     const [addInventories, setAddInventories] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/addInventory')
+        fetch('https://stock-management-system-server.vercel.app/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
     }, [])
 
-  
-
-  
     
   //product unique
 
@@ -32,6 +29,8 @@ const CurrentStock = () => {
   );
 
 console.log(uniqueInventories)
+
+//========== Quantity ==========
 
 // const productQuantities = {};
 
@@ -48,32 +47,6 @@ console.log(uniqueInventories)
 
 // console.log(productQuantities);
 
-//   console.log(uniqueInventories)
-  // stock management
-    // const [stock, setStock] = useState('')
-
-   
- 
-  
-      
-
-// =========================================================================
-    // useEffect(() => {
-    //     const stock = uniqueInventories?.map(inventory => inventory.quantity);
-    //     const stocks = uniqueInventories?.map(inventory => inventory);
-
-    //           let sum = 0;
-    //     for (let i = 0; i< stock.length; i++) {
-    //         sum += parseInt(stock[i]);
-    //         sum = parseInt(stock[i])
-    //         console.log(sum)
-    //         sum = parseInt(stock[i])+ 10
-    //         setStock(sum)
-    //     }
-        
-    // }, [uniqueInventories])
-
-    //---------------- Calculation for stock-------------
  
 
     return (
@@ -93,7 +66,7 @@ console.log(uniqueInventories)
                 </div>
             </div>
 
-            {/* <div className='mb-2 flex justify-between'>
+            <div className='mb-2 flex justify-between'>
                 <div>
                     <div className="dropdown dropdown-hover">
                         <label tabIndex={0} className="btn m-1 btn-sm bg-primary
@@ -109,7 +82,7 @@ console.log(uniqueInventories)
                         <TbMessageReport /> Reports</button>
                 </div>
 
-            </div> */}
+            </div>
 
 
             <div className="overflow-x-auto w-full">

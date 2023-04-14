@@ -11,17 +11,17 @@ const Product = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://stock-management-system-server.vercel.app/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
 
-   
-//Unique Product Name
-const uniqueProductName = products.filter((newProduct, index, self) => 
-index === self.findIndex((product) => (
-product.productName === newProduct.productName))
-);
+
+    //Unique Product Name
+    const uniqueProductName = products.filter((newProduct, index, self) =>
+        index === self.findIndex((product) => (
+            product.productName === newProduct.productName))
+    );
 
 
 
@@ -29,7 +29,7 @@ product.productName === newProduct.productName))
 
     // ---------- Delete method-----
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/product/${id}`
+        const url = `https://stock-management-system-server.vercel.app/product/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -79,7 +79,7 @@ product.productName === newProduct.productName))
                             <th>Budget Code </th>
                             <th>UoM</th>
                             <th>Alert Qty </th>
-                            <th>Sort Order</th>
+                            {/* <th>Sort Order</th> */}
                             <th>Action </th>
                         </tr>
                     </thead>
@@ -91,8 +91,9 @@ product.productName === newProduct.productName))
                                 <td>{product.productName} </td>
                                 <td>{product.budgetCode} </td>
                                 <td>{product.measureUnit}</td>
-                                <td>{product.sortOrder}</td>
-                                <td>{product.alertQty}</td>
+                                <td>{product.alertQnty}</td>
+                                {/* <td>{product.sortOrder}</td> */}
+                              
                                 <td className='flex gap-1'>
                                     <Link className='btn btn-xs bg-green-500 text-white' to={`/dashboard/productEdit/${product._id}`}><FaEdit /></Link>
                                     <label htmlFor="my-modal-6" className="btn btn-xs bg-red-500 text-white"

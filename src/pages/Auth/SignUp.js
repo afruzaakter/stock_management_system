@@ -23,7 +23,7 @@ const SignUp = () => {
     }
 
     if (token) {
-        navigate("/");
+        navigate("/dashboard");
     }
 
     let signUpError;

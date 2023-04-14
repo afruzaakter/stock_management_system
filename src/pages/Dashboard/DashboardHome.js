@@ -9,7 +9,7 @@ const DashboardHome = () => {
 
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/createRequisition")
+        fetch("https://stock-management-system-server.vercel.app/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
@@ -28,7 +28,7 @@ const DashboardHome = () => {
     const [allApprovedReq, setAllApprovedReq] = useState([]);
     useEffect(() => {
         const authorizedReq = allRequisitions.filter(requisition => requisition.status === "Approved")
-            setAllApprovedReq(authorizedReq)
+        setAllApprovedReq(authorizedReq)
     }, [allRequisitions])
     const allApprovedRequisitions = +allApprovedReq.length;
 
@@ -63,16 +63,16 @@ const DashboardHome = () => {
     useEffect(() => {
         const approvedReq = allRequisitions
             .filter(requisition => requisition.status === "Approved");
-            setAllApproved(approvedReq)
+        setAllApproved(approvedReq)
     }, [allRequisitions])
     const pendingIssued = +allApproved.length;
-  
+
     return (
         <div className='border m-1 p-2 rounded-lg'>
             <div>
                 <h1 className='p-2 mb-2 text-2xl font-bold'>Requisition Status: </h1>
             </div>
-           
+
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 border border-gray-300 shadow-lg rounded-xl mb-3'>
                 <div className="card w-full ">
                     <div className="card-body">
@@ -116,7 +116,7 @@ const DashboardHome = () => {
                     </div>
                     <div className='pt-2'>
                         <h1 className='pb-2'> Pending to Authorize Request </h1>
-                        <Link className='btn btn-sm bg-gray-300 w-full' 
+                        <Link className='btn btn-sm bg-gray-300 w-full'
                             to="/dashboard/requisitionAuthorize"> view Request
                         </Link>
                     </div>
@@ -134,7 +134,7 @@ const DashboardHome = () => {
                     </div>
                     <div className='pt-2'>
                         <h1 className='pb-2'> Pending to Approve Request </h1>
-                        <Link className='btn btn-sm bg-gray-300 w-full' 
+                        <Link className='btn btn-sm bg-gray-300 w-full'
                             to="/dashboard/requisitionApproval"> view Request
                         </Link>
                     </div>
@@ -152,7 +152,7 @@ const DashboardHome = () => {
                     </div>
                     <div className='pt-2'>
                         <h1 className='pb-2'> Pending to Issue Request </h1>
-                        <Link className='btn btn-sm bg-gray-300 w-full' 
+                        <Link className='btn btn-sm bg-gray-300 w-full'
                             to="/dashboard/requisitionIssue"> view Request
                         </Link>
                     </div>
@@ -170,7 +170,7 @@ const DashboardHome = () => {
                     </div>
                     <div className='pt-2'>
                         <h1 className='pb-2'> Completed/Issued Request </h1>
-                        <Link className='btn btn-sm bg-gray-300 w-full' 
+                        <Link className='btn btn-sm bg-gray-300 w-full'
                             to="/dashboard"> view Request
                         </Link>
                     </div>

@@ -12,7 +12,7 @@ const BudgetCode = () => {
     const [budgetCodes, setBudgetCodes] = useState([]);
     // ----------- Budget code get method ------------
     useEffect(() => {
-        fetch('http://localhost:5000/budgetcode')
+        fetch('https://stock-management-system-server.vercel.app/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, [updated])
@@ -25,7 +25,7 @@ const BudgetCode = () => {
     console.log("uniqueArray", uniqueArray)
     // ----------- Budget code post/create method ------------
     const onSubmit = (data) => {
-        const url = 'http://localhost:5000/budgetcode'
+        const url = 'https://stock-management-system-server.vercel.app/budgetcode'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -46,7 +46,7 @@ const BudgetCode = () => {
             })
     }
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/budgetcode/${id}`
+        const url = `https://stock-management-system-server.vercel.app/budgetcode/${id}`
         fetch(url, {
             method: 'DELETE'
         })

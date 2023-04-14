@@ -13,7 +13,7 @@ const DepartmentEdit = () => {
     console.log(departments)
 
     useEffect(() => {
-        const url = `http://localhost:5000/department/${id}`
+        const url = `https://stock-management-system-server.vercel.app/department/${id}`
         console.log("department id", url);
         fetch(url)
             .then(res => res.json())
@@ -28,7 +28,7 @@ const DepartmentEdit = () => {
             description,
             order
         }
-        const url = `http://localhost:5000/department/${id}`;
+        const url = `https://stock-management-system-server.vercel.app/department/${id}`;
 
         console.log(url)
 

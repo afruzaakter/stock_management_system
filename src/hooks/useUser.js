@@ -6,7 +6,7 @@ const useUser = user => {
         const email = user?.email;
         // console.log(email)
         if (email) {
-            fetch(`http://localhost:5000/roleUser/${email}`, {
+            fetch(`https://stock-management-system-server.vercel.app/roleUser/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'

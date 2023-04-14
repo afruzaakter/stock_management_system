@@ -14,62 +14,62 @@ const RequisitionEdit = () => {
     const [requisitions, setRequisitions] = useState([]);
 
     useEffect(() => {
-    fetch(`http://localhost:5000/createRequisition/${id}`)
-        .then((res) => res.json())
-        .then((data) => setRequisitions(data));
+        fetch(`https://stock-management-system-server.vercel.app/createRequisition/${id}`)
+            .then((res) => res.json())
+            .then((data) => setRequisitions(data));
     }, []);
     // ----this pre product length for -dynamic index value for 2nd {} -----
-    const previousReqProductLenth = requisitions?.products?.length+1 ;
+    const previousReqProductLenth = requisitions?.products?.length + 1;
 
-     // -------- budgetCode get method--------------
-     const [budgetCodes, setBudgetCodes] = useState([]);
-     useEffect(() => {
-         fetch('http://localhost:5000/budgetcode')
-             .then(res => res.json())
-             .then(data => setBudgetCodes(data))
-     }, []);
- 
-     // -------------- products get method--------
-     const [products, setProducts] = useState([]);
-     useEffect(() => {
-         fetch('http://localhost:5000/product')
-             .then(res => res.json())
-             .then(data => setProducts(data))
-     }, []);
- 
-     // ============================================
-     // --For searching product---
-     const [searchValue, setSearchVal] = useState("");
- 
-     // --selectedBudgetCode and filter data form under BudgetCode ---------
-     const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
-     const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
-    
-     // ========== For initial quantity input filed value 1 =======
-     const [minValue, setMinValue] = useState(1);
-     const handleChange = (event) => {
-         const newValue = Number(event.target.value);
-         setMinValue(newValue >= 1 ? newValue : 1);
-     };
+    // -------- budgetCode get method--------------
+    const [budgetCodes, setBudgetCodes] = useState([]);
+    useEffect(() => {
+        fetch('https://stock-management-system-server.vercel.app/budgetcode')
+            .then(res => res.json())
+            .then(data => setBudgetCodes(data))
+    }, []);
+
+    // -------------- products get method--------
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetch('https://stock-management-system-server.vercel.app/product')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, []);
+
+    // ============================================
+    // --For searching product---
+    const [searchValue, setSearchVal] = useState("");
+
+    // --selectedBudgetCode and filter data form under BudgetCode ---------
+    const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
+    const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
+
+    // ========== For initial quantity input filed value 1 =======
+    const [minValue, setMinValue] = useState(1);
+    const handleChange = (event) => {
+        const newValue = Number(event.target.value);
+        setMinValue(newValue >= 1 ? newValue : 1);
+    };
 
     // ===Multiple productName selected and show the table =====
     // ----------
     const [selectedProduct, setSelectedProduct] = useState([]);
     const handleRowClick = (selectedItem) => {
-        setSelectedProduct([ ...selectedProduct, selectedItem]);
+        setSelectedProduct([...selectedProduct, selectedItem]);
     };
     // ----------
     const [selectedPreviousProduct, setSelectedPreviousProduct] = useState([]);
     useEffect(() => {
         const products = requisitions?.products;
         setSelectedPreviousProduct(products);
-    },[requisitions])
-    console.log('selectedPreviousProduct ', selectedPreviousProduct );
-   
-    
+    }, [requisitions])
+    console.log('selectedPreviousProduct ', selectedPreviousProduct);
+
+
     // ------- delete previous ordered product ----------
     const deletePreviousProduct = (index) => {
-        console.log('iundex',index);
+        console.log('iundex', index);
         let productsArray = [...requisitions?.products];
         productsArray.splice(index, 1);
         setSelectedPreviousProduct(productsArray)
@@ -80,7 +80,7 @@ const RequisitionEdit = () => {
         const remaining = selectedProduct.filter(product => product._id !== deleteId);
         setSelectedProduct(remaining);
     }
-   
+
     //==============================================
     const onSubmit = (data) => {
         console.log("edit req", data);
@@ -95,7 +95,7 @@ const RequisitionEdit = () => {
                 };
                 arrayOfTotalProduct.push(obj);
             });
-        console.log('arrayOfTotalProduct',arrayOfTotalProduct);
+        console.log('arrayOfTotalProduct', arrayOfTotalProduct);
         const currentData = {
             products: arrayOfTotalProduct,
             status: "Pending",
@@ -109,7 +109,7 @@ const RequisitionEdit = () => {
 
         }
 
-        const url = `http://localhost:5000/createRequisition/${id}`
+        const url = `https://stock-management-system-server.vercel.app/createRequisition/${id}`
         fetch(url, {
             method: 'PATCH',
             body: JSON.stringify(currentData),
@@ -124,7 +124,7 @@ const RequisitionEdit = () => {
             })
         navigate('/dashboard/requisition');
     }
-    
+
     return (
         <div className='border m-2 p-2 rounded-lg'>
             <div className='p-1 mb-2'>
@@ -132,7 +132,7 @@ const RequisitionEdit = () => {
             </div>
 
             <div className='lg:flex lg:gap-4'>
-                 {/* ----------Left side >>>- Requisition Product Input Field ----------------- */}
+                {/* ----------Left side >>>- Requisition Product Input Field ----------------- */}
                 <div className='w-8/12'>
                     <form onSubmit={handleSubmit(onSubmit)} >
 

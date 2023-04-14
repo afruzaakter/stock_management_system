@@ -11,7 +11,7 @@ const ProductKeyEdit = () => {
     // -------- key type get method------------
     const [keys, setKeys] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/key')
+        fetch('https://stock-management-system-server.vercel.app/key')
             .then(res => res.json())
             .then(data => setKeys(data))
     }, [])
@@ -20,7 +20,7 @@ const ProductKeyEdit = () => {
 
 
     useEffect(() => {
-        const url = `http://localhost:5000/productkey/${id}`
+        const url = `https://stock-management-system-server.vercel.app/productkey/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setProductkeys(data))
@@ -36,7 +36,7 @@ const ProductKeyEdit = () => {
             keytype
         }
         console.log(updateData)
-        const url = `http://localhost:5000/productkey/${id}`
+        const url = `https://stock-management-system-server.vercel.app/productkey/${id}`
         fetch(url, {
             method: 'PUT',
             headers: {

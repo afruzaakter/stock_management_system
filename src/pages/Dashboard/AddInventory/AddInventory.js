@@ -14,7 +14,7 @@ const AddInventory = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:5000/addInventory', {
+        fetch('https://stock-management-system-server.vercel.app/addInventory', {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -32,14 +32,14 @@ const AddInventory = () => {
 
     }, [])
 
- //product unique
- const uniqueInventories = addInventories.filter((newInventories, index, self) =>
- index === self.findIndex((inventories) => (
-   inventories.productName === newInventories.productName))  
- );
+    //product unique
+    const uniqueInventories = addInventories.filter((newInventories, index, self) =>
+        index === self.findIndex((inventories) => (
+            inventories.productName === newInventories.productName))
+    );
 
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/addInventory/${id}`
+        const url = `https://stock-management-system-server.vercel.app/addInventory/${id}`
         fetch(url, {
             method: 'DELETE'
         })

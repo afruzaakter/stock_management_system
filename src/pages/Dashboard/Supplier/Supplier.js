@@ -10,14 +10,14 @@ const Supplier = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [suppliers, setSuppliers] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/supplier')
+        fetch('https://stock-management-system-server.vercel.app/supplier')
             .then(res => res.json())
             .then(data => setSuppliers(data))
     }, []);
     console.log(suppliers)
     //-------- supplier delete method -----------
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/supplier/${id}`
+        const url = `https://stock-management-system-server.vercel.app/supplier/${id}`
         console.log(url)
         fetch(url, {
             method: 'DELETE'

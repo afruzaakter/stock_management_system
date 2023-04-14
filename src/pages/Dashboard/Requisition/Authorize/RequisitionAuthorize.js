@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const RequisitionAuthorize = () => {
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/createRequisition")
+        fetch("https://stock-management-system-server.vercel.app/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
@@ -48,18 +48,18 @@ const RequisitionAuthorize = () => {
                     </thead>
 
                     <tbody>
-                    {
-                            allCreatedReq?.map((createRequisition, index) => 
-                            <tr key={createRequisition._id}>
-                                <td> {createRequisition.autoCode}</td>
-                                <td>{ (createRequisition.date).split(" ")[0] }</td>
-                                <td>{createRequisition.userName}</td>
-                                <td>{createRequisition.requisitionNotes}</td>
-                                <td className='text-center'>
-                                    <Link to={`/dashboard/previewAuthorize/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
-                                        <AiOutlineEye /> Preview </Link>
-                                </td>
-                            </tr>)
+                        {
+                            allCreatedReq?.map((createRequisition, index) =>
+                                <tr key={createRequisition._id}>
+                                    <td> {createRequisition.autoCode}</td>
+                                    <td>{(createRequisition.date).split(" ")[0]}</td>
+                                    <td>{createRequisition.userName}</td>
+                                    <td>{createRequisition.requisitionNotes}</td>
+                                    <td className='text-center'>
+                                        <Link to={`/dashboard/previewAuthorize/${createRequisition._id}`} className="btn btn-sm mx-1 bg-success text-white">
+                                            <AiOutlineEye /> Preview </Link>
+                                    </td>
+                                </tr>)
                         }
                     </tbody>
                 </table>

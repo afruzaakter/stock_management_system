@@ -11,7 +11,7 @@ const UserEdit = () => {
     // ------fetch 
     const [employees, setEmployees] = useState([])
     useEffect(() => {
-        fetch("http://localhost:5000/employee")
+        fetch("https://stock-management-system-server.vercel.app/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])
@@ -19,7 +19,7 @@ const UserEdit = () => {
     // --------------update method-----
     const [users, setUsers] = useState({})
     useEffect(() => {
-        const url = `http://localhost:5000/user/${id}`
+        const url = `https://stock-management-system-server.vercel.app/user/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setUsers(data))
@@ -45,7 +45,7 @@ const UserEdit = () => {
         }
         console.log("updateData User Management", updateData);
 
-        const url = `http://localhost:5000/user/${id}`;
+        const url = `https://stock-management-system-server.vercel.app/user/${id}`;
         fetch(url, {
             method: 'PATCH',
             headers: {

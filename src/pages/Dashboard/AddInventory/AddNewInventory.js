@@ -10,7 +10,7 @@ const AddNewInventory = () => {
     // ---------- Drop down Product get method ----------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://stock-management-system-server.vercel.app/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
@@ -24,14 +24,14 @@ const AddNewInventory = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [budgetCodes, setBudgetCodes] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/budgetcode')
+        fetch('https://stock-management-system-server.vercel.app/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, [])
     // ---------- Drop down Product get method ----------
     const [suppliers, setSuppliers] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/supplier')
+        fetch('https://stock-management-system-server.vercel.app/supplier')
             .then(res => res.json())
             .then(data => setSuppliers(data))
     }, [])
@@ -41,7 +41,7 @@ const AddNewInventory = () => {
     const [selectedBudgetCode, setSelectedBudgetCode] = useState([]);
     const selectedProducts = products.filter(product => product.budgetCode === selectedBudgetCode);
 
- 
+
 
 
 
@@ -55,7 +55,7 @@ const AddNewInventory = () => {
     //------- for auto generate code 
     // const [addInventories, setAddInventories] = useState([]);
     // useEffect(() => {
-    //     fetch('http://localhost:5000/addInventory')
+    //     fetch('https://stock-management-system-server.vercel.app/addInventory')
     //         .then(res => res.json())
     //         .then(data => setAddInventories(data))
 
@@ -79,36 +79,31 @@ const AddNewInventory = () => {
     const [addInventories, setAddInventories] = useState([]);
     // console.log( addInventories)
     useEffect(() => {
-        fetch('http://localhost:5000/addInventory')
+        fetch('https://stock-management-system-server.vercel.app/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 
     }, [])
 
-
-    //  console.log(addInventories)
-
     // Show Orders 
-    const [selectInventorys, setSelectInventorys] = useState([]);
-    const selectedInventory = addInventories.filter(inventory => inventory.productName === selectInventorys);
-    console.log("selectedInventory",selectedInventory)
-
-
-   //====== alert quantity ==========
-   const  alertQuantity = selectedInventory.map(product => product.alertQty);
-   console.log("alertQnty", alertQuantity)
-
-
-
-    //  const [stocks, setStocks] = useState('')
-    //  console.log("total stock",stocks) 
+    var [selectInventorys, setSelectInventorys] = useState([]);
+    var selectedInventory = addInventories.filter(inventory => inventory.productName === selectInventorys);
+    // console.log("selectedInventory", selectedInventory)
 
     const stock = selectedInventory.map((inventory) => inventory.quantity)
-    console.log("stock", (stock))
-
+    // console.log("stock", (stock))
     // const array = ['60', '40', '50'];
     const totalQuantity = stock.reduce((total, num) => total + parseInt(num), 0);
-    console.log("totalQuantity",totalQuantity);
+    // console.log("totalQuantity", totalQuantity);
+
+
+  
+
+
+    //====== alert quantity ==========
+    const alertQuantity = uniqueProductName.map(product => product.alertQty);
+    // console.log("alertQnty", alertQuantity)
+
 
     //product unique
     //   const uniqueInventories = addInventories.filter((newInventories, index, self) =>
@@ -129,15 +124,13 @@ const AddNewInventory = () => {
             supplierCompany: data.supplierCompany,
             purchase: data.purchase,
             unitMeasurement: data.unitMeasurement,
-            packSize: data.packSize,       
-            // alertQty: data.alertQty,
+            packSize: data.packSize,
             quantity: data.quantity,
             totalQuantity: totalQuantity,
-            alertQuantity:alertQuantity,
-            stock: parseInt(data.quantity )+ parseInt(totalQuantity),
-            // autoCode: autoCode,
+            // alertQuantity: alertQuantity,
+            stock: parseInt(data.quantity) + parseInt(totalQuantity)          
         }
-        const url = "http://localhost:5000/addInventory"
+        const url = "https://stock-management-system-server.vercel.app/addInventory"
         fetch(url, {
             method: "POST",
             body: JSON.stringify(updateData),
@@ -347,8 +340,8 @@ const AddNewInventory = () => {
                         <div className="form-control">
                             <label className='text-start'>Total Quantity</label>
                             <input
-                             
-                             Value={totalQuantity}
+
+                                Value={totalQuantity}
                                 type="text"
                                 className={`input input-sm   focus:outline-0 rounded-sm md:w-64 border-green-700   lg:w-80 focus:border-blue-500  login-container-input ${errors.totalQuantity && 'focus:border-red-600 border-red-600 focus:ring-red-600'}`}
                                 {...register("totalQuantity", {

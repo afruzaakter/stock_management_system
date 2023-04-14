@@ -9,7 +9,7 @@ const DesignationAdd = () => {
     const [updated, setUpdated] = useState(false);
     const navigate = useNavigate()
     const onSubmit = (data) => {
-        const url = "http://localhost:5000/designation"
+        const url = "https://stock-management-system-server.vercel.app/designation"
         fetch(url, {
             method: "POST",
             body: JSON.stringify(data),

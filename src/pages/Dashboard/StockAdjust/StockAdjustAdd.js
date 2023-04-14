@@ -14,7 +14,7 @@ const StockAdjustAdd = () => {
     //------------- product brand name dropdown show data ---------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://stock-management-system-server.vercel.app/product')
             .then(res => res.json())
             .then(data => setProducts(data));
     }, [])
@@ -22,7 +22,7 @@ const StockAdjustAdd = () => {
     //------------- stock adjust data get method ---------
     const [stockAdjusts, setStockAdjusts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/stockadjust')
+        fetch('https://stock-management-system-server.vercel.app/stockadjust')
             .then(res => res.json())
             .then(data => setStockAdjusts(data));
     }, [updated])
@@ -45,7 +45,7 @@ const StockAdjustAdd = () => {
         }
         console.log("total", total)
         // console.log(quantity)
-        const url = 'http://localhost:5000/stockadjust'
+        const url = 'https://stock-management-system-server.vercel.app/stockadjust'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(updateData),
@@ -64,7 +64,7 @@ const StockAdjustAdd = () => {
     }
 
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/stockadjust/${id}`
+        const url = `https://stock-management-system-server.vercel.app/stockadjust/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -229,7 +229,7 @@ const StockAdjustAdd = () => {
 
                                     </label>
                                 </div>
-                               
+
                                 {/* -----------------------Item short notes input Field ------------------------------ */}
                                 <div className="form-control">
                                     <label className='text-start'>Items Short Notes <span className='text-red-900 font-bold text-xl'>*</span> </label>

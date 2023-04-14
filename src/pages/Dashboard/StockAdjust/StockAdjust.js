@@ -15,7 +15,7 @@ const StockAdjust = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://stock-management-system-server.vercel.app/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
@@ -29,7 +29,7 @@ const StockAdjust = () => {
 
 
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/product/${id}`
+        const url = `https://stock-management-system-server.vercel.app/product/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -46,7 +46,7 @@ const StockAdjust = () => {
     const [addInventories, setAddInventories] = useState([]);
     console.log(addInventories)
     useEffect(() => {
-        fetch('http://localhost:5000/addInventory')
+        fetch('https://stock-management-system-server.vercel.app/addInventory')
             .then(res => res.json())
             .then(data => setAddInventories(data))
 

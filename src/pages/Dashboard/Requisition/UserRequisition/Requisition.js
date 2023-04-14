@@ -11,7 +11,7 @@ const Requisition = () => {
 
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/createRequisition")
+        fetch("https://stock-management-system-server.vercel.app/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
@@ -24,7 +24,7 @@ const Requisition = () => {
     }, [allRequisitions, user]);
 
     // check if the user is already authenticated 
-    
+
 
     return (
         <div className='border m-1 p-1 rounded-lg'>

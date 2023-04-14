@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 const RequisitionIssue = () => {
     const [allRequisitions, setAllRequisitions] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/createRequisition")
+        fetch("https://stock-management-system-server.vercel.app/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, []);
-    
+
     const [allApprovedReq, setAllApprovedReq] = useState([]);
     useEffect(() => {
         const approvedReq = allRequisitions
@@ -36,7 +36,7 @@ const RequisitionIssue = () => {
                     </div>
                 </div>
             </div>
-            
+
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -50,8 +50,8 @@ const RequisitionIssue = () => {
                     </thead>
 
                     <tbody>
-                            {
-                                allApprovedReq?.map((createRequisition, index) => 
+                        {
+                            allApprovedReq?.map((createRequisition, index) =>
                                 <tr key={createRequisition._id}>
                                     <td> {createRequisition.autoCode}</td>
                                     <td>{(createRequisition.date).split(" ")[0]}</td>
@@ -62,8 +62,8 @@ const RequisitionIssue = () => {
                                             <AiOutlineEye /> Preview </Link>
                                     </td>
                                 </tr>)
-                            }
-                        </tbody>
+                        }
+                    </tbody>
                 </table>
             </div>
         </div>

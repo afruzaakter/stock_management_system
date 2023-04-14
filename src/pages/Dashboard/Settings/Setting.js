@@ -12,7 +12,7 @@ const Setting = () => {
   const [data, setData] = useState(options);
 
   // useEffect(() => {
-  //   fetch('http://localhost:5000/department')
+  //   fetch('https://stock-management-system-server.vercel.app/department')
   //     .then(res => res.json())
   //     .then(data => setData(data))
 

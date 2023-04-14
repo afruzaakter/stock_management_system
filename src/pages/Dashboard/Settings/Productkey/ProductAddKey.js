@@ -11,13 +11,13 @@ const ProductAddKey = () => {
 
     const [keys, setKeys] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/key')
+        fetch('https://stock-management-system-server.vercel.app/key')
             .then(res => res.json())
             .then(data => setKeys(data))
     }, [])
 
     const onSubmit = (data) => {
-        const url = 'http://localhost:5000/productkey'
+        const url = 'https://stock-management-system-server.vercel.app/productkey'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),

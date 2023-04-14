@@ -16,7 +16,7 @@ const AddNewEmployee = () => {
     //----------Designation Fetch Data------------
     const [designations, setDesignations] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/designation')
+        fetch('https://stock-management-system-server.vercel.app/designation')
             .then(res => res.json())
             .then(data => setDesignations(data))
     }, [])
@@ -24,7 +24,7 @@ const AddNewEmployee = () => {
     const [departments, setDepartments] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/department')
+        fetch('https://stock-management-system-server.vercel.app/department')
             .then(res => res.json())
             .then(data => setDepartments(data))
     }, [])
@@ -39,7 +39,7 @@ const AddNewEmployee = () => {
     //======= all user get data===========
     const [allUsers, setAllUser] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/user')
+        fetch('https://stock-management-system-server.vercel.app/user')
             .then(res => res.json())
             .then(data => setAllUser(data))
     }, [])
@@ -49,7 +49,7 @@ const AddNewEmployee = () => {
         index === self.findIndex((userEmail) => (
             userEmail.email === newUser.email))
     );
-  
+
 
 
     const onSubmit = (data) => {
@@ -63,7 +63,7 @@ const AddNewEmployee = () => {
             showOrders
 
         }
-        const url = 'http://localhost:5000/employee'
+        const url = 'https://stock-management-system-server.vercel.app/employee'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(updateData),

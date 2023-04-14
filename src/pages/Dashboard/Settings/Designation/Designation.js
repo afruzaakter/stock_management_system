@@ -12,7 +12,7 @@ const Designation = () => {
     //------ Designation Fetch method -----------------  
     const [designations, setDesignations] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/designation')
+        fetch('https://stock-management-system-server.vercel.app/designation')
             .then(res => res.json())
             .then(data => setDesignations(data))
 
@@ -20,7 +20,7 @@ const Designation = () => {
 
     //--------- Designation Delete method------------
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/designation/${id}`
+        const url = `https://stock-management-system-server.vercel.app/designation/${id}`
         fetch(url, {
             method: "DELETE"
         })

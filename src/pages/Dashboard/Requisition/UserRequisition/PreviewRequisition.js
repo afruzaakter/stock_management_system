@@ -11,14 +11,14 @@ const PreviewRequisition = () => {
   const [requisitions, setRequisitions] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/createRequisition/${id}`)
+    fetch(`https://stock-management-system-server.vercel.app/createRequisition/${id}`)
       .then((res) => res.json())
       .then((data) => setRequisitions(data));
   }, []);
 
   const handleReqDelete = (id) => {
     console.log(id);
-    const url = `http://localhost:5000/createRequisition/${id}`;
+    const url = `https://stock-management-system-server.vercel.app/createRequisition/${id}`;
     fetch(url, {
       method: "DELETE",
     })
@@ -31,36 +31,36 @@ const PreviewRequisition = () => {
   return (
     <div className="m-4 ">
       <div className='p-1 mb-2'>
-          <h1 className='text-2xl font-bold'>Preview Requisition </h1>
+        <h1 className='text-2xl font-bold'>Preview Requisition </h1>
       </div>
       <div className="flex items-center">
-        <BsArrowRightCircle className="text-green-800 text-xl"/>
+        <BsArrowRightCircle className="text-green-800 text-xl" />
         <h2 className="text-xl ml-2"> Requisition Serial: {requisitions?.autoCode} </h2>
       </div>
-      
+
       <div className="flex justify-between items-center  rounded-l-md ">
         <div>
           <div className="flex justify-start items-center gap-5 mt-4">
             <AiOutlineCheck className="font-bold text-2xl text-green-900" />
             <div>
-              <p> <span className="text-primary font-semibold "> User_Note:  </span> 
-                {requisitions.requisitionNotes} 
+              <p> <span className="text-primary font-semibold "> User_Note:  </span>
+                {requisitions.requisitionNotes}
               </p>
-              <p> <span className="text-primary font-semibold "> Date:</span> 
+              <p> <span className="text-primary font-semibold "> Date:</span>
                 {requisitions.date}
               </p>
             </div>
           </div>
-          
+
           {requisitions?.authorizeNotes && (
             <>
               <div className="flex justify-start items-center gap-5 mt-2">
                 <AiOutlineCheck className="font-bold text-2xl text-green-900" />
                 <div>
-                  <p> <span className="text-green-900 font-semibold "> Auth_Note: </span> 
-                    {requisitions?.authorizeNotes} 
+                  <p> <span className="text-green-900 font-semibold "> Auth_Note: </span>
+                    {requisitions?.authorizeNotes}
                   </p>
-                  <p> <span className="text-green-900 font-semibold ">Date: </span> 
+                  <p> <span className="text-green-900 font-semibold ">Date: </span>
                     {requisitions?.AuthorizedDate}
                   </p>
                 </div>
@@ -73,26 +73,26 @@ const PreviewRequisition = () => {
               <div className="flex justify-start items-center gap-5 mt-2">
                 <AiOutlineCheck className="font-bold text-2xl text-green-900" />
                 <div>
-                  <p> <span className="text-green-900 font-semibold "> App_Note: </span> 
-                    {requisitions?.approvedNotes} 
+                  <p> <span className="text-green-900 font-semibold "> App_Note: </span>
+                    {requisitions?.approvedNotes}
                   </p>
-                  <p> <span className="text-green-900 font-semibold "> Date: </span> 
+                  <p> <span className="text-green-900 font-semibold "> Date: </span>
                     {requisitions?.approvedDate}
                   </p>
                 </div>
               </div>
             </>
           )}
-          
+
           {requisitions?.issuedNotes && (
             <>
               <div className="flex justify-start items-center gap-5 mt-2">
                 <AiOutlineCheck className="font-bold text-2xl text-green-900" />
                 <div>
-                  <p> <span className="text-green-900 font-semibold "> App_Note: </span> 
-                    {requisitions?.issuedNotes} 
+                  <p> <span className="text-green-900 font-semibold "> App_Note: </span>
+                    {requisitions?.issuedNotes}
                   </p>
-                  <p> <span className="text-green-900 font-semibold "> Date: </span> 
+                  <p> <span className="text-green-900 font-semibold "> Date: </span>
                     {requisitions?.issuedDate}
                   </p>
                 </div>
@@ -122,8 +122,8 @@ const PreviewRequisition = () => {
               </h3>
 
               <div className="mr-14 modal-action">
-                <label htmlFor="my-modal-6"  onClick={() => handleReqDelete(id)}  className="btn  btn-sm bg-green-600 text-white rounded-md">  ok </label>
-                <label htmlFor="my-modal-6"  className="btn btn-sm bg-red-600 rounded-md justify-start text-white" >  Cancel </label>
+                <label htmlFor="my-modal-6" onClick={() => handleReqDelete(id)} className="btn  btn-sm bg-green-600 text-white rounded-md">  ok </label>
+                <label htmlFor="my-modal-6" className="btn btn-sm bg-red-600 rounded-md justify-start text-white" >  Cancel </label>
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@ const PreviewRequisition = () => {
               </thead>
 
               <tbody>
-                {requisitions.products?.map((product,index) => (
+                {requisitions.products?.map((product, index) => (
                   <tr key={index}>
                     <td>{product.productName}</td>
                     <td>{product.productQuantity}</td>

@@ -6,7 +6,7 @@ const useInventory = user => {
         const email = user?.email;
         // console.log(email)
         if (email) {
-            fetch(`http://localhost:5000/inventory/${email}`, {
+            fetch(`https://stock-management-system-server.vercel.app/inventory/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'

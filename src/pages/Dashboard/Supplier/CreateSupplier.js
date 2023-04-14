@@ -15,7 +15,7 @@ const CreateSupplier = () => {
     const [autoCode, setAutoCode] = useState();
 
     useEffect(() => {
-        const url = `http://localhost:5000/supplier`
+        const url = `https://stock-management-system-server.vercel.app/supplier`
         fetch(url)
             .then(res => res.json())
             .then(data => setSuppliers(data))
@@ -45,7 +45,7 @@ const CreateSupplier = () => {
         }
 
         console.log(data);
-        const url = "http://localhost:5000/supplier"
+        const url = "https://stock-management-system-server.vercel.app/supplier"
         fetch(url, {
             method: "POST",
             body: JSON.stringify(updateData),

@@ -19,13 +19,13 @@ const UserManagement = () => {
     const [deleteID, setDeleteID] = useState('')
 
     useEffect(() => {
-        fetch("http://localhost:5000/user")
+        fetch("https://stock-management-system-server.vercel.app/user")
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])
 
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/user/${id}`
+        const url = `https://stock-management-system-server.vercel.app/user/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -121,15 +121,15 @@ const UserManagement = () => {
                                             {/* <FiEdit /> */}
                                             Assign_Role
                                         </Link>
-                                      
+
                                         <label htmlFor="my-modal-6" className="btn btn-sm bg-red-500 text-white"
-                                        onClick={() => setDeleteID(user._id)} >
-                                        <AiOutlineDelete />
-                                    </label>
+                                            onClick={() => setDeleteID(user._id)} >
+                                            <AiOutlineDelete />
+                                        </label>
 
                                     </td>
 
-                                  
+
 
                                     {/* -------- delete modal ----------------- */}
                                     <input type="checkbox" id="my-modal-6" className="modal-toggle" />

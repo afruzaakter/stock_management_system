@@ -10,14 +10,14 @@ const EmployeeReport = () => {
     //------ Departments Fetch method -----------------  
     const [departments, setDepartments] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/department')
+        fetch('https://stock-management-system-server.vercel.app/department')
             .then(res => res.json())
             .then(data => setDepartments(data))
     }, [])
     //------ Designation Fetch method -----------------  
     const [designations, setDesignations] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/designation')
+        fetch('https://stock-management-system-server.vercel.app/designation')
             .then(res => res.json())
             .then(data => setDesignations(data))
     }, []);
@@ -25,7 +25,7 @@ const EmployeeReport = () => {
     // all employee data show method-------------
     const [employees, setEmployees] = useState([])
     useEffect(() => {
-        fetch("http://localhost:5000/employee")
+        fetch("https://stock-management-system-server.vercel.app/employee")
             .then(res => res.json())
             .then(data => setEmployees(data))
     }, [])

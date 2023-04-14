@@ -12,7 +12,7 @@ const ProductEdit = () => {
     // ---------- Drop down budgetCodes get method ----------
     const [budgetCodes, setBudgetCodes] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/budgetcode')
+        fetch('https://stock-management-system-server.vercel.app/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, [])
@@ -20,7 +20,7 @@ const ProductEdit = () => {
     const [products, setProducts] = useState([]);
     console.log("product", products);
     useEffect(() => {
-        const url = `http://localhost:5000/product/${id}`
+        const url = `https://stock-management-system-server.vercel.app/product/${id}`
         console.log("product id", url);
         fetch(url)
             .then(res => res.json())
@@ -46,7 +46,7 @@ const ProductEdit = () => {
             invoice
         }
 
-        const url = `http://localhost:5000/product/${id}`;
+        const url = `https://stock-management-system-server.vercel.app/product/${id}`;
 
         console.log(url)
 
@@ -83,7 +83,7 @@ const ProductEdit = () => {
                             <div className="form-control">
                                 <label >Product Name</label>
                                 <input
-                                  Value={products.productName}
+                                    Value={products.productName}
                                     type="text"
                                     className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.productName && 'border-red-600 focus:border-red-600'}`}
                                     {...register("productName")}
@@ -118,7 +118,7 @@ const ProductEdit = () => {
                                 <input
                                     type="text"
                                     Value={products.size}
-                                  className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.size && 'border-red-600 focus:border-red-600'}`}
+                                    className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.size && 'border-red-600 focus:border-red-600'}`}
                                     {...register("size")}
                                 />
                                 <label className="label">

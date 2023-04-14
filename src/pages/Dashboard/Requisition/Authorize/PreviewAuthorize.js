@@ -12,7 +12,7 @@ const PreviewAuthorize = () => {
     const [requisitions, setRequisitions] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/createRequisition/${id}`)
+        fetch(`https://stock-management-system-server.vercel.app/createRequisition/${id}`)
             .then(res => res.json())
             .then(data => setRequisitions(data))
     }, [])
@@ -29,14 +29,14 @@ const PreviewAuthorize = () => {
     const twelveHourClock = hours % 12 || 12;
     const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
     // format the date
-    const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
+    const currentDate = day + '-' + month + '-' + year + ' | ' + currentTime;
 
     // 
-    const handleIsAuthorized =(id)=>{
+    const handleIsAuthorized = (id) => {
         const newData = {
             status: "Authorized",
         };
-        const url = `http://localhost:5000/createRequisition/${id}`;
+        const url = `https://stock-management-system-server.vercel.app/createRequisition/${id}`;
         fetch(url, {
             method: 'PATCH',
             headers: {
@@ -44,55 +44,55 @@ const PreviewAuthorize = () => {
             },
             body: JSON.stringify(newData),
         })
-          .then((res) => res.json())
-          .then((data) => {
-              navigate('/dashboard/requisitionAuthorize');
-          })
+            .then((res) => res.json())
+            .then((data) => {
+                navigate('/dashboard/requisitionAuthorize');
+            })
     }
     // 
-    const handleIsRejected =(id)=>{
+    const handleIsRejected = (id) => {
         const newData = {
             status: "Rejected",
         };
-        const url = `http://localhost:5000/createRequisition/${id}`;
+        const url = `https://stock-management-system-server.vercel.app/createRequisition/${id}`;
         fetch(url, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newData),
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newData),
         })
-          .then((res) => res.json())
-          .then((data) => {
-            navigate('/dashboard/requisitionAuthorize');
-          })
+            .then((res) => res.json())
+            .then((data) => {
+                navigate('/dashboard/requisitionAuthorize');
+            })
 
     }
- 
+
     // --------------For Authorized------------------
     const onSubmit = (data) => {
         const newData = {
-          authorizeNotes: data.authorizeNotes,
-          AuthorizedDate: currentDate
+            authorizeNotes: data.authorizeNotes,
+            AuthorizedDate: currentDate
         };
-        const url = `http://localhost:5000/createRequisition/${id}`;
+        const url = `https://stock-management-system-server.vercel.app/createRequisition/${id}`;
         fetch(url, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newData),
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newData),
         })
-          .then((res) => res.json())
-          .then((data) => {
-            navigate('/dashboard/requisitionAuthorize');
-        })
+            .then((res) => res.json())
+            .then((data) => {
+                navigate('/dashboard/requisitionAuthorize');
+            })
     };
 
     return (
         <div className='m-4 '>
             <h2 className='text-xl font-bold ml-4'> Requisition Serial: {requisitions?.autoCode}</h2>
-            
+
             <div className='flex justify-between items-center border-b-2 rounded-l-md pb-2'>
                 <div className='flex justify-start items-center gap-5 mt-2'>
                     <AiOutlineCheck className='font-bold text-2xl text-green-900' />
@@ -103,14 +103,14 @@ const PreviewAuthorize = () => {
                 </div>
                 <div >
                     <Link to={`/dashboard/requisitionAuthorize`} className="btn btn-xs rounded-md  text-blue-900 mx-1 border-blue-600">
-                        Back 
+                        Back
                     </Link>
                 </div>
             </div>
 
             <div>
                 <form onSubmit={handleSubmit(onSubmit)} >
-                    
+
                     {/* ----------------------- Authorized Notes Field ------------------ */}
                     <div className="form-control">
                         <label className='text-start'> Authorized Notes </label>
@@ -129,18 +129,18 @@ const PreviewAuthorize = () => {
                         </label>
                     </div>
 
-                    <input 
-                        onClick={()=>handleIsAuthorized(id)}
-                        className='input btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-green-500 hover:text-white' 
+                    <input
+                        onClick={() => handleIsAuthorized(id)}
+                        className='input btn btn-sm mx-1 bg-green-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-green-500 hover:text-white'
                         type="submit" value='Authorize' />
-                    <input 
-                        onClick={()=>handleIsRejected(id)}
-                        className='input btn btn-sm mx-1 bg-red-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-red-500 hover:text-white' 
+                    <input
+                        onClick={() => handleIsRejected(id)}
+                        className='input btn btn-sm mx-1 bg-red-700 text-white  max-w-xs cursor-pointer font-bold uppercase hover:bg-red-500 hover:text-white'
                         type="submit" value='Rejected' />
-                    
+
                 </form>
             </div>
-            
+
             <div className="overflow-x-auto mt-3">
                 <table className="table w-full">
                     <thead>
@@ -157,9 +157,9 @@ const PreviewAuthorize = () => {
                                     <td>{product.productName}</td>
                                     <td>{product.productQuantity}</td>
                                 </tr>
-                                
+
                             ))
-                        } 
+                        }
                     </tbody>
                 </table>
             </div>

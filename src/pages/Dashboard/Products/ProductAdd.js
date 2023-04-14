@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { RxCross2 } from 'react-icons/rx';
 const ProductAdd = () => {
-    const { register, formState: { errors }, handleSubmit, reset} = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [updated, setUpdated] = useState(false);
     const navigate = useNavigate()
 
@@ -12,20 +12,20 @@ const ProductAdd = () => {
     const [budgetCodes, setBudgetCodes] = useState([]);
     console.log(budgetCodes)
     useEffect(() => {
-        fetch('http://localhost:5000/budgetcode')
+        fetch('https://stock-management-system-server.vercel.app/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, [])
 
     //---------------------autocode--------------
-     // ---------- Drop down budgetCodes get method ----------
-     const [products, setProduct] = useState([]);
-     useEffect(() => {
-         fetch('http://localhost:5000/product')
-             .then(res => res.json())
-             .then(data => setBudgetCodes(data))
-     }, [])
-    
+    // ---------- Drop down budgetCodes get method ----------
+    const [products, setProduct] = useState([]);
+    useEffect(() => {
+        fetch('https://stock-management-system-server.vercel.app/product')
+            .then(res => res.json())
+            .then(data => setBudgetCodes(data))
+    }, [])
+
     const [autoCode, setAutoCode] = useState();
     useEffect(() => {
         const codeList = products?.map(product => product.autoCode);
@@ -42,15 +42,16 @@ const ProductAdd = () => {
 
     // ---------------- post method product -----------
     const onSubmit = (data) => {
-       const updateData= {
-        autoCode: autoCode,
-        productName: data.productName,
-        budgetCode: data.budgetCode,
-        measureUnit: data.measureUnit, 
-        packUnit: data.packUnit,
-        invoice: data.invoice
-       }
-        const url = "http://localhost:5000/product"
+        const updateData = {
+            autoCode: autoCode,
+            productName: data.productName,
+            budgetCode: data.budgetCode,
+            measureUnit: data.measureUnit,
+            packUnit: data.packUnit,
+            alertQnty: data.alertQnty,
+            invoice: data.invoice
+        }
+        const url = "https://stock-management-system-server.vercel.app/product"
         fetch(url, {
             method: "POST",
             body: JSON.stringify(updateData),
@@ -84,7 +85,7 @@ const ProductAdd = () => {
                                 <label >Product Name</label>
                                 <input
                                     type="text"
-                                    placeholder='e.g:CocaCola, Pepsi, Lux .. '                              
+                                    placeholder='e.g:CocaCola, Pepsi, Lux .. '
                                     className={`input input-sm max-w-xs  focus:outline-0 rounded-sm border-green-700   lg:w-80 focus:border-blue-700  login-container-input ${errors.productName && 'border-red-600 focus:border-red-600'}`}
                                     {...register("productName", {
                                         required: {
@@ -210,7 +211,7 @@ const ProductAdd = () => {
 
 
 
-                       
+
                             {/* -------------------- Invoice Notes Input Field -----------------------   */}
                             <div className="form-control">
                                 <label >Invoice Notes</label>

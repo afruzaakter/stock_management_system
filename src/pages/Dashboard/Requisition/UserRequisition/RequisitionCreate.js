@@ -15,7 +15,7 @@ const RequisitionCreate = () => {
     // -------- budgetCode get method--------------
     const [budgetCodes, setBudgetCodes] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/budgetcode')
+        fetch('https://stock-management-system-server.vercel.app/budgetcode')
             .then(res => res.json())
             .then(data => setBudgetCodes(data))
     }, []);
@@ -23,7 +23,7 @@ const RequisitionCreate = () => {
     // -------------- products get method--------
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://stock-management-system-server.vercel.app/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
@@ -64,7 +64,7 @@ const RequisitionCreate = () => {
     const twelveHourClock = hours % 12 || 12;
     const currentTime = `${twelveHourClock}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
     // format the date
-    const currentDate = day + '-' + month + '-' + year + ' | '+ currentTime;
+    const currentDate = day + '-' + month + '-' + year + ' | ' + currentTime;
 
     // ========== For initial quantity input filed value 1 =======
     const [minValue, setMinValue] = useState(1);
@@ -78,7 +78,7 @@ const RequisitionCreate = () => {
     const [autoCode, setAutoCode] = useState();
 
     useEffect(() => {
-        fetch("http://localhost:5000/createRequisition")
+        fetch("https://stock-management-system-server.vercel.app/createRequisition")
             .then(res => res.json())
             .then(data => setAllRequisitions(data))
     }, [])
@@ -111,7 +111,7 @@ const RequisitionCreate = () => {
 
         const currentData = {
             autoCode: autoCode,
-            userName:user.displayName,
+            userName: user.displayName,
             email: user.email,
             date: currentDate,
             products: arrayOfTotalProduct,
@@ -119,7 +119,7 @@ const RequisitionCreate = () => {
             status: "Pending"
         }
 
-        const url = 'http://localhost:5000/createRequisition'
+        const url = 'https://stock-management-system-server.vercel.app/createRequisition'
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(currentData),
